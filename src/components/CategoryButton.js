@@ -1,12 +1,17 @@
+// Standard Imports
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+
+// Custom Import
+import TextStyling from '../constants/fontstyling'
+
 
 function CategoryButton(props) {
   return (
     <View style={[styles.container, props.style]}>
       <TouchableOpacity style={styles.button}>
         <View style={styles.textRow}>
-          <Text style={styles.text}>Category</Text>
+          <Text style={TextStyling.textWhiteLarge}>Category</Text>
           <View style={styles.imageHolder}></View>
         </View>
       </TouchableOpacity>
@@ -26,9 +31,9 @@ const styles = StyleSheet.create({
   },
   text: {
     //fontFamily: "roboto-700",
-    color: "rgba(255,255,255,1)",
-    fontSize: 26,
-    marginTop: 11
+    //color: "rgba(255,255,255,1)",
+    //fontSize: 26,
+    //marginTop: 11
   },
   imageHolder: {
     width: 99,
