@@ -25,16 +25,16 @@ function CreateItemScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerCIS: {
     flex: 1,
   },
-  header: {
+  headerCIS: {
     height: 39,
     width: 339,
     marginTop: 35,
     marginLeft: 10
   },
-  imageUploader: {
+  imageUploaderCIS: {
     height: 104,
     width: 339,
     marginTop: 21,
@@ -42,27 +42,27 @@ const styles = StyleSheet.create({
     margin: Margins.midsize, // AD - added
     padding: Paddings.midsize, // AD - added
   },
-  iconInputBoxAttached: {
+  iconInputBoxAttachedCIS: {
     height: 44,
     width: 317,
     marginTop: 42,
     marginLeft: 20,
     padding: Paddings.midsize, // AD - added
   },
-  buttonContainer: {
+  buttonContainerCIS: {
     width: 339,
     height: 89,
     marginTop: 250,
     marginLeft: 10,
     padding: Paddings.midsize, // AD - added
   },
-  uploadButton: {
+  uploadButtonCIS: {
     width: 206,
     height: 36,
     marginTop: 4,
     marginLeft: 66
   },
-  cancelButton: {
+  cancelButtonCIS: {
     width: 206,
     height: 36,
     overflow: "visible",
