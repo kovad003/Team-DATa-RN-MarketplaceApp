@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     height: 89,
     marginTop: 250,
     marginLeft: 10,
-    // padding: Paddings.midsize, // AD - added
+    padding: Paddings.midsize, // AD - added
   },
   uploadButton: {
     width: 206,
