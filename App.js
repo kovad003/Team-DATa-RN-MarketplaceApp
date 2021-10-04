@@ -12,10 +12,23 @@ import ListItemsScreen from "./src/screens/ListItemsScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import SearchResultScreen from "./src/screens/SearchResultScreen";
 
+import * as Font from 'expo-font';
+import AppLoading from "expo-app-loading";
 
-function App() {
+// Custom Fonts
+const getFonts = (props) => Font.loadAsync({
+  'cheveuxdange': require('./src/assets/fonts/cheveuxdange.ttf'),
+  'caballar': require('./src/assets/fonts/caballar.ttf'),
+  'cake-n-truffles': require('./src/assets/fonts/cake-n-truffles.ttf'),
+});
+
+
+function App(props) {
+  const [fontloaded, setFontsLoaded] = useState(false);
+
+  if(fontloaded){
     return (
-      // <MainScreen></MainScreen>
+      // <MainScreen></MainScreen> 
       // <LoginScreen></LoginScreen>
       <SearchScreen></SearchScreen>
       // <CreateItemScreen></CreateItemScreen>
@@ -23,6 +36,15 @@ function App() {
       // <RegistrationScreen></RegistrationScreen>
       // <SearchResultScreen></SearchResultScreen>
     );
+  } else {
+    return(
+      <AppLoading
+      startAsync={getFonts}
+      onFinish={()=> setFontsLoaded(true)}
+      onError={() => console.log('error')}/>
+    )
+  }
+  
 }
 
 export default App;
