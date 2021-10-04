@@ -24,21 +24,21 @@ function MainScreen(props) {
 
   return (
     <View style={styles.container}>
-      <HeaderComponent style={styles.header}></HeaderComponent>
-      <View style={styles.scrollable}>
-        <View style={styles.scrollArea}>
-          <View>
-            <Logo style={styles.logo}></Logo>
-          </View>
-          <View style={styles.categoryItems}>
-            <FlatList 
-            keyExtractor={(item, index) => item.id}
-            data={CATEGORIES} 
-            renderItem={renderCategoryItem} 
-            numColumns={2}
-            />
-          </View>
+      <View style={styles.scrollArea}>
+        <View style={styles.logoContainer}>
+          <Logo style={styles.logo}></Logo>
         </View>
+        <View style={styles.categoryItems}>
+          <FlatList 
+          keyExtractor={(item, index) => item.id}
+          data={CATEGORIES} 
+          renderItem={renderCategoryItem} 
+          numColumns={2}
+          />
+        </View>
+      </View>
+      <View style={styles.headerContainer}>
+        <HeaderComponent style={styles.header}></HeaderComponent>
       </View>
     </View>
   );
@@ -46,32 +46,40 @@ function MainScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  header: {
-    height: 39,
-    width: 339,
-    marginTop: 35,
-    marginLeft: 10
-  },
-  scrollable: {
-    width: '100%',
-    height: 800,
-    margin:10,    
+    flex:1,
+    width:'100%',
+    justifyContent:'center',
+
   },
   scrollArea: {
-    width: '95%',
-    height: 539,
+    flex:1,
+    height:'90%',
+    width: '100%',
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  logoContainer:{
+    marginTop:20,
+    
   },
   categoryItems:{
+    flex:5,
     width:'100%',
+
   },
-  logo: {
-    height: 110,
-    width: 172,
-    marginTop: 5,
-    marginLeft: 80
+  headerContainer:{
+    height: 60,
+    justifyContent:'center',
+    alignItems:'center'
+
   },
+  header: {
+    height: 60,
+    width: '100%',
+  },
+
+
+
   categoryButton: {
 
     marginTop: 18,
