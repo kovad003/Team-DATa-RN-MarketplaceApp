@@ -8,6 +8,7 @@ import AppButton from "../components/AppButton";
 // AD - constants
 import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
 
 function CreateItemScreen(props) {
   return (
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   containerCIS: {
     flex: 1,
     alignItems: 'center', // AD - added align
+    backgroundColor: colors.light4, // AD - added background
   },
   headerCIS: {
     height: 39,
@@ -54,12 +56,11 @@ const styles = StyleSheet.create({
     //marginTop: 21, AD - removed
     // marginLeft: 10, // AD - removed
     //marginTop: Margins.xxlarge, // AD marginTop
-    //padding: Paddings.midsize, // AD - added
+    
 
     alignItems: 'center', // AD - added
     marginTop: Margins.narrow, // AD - added margin Top
-    marginBottom: Margins.xlarge, // AD - added margin bottom
- 
+    marginBottom: Margins.xlarge, // AD - added margin bottom  
   },
   iconInputBoxAttachedCIS: {
     height: 44,
@@ -72,6 +73,8 @@ const styles = StyleSheet.create({
     alignItems: 'center', // AD - added align
     marginLeft: Margins.narrow, // AD - added margin left
    
+    
+   
   },  
   buttonContainerCIS: {
     //width: 339, AD - removed
@@ -83,7 +86,8 @@ const styles = StyleSheet.create({
 
     alignItems: 'center', // AD - added align
     //backgroundColor: 'red',
-    marginBottom: Margins.xnarrow, // AD - added margin bottom
+    marginBottom: Margins.narrow, // AD - added margin bottom
+    
    
   },
 
@@ -96,19 +100,21 @@ const styles = StyleSheet.create({
     //marginLeft: 10, // AD - removed
     paddingVertical: Paddings.xnarrow,
     //paddingVertical: 'auto',
-    width: '85%',
+    width: '88%',
     alignItems: 'center', // AD - added align
     backgroundColor: 'red',   
 
     marginTop: Margins.large, // AD - added margin Top
     //marginBottom: Margins.xxlarge, // AD - added margin bottom
-    backgroundColor: "#E6E6E6",
+    //backgroundColor: "#E6E6E6", // "#E6E6E6"
     borderRadius: 15,
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
       width: 3,
       height: 3
     },
+
+    backgroundColor: colors.light2,
   
   },
   /* AD - added placeholder stylings */
