@@ -30,7 +30,7 @@ function MainScreen(props) {
           <View>
             <Logo style={styles.logo}></Logo>
           </View>
-          <View>
+          <View style={styles.categoryItems}>
             <FlatList 
             keyExtractor={(item, index) => item.id}
             data={CATEGORIES} 
@@ -55,13 +55,16 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   scrollable: {
-    width: 332,
-    height: 539,
+    width: '100%',
+    height: 800,
     margin:10,    
   },
   scrollArea: {
-    width: 332,
-    height: 539
+    width: '95%',
+    height: 539,
+  },
+  categoryItems:{
+    width:'100%',
   },
   logo: {
     height: 110,
