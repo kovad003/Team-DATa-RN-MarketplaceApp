@@ -5,7 +5,12 @@ import { StyleSheet } from "react-native";
 
 function SliderComponent(props) {
   return (
-    <Slider value={0} style={styles.slider}></Slider>
+    <Slider 
+      value={0}
+      thumbTintColor='darkblue'
+      minimumTrackTintColor='dodgerblue'
+      maximumTrackTintColor='#aaa498' 
+      style={styles.slider}></Slider>
   );
 }
 

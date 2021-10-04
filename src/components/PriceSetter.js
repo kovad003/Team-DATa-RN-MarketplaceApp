@@ -25,10 +25,11 @@ function PriceSetter(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light2,
+    // backgroundColor: colors.light2,
+    backgroundColor: '#fbf9eb',
     borderRadius: 15,
-    marginVertical: 10,
-    marginHorizontal: 20,
+    marginVertical: 3,
+    marginHorizontal: 50,
     // ------------------------------
     //android shadows
     elevation: 5,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
       height: 3
     },
     shadowOpacity: 0.5,
-    shadowRadius: 0,
+    shadowRadius: 1,
     // ------------------------------
   },
   row: {

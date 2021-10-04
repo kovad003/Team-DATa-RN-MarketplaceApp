@@ -15,13 +15,13 @@ import SearchResultScreen from "./src/screens/SearchResultScreen";
 
 function App() {
     return (
-      //<MainScreen></MainScreen>
-      //<LoginScreen></LoginScreen>
+      // <MainScreen></MainScreen>
+      // <LoginScreen></LoginScreen>
       <SearchScreen></SearchScreen>
-      //<CreateItemScreen></CreateItemScreen>
-      //<ListItemsScreen></ListItemsScreen>
-      //<RegistrationScreen></RegistrationScreen>
-      //<SearchResultScreen></SearchResultScreen>
+      // <CreateItemScreen></CreateItemScreen>
+      // <ListItemsScreen></ListItemsScreen>
+      // <RegistrationScreen></RegistrationScreen>
+      // <SearchResultScreen></SearchResultScreen>
     );
 }
 
