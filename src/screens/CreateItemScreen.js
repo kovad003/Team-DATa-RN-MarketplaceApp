@@ -10,15 +10,15 @@ import { Margins, Paddings } from "../constants/constvalues";
 
 function CreateItemScreen(props) {
   return (
-    <View style={styles.container}>
-      <HeaderComponent style={styles.header}></HeaderComponent>
-      <ImageUploader style={styles.imageUploader}></ImageUploader>
+    <View style={styles.containerCIS}>
+      <HeaderComponent style={styles.headerCIS}></HeaderComponent>
+      <ImageUploader style={styles.imageUploaderCIS}></ImageUploader>
       <IconInputBoxAttached
-        style={styles.iconInputBoxAttached}
+        style={styles.iconInputBoxAttachedCIS}
       ></IconInputBoxAttached>
-      <View style={styles.buttonContainer}>
-        <AppButton button="Upload" style={styles.uploadButton}></AppButton>
-        <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
+      <View style={styles.buttonContainerCIS}>
+        <AppButton button="Upload" style={styles.uploadButtonCIS}></AppButton>
+        <AppButton button="Cancel" style={styles.cancelButtonCIS}></AppButton>
       </View>
     </View>
   );
