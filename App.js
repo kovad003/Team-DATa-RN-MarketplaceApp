@@ -17,11 +17,11 @@ function App() {
     return (
       //<MainScreen></MainScreen>
       //<LoginScreen></LoginScreen>
-      <SearchScreen></SearchScreen>
+      //<SearchScreen></SearchScreen>
       //<CreateItemScreen></CreateItemScreen>
       //<ListItemsScreen></ListItemsScreen>
       //<RegistrationScreen></RegistrationScreen>
-      //<SearchResultScreen></SearchResultScreen>
+      <SearchResultScreen></SearchResultScreen>
     );
 }
 

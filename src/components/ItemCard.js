@@ -4,121 +4,102 @@ import SellerTab from "./SellerTab";
 import ImageHolder from "./ImageHolder";
 import ViewCounter from "./ViewCounter";
 import IconButton from "./IconButton";
+import colors from "../constants/colors";
+import { Margins, Paddings } from "../constants/constvalues";
 
 function ItemCard(props) {
   return (
-    <View style={[styles.container, props.style]}>
-      <View style={styles.rect}>
-        <SellerTab style={styles.sellerTab}></SellerTab>
-        <ImageHolder style={styles.imageHolder}></ImageHolder>
-        <View style={styles.tilteWithPrice}>
-          <View style={styles.titleContainer}>
-            <View style={styles.titleRow}>
-              <Text style={styles.title}>Title</Text>
-              <Text style={styles.price}>Price €</Text>
-            </View>
-          </View>
+    <View style={styles.container}>
+      {/* --------------------------------------------------------------------- */}
+      <SellerTab style={styles.sellerTab}></SellerTab>
+      {/* --------------------------------------------------------------------- */}
+      <ImageHolder style={styles.imageHolder}></ImageHolder>
+      {/* --------------------------------------------------------------------- */}
+      <View style={styles.titleRow}>
+        <View style={styles.title}>
+          <Text >Title</Text>
         </View>
-        <View style={styles.itemDescription}>
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>description text</Text>
-          </View>
-        </View>
-        <View style={styles.viewCounterRow}>
-          <ViewCounter style={styles.viewCounter}></ViewCounter>
-          <IconButton
-            iconName="magnifying-glass"
-            icon="shopping-cart"
-            style={styles.buyButton}
-          ></IconButton>
+        <View style={styles.price}>
+          <Text >Price €</Text>
         </View>
       </View>
+      {/* --------------------------------------------------------------------- */}
+      <View style={styles.description}>
+          <Text style={styles.descriptionText}>description text</Text>
+      </View>
+      {/* --------------------------------------------------------------------- */}
+      <View style={styles.viewCounterRow}>
+        {/* .................................... */}
+        <View style={styles.viewCounter}>
+          <ViewCounter></ViewCounter>
+        </View>
+        {/* .................................... */}
+        <View style={styles.shoppingButton}>
+          <IconButton 
+            iconName="magnifying-glass"
+            icon="shopping-cart"     
+          ></IconButton>  
+        </View>
+        {/* .................................... */}    
+      </View>
+      {/* --------------------------------------------------------------------- */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  rect: {
-    width: 294,
-    height: 407,
-    backgroundColor: "#E6E6E6",
-    borderRadius: 15
+  container: {
+    width: '90%',
+    //height: '50%',
+    backgroundColor: colors.light3,
+    borderRadius: 15,
+    justifyContent: 'center',
+    margin: Margins.large,
+    padding: Paddings.midsize
   },
-  sellerTab: {
-    height: 43,
-    width: 267,
-    marginTop: 16,
-    marginLeft: 15
+  sellerTab:{
+    alignSelf: 'center',
   },
   imageHolder: {
-    height: 153,
-    width: 267,
-    marginTop: 8,
-    marginLeft: 15
+    alignSelf: 'center',
+    backgroundColor: 'black',
+    height: 250,
+    width: '90%',
   },
-  tilteWithPrice: {
-    width: 267,
-    height: 38,
-    marginTop: 9,
-    marginLeft: 15
-  },
-  titleContainer: {
-    width: 267,
-    height: 38,
-    backgroundColor: "#E6E6E6",
-    flexDirection: "row"
+  titleRow:{
+    flexDirection: 'row',
+    //flex:1,
+    marginVertical: 10
   },
   title: {
-    //fontFamily: "roboto-700",
-    color: "#121212",
-    fontSize: 22
+    width:'50%',  
+    flexDirection: 'row',
+    alignSelf: 'flex-start'
   },
   price: {
-    //fontFamily: "roboto-700",
-    color: "#121212",
-    fontSize: 22,
-    marginLeft: 144,
-    marginTop: 1
+    width:'50%',  
+    flexDirection: 'row',
+    justifyContent:'flex-end',
   },
-  titleRow: {
-    height: 28,
-    flexDirection: "row",
-    flex: 1,
-    marginRight: 9,
-    marginTop: 5
+  description: {
+    marginVertical: 5
   },
-  itemDescription: {
-    width: 267,
-    height: 67,
-    marginTop: 11,
-    marginLeft: 15
-  },
-  descriptionContainer: {
-    width: 267,
-    height: 66,
-    marginTop: -9
-  },
-  descriptionText: {
-    //fontFamily: "roboto-regular",
-    color: "#121212",
-    marginTop: 9
+  viewCounterRow:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    height: 60,
   },
   viewCounter: {
-    height: 39,
-    width: 92
+    width:'50%',  
+    flexDirection:'row',
+    justifyContent:'flex-start',
+    
   },
-  buyButton: {
-    height: 39,
-    width: 47,
-    marginLeft: 116
-  },
-  viewCounterRow: {
-    height: 39,
-    flexDirection: "row",
-    marginTop: 11,
-    marginLeft: 19,
-    marginRight: 20
+  shoppingButton:{
+    width:'50%',  
+    flexDirection:'row',
+    justifyContent:'flex-end',
   }
 });
 
