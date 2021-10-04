@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     marginTop: 21,
     marginLeft: 10,
     margin: Margins.midsize, // AD - added
+    padding: Paddings.midsize, // AD - added
   },
   iconInputBoxAttached: {
     height: 44,
