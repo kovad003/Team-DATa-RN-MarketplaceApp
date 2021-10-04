@@ -27,6 +27,7 @@ function CreateItemScreen(props) {
 const styles = StyleSheet.create({
   containerCIS: {
     flex: 1,
+    alignItems: 'center',
   },
   headerCIS: {
     height: 39,
