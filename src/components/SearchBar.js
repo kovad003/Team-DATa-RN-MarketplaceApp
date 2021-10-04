@@ -1,63 +1,56 @@
+// Standard Imports
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 import IconButton from "./IconButton";
 
+// Custom Imports
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
+
 function SearchBar(props) {
   return (
-    <View style={[styles.container, props.style]}>
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBoxRow}>
-          <TextInput
-            placeholder="Search..."
-            style={styles.searchBox}
-          ></TextInput>
-          <IconButton style={styles.iconButton1}></IconButton>
-        </View>
-      </View>
+    <View style={styles.container}>
+      <View style={styles.searchRow}>
+        <TextInput style={styles.inputField} placeholder="Search..."></TextInput>
+        <IconButton style={styles.iconButton}></IconButton>
+      </View>    
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  searchContainer: {
-    width: 360,
-    height: 97,
-    backgroundColor: "#E6E6E6",
-    shadowColor: "rgba(0,0,0,1)",
+  container: {
+    backgroundColor:colors.light2,
+    flexDirection: "row",
+    flex: 1,
+    alignItems: 'center',
+    // only for android
+    elevation: 8,
+    // only for ios
+    shadowColor: colors.black,
     shadowOffset: {
       width: 3,
       height: 3
     },
-    elevation: 5,
-    shadowOpacity: 0.3,
-    shadowRadius: 0,
-    flexDirection: "row"
+    shadowOpacity: 1,
+    shadowRadius: 1,
   },
-  searchBox: {
-    //fontFamily: "roboto-regular",
-    color: "#121212",
-    height: 32,
-    width: 270,
-    borderRadius: 15,
-    backgroundColor: "#fff",
-    fontSize: 22,
-    textAlign: "center",
-    marginTop: 3
-  },
-  iconButton1: {
-    height: 39,
-    width: 47,
-    marginLeft: 6
-  },
-  searchBoxRow: {
-    height: 39,
+  searchRow: {
     flexDirection: "row",
     flex: 1,
-    marginRight: 19,
-    marginLeft: 18,
-    marginTop: 45
-  }
+    marginHorizontal: Paddings.midsize,
+    marginTop: Margins.midsize,
+  },
+  inputField: {
+    flex:1,
+    borderRadius: 15,
+    backgroundColor: colors.white,
+    fontSize: 22,
+    textAlign: "center",
+  },
+  iconButton: {
+    marginLeft: 15,
+  },
 });
 
 export default SearchBar;

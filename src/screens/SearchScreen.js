@@ -1,108 +1,75 @@
-import React, { Component } from "react";
-import { StyleSheet, View, ScrollView, Text } from "react-native";
+import React, { Component, useState } from "react";
+import { StyleSheet, View, ScrollView, Text, FlatList } from "react-native";
 import SwitchFilter from "../components/SwitchFilter";
 import ScrollDownList from "../components/ScrollDownList";
 import PriceSetter from "../components/PriceSetter";
 import SearchBar from "../components/SearchBar";
 
+// Constants
+import TextStyling from '../constants/fontstyling'
+import colors from "../constants/colors";
+
 function SearchScreen(props) {
+  // Creating mock data
+  const categoryList = [
+    {id: '1', name: 'Furniture'},
+    {id: '2', name: 'Sports'},
+    {id: '3', name: 'Clothes'},
+    {id: '4', name: 'Electronics'},
+    {id: '5', name: 'Other'},
+  ]
+  console.log('categoryList: ' + categoryList);
+
   return (
     <View style={styles.container}>
-      <View style={styles.scrollArea}>
-        <ScrollView
-          horizontal={false}
-          contentContainerStyle={styles.scrollArea_contentContainerStyle}
-        >
-          <View style={styles.categoryMain}>
-            <Text style={styles.categoryTitle}>Categories</Text>
-            <SwitchFilter style={styles.switchFilter}></SwitchFilter>
-          </View>
-          <View style={styles.locationMain}>
-            <Text style={styles.locationTitle}>Location</Text>
-            <ScrollDownList style={styles.scrollDownList}></ScrollDownList>
-          </View>
-          <View style={styles.priceMain}>
-            <Text style={styles.priceTitle}>Price</Text>
-            <PriceSetter style={styles.priceSetter}></PriceSetter>
-          </View>
-        </ScrollView>
+
+      <View style={styles.searchBar}>
+        <SearchBar style={styles.searchBar}/>
       </View>
-      <SearchBar style={styles.searchBar}></SearchBar>
+        <ScrollView horizontal={false} contentContainerStyle={styles.scrollArea_contentContainerStyle}>
+          {/* ---------------------------------------------------------------------------- */}
+          <View style={styles.categoriesContainer}>
+            <Text style={TextStyling.textBlackLarge}>Categories</Text>
+            <SwitchFilter selectorLabel="All"></SwitchFilter>
+            <FlatList //FlatList shouldnt be used with ScrollView
+                keyExtractor={item=>item.id}
+                data={categoryList}
+                renderItem={itemData => <SwitchFilter label={itemData.item.name}/>}
+            />
+          </View>
+          {/* ---------------------------------------------------------------------------- */}
+          <View style={styles.locationContainer}>
+            <Text style={TextStyling.textBlackLarge}>Location</Text>
+            <ScrollDownList label="Select Location..."/>
+            <ScrollDownList label="Select Radius..."/>
+          </View>
+          {/* ---------------------------------------------------------------------------- */}
+          <View>
+            <Text style={TextStyling.textBlackLarge}>Price</Text>
+            <PriceSetter label='Min: €'/>
+            <PriceSetter label='Max: €'/>
+          </View>
+          {/* ---------------------------------------------------------------------------- */}
+        </ScrollView>     
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  title: {
+    
+  },
   container: {
     flex: 1,
-    backgroundColor: "rgba(179,169,169,1)"
+    backgroundColor: colors.light3,
   },
-  scrollArea: {
-    width: 323,
-    height: 404,
-    marginTop: 97,
-    marginLeft: 18
-  },
-  scrollArea_contentContainerStyle: {
-    height: 404,
-    width: 323
-  },
-  categoryMain: {
-    width: 323,
-    height: 125
-  },
-  categoryTitle: {
-    //fontFamily: "roboto-regular",
-    color: "#121212",
-    height: 30,
-    width: 161,
-    fontSize: 22,
-    marginLeft: 1
-  },
-  switchFilter: {
-    height: 43,
-    width: 323,
-    marginTop: 11
-  },
-  locationMain: {
-    width: 323,
-    height: 119,
-    marginTop: 11
-  },
-  locationTitle: {
-    //fontFamily: "roboto-regular",
-    color: "#121212",
-    height: 30,
-    width: 161,
-    fontSize: 22
-  },
-  scrollDownList: {
-    height: 43,
-    width: 323,
-    marginTop: 17
-  },
-  priceMain: {
-    width: 323,
-    height: 138,
-    marginTop: 11
-  },
-  priceTitle: {
-    //fontFamily: "roboto-regular",
-    color: "#121212",
-    height: 30,
-    width: 161,
-    fontSize: 22,
-    marginLeft: 1
-  },
-  priceSetter: {
-    height: 43,
-    width: 323,
-    marginTop: 10
+  categoriesContainer: {
+
   },
   searchBar: {
-    height: 97,
-    width: 360,
-    marginTop: -501
+    height: 90,
+    //flex: 0.15,
+    // backgroundColor set in then component file
   }
 });
 
