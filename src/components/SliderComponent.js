@@ -1,22 +1,18 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Slider } from "react-native";
+//Standard Import
+import Slider from "@react-native-community/slider";
+import React from "react";
+import { StyleSheet } from "react-native";
 
 function SliderComponent(props) {
   return (
-    <View style={[styles.container, props.style]}>
-      <Slider value={50} style={styles.slider}></Slider>
-    </View>
+    <Slider value={0} style={styles.slider}></Slider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "transparent",
-    justifyContent: "center"
-  },
   slider: {
-    height: 30,
-    width: 150
+    flexDirection: 'row',
+    flex:1, 
   }
 });
 
