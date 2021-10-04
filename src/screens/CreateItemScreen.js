@@ -4,17 +4,20 @@ import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
 import AppButton from "../components/AppButton";
+
+// AD - constants
+import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
-
-
 
 function CreateItemScreen(props) {
   return (
     <View style={styles.containerCIS}>
       <View style={styles.titleContainerCIS}>
-        <Text
+        <Text style={TextStyling.textBlackMedium} >
+          Create Item
+          {/*Price
           placeholder="Create Item"
-          style={styles.placeholder}>
+          style={styles.placeholder}*/}
         </Text>
       </View>
       {/* <HeaderComponent style={styles.headerCIS}></HeaderComponent>*/}
