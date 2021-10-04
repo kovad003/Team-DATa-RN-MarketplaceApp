@@ -6,10 +6,12 @@ import EditableCard from "../components/EditableCard";
 function ListItemsScreen(props) {
   return (
     <View style={styles.container}>
-      <HeaderComponent style={styles.header}></HeaderComponent>
       <Text style={styles.title}>My Items...</Text>
       <View style={styles.rect}>
         <EditableCard style={styles.editableCard}></EditableCard>
+      </View>
+      <View style={styles.headerContainer}>
+        <HeaderComponent style={styles.header}></HeaderComponent>
       </View>
     </View>
   );
@@ -17,7 +19,7 @@ function ListItemsScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   header: {
     height: 39,
