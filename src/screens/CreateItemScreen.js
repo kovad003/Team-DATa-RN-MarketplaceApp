@@ -4,6 +4,9 @@ import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
 import AppButton from "../components/AppButton";
+import { Paddings } from "../constants/constvalues";
+
+
 
 function CreateItemScreen(props) {
   return (
@@ -23,7 +26,7 @@ function CreateItemScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   header: {
     height: 39,
@@ -35,19 +38,22 @@ const styles = StyleSheet.create({
     height: 104,
     width: 339,
     marginTop: 21,
-    marginLeft: 10
+    marginLeft: 10,
+    // padding: Paddings.midsize, // AD - added
   },
   iconInputBoxAttached: {
     height: 44,
     width: 317,
     marginTop: 42,
-    marginLeft: 20
+    marginLeft: 20,
+    // padding: Paddings.midsize, // AD - added
   },
   buttonContainer: {
     width: 339,
     height: 89,
     marginTop: 250,
-    marginLeft: 10
+    marginLeft: 10,
+    // padding: Paddings.midsize, // AD - added
   },
   uploadButton: {
     width: 206,
