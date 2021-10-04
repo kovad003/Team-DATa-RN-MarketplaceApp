@@ -34,18 +34,19 @@ const styles = StyleSheet.create({
     width: 339,
     marginTop: 35,
     //marginLeft: 10 // AD - removed
-    alignItems: 'center',
+    alignItems: 'center', // AD - added
     backgroundColor: 'red', // AD - just for testing
   },
   imageUploaderCIS: {
     height: 104,
     width: 339,
     marginTop: 21,
-    marginLeft: 10,
+    // marginLeft: 10, // AD - removed
     //margin: Margins.midsize, // AD - removed
     //padding: Paddings.midsize, // AD - added
 
-    //alignItems: 'center',
+    alignItems: 'center', // AD - added
+    backgroundColor: 'red', // AD - just for testing
   },
   iconInputBoxAttachedCIS: {
     height: 44,
