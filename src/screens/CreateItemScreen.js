@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
@@ -12,7 +12,10 @@ function CreateItemScreen(props) {
   return (
     <View style={styles.containerCIS}>
       <View style={styles.titleContainerCIS}>
-
+        <Text
+          placeholder="Create Item"
+          style={styles.placeholder}>
+        </Text>
       </View>
       {/* <HeaderComponent style={styles.headerCIS}></HeaderComponent>*/}
       <ImageUploader style={styles.imageUploaderCIS}></ImageUploader> 
@@ -36,22 +39,22 @@ const styles = StyleSheet.create({
   headerCIS: {
     height: 39,
     width: 339,
-    marginTop: 35,
+    //marginTop: 35,
     //marginLeft: 10 // AD - removed
-    alignItems: 'center', // AD - added
- 
+    alignItems: 'center', // AD - added 
   },
+  
   imageUploaderCIS: {
     height: 104,
     width: 339,
-    marginTop: 21,
+    //marginTop: 21, AD - removed
     // marginLeft: 10, // AD - removed
-    marginTop: Margins.xxlarge, // AD marginTop
+    //marginTop: Margins.xxlarge, // AD marginTop
     //padding: Paddings.midsize, // AD - added
 
     alignItems: 'center', // AD - added
-    marginTop: Margins.midsize, // AD - added margin Top
-    marginBottom: Margins.xxlarge, // AD - added margin bottom
+    marginTop: Margins.narrow, // AD - added margin Top
+    marginBottom: Margins.xlarge, // AD - added margin bottom
  
   },
   iconInputBoxAttachedCIS: {
@@ -75,18 +78,20 @@ const styles = StyleSheet.create({
     width: '80%',
 
     alignItems: 'center', // AD - added align
-    backgroundColor: 'red',
+    //backgroundColor: 'red',
+    marginBottom: Margins.xnarrow, // AD - added margin bottom
    
   },
 
   /* AD - an extra container for the title */
   titleContainerCIS: {
     //width: 339, AD - removed
-    height: 40,
+    height: 39,
+ 
     //marginTop: 20,
     //marginLeft: 10, // AD - removed
     //padding: Paddings.midsize, // AD - removed
-    width: '90%',
+    width: '85%',
     alignItems: 'center', // AD - added align
     backgroundColor: 'red',   
 
@@ -101,8 +106,22 @@ const styles = StyleSheet.create({
     },
   
   },
+  /* AD - added placeholder stylings */
+  placeholder: {
+    //fontFamily: "roboto-regular",
+    color: "#121212", // "#121212"
+    height: 30,
+    width: 249,
+    backgroundColor: "rgba(255,255,255,1)",
+    borderRadius: 15,
+    textAlign: "center",
+    marginLeft: 18
+  },
 
+  /* AD - added text stylings */
+  customText: {
 
+  },
 
   uploadButtonCIS: {
     width: 206,
