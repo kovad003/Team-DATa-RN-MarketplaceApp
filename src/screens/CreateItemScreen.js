@@ -86,12 +86,20 @@ const styles = StyleSheet.create({
     //marginTop: 20,
     //marginLeft: 10, // AD - removed
     //padding: Paddings.midsize, // AD - removed
-    width: '80%',
+    width: '90%',
     alignItems: 'center', // AD - added align
     backgroundColor: 'red',   
 
     marginTop: Margins.large, // AD - added margin Top
     //marginBottom: Margins.xxlarge, // AD - added margin bottom
+    backgroundColor: "#E6E6E6",
+    borderRadius: 15,
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+  
   },
 
 
