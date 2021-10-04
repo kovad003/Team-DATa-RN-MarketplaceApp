@@ -16,9 +16,9 @@ import SearchResultScreen from "./src/screens/SearchResultScreen";
 function App() {
     return (
       //<MainScreen></MainScreen>
-      <LoginScreen></LoginScreen>
+      //<LoginScreen></LoginScreen>
       //<SearchScreen></SearchScreen>
-      //<CreateItemScreen></CreateItemScreen>
+      <CreateItemScreen></CreateItemScreen>
       //<ListItemsScreen></ListItemsScreen>
       //<RegistrationScreen></RegistrationScreen>
       //<SearchResultScreen></SearchResultScreen>
