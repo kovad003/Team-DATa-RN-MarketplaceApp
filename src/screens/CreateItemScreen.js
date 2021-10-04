@@ -12,8 +12,9 @@ import { Margins, Paddings } from "../constants/constvalues";
 function CreateItemScreen(props) {
   return (
     <View style={styles.containerCIS}>
-      <View style={styles.titleContainerCIS}>
-        <Text style={TextStyling.textBlackMedium} >
+      {/* AD - adds title text */}
+      <View style={styles.titleContainerCIS}>        
+        <Text style={TextStyling.textBlackLarge} >
           Create Item
           {/*Price
           placeholder="Create Item"
@@ -89,11 +90,12 @@ const styles = StyleSheet.create({
   /* AD - an extra container for the title */
   titleContainerCIS: {
     //width: 339, AD - removed
-    height: 39,
+    height: 42, 
  
     //marginTop: 20,
     //marginLeft: 10, // AD - removed
-    //padding: Paddings.midsize, // AD - removed
+    paddingVertical: Paddings.xnarrow,
+    //paddingVertical: 'auto',
     width: '85%',
     alignItems: 'center', // AD - added align
     backgroundColor: 'red',   
