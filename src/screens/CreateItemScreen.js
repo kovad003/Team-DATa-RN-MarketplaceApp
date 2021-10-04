@@ -4,7 +4,7 @@ import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
 import AppButton from "../components/AppButton";
-import { Paddings } from "../constants/constvalues";
+import { Margins, Paddings } from "../constants/constvalues";
 
 
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     width: 339,
     marginTop: 21,
     marginLeft: 10,
-    padding: Paddings.midsize, // AD - added
+    margin: Margins.midsize, // AD - added
   },
   iconInputBoxAttached: {
     height: 44,
