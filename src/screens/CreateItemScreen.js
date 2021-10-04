@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     height: 36,
     marginTop: 4,
     // marginLeft: 66 // AD - removed
-    
+    backgroundColor: colors.light2, // AD - added color
   },
   cancelButtonCIS: {
     width: 206,
@@ -148,6 +148,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
     // marginLeft: 66 // AD - removed
+
+    backgroundColor: colors.light5, // AD - added color
     
   }
 });
