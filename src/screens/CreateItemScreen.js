@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     width: 317,
     marginTop: 42,
     marginLeft: 20,
-    // padding: Paddings.midsize, // AD - added
+    padding: Paddings.midsize, // AD - added
   },
   buttonContainer: {
     width: 339,
