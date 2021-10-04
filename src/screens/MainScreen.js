@@ -1,21 +1,43 @@
 import React, { Component } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, FlatList } from "react-native";
+
+
+
 import HeaderComponent from "../components/HeaderComponent";
 import Logo from "../components/Logo";
 import CategoryButton from "../components/CategoryButton";
+import { CATEGORIES } from "../data/dummy-data";
 
 function MainScreen(props) {
+
+  const renderCategoryItem = itemData => {
+    return( 
+      <CategoryButton 
+      title={itemData.item.title}
+      onSelect={()=>{console.log('click')}}
+      color= {itemData.item.color}
+      image={itemData.item.url}
+      />
+      );
+  };
+
+
   return (
     <View style={styles.container}>
       <HeaderComponent style={styles.header}></HeaderComponent>
       <View style={styles.scrollable}>
         <View style={styles.scrollArea}>
-          <ScrollView
-            contentContainerStyle={styles.scrollArea_contentContainerStyle}
-          >
+          <View>
             <Logo style={styles.logo}></Logo>
-            <CategoryButton style={styles.categoryButton}></CategoryButton>
-          </ScrollView>
+          </View>
+          <View style={styles.categoryItems}>
+            <FlatList 
+            keyExtractor={(item, index) => item.id}
+            data={CATEGORIES} 
+            renderItem={renderCategoryItem} 
+            numColumns={2}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -33,18 +55,16 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   scrollable: {
-    width: 332,
-    height: 539,
-    marginTop: 14,
-    marginLeft: 18
+    width: '100%',
+    height: 800,
+    margin:10,    
   },
   scrollArea: {
-    width: 332,
-    height: 539
-  },
-  scrollArea_contentContainerStyle: {
+    width: '95%',
     height: 539,
-    width: 332
+  },
+  categoryItems:{
+    width:'100%',
   },
   logo: {
     height: 110,
@@ -53,8 +73,7 @@ const styles = StyleSheet.create({
     marginLeft: 80
   },
   categoryButton: {
-    height: 72,
-    width: 309,
+
     marginTop: 18,
     marginLeft: 11
   }
