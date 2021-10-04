@@ -10,7 +10,7 @@ function ScrollDownList(props) {
   return (
     <View style={[styles.container]}>
       <TouchableOpacity style={styles.row}>
-        <Text style={fontstyling.textBlackLarge}>{props.label || 'Select...'}</Text>
+        <Text style={styles.label}>{props.label || 'Select...'}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -41,7 +41,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: 'center',
     marginHorizontal: 15,
-  }
+  },
+  label:{
+    fontFamily: 'caballar',
+    fontSize: 22,
+    color: 'black'
+  },
 });
 
 export default ScrollDownList;

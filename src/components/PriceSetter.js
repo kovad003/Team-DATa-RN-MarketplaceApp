@@ -14,8 +14,8 @@ function PriceSetter(props) {
     <View style={styles.container}>
       <View style={styles.row}>
         <View style={styles.row}>
-          <Text style={fontstyling.textBlackLarge}>{props.label || '€'}</Text>
-          <TextInput placeholder="0" style={fontstyling.textBlackLarge}></TextInput>
+          <Text style={styles.label}>{props.label || '€'}</Text>
+          <TextInput placeholder="0" style={styles.label}></TextInput>
         </View>
         <SliderComponent></SliderComponent>
       </View>
@@ -48,7 +48,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: 'center',
     marginHorizontal: 15,
-  }
+  },
+  label:{
+    fontFamily: 'caballar',
+    fontSize: 22,
+    color: 'black',
+  },
 });
 
 export default PriceSetter;

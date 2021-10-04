@@ -21,7 +21,7 @@ function SearchBar(props) {
 const styles = StyleSheet.create({
   container: {
     // backgroundColor:colors.light2,
-    backgroundColor: '#706f6e',
+    backgroundColor: '#493c30',
     flexDirection: "row",
     flex: 1,
     alignItems: 'center',
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     flex:1,
     borderRadius: 15,
     backgroundColor: colors.white,
+    fontFamily: 'caballar',
     fontSize: 22,
     textAlign: "center",
   },

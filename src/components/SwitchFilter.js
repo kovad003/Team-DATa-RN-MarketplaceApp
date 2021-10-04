@@ -13,8 +13,8 @@ function SwitchFilter(props) {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <SwitchComponent></SwitchComponent>
-        <Text style={fontstyling.textBlackLarge}>{props.label || 'label'}</Text>
+        <SwitchComponent value={props.value ? true : false}></SwitchComponent>
+        <Text style={styles.label}>{props.label || 'label'}</Text>
       </View>
     </View>
   );
@@ -45,7 +45,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: 'center',
     marginHorizontal: 15,
-  }
+  },
+  label:{
+    fontFamily: 'caballar',
+    fontSize: 22,
+    color: 'black',
+  },
 });
 
 export default SwitchFilter;

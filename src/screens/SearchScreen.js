@@ -24,7 +24,7 @@ function SearchScreen(props) {
  */
 
   const categoryList = [
-    {id: '0', name: 'All'},
+    /* {id: '0', name: 'All'}, */
     {id: '1', name: 'Furniture'},
     {id: '2', name: 'Sports'},
     {id: '3', name: 'Clothes'},
@@ -55,7 +55,7 @@ function SearchScreen(props) {
               {categoryList.map((category)=>
                 <SwitchFilter label={category.name}></SwitchFilter>)}
             </ScrollView> */}
-
+            <SwitchFilter label='All' value='true'/>
             <FlatList //FlatList shouldnt be used with ScrollView
                 keyExtractor={item=>item.id}
                 data={categoryList}
@@ -100,9 +100,9 @@ const styles = StyleSheet.create({
   fontTitle: {
     marginLeft: 5,
     marginTop: 15,
-    fontFamily: 'monospace',
+    fontFamily: 'cake-n-truffles',
     fontSize: 26,
-    fontWeight: 'bold',
+    // fontWeight: '900',
     color: '#493c30',
     //fontStyle:'italic',
     
