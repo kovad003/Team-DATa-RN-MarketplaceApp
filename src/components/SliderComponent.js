@@ -7,9 +7,9 @@ function SliderComponent(props) {
   return (
     <Slider 
       value={0}
-      thumbTintColor='darkblue'
-      minimumTrackTintColor='dodgerblue'
-      maximumTrackTintColor='#aaa498' 
+      thumbTintColor='#2d3553'
+      minimumTrackTintColor='#8b91ad'
+      maximumTrackTintColor='#cdad9c' 
       style={styles.slider}></Slider>
   );
 }

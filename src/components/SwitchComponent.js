@@ -10,8 +10,8 @@ function SwitchComponent(props) {
     <View style={[styles.container, props.style]}>
       <Switch
         value={props.value ? true : false}
-        thumbColor={props.value ? 'darkblue' : '#706f6e'}
-        trackColor={{true: 'dodgerblue', false: '#aaa498'}}
+        thumbColor={props.value ? '#2d3553' : '#706f6e'}
+        trackColor={{true: '#8b91ad', false: '#aaa498'}}
         /* thumbColor={props.value ? '#64513b' : 'blue'}
         trackColor={{true: '#ceb99a', false: '#aaa498'}} */
         // thumbColor={props.value ? '#c08e3a' : '#5e5f65'}

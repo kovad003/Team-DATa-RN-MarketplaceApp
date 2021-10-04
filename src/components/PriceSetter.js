@@ -26,7 +26,7 @@ function PriceSetter(props) {
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: colors.light2,
-    backgroundColor: '#fbf9eb',
+    backgroundColor: 'white',
     borderRadius: 15,
     marginVertical: 3,
     marginHorizontal: 50,

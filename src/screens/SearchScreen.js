@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: colors.light3,
-    backgroundColor: '#ceb99a',
+    backgroundColor: '#f5eeeb',
+    // backgroundColor: '#e7ecf2'
   },
   categoriesContainer: {
     height: 215,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     fontFamily: 'cake-n-truffles',
     fontSize: 26,
     // fontWeight: '900',
-    color: '#493c30',
+    color: '#2d3553',
     //fontStyle:'italic',
     
 
