@@ -24,11 +24,10 @@ function SearchScreen(props) {
     <View style={styles.container}>
 
       <View style={styles.searchBar}>
-        <SearchBar/>
+        <SearchBar style={styles.searchBar}/>
       </View>
-
         <ScrollView horizontal={false} contentContainerStyle={styles.scrollArea_contentContainerStyle}>
-
+          {/* ---------------------------------------------------------------------------- */}
           <View style={styles.categoriesContainer}>
             <Text style={TextStyling.textBlackLarge}>Categories</Text>
             <SwitchFilter selectorLabel="All"></SwitchFilter>
@@ -38,25 +37,20 @@ function SearchScreen(props) {
                 renderItem={itemData => <SwitchFilter label={itemData.item.name}/>}
             />
           </View>
-
+          {/* ---------------------------------------------------------------------------- */}
           <View style={styles.locationContainer}>
             <Text style={TextStyling.textBlackLarge}>Location</Text>
             <ScrollDownList label="Select Location..."/>
             <ScrollDownList label="Select Radius..."/>
           </View>
-
+          {/* ---------------------------------------------------------------------------- */}
           <View>
             <Text style={TextStyling.textBlackLarge}>Price</Text>
             <PriceSetter label='Min: €'/>
             <PriceSetter label='Max: €'/>
           </View>
-        </ScrollView>
-        
-        
-
-      
-      
-      
+          {/* ---------------------------------------------------------------------------- */}
+        </ScrollView>     
     </View>
   );
 }
