@@ -12,10 +12,10 @@ function CreateItemScreen(props) {
   return (
     <View style={styles.containerCIS}>
       <HeaderComponent style={styles.headerCIS}></HeaderComponent>
-      <ImageUploader style={styles.imageUploaderCIS}></ImageUploader>
-      <IconInputBoxAttached
-        style={styles.iconInputBoxAttachedCIS}
-      ></IconInputBoxAttached>
+      <ImageUploader style={styles.imageUploaderCIS}></ImageUploader> 
+        <IconInputBoxAttached
+          style={styles.iconInputBoxAttachedCIS}
+        ></IconInputBoxAttached>     
       <View style={styles.buttonContainerCIS}>
         <AppButton button="Upload" style={styles.uploadButtonCIS}></AppButton>
         <AppButton button="Cancel" style={styles.cancelButtonCIS}></AppButton>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginTop: 35,
     //marginLeft: 10 // AD - removed
     alignItems: 'center', // AD - added
-    backgroundColor: 'red', // AD - just for testing
+ 
   },
   imageUploaderCIS: {
     height: 104,
@@ -46,17 +46,17 @@ const styles = StyleSheet.create({
     //padding: Paddings.midsize, // AD - added
 
     alignItems: 'center', // AD - added
-    backgroundColor: 'red', // AD - just for testing
+ 
   },
   iconInputBoxAttachedCIS: {
     height: 44,
     width: 317,
     marginTop: 42,
-    marginLeft: 20,
+    //marginLeft: 20, // AD - removed
     //padding: Paddings.midsize, // AD - removed
 
     alignItems: 'center', // AD - added align
-  },
+  },  
   buttonContainerCIS: {
     //width: 339, AD - removed
     height: 89,
@@ -66,13 +66,14 @@ const styles = StyleSheet.create({
     width: '80%',
 
     alignItems: 'center', // AD - added align
-    backgroundColor: 'red', // AD - just for testing
+
   },
   uploadButtonCIS: {
     width: 206,
     height: 36,
     marginTop: 4,
     // marginLeft: 66 // AD - removed
+    
   },
   cancelButtonCIS: {
     width: 206,
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
     // marginLeft: 66 // AD - removed
+    
   }
 });
 
