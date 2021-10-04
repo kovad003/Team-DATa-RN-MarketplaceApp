@@ -1,6 +1,8 @@
+// Standard Imports
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 
+// Custom Imports
 import HeaderComponent from "./src/components/HeaderComponent";
 import MainScreen from "./src/screens/MainScreen";
 import LoginScreen from "./src/screens/LoginScreen";
@@ -11,13 +13,11 @@ import RegistrationScreen from "./src/screens/RegistrationScreen";
 import SearchResultScreen from "./src/screens/SearchResultScreen";
 
 
-
-
 function App() {
     return (
-      <MainScreen></MainScreen>
+      //<MainScreen></MainScreen>
       //<LoginScreen></LoginScreen>
-      //<SearchScreen></SearchScreen>
+      <SearchScreen></SearchScreen>
       //<CreateItemScreen></CreateItemScreen>
       //<ListItemsScreen></ListItemsScreen>
       //<RegistrationScreen></RegistrationScreen>
