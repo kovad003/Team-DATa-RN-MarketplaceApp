@@ -11,7 +11,7 @@ import { Margins, Paddings } from "../constants/constvalues";
 function CreateItemScreen(props) {
   return (
     <View style={styles.containerCIS}>
-      <HeaderComponent style={styles.headerCIS}></HeaderComponent>
+      {/* <HeaderComponent style={styles.headerCIS}></HeaderComponent>*/}
       <ImageUploader style={styles.imageUploaderCIS}></ImageUploader> 
         <IconInputBoxAttached
           style={styles.iconInputBoxAttachedCIS}
@@ -20,6 +20,7 @@ function CreateItemScreen(props) {
         <AppButton button="Upload" style={styles.uploadButtonCIS}></AppButton>
         <AppButton button="Cancel" style={styles.cancelButtonCIS}></AppButton>
       </View>
+      <HeaderComponent style={styles.headerCIS}></HeaderComponent>
     </View>
   );
 }
@@ -42,10 +43,11 @@ const styles = StyleSheet.create({
     width: 339,
     marginTop: 21,
     // marginLeft: 10, // AD - removed
-    //margin: Margins.midsize, // AD - removed
+    marginTop: Margins.xxlarge, // AD marginTop
     //padding: Paddings.midsize, // AD - added
 
     alignItems: 'center', // AD - added
+    
  
   },
   iconInputBoxAttachedCIS: {
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
     //padding: Paddings.midsize, // AD - removed
 
     alignItems: 'center', // AD - added align
+    marginLeft: Margins.narrow, // AD - added margin left
   },  
   buttonContainerCIS: {
     //width: 339, AD - removed
@@ -66,6 +69,8 @@ const styles = StyleSheet.create({
     width: '80%',
 
     alignItems: 'center', // AD - added align
+    backgroundColor: 'red',
+   
 
   },
   uploadButtonCIS: {
