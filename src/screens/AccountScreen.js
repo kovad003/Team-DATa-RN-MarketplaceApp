@@ -65,9 +65,9 @@ function AccountScreen(props) {
        
        */}
 
-    <View style={styles.headerContainer}>
+    {/*<View style={styles.headerContainer}>*/}
       <HeaderComponent style={styles.header}></HeaderComponent>
-    </View>
+    {/*</View>*/}
 
     </View>
         
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
   header: {
     height: 60,
     width: '100%',
+    justifyContent: 'space-between',
   },
 
   /* 
