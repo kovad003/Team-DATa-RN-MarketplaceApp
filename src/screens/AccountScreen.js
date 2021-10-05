@@ -20,15 +20,32 @@ function AccountScreen(props) {
         </Text>
       </View>
      
-      <AccountTile style={styles.imageUploader} ></AccountTile> 
+      <View style={styles.centralContainer}>
+        <View style={styles.rowLineContainer}>
+        <AccountTile style={styles.rowStylings} ></AccountTile> 
+        </View>
+        
+        <View style={styles.rowLineContainer}>
+        <AccountTile style={styles.rowStylings} ></AccountTile> 
+        </View>
 
-      <AccountTile style={styles.imageUploader} ></AccountTile> 
+        <View style={styles.rowLineContainer}>
+        <AccountTile style={styles.rowStylings} ></AccountTile> 
+        </View>
 
-      <AccountTile style={styles.imageUploader} ></AccountTile> 
+        <View style={styles.rowLineContainer}>
+        <AccountTile style={styles.rowStylings} ></AccountTile> 
+        </View>
 
-      <AccountTile style={styles.imageUploader} ></AccountTile> 
+        <View style={styles.rowLineContainer}>
+        <AccountTile style={styles.imageUploader} ></AccountTile> 
+        </View>
 
-      <AccountTile style={styles.imageUploader} ></AccountTile> 
+        <View style={styles.rowLineContainer}>
+        <AccountTile style={styles.imageUploader} ></AccountTile> 
+        </View>
+      </View>
+
         
         {/*
         <IconInputBoxAttached
@@ -71,9 +88,17 @@ const styles = StyleSheet.create({
     width: '100%',
     // height: 60,   
   },
+
+  centralContainer: {
+    marginVertical: Margins.xxxlarge, // AD - added margin vertical
+  },
+
+  rowLineContainer : {
+    marginVertical: Margins.narrow, // AD - added margin vertical
+  },
   
   
-  imageUploader: {
+  rowStylings: {
     //height: 104,
     //width: 339,    
     alignItems: 'center', // AD - added
@@ -92,7 +117,7 @@ const styles = StyleSheet.create({
   },  
   buttonContainer: {
     height: 89,
-    marginTop: 250,
+    //marginTop: 250,
     width: '80%',
     alignItems: 'center', // AD - added align  
     marginBottom: Margins.narrow, // AD - added margin bottom
