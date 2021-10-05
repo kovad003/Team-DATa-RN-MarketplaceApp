@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/Entypo";
+import Icon from "react-native-vector-icons/AntDesign";
 
 // Added for margins and paddings
 import { Margins, Paddings } from "../constants/constvalues";
@@ -9,7 +9,7 @@ function AccountTile(props) {
   return (
     <View style={[styles.container, props.style]}>
       <TouchableOpacity style={styles.rowContainer}>
-        <Icon name="squared-plus" style={styles.icon}></Icon>
+        <Icon name="right" style={styles.icon}></Icon>
       </TouchableOpacity>
     </View>
   );
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     //width: '110%',
 
     
-    height: 50,
+    height: 53,
 
     //marginVertical: Margins.midsize, // AD - added margin Top
 
