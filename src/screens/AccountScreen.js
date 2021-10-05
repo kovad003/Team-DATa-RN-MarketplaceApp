@@ -22,17 +22,29 @@ function AccountScreen(props) {
      
       <View style={styles.centralContainer}>
        
-        <AccountTile></AccountTile> 
-
-        <AccountTile></AccountTile> 
-
-        <AccountTile></AccountTile> 
-
-        <AccountTile></AccountTile> 
-
+      <View style={styles.rowLineContainer}>
         <AccountTile></AccountTile>
-       
+      </View> 
+
+      <View style={styles.rowLineContainer}>
         <AccountTile></AccountTile>
+      </View>
+      
+      <View style={styles.rowLineContainer}>
+        <AccountTile></AccountTile>
+      </View>
+
+      <View style={styles.rowLineContainer}>
+        <AccountTile></AccountTile>
+      </View>
+
+      <View style={styles.rowLineContainer}>
+        <AccountTile></AccountTile>
+      </View>
+
+      <View style={styles.rowLineContainer}>
+        <AccountTile></AccountTile>
+      </View>
         
       </View>
 

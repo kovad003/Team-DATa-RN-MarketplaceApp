@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     
     height: 50,
 
-    marginVertical: Margins.midsize, // AD - added margin Top
+    //marginVertical: Margins.midsize, // AD - added margin Top
 
     //width: 200,
 
