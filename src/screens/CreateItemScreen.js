@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center', // AD - added align
     backgroundColor: colors.light4, // AD - added background
-
     width:'100%',
     justifyContent:'center',
   },
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
   titleContainer: {  
     height: 42,
     paddingVertical: Paddings.xnarrow,
-    width: '88%',
+    width: '93%',
     alignItems: 'center', // AD - added align
     backgroundColor: 'red',
     marginTop: Margins.large, // AD - added margin Top  

@@ -15,7 +15,7 @@ function AccountScreen(props) {
     <View style={styles.container}> 
       <View style={styles.titleContainer}>        
         <Text style={TextStyling.textBlackLarge} >
-          Create Item       
+          Account Screen      
         </Text>
       </View>
      
@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
   header: {
     flex:1,   
     width: '100%',
-    //height: 60,   
+    // height: 60,   
   },
   
   imageUploader: {
     height: 104,
-    width: 339,
+    width: 339,    
     alignItems: 'center', // AD - added
     marginTop: Margins.narrow, // AD - added margin Top
     marginBottom: Margins.xlarge, // AD - added margin bottom  
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   titleContainer: {  
     height: 42,
     paddingVertical: Paddings.xnarrow,
-    width: '88%',
+    width: '93%',
     alignItems: 'center', // AD - added align
     backgroundColor: 'red',
     marginTop: Margins.large, // AD - added margin Top  
