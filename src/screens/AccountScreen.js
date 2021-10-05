@@ -30,9 +30,17 @@ function AccountScreen(props) {
       <View style={styles.buttonContainerCIS}>
         <AppButton button="Upload" style={styles.uploadButtonCIS}></AppButton>
         <AppButton button="Cancel" style={styles.cancelButtonCIS}></AppButton>
-      </View>
-      <HeaderComponent style={styles.header}></HeaderComponent>
+
+        </View>
+
+
+        {/*<View style={styles.headerContainer}>*/}
+        <HeaderComponent style={styles.header}></HeaderComponent>
+        {/*</View>*/}
+
     </View>
+
+        
   );
 }
 
@@ -52,6 +60,7 @@ const styles = StyleSheet.create({
   // AD - testing
   headerContainer:{
     flex:1,
+    //height: 60,
     justifyContent:'center',
     alignItems:'center'
 
