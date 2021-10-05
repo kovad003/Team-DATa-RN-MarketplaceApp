@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
+import AccountTile from "../components/AccountTile";
 import AppButton from "../components/AppButton";
 
 // AD - constants
@@ -19,7 +20,7 @@ function AccountScreen(props) {
         </Text>
       </View>
      
-      <ImageUploader style={styles.imageUploader}></ImageUploader> 
+      <AccountTile style={styles.imageUploader}></AccountTile> 
         <IconInputBoxAttached
           style={styles.iconInputBoxAttached}>
         </IconInputBoxAttached>     
