@@ -9,7 +9,8 @@ import MainScreen from '../screens/MainScreen'
 import AccountScreen from '../screens/AccountScreen'
 import SearchScreen from '../screens/SearchScreen'
 import CreateItemScreen from '../screens/CreateItemScreen'
-//import CategoryScreen from '../screens/CategoryScreen'
+import CategoryScreen from '../screens/CategoryScreen'
+import HomeScreen from '../screens/HomeScreen'
 
 const Tab = createBottomTabNavigator();
 
@@ -18,13 +19,13 @@ function BottomTabsNavigation () {
     <NavigationContainer>
         <Tab.Navigator>
             <Tab.Screen 
-            name="Main" 
-            component={MainScreen}   
+            name="Home" 
+            component={HomeScreen}   
             />
-            {/* <Tab.Screen 
-            name="Category" 
+            <Tab.Screen 
+            name="Categories" 
             component={CategoryScreen}   
-            /> */}
+            />
             {/* <Tab.Screen 
             name="Profile" 
             component={AccountScreen}   
