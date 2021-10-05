@@ -12,34 +12,24 @@ import colors from "../constants/colors";
 
 function AccountScreen(props) {
   return (
-    <View style={styles.container}>
-      {/* AD - adds title text */}
+    <View style={styles.container}> 
       <View style={styles.titleContainer}>        
         <Text style={TextStyling.textBlackLarge} >
-          Create Item
-          {/*Price
-          placeholder="Create Item"
-          style={styles.placeholder}*/}
+          Create Item       
         </Text>
       </View>
-      {/* <HeaderComponent style={styles.headerCIS}></HeaderComponent>*/}
+     
       <ImageUploader style={styles.imageUploader}></ImageUploader> 
         <IconInputBoxAttached
-          style={styles.iconInputBoxAttached}
-        ></IconInputBoxAttached>     
+          style={styles.iconInputBoxAttached}>
+        </IconInputBoxAttached>     
       <View style={styles.buttonContainer}>
         <AppButton button="Upload" style={styles.uploadButton}></AppButton>
         <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
-
-        </View>
-
-
-        {/*<View style={styles.headerContainer}>*/}
-        <HeaderComponent style={styles.header}></HeaderComponent>
-        {/*</View>*/}
-
+      </View>
+    
+      <HeaderComponent style={styles.header}></HeaderComponent>
     </View>
-
         
   );
 }
@@ -49,12 +39,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center', // AD - added align
     backgroundColor: colors.light4, // AD - added background
+
+    width:'100%',
+    justifyContent:'center',
   },
+    /* 
   header: {
     height: 39,
     width: 339,
-    alignItems: 'center', // AD - added 
+    alignItems: 'center',
   },
+  */
+
   // AD - testing
   headerContainer:{
     flex:1,

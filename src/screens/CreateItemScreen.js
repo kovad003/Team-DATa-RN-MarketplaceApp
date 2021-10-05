@@ -12,101 +12,94 @@ import colors from "../constants/colors";
 
 function CreateItemScreen(props) {
   return (
-    <View style={styles.containerCIS}>
-      {/* AD - adds title text */}
-      <View style={styles.titleContainerCIS}>        
+    <View style={styles.container}> 
+      <View style={styles.titleContainer}>        
         <Text style={TextStyling.textBlackLarge} >
-          Create Item
-          {/*Price
-          placeholder="Create Item"
-          style={styles.placeholder}*/}
+          Create Item       
         </Text>
       </View>
-      {/* <HeaderComponent style={styles.headerCIS}></HeaderComponent>*/}
-      <ImageUploader style={styles.imageUploaderCIS}></ImageUploader> 
+     
+      <ImageUploader style={styles.imageUploader}></ImageUploader> 
         <IconInputBoxAttached
-          style={styles.iconInputBoxAttachedCIS}
-        ></IconInputBoxAttached>     
-      <View style={styles.buttonContainerCIS}>
-        <AppButton button="Upload" style={styles.uploadButtonCIS}></AppButton>
-        <AppButton button="Cancel" style={styles.cancelButtonCIS}></AppButton>
+          style={styles.iconInputBoxAttached}>
+        </IconInputBoxAttached>     
+      <View style={styles.buttonContainer}>
+        <AppButton button="Upload" style={styles.uploadButton}></AppButton>
+        <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
       </View>
-      <HeaderComponent style={styles.headerCIS}></HeaderComponent>
+    
+      <HeaderComponent style={styles.header}></HeaderComponent>
     </View>
+        
   );
 }
 
 const styles = StyleSheet.create({
-  containerCIS: {
+  container: {
     flex: 1,
     alignItems: 'center', // AD - added align
     backgroundColor: colors.light4, // AD - added background
+
+    width:'100%',
+    justifyContent:'center',
   },
-  headerCIS: {
+    /* 
+  header: {
     height: 39,
     width: 339,
-    //marginTop: 35,
-    //marginLeft: 10 // AD - removed
-    alignItems: 'center', // AD - added 
+    alignItems: 'center',
+  },
+  */
+
+  // AD - testing
+  headerContainer:{
+    flex:1,
+    //height: 60,
+    justifyContent:'center',
+    alignItems:'center'
+
+  },
+  // AD - testing
+  header: {
+    flex:1,   
+    width: '100%',
+    //height: 60,   
   },
   
-  imageUploaderCIS: {
+  imageUploader: {
     height: 104,
     width: 339,
-    //marginTop: 21, AD - removed
-    // marginLeft: 10, // AD - removed
-    //marginTop: Margins.xxlarge, // AD marginTop
-    
-
     alignItems: 'center', // AD - added
     marginTop: Margins.narrow, // AD - added margin Top
     marginBottom: Margins.xlarge, // AD - added margin bottom  
   },
-  iconInputBoxAttachedCIS: {
+  iconInputBoxAttached: {
     height: 44,
     width: 317,
-    //marginTop: 42, AD - removed
-
-    //marginLeft: 20, // AD - removed
-    //padding: Paddings.midsize, // AD - removed
-
     alignItems: 'center', // AD - added align
     marginLeft: Margins.narrow, // AD - added margin left
    
     
    
   },  
-  buttonContainerCIS: {
-    //width: 339, AD - removed
+  buttonContainer: {
     height: 89,
     marginTop: 250,
-    //marginLeft: 10, // AD - removed
-    //padding: Paddings.midsize, // AD - removed
     width: '80%',
-
-    alignItems: 'center', // AD - added align
-    //backgroundColor: 'red',
+    alignItems: 'center', // AD - added align  
     marginBottom: Margins.narrow, // AD - added margin bottom
     
    
   },
 
   /* AD - an extra container for the title */
-  titleContainerCIS: {
-    //width: 339, AD - removed
-    height: 42, 
- 
-    //marginTop: 20,
-    //marginLeft: 10, // AD - removed
+  titleContainer: {  
+    height: 42,
     paddingVertical: Paddings.xnarrow,
-    //paddingVertical: 'auto',
     width: '88%',
     alignItems: 'center', // AD - added align
-    backgroundColor: 'red',   
-
-    marginTop: Margins.large, // AD - added margin Top
-    //marginBottom: Margins.xxlarge, // AD - added margin bottom
-    //backgroundColor: "#E6E6E6", // "#E6E6E6"
+    backgroundColor: 'red',
+    marginTop: Margins.large, // AD - added margin Top  
     borderRadius: 15,
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
@@ -134,21 +127,18 @@ const styles = StyleSheet.create({
 
   },
 
-  uploadButtonCIS: {
+  uploadButton: {
     width: 206,
     height: 36,
     marginTop: 4,
-    // marginLeft: 66 // AD - removed
     backgroundColor: colors.light2, // AD - added color
   },
-  cancelButtonCIS: {
+  cancelButton: {
     width: 206,
     height: 36,
     overflow: "visible",
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
-    // marginLeft: 66 // AD - removed
-
     backgroundColor: colors.light5, // AD - added color
     
   }
