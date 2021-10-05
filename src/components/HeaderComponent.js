@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 1.2,
     elevation: 3,
-    borderRadius: 15
+    borderRadius: 0
   },
   iconButton: {
     padding: 11

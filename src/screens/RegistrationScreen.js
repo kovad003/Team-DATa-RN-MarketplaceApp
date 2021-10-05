@@ -64,13 +64,16 @@ function RegistrationScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(179,169,169,1)"
+    backgroundColor: "rgba(179,169,169,1)",
+    justifyContent: 'center',
+    alignItems: 'center'
+    
   },
   logo: {
     width: 172,
     height: 110,
-    marginTop: 46,
-    alignSelf: "center"
+    marginTop: -25,
+    alignSelf: "center",
   },
   buttonContainer: {
     width: 305,
@@ -91,11 +94,12 @@ const styles = StyleSheet.create({
   registerButtonRow: {
     height: 36,
     flexDirection: "row",
-    flex: 1
+    flex: 1,
+    marginTop: 40
   },
   formContainer: {
     width: 302,
-    height: 214,
+    height: 299,
     marginTop: -462,
     marginLeft: 28
   },
@@ -137,12 +141,12 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: "row",
     flex: 1,
-    marginTop: -1
+    marginTop: -50
   },
   loginButton: {
     height: 36,
     width: 138,
-    marginTop: 28,
+    marginTop: -20,
     marginLeft: 110
   }
 });
