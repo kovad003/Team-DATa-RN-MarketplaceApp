@@ -20,7 +20,6 @@ return (
                         <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
                     </View>
                 </ImageBackground>
-
             </View>
             <View style={{...styles.postedRow, ...styles.postedDetail}}>
                 <Text >Price: {props.price} euro</Text>
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     titleContainer:{
-        backgroundColor:'rgba(0,0,0,0.5)',
+        backgroundColor:'rgba(0,0,0,0.4)',
         paddingVertical:5,
         paddingHorizontal:20,
     },

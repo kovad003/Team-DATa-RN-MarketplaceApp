@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
   logoContainer:{
-    marginTop:20,
+    marginTop:30,
     
   },
   categoryItems:{

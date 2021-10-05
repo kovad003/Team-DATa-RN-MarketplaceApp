@@ -37,16 +37,18 @@ return (
 const styles = StyleSheet.create({
     gridItem:{
         flex:1,
-        margin:10,
-        height:180,
+        marginHorizontal:8,
+        marginVertical:15,
+
+        height:190,
         borderWidth:0,
-        borderRadius:10,
+        borderRadius:11,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        elevation:3,
+        elevation:4,
 
     },
     titleContainer:{
-        backgroundColor:'rgba(0,0,0,0.5)',
+        backgroundColor:'rgba(0,0,0,0.6)',
         paddingVertical:5,
         paddingHorizontal:15,
     },

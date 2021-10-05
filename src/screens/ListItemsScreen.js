@@ -17,7 +17,7 @@ function ListItemsScreen(props) {
 
   // created by Hossein to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
-        console.log(myItemsList);
+        //console.log(myItemsList);
         return( 
             <MyItemCard 
             title={itemData.item.title} 
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   title: {
     //fontFamily: "roboto-regular",
     color: "#121212",
-    margin:20,
+    marginTop:40,
     fontSize: 20,
 
   },
