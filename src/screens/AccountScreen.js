@@ -21,29 +21,32 @@ function AccountScreen(props) {
       </View>
      
       <View style={styles.centralContainer}>
-        <View style={styles.rowLineContainer}>
+
+       
         <AccountTile style={styles.rowStylings} ></AccountTile> 
-        </View>
+     
         
-        <View style={styles.rowLineContainer}>
+       
         <AccountTile style={styles.rowStylings} ></AccountTile> 
-        </View>
+     
 
-        <View style={styles.rowLineContainer}>
+        
         <AccountTile style={styles.rowStylings} ></AccountTile> 
-        </View>
+      
 
-        <View style={styles.rowLineContainer}>
+       
         <AccountTile style={styles.rowStylings} ></AccountTile> 
-        </View>
+    
 
-        <View style={styles.rowLineContainer}>
-        <AccountTile style={styles.imageUploader} ></AccountTile> 
-        </View>
+        
+        <AccountTile style={styles.rowStylings} ></AccountTile> 
+       
 
-        <View style={styles.rowLineContainer}>
-        <AccountTile style={styles.imageUploader} ></AccountTile> 
-        </View>
+       
+        <AccountTile></AccountTile> 
+        
+
+        
       </View>
 
         
@@ -53,10 +56,15 @@ function AccountScreen(props) {
         </IconInputBoxAttached>     
         */}
 
+        {/*
+
       <View style={styles.buttonContainer}>
         <AppButton button="Upload" style={styles.uploadButton}></AppButton>
         <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
       </View>
+       
+       */}
+
     
       <HeaderComponent style={styles.header}></HeaderComponent>
     </View>
@@ -90,12 +98,17 @@ const styles = StyleSheet.create({
   },
 
   centralContainer: {
-    marginVertical: Margins.xxxlarge, // AD - added margin vertical
-  },
+    //flex: 1,
+    marginVertical: Margins.narrow, // AD - added margin vertical (xxxlarge is good too)
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    width: '90%', 
+    height: '76%',
+},
 
   rowLineContainer : {
-    marginVertical: Margins.narrow, // AD - added margin vertical
-  },
+    //marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)
+},
   
   
   rowStylings: {
