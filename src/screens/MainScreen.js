@@ -8,6 +8,7 @@ import Logo from "../components/Logo";
 import CategoryButton from "../components/CategoryButton";
 import { CATEGORIES } from "../data/dummy-data";
 
+
 function MainScreen(props) {
 
   const renderCategoryItem = itemData => {
@@ -88,3 +89,4 @@ const styles = StyleSheet.create({
 });
 
 export default MainScreen;
+
