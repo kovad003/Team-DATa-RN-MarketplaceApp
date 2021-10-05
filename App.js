@@ -18,8 +18,8 @@ function App() {
       //<MainScreen></MainScreen>
       //<LoginScreen></LoginScreen>
       //<SearchScreen></SearchScreen>
-      <CreateItemScreen></CreateItemScreen>
-      //<ListItemsScreen></ListItemsScreen>
+      //<CreateItemScreen></CreateItemScreen>
+      <ListItemsScreen></ListItemsScreen>
       //<RegistrationScreen></RegistrationScreen>
       //<SearchResultScreen></SearchResultScreen>
     );
