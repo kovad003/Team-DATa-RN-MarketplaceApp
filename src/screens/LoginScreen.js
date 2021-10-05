@@ -43,12 +43,17 @@ function LoginScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "rgba(179,169,169,1)",
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -100
   },
   logo: {
     width: 172,
     height: 110,
     marginTop: 46,
+    marginBottom: 50,
     alignSelf: "center"
   },
   loginContainer: {
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
   },
   registerButton: {
     width: 139,
-    backgroundColor: "rgba(11,129,217,1)"
+    backgroundColor: "rgba(11,129,217,1)"    
   },
   cancelButton: {
     width: 138,
@@ -105,7 +110,8 @@ const styles = StyleSheet.create({
   registerButtonRow: {
     height: 36,
     flexDirection: "row",
-    flex: 1
+    flex: 1,
+    marginTop: 70
   }
 });
 
