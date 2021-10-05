@@ -22,9 +22,12 @@ function AccountScreen(props) {
      
       <AccountTile style={styles.imageUploader} ></AccountTile> 
         
+        
         <IconInputBoxAttached
           style={styles.iconInputBoxAttached}>
         </IconInputBoxAttached>     
+
+
       <View style={styles.buttonContainer}>
         <AppButton button="Upload" style={styles.uploadButton}></AppButton>
         <AppButton button="Cancel" style={styles.cancelButton}></AppButton>

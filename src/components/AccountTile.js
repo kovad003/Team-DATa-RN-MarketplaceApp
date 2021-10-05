@@ -35,14 +35,40 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     //marginTop: -31,
     //marginLeft: -10
-    height: '20%',
-    width: 300,
-    flexDirection:'row',
+   
+    //flexDirection:'row',
     //alignSelf: 'stretch',
     //textAlign: 'center',
     marginTop: Margins.narrow, // AD - added margin Top
     marginBottom: Margins.xlarge, // AD - added margin bottom 
 
+    //height: '30%',
+  
+    //width: '110%',
+
+    
+    //height: 50,
+    //width: 200,
+
+    flex: 1, 
+    flexDirection: "row",
+    alignItems: "center",
+
+    height: '30%',
+  
+    width: '110%',
+
+    /*
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    borderWidth: 1,
+    flexDirection: 'column',
+
+
+    */
+    
     
   },
 
