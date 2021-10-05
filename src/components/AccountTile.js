@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     //flexDirection:'row',
     //alignSelf: 'stretch',
     //textAlign: 'center',
-    marginTop: Margins.narrow, // AD - added margin Top
-    marginBottom: Margins.xlarge, // AD - added margin bottom 
+    //marginTop: Margins.narrow, // AD - added margin Top
+    //marginBottom: Margins.xlarge, // AD - added margin bottom 
 
     //height: '30%',
   
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     //height: 50,
     //width: 200,
 
-    flex: 1, 
-    flexDirection: "row",
-    alignItems: "center",
+    //flex: 1, 
+    //flexDirection: "row",
+    //alignItems: "center",
 
-    height: '30%',
+    //height: '20%',
   
-    width: '110%',
+    //width: '110%',
 
     /*
     flex: 1,

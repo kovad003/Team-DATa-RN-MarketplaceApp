@@ -21,12 +21,20 @@ function AccountScreen(props) {
       </View>
      
       <AccountTile style={styles.imageUploader} ></AccountTile> 
+
+      <AccountTile style={styles.imageUploader} ></AccountTile> 
+
+      <AccountTile style={styles.imageUploader} ></AccountTile> 
+
+      <AccountTile style={styles.imageUploader} ></AccountTile> 
+
+      <AccountTile style={styles.imageUploader} ></AccountTile> 
         
-        
+        {/*
         <IconInputBoxAttached
           style={styles.iconInputBoxAttached}>
         </IconInputBoxAttached>     
-
+        */}
 
       <View style={styles.buttonContainer}>
         <AppButton button="Upload" style={styles.uploadButton}></AppButton>
@@ -46,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light4, // AD - added background
 
     width:'100%',
-    justifyContent:'center',
+    //justifyContent:'center',
   },    
 
   // AD - testing
@@ -66,11 +74,11 @@ const styles = StyleSheet.create({
   
   
   imageUploader: {
-    height: 104,
-    width: 339,    
+    //height: 104,
+    //width: 339,    
     alignItems: 'center', // AD - added
-    marginTop: Margins.narrow, // AD - added margin Top
-    marginBottom: Margins.xlarge, // AD - added margin bottom  
+    //marginTop: Margins.narrow, // AD - added margin Top
+    //marginBottom: Margins.xlarge, // AD - added margin bottom  
   },
   
   iconInputBoxAttached: {
