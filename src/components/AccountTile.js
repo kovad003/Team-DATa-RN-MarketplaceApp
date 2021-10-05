@@ -42,13 +42,16 @@ const styles = StyleSheet.create({
     //marginTop: Margins.narrow, // AD - added margin Top
     //marginBottom: Margins.xlarge, // AD - added margin bottom 
 
-    height: '20%',
+    //height: '20%',
     backgroundColor: 'blue',
   
     //width: '110%',
 
     
-    //height: 50,
+    height: 50,
+
+    marginVertical: Margins.midsize, // AD - added margin Top
+
     //width: 200,
 
     //flex: 1, 

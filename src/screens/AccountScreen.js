@@ -21,31 +21,18 @@ function AccountScreen(props) {
       </View>
      
       <View style={styles.centralContainer}>
-
-       
-        <AccountTile style={styles.rowStylings} ></AccountTile> 
-     
-        
-       
-        <AccountTile style={styles.rowStylings} ></AccountTile> 
-     
-
-        
-        <AccountTile style={styles.rowStylings} ></AccountTile> 
-      
-
-       
-        <AccountTile style={styles.rowStylings} ></AccountTile> 
-    
-
-        
-        <AccountTile style={styles.rowStylings} ></AccountTile> 
-       
-
        
         <AccountTile></AccountTile> 
-        
 
+        <AccountTile></AccountTile> 
+
+        <AccountTile></AccountTile> 
+
+        <AccountTile></AccountTile> 
+
+        <AccountTile></AccountTile>
+       
+        <AccountTile></AccountTile>
         
       </View>
 
