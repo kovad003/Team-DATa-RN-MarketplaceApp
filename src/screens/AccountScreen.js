@@ -20,7 +20,8 @@ function AccountScreen(props) {
         </Text>
       </View>
      
-      <AccountTile style={styles.imageUploader}></AccountTile> 
+      <AccountTile style={styles.imageUploader} ></AccountTile> 
+        
         <IconInputBoxAttached
           style={styles.iconInputBoxAttached}>
         </IconInputBoxAttached>     
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     // height: 60,   
   },
   
+  
   imageUploader: {
     height: 104,
     width: 339,    
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
     marginTop: Margins.narrow, // AD - added margin Top
     marginBottom: Margins.xlarge, // AD - added margin bottom  
   },
+  
   iconInputBoxAttached: {
     height: 44,
     width: 317,
