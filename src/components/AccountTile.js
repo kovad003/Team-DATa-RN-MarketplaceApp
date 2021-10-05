@@ -52,21 +52,7 @@ function AccountTile(props) {
             <Text style={TextStyling.textWhiteMedium}>Delete Account</Text>
             <Icon name="right" style={styles.icon2}></Icon>
             </TouchableOpacity>
-        </View>
-
-    
-    
-    
-    
-    
-    
-    
-    {/* 
-      <TouchableOpacity style={styles.rowContainer}>
-            <Icon name="right" style={styles.icon}></Icon>
-      </TouchableOpacity>
-    */}
-    
+        </View>   
     
     </View>
   );
@@ -74,14 +60,7 @@ function AccountTile(props) {
 
 const styles = StyleSheet.create({
   container: {},
-  rowContainer: {
-    //width: 339,
-    //height: 311,
-    //width: '100%',
-    //height: '30%',
-    //backgroundColor: "#F5FCFF", // #E6E6E6
-    //marginLeft: 0,
-    //borderRadius: 15,
+  rowContainer: {    
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
       width: 3,
@@ -102,14 +81,7 @@ const styles = StyleSheet.create({
 
 
   container: {},
-  rowContainer2: {
-    //width: 339,
-    //height: 311,
-    //width: '100%',
-    //height: '30%',
-    //backgroundColor: "#F5FCFF", // #E6E6E6
-    //marginLeft: 0,
-    //borderRadius: 15,
+  rowContainer2: {    
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
       width: 3,
@@ -151,30 +123,18 @@ container: {},
 
   icon: {
     color: "rgba(128,128,128,1)",
-    fontSize: 30,
-    // height: 44,
-    // width: 40,
-    // marginTop: 30,
-    // marginLeft: 150
+    fontSize: 30,  
 
     justifyContent:'center',
     alignItems:'center'
   },
 
   icon2: {
-    //color: "rgba(128,128,128,1)",
     color: colors.white,
-    //backgroundColor: colors.light4,
-    fontSize: 30,
-    // height: 44,
-    // width: 40,
-    // marginTop: 30,
-    // marginLeft: 150
-
+    fontSize: 30,  
     justifyContent:'center',
     alignItems:'center'
   },
-
   
   rowLineContainer1 : {
     marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)

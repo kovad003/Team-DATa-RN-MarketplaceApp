@@ -24,54 +24,10 @@ function AccountScreen(props) {
      
       <View style={styles.centralContainer}>
        
-       {/* 
-      <View style={styles.rowLineContainer1}>
-        <AccountTile>
-            
-        </AccountTile>
-      </View> 
-
-      <View style={styles.rowLineContainer2}>
-        <AccountTile></AccountTile>
-      </View>
-
-      <View style={styles.rowLineContainer2}>
-        <AccountTile></AccountTile>
-      </View>
-
-      <View style={styles.rowLineContainer2}>
-        <AccountTile></AccountTile>
-      </View>
-
-      <View style={styles.rowLineContainer2}>
-        <AccountTile></AccountTile>
-      </View>
-
-      <View style={styles.rowLineContainer3}>
-        <AccountTile></AccountTile>
-      </View>
-
-      */}
-
         <AccountTile></AccountTile>
         
       </View>
 
-        
-        {/*
-        <IconInputBoxAttached
-          style={styles.iconInputBoxAttached}>
-        </IconInputBoxAttached>     
-        */}
-
-        {/*
-
-      <View style={styles.buttonContainer}>
-        <AppButton button="Upload" style={styles.uploadButton}></AppButton>
-        <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
-      </View>
-       
-       */}
 
     {/*<View style={styles.headerContainer}>*/}
       <HeaderComponent style={styles.header}></HeaderComponent>
@@ -104,22 +60,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  /* 
-  headerContainer:{
-    flex:1,
-    //height: 60,
-    justifyContent:'center',
-    alignItems:'center'
-
-  },
-
-  header: {
-    //flex:1,   
-    width: '100%',
-    height: 60,   
-  },
-  */
-
   centralContainer: {
     flex: 1,
     marginVertical: Margins.narrow, // AD - added margin vertical (xxxlarge is good too)
@@ -143,30 +83,22 @@ rowLineContainer3 : {
 },
   
   
-  rowStylings: {
-    //height: 104,
-    //width: 339,    
-    alignItems: 'center', // AD - added
-    //marginTop: Margins.narrow, // AD - added margin Top
-    //marginBottom: Margins.xlarge, // AD - added margin bottom  
+  rowStylings: {      
+    alignItems: 'center', // AD - added   
   },
   
   iconInputBoxAttached: {
     height: 44,
     width: 317,
     alignItems: 'center', // AD - added align
-    marginLeft: Margins.narrow, // AD - added margin left
-   
-    
-   
+    marginLeft: Margins.narrow, // AD - added margin left    
   },  
   buttonContainer: {
     height: 89,
     //marginTop: 250,
     width: '80%',
     alignItems: 'center', // AD - added align  
-    marginBottom: Margins.narrow, // AD - added margin bottom
-    
+    marginBottom: Margins.narrow, // AD - added margin bottom    
    
   },
 
