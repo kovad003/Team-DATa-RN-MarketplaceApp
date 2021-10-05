@@ -10,6 +10,7 @@ import TextStyling from '../constants/fontstyling'
 
 const CategoryButton = props => {
 const imageUrl = props.image;
+
 return (
     <View style={styles.gridItem} >
     <TouchableOpacity 
@@ -36,18 +37,20 @@ return (
 const styles = StyleSheet.create({
     gridItem:{
         flex:1,
-        margin:10,
-        height:160,
+        marginHorizontal:8,
+        marginVertical:15,
+
+        height:190,
         borderWidth:0,
-        borderRadius:10,
+        borderRadius:11,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         elevation:4,
 
     },
     titleContainer:{
-        backgroundColor:'rgba(0,0,0,0.5)',
+        backgroundColor:'rgba(0,0,0,0.6)',
         paddingVertical:5,
-        paddingHorizontal:20,
+        paddingHorizontal:15,
     },
     mealRow:{
       flexDirection: 'row',
