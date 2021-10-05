@@ -32,14 +32,14 @@ function App(props) {
 
   if(fontloaded){
     return (
-      // <MainScreen />
+      <MainScreen />
       // <RegistrationScreen />
       // <LoginScreen />
       // <SearchScreen />
       // <SearchResultScreen />
       // <CreateItemScreen />
       // <ListItemsScreen />
-       <AccountScreen />
+      // <AccountScreen />
         
     );
   } else {
