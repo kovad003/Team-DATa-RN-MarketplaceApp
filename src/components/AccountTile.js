@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     //marginBottom: Margins.xlarge, // AD - added margin bottom 
 
     //height: '20%',
-    backgroundColor: 'blue',
+    //backgroundColor: 'blue',
   
     //width: '110%',
 

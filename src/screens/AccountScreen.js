@@ -22,27 +22,27 @@ function AccountScreen(props) {
      
       <View style={styles.centralContainer}>
        
-      <View style={styles.rowLineContainer}>
+      <View style={styles.rowLineContainer1}>
         <AccountTile></AccountTile>
       </View> 
 
-      <View style={styles.rowLineContainer}>
-        <AccountTile></AccountTile>
-      </View>
-      
-      <View style={styles.rowLineContainer}>
+      <View style={styles.rowLineContainer2}>
         <AccountTile></AccountTile>
       </View>
 
-      <View style={styles.rowLineContainer}>
+      <View style={styles.rowLineContainer2}>
         <AccountTile></AccountTile>
       </View>
 
-      <View style={styles.rowLineContainer}>
+      <View style={styles.rowLineContainer2}>
         <AccountTile></AccountTile>
       </View>
 
-      <View style={styles.rowLineContainer}>
+      <View style={styles.rowLineContainer2}>
+        <AccountTile></AccountTile>
+      </View>
+
+      <View style={styles.rowLineContainer3}>
         <AccountTile></AccountTile>
       </View>
         
@@ -114,14 +114,22 @@ const styles = StyleSheet.create({
   centralContainer: {
     flex: 1,
     marginVertical: Margins.narrow, // AD - added margin vertical (xxxlarge is good too)
-    backgroundColor: 'red',
+    backgroundColor: colors.light4, // AD - added background
     justifyContent: 'center',
     width: '90%', 
     //height: '76%',
 },
 
-  rowLineContainer : {
-    //marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)
+  rowLineContainer1 : {
+    marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)
+},
+
+rowLineContainer2 : {
+    marginVertical: Margins.narrow, // AD - added margin vertical (narros is the best)
+},
+
+rowLineContainer3 : {
+    marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)
 },
   
   
