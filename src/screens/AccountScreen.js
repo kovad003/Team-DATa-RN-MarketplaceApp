@@ -11,6 +11,8 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+
+
 function AccountScreen(props) {
   return (
     <View style={styles.container}> 
@@ -23,7 +25,9 @@ function AccountScreen(props) {
       <View style={styles.centralContainer}>
        
       <View style={styles.rowLineContainer1}>
-        <AccountTile></AccountTile>
+        <AccountTile>
+            
+        </AccountTile>
       </View> 
 
       <View style={styles.rowLineContainer2}>
@@ -209,8 +213,7 @@ rowLineContainer3 : {
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
     backgroundColor: colors.light5, // AD - added color
-    
-  }
+    }
 });
 
 export default AccountScreen;
