@@ -38,8 +38,8 @@ function App(props) {
       // <SearchScreen />
       // <SearchResultScreen />
       // <CreateItemScreen />
-      // <ListItemsScreen />
-       <AccountScreen />
+       <ListItemsScreen />
+      // <AccountScreen />
         
     );
   } else {

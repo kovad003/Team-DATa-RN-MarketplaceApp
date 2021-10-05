@@ -31,7 +31,7 @@ function AccountScreen(props) {
         <AppButton button="Upload" style={styles.uploadButtonCIS}></AppButton>
         <AppButton button="Cancel" style={styles.cancelButtonCIS}></AppButton>
       </View>
-      <HeaderComponent style={styles.headerCIS}></HeaderComponent>
+      <HeaderComponent style={styles.header}></HeaderComponent>
     </View>
   );
 }
@@ -48,6 +48,18 @@ const styles = StyleSheet.create({
     //marginTop: 35,
     //marginLeft: 10 // AD - removed
     alignItems: 'center', // AD - added 
+  },
+  // AD - testing
+  headerContainer:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+
+  },
+  // AD - testing
+  header: {
+    height: 60,
+    width: '100%',
   },
   
   imageUploaderCIS: {
