@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center', // AD - added align
-    backgroundColor: colors.light4, // AD - added background
-
+    //backgroundColor: colors.light4, // AD - added background
+    backgroundColor: colors.light4,
     width:'100%',
     //justifyContent:'center',
   },    
@@ -114,10 +114,11 @@ const styles = StyleSheet.create({
   centralContainer: {
     flex: 1,
     marginVertical: Margins.narrow, // AD - added margin vertical (xxxlarge is good too)
-    backgroundColor: colors.light4, // AD - added background
+    //backgroundColor: colors.light4, // AD - added background
     justifyContent: 'center',
-    width: '90%', 
+    width: '100%', 
     //height: '76%',
+    backgroundColor: colors.light4,
 },
 
   rowLineContainer1 : {

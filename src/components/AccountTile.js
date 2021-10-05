@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     //height: 311,
     //width: '100%',
     //height: '30%',
-    backgroundColor: "#E6E6E6",
+    //backgroundColor: "#F5FCFF", // #E6E6E6
     //marginLeft: 0,
     //borderRadius: 15,
     shadowColor: "rgba(0,0,0,1)",
@@ -33,6 +33,40 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 0.31,
     shadowRadius: 0,
+
+
+    backgroundColor: "#E6E6E6",
+    //borderRadius: 15,
+
+/*
+
+ backgroundColor: "#E6E6E6",
+    borderRadius: 15,
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    elevation: 5,
+    shadowOpacity: 0.31,
+    shadowRadius: 0,
+    marginTop: -31,
+    marginLeft: -10
+  },
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
     //marginTop: -31,
     //marginLeft: -10
    
