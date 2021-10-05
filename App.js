@@ -13,6 +13,7 @@ import CreateItemScreen from "./src/screens/CreateItemScreen";
 import ListItemsScreen from "./src/screens/ListItemsScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import SearchResultScreen from "./src/screens/SearchResultScreen";
+import AccountScreen from "./src/screens/AccountScreen";
 
 // Font Imports
 import * as Font from 'expo-font';
@@ -36,8 +37,9 @@ function App(props) {
       // <LoginScreen />
       // <SearchScreen />
       // <SearchResultScreen />
-       <CreateItemScreen />
+      // <CreateItemScreen />
       // <ListItemsScreen />
+       <AccountScreen />
         
     );
   } else {

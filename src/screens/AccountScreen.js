@@ -10,7 +10,7 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function CreateItemScreen(props) {
+function AccountScreen(props) {
   return (
     <View style={styles.containerCIS}>
       {/* AD - adds title text */}
@@ -154,4 +154,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CreateItemScreen;
+export default AccountScreen;
