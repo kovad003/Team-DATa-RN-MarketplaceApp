@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 
 // Added for margins and paddings
@@ -8,9 +8,9 @@ import { Margins, Paddings } from "../constants/constvalues";
 function AccountTile(props) {
   return (
     <View style={[styles.container, props.style]}>
-      <View style={styles.rowContainer}>
+      <TouchableOpacity style={styles.rowContainer}>
         <Icon name="squared-plus" style={styles.icon}></Icon>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
