@@ -65,8 +65,10 @@ function AccountScreen(props) {
        
        */}
 
-    
+    <View style={styles.headerContainer}>
       <HeaderComponent style={styles.header}></HeaderComponent>
+    </View>
+
     </View>
         
   );
@@ -82,7 +84,18 @@ const styles = StyleSheet.create({
     //justifyContent:'center',
   },    
 
-  // AD - testing
+  headerContainer:{
+    height: 60,
+    justifyContent:'center',
+    alignItems:'center'
+
+  },
+  header: {
+    height: 60,
+    width: '100%',
+  },
+
+  /* 
   headerContainer:{
     flex:1,
     //height: 60,
@@ -90,20 +103,21 @@ const styles = StyleSheet.create({
     alignItems:'center'
 
   },
-  // AD - testing
+
   header: {
-    flex:1,   
+    //flex:1,   
     width: '100%',
-    // height: 60,   
+    height: 60,   
   },
+  */
 
   centralContainer: {
-    //flex: 1,
+    flex: 1,
     marginVertical: Margins.narrow, // AD - added margin vertical (xxxlarge is good too)
     backgroundColor: 'red',
     justifyContent: 'center',
     width: '90%', 
-    height: '76%',
+    //height: '76%',
 },
 
   rowLineContainer : {

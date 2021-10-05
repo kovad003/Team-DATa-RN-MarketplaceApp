@@ -39,7 +39,7 @@ function App(props) {
       // <SearchResultScreen />
       // <CreateItemScreen />
       // <ListItemsScreen />
-       <AccountScreen />
+      <AccountScreen />
         
     );
   } else {
