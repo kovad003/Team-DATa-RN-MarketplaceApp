@@ -14,8 +14,8 @@ function PriceSetter(props) {
     <View style={styles.container}>
       <View style={styles.row}>
         <View style={styles.row}>
-          <Text style={fontstyling.textBlackLarge}>{props.label || '€'}</Text>
-          <TextInput placeholder="0" style={fontstyling.textBlackLarge}></TextInput>
+          <Text style={styles.label}>{props.label || '€'}</Text>
+          <TextInput placeholder="0" style={styles.label}></TextInput>
         </View>
         <SliderComponent></SliderComponent>
       </View>
@@ -25,10 +25,11 @@ function PriceSetter(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light2,
+    // backgroundColor: colors.light2,
+    backgroundColor: 'white',
     borderRadius: 15,
-    marginVertical: 10,
-    marginHorizontal: 20,
+    marginVertical: 3,
+    marginHorizontal: 50,
     // ------------------------------
     //android shadows
     elevation: 5,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
       height: 3
     },
     shadowOpacity: 0.5,
-    shadowRadius: 0,
+    shadowRadius: 1,
     // ------------------------------
   },
   row: {
@@ -47,7 +48,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: 'center',
     marginHorizontal: 15,
-  }
+  },
+  label:{
+    fontFamily: 'caballar',
+    fontSize: 22,
+    color: 'black',
+  },
 });
 
 export default PriceSetter;

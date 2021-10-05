@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
   button: {
     width: 47,
     height: 39,
-    backgroundColor: "rgba(227,143,5,1)",
+    backgroundColor: "#E38F05",
     borderRadius: 15
   },
   icon: {
-    color: "rgba(0,0,0,1)",
+    color: "black",
     fontSize: 30,
     height: 33,
     width: 30,

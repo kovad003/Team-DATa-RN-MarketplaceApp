@@ -10,14 +10,34 @@ import TextStyling from '../constants/fontstyling'
 import colors from "../constants/colors";
 
 function SearchScreen(props) {
-  // Creating mock data
+// Creating mock data
+
+//usestat -> causing cont rendering issues bc add function is not wired to a button
+/* 
+  const [categoryList, addToCategoryList] = useState([]);
+
+  const addNewCategory=(idParam, nameParam)=>{
+    addToCategoryList(categoryList=>[...categoryList, {id:idParam, name:nameParam}])
+  }
+
+  addNewCategory('1', 'Furniture');
+ */
+
   const categoryList = [
+    /* {id: '0', name: 'All'}, */
     {id: '1', name: 'Furniture'},
     {id: '2', name: 'Sports'},
     {id: '3', name: 'Clothes'},
     {id: '4', name: 'Electronics'},
     {id: '5', name: 'Other'},
+ /*    {id: '6', name: 'Clothes'},
+    {id: '7', name: 'Electronics'},
+    {id: '8', name: 'Other'},
+    {id: '9', name: 'Clothes'},
+    {id: '10', name: 'Electronics'},
+    {id: '11', name: 'Other'}, */
   ]
+  
   console.log('categoryList: ' + categoryList);
 
   return (
@@ -26,11 +46,16 @@ function SearchScreen(props) {
       <View style={styles.searchBar}>
         <SearchBar style={styles.searchBar}/>
       </View>
-        <ScrollView horizontal={false} contentContainerStyle={styles.scrollArea_contentContainerStyle}>
+        <View>
           {/* ---------------------------------------------------------------------------- */}
           <View style={styles.categoriesContainer}>
-            <Text style={TextStyling.textBlackLarge}>Categories</Text>
-            <SwitchFilter selectorLabel="All"></SwitchFilter>
+            <Text style={styles.fontTitle}>Categories:</Text>
+
+            {/* <ScrollView horizontal={false}>
+              {categoryList.map((category)=>
+                <SwitchFilter label={category.name}></SwitchFilter>)}
+            </ScrollView> */}
+            <SwitchFilter label='All' value='true'/>
             <FlatList //FlatList shouldnt be used with ScrollView
                 keyExtractor={item=>item.id}
                 data={categoryList}
@@ -39,18 +64,18 @@ function SearchScreen(props) {
           </View>
           {/* ---------------------------------------------------------------------------- */}
           <View style={styles.locationContainer}>
-            <Text style={TextStyling.textBlackLarge}>Location</Text>
-            <ScrollDownList label="Select Location..."/>
-            <ScrollDownList label="Select Radius..."/>
+            <Text style={styles.fontTitle}>Location:</Text>
+            <ScrollDownList label="Set Location..."/>
+            <ScrollDownList label="Set Radius..."/>
           </View>
           {/* ---------------------------------------------------------------------------- */}
           <View>
-            <Text style={TextStyling.textBlackLarge}>Price</Text>
+            <Text style={styles.fontTitle}>Price:</Text>
             <PriceSetter label='Min: €'/>
             <PriceSetter label='Max: €'/>
           </View>
           {/* ---------------------------------------------------------------------------- */}
-        </ScrollView>     
+        </View>    
     </View>
   );
 }
@@ -61,15 +86,28 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: colors.light3,
+    // backgroundColor: colors.light3,
+    backgroundColor: '#f5eeeb',
+    // backgroundColor: '#e7ecf2'
   },
   categoriesContainer: {
-
+    height: 215,
   },
   searchBar: {
     height: 90,
     //flex: 0.15,
     // backgroundColor set in then component file
+  },
+  fontTitle: {
+    marginLeft: 5,
+    marginTop: 15,
+    fontFamily: 'cake-n-truffles',
+    fontSize: 26,
+    // fontWeight: '900',
+    color: '#2d3553',
+    //fontStyle:'italic',
+    
+
   }
 });
 
