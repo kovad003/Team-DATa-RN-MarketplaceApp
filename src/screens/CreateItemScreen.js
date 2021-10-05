@@ -43,13 +43,6 @@ const styles = StyleSheet.create({
     width:'100%',
     justifyContent:'center',
   },
-    /* 
-  header: {
-    height: 39,
-    width: 339,
-    alignItems: 'center',
-  },
-  */
 
   // AD - testing
   headerContainer:{
