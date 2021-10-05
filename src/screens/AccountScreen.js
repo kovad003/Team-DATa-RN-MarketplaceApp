@@ -24,6 +24,7 @@ function AccountScreen(props) {
      
       <View style={styles.centralContainer}>
        
+       {/* 
       <View style={styles.rowLineContainer1}>
         <AccountTile>
             
@@ -49,6 +50,10 @@ function AccountScreen(props) {
       <View style={styles.rowLineContainer3}>
         <AccountTile></AccountTile>
       </View>
+
+      */}
+
+        <AccountTile></AccountTile>
         
       </View>
 

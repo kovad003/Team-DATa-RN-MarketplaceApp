@@ -8,9 +8,60 @@ import { Margins, Paddings } from "../constants/constvalues";
 function AccountTile(props) {
   return (
     <View style={[styles.container, props.style]}>
+
+        <View style={styles.rowLineContainer1}>
+        <TouchableOpacity style={styles.rowContainer}>
+            <Text>Register</Text>
+            
+            <Icon name="right" style={styles.icon}></Icon>
+        
+        </TouchableOpacity>
+      </View> 
+
+      <View style={styles.rowLineContainer2}>
       <TouchableOpacity style={styles.rowContainer}>
             <Icon name="right" style={styles.icon}></Icon>
       </TouchableOpacity>
+      </View>
+
+      <View style={styles.rowLineContainer2}>
+      <TouchableOpacity style={styles.rowContainer}>
+            <Icon name="right" style={styles.icon}></Icon>
+      </TouchableOpacity>
+      </View>
+
+      <View style={styles.rowLineContainer2}>
+      <TouchableOpacity style={styles.rowContainer}>
+            <Icon name="right" style={styles.icon}></Icon>
+      </TouchableOpacity>
+      </View>
+
+      <View style={styles.rowLineContainer2}>
+      <TouchableOpacity style={styles.rowContainer}>
+            <Icon name="right" style={styles.icon}></Icon>
+      </TouchableOpacity>
+      </View>
+
+      <View style={styles.rowLineContainer3}>
+      <TouchableOpacity style={styles.rowContainer}>
+            <Icon name="right" style={styles.icon}></Icon>
+      </TouchableOpacity>
+      </View>
+
+    
+    
+    
+    
+    
+    
+    
+    {/* 
+      <TouchableOpacity style={styles.rowContainer}>
+            <Icon name="right" style={styles.icon}></Icon>
+      </TouchableOpacity>
+    */}
+    
+    
     </View>
   );
 }
@@ -69,7 +120,21 @@ container: {},
 
     justifyContent:'center',
     alignItems:'center'
-  }
+  },
+
+  
+  rowLineContainer1 : {
+    marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)
+},
+
+rowLineContainer2 : {
+    marginVertical: Margins.narrow, // AD - added margin vertical (narros is the best)
+},
+
+rowLineContainer3 : {
+    marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)
+},
+
 });
 
 export default AccountTile;
