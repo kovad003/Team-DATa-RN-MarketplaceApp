@@ -4,12 +4,11 @@ import { StyleSheet, View, ScrollView, FlatList } from "react-native";
 
 
 import HeaderComponent from "../components/HeaderComponent";
-import Logo from "../components/Logo";
 import CategoryButton from "../components/CategoryButton";
 import { CATEGORIES } from "../data/dummy-data";
 
 
-function MainScreen(props) {
+function CategoryScreen(props) {
 
   const renderCategoryItem = itemData => {
     return( 
@@ -26,9 +25,6 @@ function MainScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.scrollArea}>
-        <View style={styles.logoContainer}>
-          <Logo style={styles.logo}></Logo>
-        </View>
         <View style={styles.categoryItems}>
           <FlatList 
           keyExtractor={(item, index) => item.id}
@@ -37,9 +33,6 @@ function MainScreen(props) {
           numColumns={2}
           />
         </View>
-      </View>
-      <View style={styles.headerContainer}>
-        <HeaderComponent style={styles.header}></HeaderComponent>
       </View>
     </View>
   );
@@ -88,5 +81,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainScreen;
+export default CategoryScreen;
 

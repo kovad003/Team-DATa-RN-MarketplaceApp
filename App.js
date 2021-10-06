@@ -13,7 +13,11 @@ import CreateItemScreen from "./src/screens/CreateItemScreen";
 import ListItemsScreen from "./src/screens/ListItemsScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import SearchResultScreen from "./src/screens/SearchResultScreen";
+
 import AccountScreen from "./src/screens/AccountScreen";
+
+import BottomTabsNavigation from './src/navigation/BottomTabsNavigation'
+
 
 // Font Imports
 import * as Font from 'expo-font';
@@ -32,15 +36,17 @@ function App(props) {
 
   if(fontloaded){
     return (
-      <MainScreen />
+
+      // <MainScreen />
       // <RegistrationScreen />
       // <LoginScreen />
       // <SearchScreen />
       // <SearchResultScreen />
       // <CreateItemScreen />
       // <ListItemsScreen />
-      // <AccountScreen />
-        
+      // <AccountScreen /> 
+      <BottomTabsNavigation /> 
+
     );
   } else {
     return(
