@@ -14,16 +14,7 @@ function CreateItemScreen(props) {
   return (
     
       <ScrollView>
-      <View style={styles.container}> 
-      
-      {/*
-        <View style={styles.titleContainer}>        
-          <Text style={TextStyling.textBlackLarge} >
-            Create Item       
-          </Text>
-        </View>
-      */}
-      
+      <View style={styles.container}>     
         <ImageUploader style={styles.imageUploader}></ImageUploader> 
           <IconInputBoxAttached
             style={styles.iconInputBoxAttached}>
@@ -32,11 +23,6 @@ function CreateItemScreen(props) {
           <AppButton button="Upload" style={styles.uploadButton}></AppButton>
           <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
         </View>
-      
-      {/*
-        <HeaderComponent style={styles.header}></HeaderComponent>
-      */}
-
       
       </View>
       </ScrollView>
@@ -51,19 +37,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light4, // AD - added background
     width:'100%',
     justifyContent:'center',
-    
+
     marginVertical: Margins.xnarrow,
-  },
-
-  scrollView: {
-    backgroundColor: 'red',
-    //marginHorizontal: 20,
-
-    flex: 1,
-    alignItems: 'center', // AD - added align
-    backgroundColor: colors.light4, // AD - added background
-    width:'100%',
-    justifyContent:'center',
   },
 
   // AD - testing

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
@@ -15,25 +15,26 @@ import colors from "../constants/colors";
 
 function AccountScreen(props) {
   return (
-    <View style={styles.container}> 
-      <View style={styles.titleContainer}>        
-        <Text style={TextStyling.textBlackLarge} >
-          Account Screen      
-        </Text>
-      </View>
-     
-      <View style={styles.centralContainer}>
-       
-        <AccountTile></AccountTile>
+
+    <ScrollView>
+      <View style={styles.container}> 
+
+      {/*
+        <View style={styles.titleContainer}>        
+          <Text style={TextStyling.textBlackLarge} >
+            Account Screen      
+          </Text>
+        </View>
+      */}
+      
+        <View style={styles.centralContainer}>
         
+          <AccountTile></AccountTile>
+          
+        </View>     
+
       </View>
-
-
-    {/*<View style={styles.headerContainer}>*/}
-      <HeaderComponent style={styles.header}></HeaderComponent>
-    {/*</View>*/}
-
-    </View>
+    </ScrollView>
         
   );
 }
@@ -46,6 +47,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light4,
     width:'100%',
     //justifyContent:'center',
+
+    marginVertical: Margins.xnarrow,
   },    
 
   headerContainer:{
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light4,
 },
 
-  rowLineContainer1 : {
+rowLineContainer1 : {
     marginVertical: Margins.midsize, // AD - added margin vertical (narros is the best)
 },
 
