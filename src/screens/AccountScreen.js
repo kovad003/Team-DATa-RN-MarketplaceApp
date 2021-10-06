@@ -17,18 +17,29 @@ function AccountScreen(props) {
   return (
 
     <ScrollView style={styles.scrollStyle}>
-      <View style={styles.container}>     
-      
+      <View style={styles.container}>  
         <View style={styles.centralContainer}>
-        
+   
           <AccountTile rowText = "Register" style = {styles.row1} />
-          <AccountTile rowText = "Register" style = {styles.row2} />
-          <AccountTile rowText = "Register" style = {styles.row2} />
-          <AccountTile rowText = "Register" style = {styles.row2} />
-          <AccountTile rowText = "Register" style = {styles.row2} />
-          <AccountTile rowText = "Register" style = {styles.row3} />
+          <AccountTile rowText = "Login" style = {styles.row2} />
+          <AccountTile rowText = "Settings" style = {styles.row2} />
+          <AccountTile rowText = "Premium" style = {styles.row2} />
+          <AccountTile rowText = "Contact" style = {styles.row2} />
+          <AccountTile rowText = "Delete Account" style = {styles.row3} />
+         
+         {/* 
+         
+      <TouchableOpacity style={styles.rowContainer}>
+        <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
+        <Icon name="right" style={styles.icon}></Icon>        
+      </TouchableOpacity>
+
+         */}
           
-        </View>     
+     
+        </View>
+      
+        
 
       </View>
     </ScrollView>
@@ -48,7 +59,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center', // AD - added align
     //backgroundColor: colors.light4, // AD - added background
-    backgroundColor: colors.light4,
+    //backgroundColor: colors.light4,
+    //backgroundColor: 'red',
     width:'100%',
     //justifyContent:'center',
 
@@ -56,7 +68,7 @@ const styles = StyleSheet.create({
   },    
 
   row1: {
-    marginVertical: Margins.midsize,
+    marginVertical: Margins.xlarge,
   },
 
   row2: {
@@ -64,7 +76,7 @@ const styles = StyleSheet.create({
   },
 
   row3: {
-    marginVertical: Margins.midsize,
+    marginVertical: Margins.xlarge,
   },
 
   headerContainer:{
