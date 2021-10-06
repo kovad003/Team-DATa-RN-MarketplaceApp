@@ -13,6 +13,7 @@ import CreateItemScreen from "./src/screens/CreateItemScreen";
 import ListItemsScreen from "./src/screens/ListItemsScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import SearchResultScreen from "./src/screens/SearchResultScreen";
+import ItemDetailScreen from './src/screens/ItemDetailScreen'
 
 import AccountScreen from "./src/screens/AccountScreen";
 
@@ -46,6 +47,7 @@ function App(props) {
       // <ListItemsScreen />
       // <AccountScreen /> 
       <BottomTabsNavigation /> 
+      //<ItemDetailScreen id='gf761' />
 
     );
   } else {

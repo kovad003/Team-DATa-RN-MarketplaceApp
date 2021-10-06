@@ -7,12 +7,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import MainScreen from '../screens/MainScreen'
-//import AccountScreen from '../screens/AccountScreen'
+import AccountScreen from '../screens/AccountScreen'
 import SearchScreen from '../screens/SearchScreen'
 import CreateItemScreen from '../screens/CreateItemScreen'
 import CategoryScreen from '../screens/CategoryScreen'
 import HomeScreen from '../screens/HomeScreen'
-import LoginScreen from '../screens/LoginScreen'
+//import LoginScreen from '../screens/LoginScreen'
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +27,7 @@ function BottomTabsNavigation () {
         if (route.name === 'Home') {
             iconName = focused
             ? 'home' : 'home';
-        } else if (route.name === 'Add') {
+        } else if (route.name === 'Create Item') {
             iconName = focused ? 'plus-circle' : 'plus-circle';
         } else if (route.name === 'Categories') {
             iconName = focused ? 'shape' : 'shape';
@@ -55,14 +55,14 @@ function BottomTabsNavigation () {
             />
             <Tab.Screen 
             name="Profile" 
-            component={LoginScreen}   
+            component={AccountScreen}   
             />        
             <Tab.Screen 
             name="Search" 
             component={SearchScreen}   
             />        
             <Tab.Screen 
-            name="Add" 
+            name="Create Item" 
             component={CreateItemScreen}   
             />
         </Tab.Navigator>

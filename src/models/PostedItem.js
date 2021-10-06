@@ -1,5 +1,5 @@
 class PostedItem {
-    constructor(id,categoryId, customerId, title, price,  description, condition, postDate, imageUrl){
+    constructor(id,categoryId, customerId, title, price,  description, condition, postDate, city,  imageUrl){
         this.id = id;
         this.categoryId = categoryId;
         this.customerId = customerId;
@@ -8,6 +8,7 @@ class PostedItem {
         this.description = description;
         this.condition = condition;
         this.postDate = postDate;
+        this.city = city;
         this.imageUrl = imageUrl;
     }
 

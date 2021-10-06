@@ -6,18 +6,17 @@ import MyItemCard from "../components/MyItemCard";
 import MyItemCardSmall from "../components/MyItemCardSmall";
 
 import EditableCard from "../components/EditableCard";
-import HeaderComponent from "../components/HeaderComponent";
 import Logo from "../components/Logo";
 
 
 function HomeScreen(props) {
 
   
-  // created By Hossein to read data from dummy-data
+  // HH - created to read data from dummy-data
   // const myItemsList = POSTEDITEMS.find(posted => posted.customerId === 'p004');
   const AllItemsList = POSTEDITEMS;
 
-  // created by Hossein to render MyItemCard component details*****************
+  // HH - created  to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
         //console.log(myItemsList);
         return( 
