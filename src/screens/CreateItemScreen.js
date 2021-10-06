@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
@@ -12,36 +12,53 @@ import colors from "../constants/colors";
 
 function CreateItemScreen(props) {
   return (
-    <View style={styles.container}> 
-
-    {/*
-      <View style={styles.titleContainer}>        
-        <Text style={TextStyling.textBlackLarge} >
-          Create Item       
-        </Text>
-      </View>
-    */}
-     
-      <ImageUploader style={styles.imageUploader}></ImageUploader> 
-        <IconInputBoxAttached
-          style={styles.iconInputBoxAttached}>
-        </IconInputBoxAttached>     
-      <View style={styles.buttonContainer}>
-        <AppButton button="Upload" style={styles.uploadButton}></AppButton>
-        <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
-      </View>
     
-    {/*
-      <HeaderComponent style={styles.header}></HeaderComponent>
-     */}
-     
-    </View>
+      <ScrollView>
+      <View style={styles.container}> 
+      
+      {/*
+        <View style={styles.titleContainer}>        
+          <Text style={TextStyling.textBlackLarge} >
+            Create Item       
+          </Text>
+        </View>
+      */}
+      
+        <ImageUploader style={styles.imageUploader}></ImageUploader> 
+          <IconInputBoxAttached
+            style={styles.iconInputBoxAttached}>
+          </IconInputBoxAttached>     
+        <View style={styles.buttonContainer}>
+          <AppButton button="Upload" style={styles.uploadButton}></AppButton>
+          <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
+        </View>
+      
+      {/*
+        <HeaderComponent style={styles.header}></HeaderComponent>
+      */}
+
+      
+      </View>
+      </ScrollView>
         
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignItems: 'center', // AD - added align
+    backgroundColor: colors.light4, // AD - added background
+    width:'100%',
+    justifyContent:'center',
+    
+    marginVertical: Margins.xnarrow,
+  },
+
+  scrollView: {
+    backgroundColor: 'red',
+    //marginHorizontal: 20,
+
     flex: 1,
     alignItems: 'center', // AD - added align
     backgroundColor: colors.light4, // AD - added background
