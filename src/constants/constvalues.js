@@ -5,6 +5,7 @@ export const Paddings={
     large: 30,
     xlarge: 40,
     xxlarge: 50, 
+    xxxlarge: 65,
 };
 
 export const Margins={
