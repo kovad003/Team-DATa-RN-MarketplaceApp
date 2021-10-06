@@ -29,7 +29,7 @@ function AccountScreen(props) {
       
         <View style={styles.centralContainer}>
         
-          <AccountTile></AccountTile>
+          <AccountTile rowText = "Register"></AccountTile>
           
         </View>     
 
@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
 
     marginVertical: Margins.xnarrow,
   },    
+
+  test: {
+    backgroundColor: 'red',
+  },
 
   headerContainer:{
     height: 60,

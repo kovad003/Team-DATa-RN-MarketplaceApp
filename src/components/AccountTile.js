@@ -11,13 +11,26 @@ import colors from "../constants/colors";
 function AccountTile(props) {
   return (
     <View style={[styles.container, props.style]}>
+  
+      <TouchableOpacity style={styles.rowContainer}>
+        <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
+        <Icon name="right" style={styles.icon}></Icon>        
+      </TouchableOpacity>
+     
+
+      {/*
 
         <View style={styles.rowLineContainer1}>
             <TouchableOpacity style={styles.rowContainer}>
-            <Text style={TextStyling.textBlackMedium}>Register</Text>
+            <Text style={TextStyling.textBlackMedium}>{props.name}</Text>
             <Icon name="right" style={styles.icon}></Icon>        
             </TouchableOpacity>
         </View> 
+
+
+
+
+
 
         <View style={styles.rowLineContainer2}>
             <TouchableOpacity style={styles.rowContainer}>
@@ -52,7 +65,8 @@ function AccountTile(props) {
             <Text style={TextStyling.textWhiteMedium}>Delete Account</Text>
             <Icon name="right" style={styles.icon2}></Icon>
             </TouchableOpacity>
-        </View>   
+        </View> 
+      */}  
     
     </View>
   );
