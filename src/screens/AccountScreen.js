@@ -16,20 +16,17 @@ import colors from "../constants/colors";
 function AccountScreen(props) {
   return (
 
-    <ScrollView>
-      <View style={styles.container}> 
-
-      {/*
-        <View style={styles.titleContainer}>        
-          <Text style={TextStyling.textBlackLarge} >
-            Account Screen      
-          </Text>
-        </View>
-      */}
+    <ScrollView style={styles.scrollStyle}>
+      <View style={styles.container}>     
       
         <View style={styles.centralContainer}>
         
-          <AccountTile rowText = "Register"></AccountTile>
+          <AccountTile rowText = "Register" style = {styles.row1} />
+          <AccountTile rowText = "Register" style = {styles.row2} />
+          <AccountTile rowText = "Register" style = {styles.row2} />
+          <AccountTile rowText = "Register" style = {styles.row2} />
+          <AccountTile rowText = "Register" style = {styles.row2} />
+          <AccountTile rowText = "Register" style = {styles.row3} />
           
         </View>     
 
@@ -40,6 +37,13 @@ function AccountScreen(props) {
 }
 
 const styles = StyleSheet.create({
+
+  scrollStyle: {
+    backgroundColor: colors.light4,
+    //justifyContent: 'center',
+  },
+
+
   container: {
     flex: 1,
     alignItems: 'center', // AD - added align
@@ -48,11 +52,19 @@ const styles = StyleSheet.create({
     width:'100%',
     //justifyContent:'center',
 
-    marginVertical: Margins.xnarrow,
+    //marginVertical: Margins.xnarrow,
   },    
 
-  test: {
-    backgroundColor: 'red',
+  row1: {
+    marginVertical: Margins.midsize,
+  },
+
+  row2: {
+    marginVertical: Margins.narrow,
+  },
+
+  row3: {
+    marginVertical: Margins.midsize,
   },
 
   headerContainer:{
@@ -69,11 +81,11 @@ const styles = StyleSheet.create({
 
   centralContainer: {
     flex: 1,
-    marginVertical: Margins.narrow, // AD - added margin vertical (xxxlarge is good too)
+    //marginVertical: Margins.narrow, // AD - added margin vertical (xxxlarge is good too)
     //backgroundColor: colors.light4, // AD - added background
     justifyContent: 'center',
     width: '100%', 
-    //height: '76%',
+    //height: '100%',
     backgroundColor: colors.light4,
 },
 
@@ -115,7 +127,7 @@ rowLineContainer3 : {
     paddingVertical: Paddings.xnarrow,
     width: '93%',
     alignItems: 'center', // AD - added align
-    backgroundColor: 'red',
+    //backgroundColor: 'red',
     marginTop: Margins.large, // AD - added margin Top  
     borderRadius: 15,
     shadowColor: "rgba(0,0,0,1)",
