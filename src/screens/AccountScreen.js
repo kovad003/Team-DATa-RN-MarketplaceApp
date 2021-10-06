@@ -4,6 +4,7 @@ import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
 import AccountTile from "../components/AccountTile";
+import AccountTile2 from "../components/AccountTile2";
 import AppButton from "../components/AppButton";
 
 // AD - constants
@@ -25,7 +26,10 @@ function AccountScreen(props) {
           <AccountTile rowText = "Settings" style = {styles.row2} />
           <AccountTile rowText = "Premium" style = {styles.row2} />
           <AccountTile rowText = "Contact" style = {styles.row2} />
-          <AccountTile rowText = "Delete Account" style = {styles.row3} />
+          <AccountTile2 
+                rowText = "Delete Account" 
+                style = {styles.row3} 
+                />
          
          {/* 
          
@@ -77,6 +81,13 @@ const styles = StyleSheet.create({
 
   row3: {
     marginVertical: Margins.xlarge,
+
+  },
+
+  row3customText: {
+    color: colors.white,
+    fontSize: 30,  
+
   },
 
   headerContainer:{
