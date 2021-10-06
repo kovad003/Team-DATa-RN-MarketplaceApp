@@ -13,11 +13,14 @@ import colors from "../constants/colors";
 function CreateItemScreen(props) {
   return (
     <View style={styles.container}> 
+
+    {/*
       <View style={styles.titleContainer}>        
         <Text style={TextStyling.textBlackLarge} >
           Create Item       
         </Text>
       </View>
+    */}
      
       <ImageUploader style={styles.imageUploader}></ImageUploader> 
         <IconInputBoxAttached
@@ -28,7 +31,10 @@ function CreateItemScreen(props) {
         <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
       </View>
     
+    {/*
       <HeaderComponent style={styles.header}></HeaderComponent>
+     */}
+     
     </View>
         
   );
