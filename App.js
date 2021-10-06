@@ -44,9 +44,9 @@ function App(props) {
       // <SearchScreen />
       // <SearchResultScreen />
       // <CreateItemScreen />
-      // <ListItemsScreen />
+       <ListItemsScreen />
       // <AccountScreen /> 
-      <BottomTabsNavigation /> 
+      //<BottomTabsNavigation /> 
       //<ItemDetailScreen id='gf761' />
 
     );
