@@ -32,7 +32,7 @@ function AccountScreen(props) {
           <AccountScreenRow2 rowText = "Login" style = {styles.row2} />
           <AccountScreenRow3 rowText = "Settings" style = {styles.row2} />
           <AccountScreenRow4 rowText = "Premium" style = {styles.row2} />
-          <AccountScreenRow5 rowText = "Contact" style = {styles.row2} />
+          <AccountScreenRow5 rowText = "Support" style = {styles.row2} />
           <AccountScreenRow6 
                 rowText = "Delete Account" 
                 style = {styles.row3} 
