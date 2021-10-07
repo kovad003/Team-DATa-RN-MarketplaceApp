@@ -12,6 +12,7 @@ import SearchScreen from '../screens/SearchScreen'
 import CreateItemScreen from '../screens/CreateItemScreen'
 import CategoryScreen from '../screens/CategoryScreen'
 import HomeScreen from '../screens/HomeScreen'
+import CategoryStackNavigation from '../navigation/CategoryStackNavigation'
 //import LoginScreen from '../screens/LoginScreen'
 
 const Tab = createBottomTabNavigator();
@@ -51,7 +52,7 @@ function BottomTabsNavigation () {
             />
             <Tab.Screen 
             name="Categories" 
-            component={CategoryScreen}   
+            component={CategoryStackNavigation}   
             />
             <Tab.Screen 
             name="Profile" 

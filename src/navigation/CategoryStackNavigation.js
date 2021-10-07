@@ -15,7 +15,6 @@ const Stack = createStackNavigator();
 function CategoryStackNavigation () {
 
     return (
-      <NavigationContainer>
         <Stack.Navigator >
           <Stack.Screen 
           name="Categories" 
@@ -34,7 +33,6 @@ function CategoryStackNavigation () {
             headerTitle: 'Item Details'} }
           />
         </Stack.Navigator>
-      </NavigationContainer>
     );
 
   }
