@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
-import IconInputBoxAttached from "../components/IconInputBoxAttached";
+import CreateItemForm from "../components/CreateItemForm";
 import AccountTile from "../components/AccountTile";
 import AccountTile2 from "../components/AccountTile2";
 import AppButton from "../components/AppButton";

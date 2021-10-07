@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
-import IconInputBoxAttached from "../components/IconInputBoxAttached";
+import CreateItemForm from "../components/CreateItemForm";
 import AppButton from "../components/AppButton";
 
 // AD - constants
@@ -16,9 +16,9 @@ function CreateItemScreen(props) {
       <ScrollView>
       <View style={styles.container}>     
         <ImageUploader style={styles.imageUploader}></ImageUploader> 
-          <IconInputBoxAttached
+          <CreateItemForm
             style={styles.iconInputBoxAttached}>
-          </IconInputBoxAttached>     
+          </CreateItemForm>     
         <View style={styles.buttonContainer}>
           <AppButton button="Upload" style={styles.uploadButton}></AppButton>
           <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
