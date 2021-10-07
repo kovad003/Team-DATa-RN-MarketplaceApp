@@ -39,6 +39,7 @@ function App(props) {
   if(fontloaded){
     return (
 
+
       // <CategoryScreen />
       // <RegistrationScreen />
       // <LoginScreen />
@@ -51,6 +52,7 @@ function App(props) {
        <BottomTabsNavigation /> 
       //<ItemDetailScreen />
       //<CategoryStackNavigation />
+
 
     );
   } else {

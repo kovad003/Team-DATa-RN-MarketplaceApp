@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import IconInputBoxAttached from "../components/IconInputBoxAttached";
@@ -12,24 +12,20 @@ import colors from "../constants/colors";
 
 function CreateItemScreen(props) {
   return (
-    <View style={styles.container}> 
-      <View style={styles.titleContainer}>        
-        <Text style={TextStyling.textBlackLarge} >
-          Create Item       
-        </Text>
-      </View>
-     
-      <ImageUploader style={styles.imageUploader}></ImageUploader> 
-        <IconInputBoxAttached
-          style={styles.iconInputBoxAttached}>
-        </IconInputBoxAttached>     
-      <View style={styles.buttonContainer}>
-        <AppButton button="Upload" style={styles.uploadButton}></AppButton>
-        <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
-      </View>
     
-      <HeaderComponent style={styles.header}></HeaderComponent>
-    </View>
+      <ScrollView>
+      <View style={styles.container}>     
+        <ImageUploader style={styles.imageUploader}></ImageUploader> 
+          <IconInputBoxAttached
+            style={styles.iconInputBoxAttached}>
+          </IconInputBoxAttached>     
+        <View style={styles.buttonContainer}>
+          <AppButton button="Upload" style={styles.uploadButton}></AppButton>
+          <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
+        </View>
+      
+      </View>
+      </ScrollView>
         
   );
 }
@@ -41,6 +37,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light4, // AD - added background
     width:'100%',
     justifyContent:'center',
+
+    marginVertical: Margins.xnarrow,
   },
 
   // AD - testing
@@ -69,10 +67,7 @@ const styles = StyleSheet.create({
     height: 44,
     width: 317,
     alignItems: 'center', // AD - added align
-    marginLeft: Margins.narrow, // AD - added margin left
-   
-    
-   
+    marginLeft: Margins.narrow, // AD - added margin left   
   },  
   buttonContainer: {
     height: 89,
@@ -80,8 +75,6 @@ const styles = StyleSheet.create({
     width: '80%',
     alignItems: 'center', // AD - added align  
     marginBottom: Margins.narrow, // AD - added margin bottom
-    
-   
   },
 
   /* AD - an extra container for the title */
