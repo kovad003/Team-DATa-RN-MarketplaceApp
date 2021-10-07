@@ -13,9 +13,9 @@ function AccountScreenRow2(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
-        <Icon1 name="login" style={styles.icon}></Icon1>
+        <Icon1 name="login" style={styles.icon1}></Icon1>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon2 name="right" style={styles.icon}></Icon2>        
+        <Icon2 name="right" style={styles.icon2}></Icon2>        
       </TouchableOpacity>
     </View>
   );
@@ -42,7 +42,15 @@ const styles = StyleSheet.create({
     paddingRight: Paddings.large    
   },
 
-  icon: {
+  icon1: {
+    //color: "rgba(128,128,128,1)",
+    color: colors.danger,
+    fontSize: 30,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+
+  icon2: {
     color: "rgba(128,128,128,1)",
     fontSize: 30,
     justifyContent:'center',

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import Icon1 from "react-native-vector-icons/AntDesign";
+import Icon2 from "react-native-vector-icons/AntDesign";
 
 // AD - constants
 import TextStyling from '../constants/fontstyling'
@@ -13,8 +14,9 @@ function AccountScreenRow6(props) {
     <View style={[styles.container, props.style]}>
   
         <TouchableOpacity style={styles.rowContainer}>
+        <Icon1 name="deleteuser" style={styles.icon}></Icon1>
         <Text style={TextStyling.textWhiteMedium}>Delete Account</Text>
-        <Icon name="right" style={styles.icon}></Icon>
+        <Icon2 name="right" style={styles.icon}></Icon2>
         </TouchableOpacity>
        
     </View>
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-between', //center
     alignItems:'center',
     flexDirection: 'row',
-    paddingLeft: '20%',
+    paddingLeft: '9%', // '20%'
     paddingRight: Paddings.large  
   },
 
