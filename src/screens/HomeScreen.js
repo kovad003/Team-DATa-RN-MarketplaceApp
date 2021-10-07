@@ -25,7 +25,7 @@ function HomeScreen(props) {
             price={itemData.item.price}
             condition={itemData.item.condition}            
             description={itemData.item.description}
-            onSelectPost={()=>{}}
+            onSelect={()=> {props.navigation.navigate('ItemDetail',{ itemId:itemData.item.id })} }
             imageUrl={itemData.item.imageUrl}
             />
           );
