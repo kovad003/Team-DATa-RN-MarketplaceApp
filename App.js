@@ -37,15 +37,15 @@ function App(props) {
   if(fontloaded){
     return (
 
-      // <MainScreen />
-      // <RegistrationScreen />
-      // <LoginScreen />
+      //<MainScreen />
+      //<RegistrationScreen />
+      <LoginScreen />
       // <SearchScreen />
       // <SearchResultScreen />
       // <CreateItemScreen />
       // <ListItemsScreen />
       // <AccountScreen /> 
-      <BottomTabsNavigation /> 
+      //<BottomTabsNavigation /> 
 
     );
   } else {
