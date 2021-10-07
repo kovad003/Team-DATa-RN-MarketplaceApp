@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { StyleSheet, View, ScrollView, FlatList } from "react-native";
+import 'react-native-gesture-handler';
+
 
 
 
 import HeaderComponent from "../components/HeaderComponent";
 import CategoryButton from "../components/CategoryButton";
 import { CATEGORIES } from "../data/dummy-data";
-
+import ListItemsScreen from '../screens/ListItemsScreen'
 
 function CategoryScreen(props) {
 
@@ -14,7 +16,7 @@ function CategoryScreen(props) {
     return( 
       <CategoryButton 
       title={itemData.item.title}
-      onSelect={()=>{console.log('click')}}
+      onSelect={()=> props.navigation.navigate('CategoryList',{ catId:itemData.item.id })}
       color= {itemData.item.color}
       image={itemData.item.url}
       />

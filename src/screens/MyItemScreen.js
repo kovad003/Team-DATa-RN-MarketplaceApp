@@ -3,29 +3,28 @@ import { StyleSheet, View, Text, FlatList } from "react-native";
 
 import { POSTEDITEMS } from "../data/dummy-data";
 import MyItemCard from "../components/MyItemCard";
-import MyItemCardSmall from "../components/MyItemCardSmall";
-
 import EditableCard from "../components/EditableCard";
-import Logo from "../components/Logo";
+import HeaderComponent from "../components/HeaderComponent";
 
 
-function HomeScreen(props) {
+function MyItemScreen(props) {
 
   
-  // HH - created to read data from dummy-data
+  // created By Hossein to read data from dummy-data
   // const myItemsList = POSTEDITEMS.find(posted => posted.customerId === 'p004');
-  const AllItemsList = POSTEDITEMS;
+  const myItemsList = POSTEDITEMS.filter(
+        posted => posted.customerId.indexOf('p004') >= 0);
 
-  // HH - created  to render MyItemCard component details*****************
+  // created by Hossein to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
         //console.log(myItemsList);
         return( 
-            <MyItemCardSmall 
+            <MyItemCard 
             title={itemData.item.title} 
             price={itemData.item.price}
             condition={itemData.item.condition}            
             description={itemData.item.description}
-            onSelect={()=> {props.navigation.navigate('ItemDetail',{ itemId:itemData.item.id })} }
+            onSelectPost={()=>{}}
             imageUrl={itemData.item.imageUrl}
             />
           );
@@ -34,17 +33,22 @@ function HomeScreen(props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Logo style={styles.logo}></Logo>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>My Items...</Text>
       </View>
       <View style={styles.rect}>
+        {/* <EditableCard style={styles.editableCard}></EditableCard> */}
+
         <FlatList
-        data={AllItemsList}
+        data={myItemsList}
         keyExtractor={(item, index)=> item.id}
         renderItem={renderMyItem}
         style={{width:'80%', }}
         />
 
+      </View>
+      <View style={styles.headerContainer}>
+        <HeaderComponent style={styles.header}></HeaderComponent>
       </View>
     </View>
   );
@@ -53,7 +57,6 @@ function HomeScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems:'center',
   },
   titleContainer:{
     flex:1,
@@ -86,11 +89,7 @@ const styles = StyleSheet.create({
   },
   editableCard: {
     width: '80%',
-  },
-  logoContainer:{
-    marginTop:30,
-    
-  },
+  }
 });
 
-export default HomeScreen;
+export default MyItemScreen;
