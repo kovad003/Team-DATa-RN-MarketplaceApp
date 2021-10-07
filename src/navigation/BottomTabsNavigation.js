@@ -13,6 +13,7 @@ import CreateItemScreen from '../screens/CreateItemScreen'
 import CategoryScreen from '../screens/CategoryScreen'
 import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
+import AccountScreen from '../screens/AccountScreen'
 
 const Tab = createBottomTabNavigator();
 
