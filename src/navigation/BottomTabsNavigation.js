@@ -64,7 +64,7 @@ function BottomTabsNavigation () {
             />        
             <Tab.Screen 
             name="Add" 
-            component={AccountScreen}   
+            component={CreateItemScreen}   
             />
         </Tab.Navigator>
     </NavigationContainer>
