@@ -52,20 +52,20 @@ const styles = StyleSheet.create({
   },   
   
   logoContainer:{
-    marginTop:30,
-    alignItems: 'center',    
+    marginTop: 26, //25
+    alignItems: 'center',   
   },
 
   row1: {
-    marginVertical: Margins.xlarge, // xlarge
+    marginVertical: Margins.large, // xlarge
   },
 
   row2: {
-    marginVertical: Margins.narrow, // narrow
+    marginVertical: Margins.xxnarrow, // narrow
   },
 
   row3: {
-    marginVertical: Margins.xlarge, // xlarge
+    marginVertical: Margins.large, // xlarge
   },
 
   centralContainer: {
