@@ -13,9 +13,15 @@ function itemDetailScreen(props) {
 
   
   // HH - created to read data from dummy-data
-  const selectedItem = POSTEDITEMS.filter(
-        posted => posted.id.indexOf(props.id) >= 0);
-  
+    console.log(props.route.params);
+
+    const { itemId } = props.route.params;
+    const selectedItemId = itemId;
+    // const selectedItem = POSTEDITEMS.filter(
+    //     cat => cat.categoryId.nidexOf(props.selectedItemId) >= 0);
+  const selectedItem = POSTEDITEMS.find(item => item.id === selectedItemId);
+  //console.log(selectedItem);
+
   //console.log(selectedItem[0].imageUrl);
 
 
@@ -24,30 +30,30 @@ function itemDetailScreen(props) {
       <ScrollView>
         <View>
           <Image
-          source={{ uri: selectedItem[0].imageUrl }}
+          source={{ uri: selectedItem.imageUrl }}
           style={{ width: '100%', height: 300 }}
           />
         </View>
         <View style={styles.mainContainer}>
-          <Text style={{fontSize:30, padding:10,}}>{selectedItem[0].title}</Text>
+          <Text style={{fontSize:30, padding:10,}}>{selectedItem.title}</Text>
           <View style={styles.rowContent}>
-            <Text style={styles.rowText}>Posted at {selectedItem[0].postDate} in {selectedItem[0].city}</Text>
+            <Text style={styles.rowText}>Posted at {selectedItem.postDate} in {selectedItem.city}</Text>
           </View>
           <View style={styles.rowContent}>
             <Text style={styles.rowTextBold}>Condition:</Text>
-            <Text style={styles.rowText}>{selectedItem[0].condition}</Text>
+            <Text style={styles.rowText}>{selectedItem.condition}</Text>
           </View>
           <View style={styles.rowContent}>
             <Text style={styles.rowTextBold}>Category</Text>
-            <Text style={styles.rowText}>{selectedItem[0].categoryId}</Text>
+            <Text style={styles.rowText}>{selectedItem.categoryId}</Text>
           </View>
           <View style={styles.rowContent}>
             <Text style={styles.rowTextBold}>Price</Text>
-            <Text style={styles.rowText} >{selectedItem[0].price} euro</Text>
+            <Text style={styles.rowText} >{selectedItem.price} euro</Text>
           </View>
             <Text style={{fontSize:28, padding:10,}}>Description:</Text>
           <View style={styles.rowContent}>
-            <Text style={styles.rowText} >{selectedItem[0].description}</Text>
+            <Text style={styles.rowText} >{selectedItem.description}</Text>
           </View>
         </View>
 

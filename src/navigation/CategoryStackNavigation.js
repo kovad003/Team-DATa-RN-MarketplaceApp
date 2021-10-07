@@ -10,8 +10,6 @@ import ListItemsScreen from '../screens/ListItemsScreen'
 import ItemDetailScreen from '../screens/ItemDetailScreen'
 import 'react-native-gesture-handler';
 //import Colors from '../constants/Colors';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-
 
 const Stack = createStackNavigator();
 function CategoryStackNavigation () {
@@ -22,21 +20,18 @@ function CategoryStackNavigation () {
           <Stack.Screen 
           name="Categories" 
           component={CategoryScreen} 
-          options={{
-            headerTitle: 'Meals Category',} 
           />
           <Stack.Screen 
           name="CategoryList" 
           component={ListItemsScreen}   
           options={{
-            headerTitle: 'Category List',} 
+            headerTitle: 'Category List'} }
           />
           <Stack.Screen 
-
           name="ItemDetail"  
           component={ItemDetailScreen}           
           options={{
-            headerTitle: 'Item Details',} 
+            headerTitle: 'Item Details'} }
           />
         </Stack.Navigator>
       </NavigationContainer>

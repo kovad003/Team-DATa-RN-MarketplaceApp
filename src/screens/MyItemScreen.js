@@ -7,7 +7,7 @@ import EditableCard from "../components/EditableCard";
 import HeaderComponent from "../components/HeaderComponent";
 
 
-function ListItemsScreen(props) {
+function MyItemScreen(props) {
 
   
   // created By Hossein to read data from dummy-data
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ListItemsScreen;
+export default MyItemScreen;

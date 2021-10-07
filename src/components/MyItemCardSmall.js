@@ -9,7 +9,7 @@ const MyItemCardSmall = props => {
 
 return (
     <View style={styles.postedItem}>
-    <TouchableOpacity onPress={props.onSelectPost} >
+    <TouchableOpacity onPress={props.onSelect} >
         <View>
             <View style={{...styles.postedRow, ...styles.postedHeader}}>
                 <ImageBackground 
