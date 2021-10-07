@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
+// Added for extra icons
+import Icon3 from "react-native-vector-icons/Entypo";
+
 // Added for margins and paddings
 import { Margins, Paddings } from "../constants/constvalues";
 
@@ -34,7 +37,7 @@ function IconInputBoxAttached(props) {
         {/* AD - extra additions */}
         <View style={styles.inputFieldRow3}>        
           <View style={styles.formIconRow}>
-            <Icon name="bookmark" style={styles.formIcon}></Icon>
+            <Icon3 name="edit" style={styles.formIcon}></Icon3>
             <TextInput
               placeholder="placeholder"
               style={styles.placeholder}
@@ -82,7 +85,8 @@ const styles = StyleSheet.create({
     width: 317,
     height: 44,
     flexDirection: "row",
-    marginTop: 31,
+    //marginTop: 31,
+    marginTop: 20,
     marginLeft: 10
   },
   /* AD - extra row stylings*/
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     height: 30,
     width: 21
-  },
+  },  
   placeholder: {
     //fontFamily: "roboto-regular",
     color: "#121212",
