@@ -52,20 +52,20 @@ const styles = StyleSheet.create({
   },   
   
   logoContainer:{
-    //marginTop:30,
+    marginTop:30,
     alignItems: 'center',    
   },
 
   row1: {
-    marginVertical: Margins.xlarge,
+    marginVertical: Margins.xlarge, // xlarge
   },
 
   row2: {
-    marginVertical: Margins.narrow,
+    marginVertical: Margins.narrow, // narrow
   },
 
   row3: {
-    marginVertical: Margins.xlarge,
+    marginVertical: Margins.xlarge, // xlarge
   },
 
   centralContainer: {
@@ -74,18 +74,6 @@ const styles = StyleSheet.create({
     width: '100%', 
     backgroundColor: colors.light4,
   },
-
-  rowLineContainer1 : {
-      marginVertical: Margins.midsize,
-  },
-
-  rowLineContainer2 : {
-      marginVertical: Margins.narrow,
-  },
-
-  rowLineContainer3 : {
-      marginVertical: Margins.midsize,
-  },  
 
 });
 

@@ -19,22 +19,22 @@ function LogoSmall(props) {
 const styles = StyleSheet.create({
   container: {},
   logoHolder: {
-    top: 1,
-    left: 0,
-    width: 172,
-    height: 109,
+    top: 1, //1
+    left: 0, //0
+    width: 152, // 172
+    height: 89, // 109
     position: "absolute"
   },
   image: {
-    top: 0,
-    left: 31,
-    width: 110,
-    height: 110,
+    top: 0, //
+    left: 31, // 31
+    width: 90, // 110
+    height: 90, // 110
     position: "absolute"
   },
   logoHolderStack: {
-    width: 172,
-    height: 110
+    width: 152, // 172
+    height: 90 // 110
   }
 });
 
