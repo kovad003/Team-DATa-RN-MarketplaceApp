@@ -13,14 +13,14 @@ function LoginScreen(props) {
         <IconTextbox
           inputStyle="Label"
           inputStyle="Username"
-          style={styles.textboxUsername}
+          style={styles.inputStyle}
         ></IconTextbox>
         <IconTextbox
           inputStyle="Label"
           iconStyleName="account"
           inputStyle="Password"
           iconStyle="eye"
-          style={styles.textboxPassword}
+          style={styles.inputStyle}
         ></IconTextbox>
         <AppButton button="Login" style={styles.loginButton}></AppButton>
         <LinkButton
@@ -44,7 +44,7 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(179,169,169,1)",
+    backgroundColor: Style.textInputbgColor,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: -100
