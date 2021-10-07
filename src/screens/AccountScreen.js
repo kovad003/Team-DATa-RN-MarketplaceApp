@@ -6,6 +6,7 @@ import CreateItemForm from "../components/CreateItemForm";
 import AccountTile from "../components/AccountTile";
 import AccountTile2 from "../components/AccountTile2";
 import AppButton from "../components/AppButton";
+import LogoSmall from "../components/LogoSmall";
 
 // AD - constants
 import TextStyling from '../constants/fontstyling'
@@ -19,6 +20,10 @@ function AccountScreen(props) {
       <View style={styles.container}>  
         <View style={styles.centralContainer}>
    
+          <View style={styles.logoContainer}>
+            <LogoSmall style={styles.logo}></LogoSmall>
+          </View>
+
           <AccountTile rowText = "Register" style = {styles.row1} />
           <AccountTile rowText = "Login" style = {styles.row2} />
           <AccountTile rowText = "Settings" style = {styles.row2} />
@@ -44,7 +49,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',   
     width:'100%',    
-  },    
+  },   
+  
+  logoContainer:{
+    //marginTop:30,
+    alignItems: 'center',    
+  },
 
   row1: {
     marginVertical: Margins.xlarge,
