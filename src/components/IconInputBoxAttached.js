@@ -3,7 +3,9 @@ import { StyleSheet, View, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 // Added for extra icons
+import Icon2 from "react-native-vector-icons/FontAwesome";
 import Icon3 from "react-native-vector-icons/Entypo";
+import Icon4 from "react-native-vector-icons/FontAwesome";
 
 // Added for margins and paddings
 import { Margins, Paddings } from "../constants/constvalues";
@@ -26,7 +28,7 @@ function IconInputBoxAttached(props) {
         {/* AD - extra additions */}
         <View style={styles.inputFieldRow2}>        
           <View style={styles.formIconRow}>
-            <Icon name="bookmark" style={styles.formIcon}></Icon>
+            <Icon2 name="euro" style={styles.formIcon}></Icon2>
             <TextInput
               placeholder="placeholder"
               style={styles.placeholder}
@@ -48,7 +50,7 @@ function IconInputBoxAttached(props) {
         {/* AD - extra additions */}
         <View style={styles.inputFieldRow4}>        
           <View style={styles.formIconRow}>
-            <Icon name="bookmark" style={styles.formIcon}></Icon>
+            <Icon name="map-marker" style={styles.formIcon}></Icon>
             <TextInput
               placeholder="placeholder"
               style={styles.placeholder}
