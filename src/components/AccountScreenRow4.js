@@ -8,10 +8,11 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountTile(props) {
+function AccountScreenRow4(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
+        <Icon name="adduser" style={styles.icon}></Icon>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
         <Icon name="right" style={styles.icon}></Icon>        
       </TouchableOpacity>
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-between', // center
     alignItems:'center',
     flexDirection: 'row',
-    paddingLeft: '20%',
+    paddingLeft: '9%', // '20%'
     paddingRight: Paddings.large    
   },
 
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center'
   },
-
+  
 });
 
-export default AccountTile;
+export default AccountScreenRow4;

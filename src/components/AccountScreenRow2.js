@@ -8,15 +8,14 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountTile2(props) {
+function AccountScreenRow2(props) {
   return (
-    <View style={[styles.container, props.style]}>
-  
-        <TouchableOpacity style={styles.rowContainer}>
-        <Text style={TextStyling.textWhiteMedium}>Delete Account</Text>
-        <Icon name="right" style={styles.icon}></Icon>
-        </TouchableOpacity>
-       
+    <View style={[styles.container, props.style]}>  
+      <TouchableOpacity style={styles.rowContainer}>
+        <Icon name="adduser" style={styles.icon}></Icon>
+        <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
+        <Icon name="right" style={styles.icon}></Icon>        
+      </TouchableOpacity>
     </View>
   );
 }
@@ -32,22 +31,23 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 0.31,
     shadowRadius: 0,
-    backgroundColor: colors.danger,  
-    height: 53,    
-    justifyContent:'space-between', //center
+    backgroundColor: "#E6E6E6",  
+    height: 53,   
+    
+    justifyContent:'space-between', // center
     alignItems:'center',
     flexDirection: 'row',
-    paddingLeft: '20%',
-    paddingRight: Paddings.large  
+    paddingLeft: '9%', // '20%'
+    paddingRight: Paddings.large    
   },
 
   icon: {
-    color: colors.white,
-    fontSize: 30,  
+    color: "rgba(128,128,128,1)",
+    fontSize: 30,
     justifyContent:'center',
     alignItems:'center'
   },
   
 });
 
-export default AccountTile2;
+export default AccountScreenRow2;

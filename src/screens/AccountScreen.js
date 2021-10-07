@@ -3,8 +3,12 @@ import { StyleSheet, View, Text, ScrollView } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import ImageUploader from "../components/ImageUploader";
 import CreateItemForm from "../components/CreateItemForm";
-import AccountTile from "../components/AccountTile";
-import AccountTile2 from "../components/AccountTile2";
+import AccountScreenRow1 from "../components/AccountScreenRow1";
+import AccountScreenRow2 from "../components/AccountScreenRow2";
+import AccountScreenRow3 from "../components/AccountScreenRow3";
+import AccountScreenRow4 from "../components/AccountScreenRow4";
+import AccountScreenRow5 from "../components/AccountScreenRow5";
+import AccountScreenRow6 from "../components/AccountScreenRow6";
 import AppButton from "../components/AppButton";
 import LogoSmall from "../components/LogoSmall";
 
@@ -24,12 +28,12 @@ function AccountScreen(props) {
             <LogoSmall style={styles.logo}></LogoSmall>
           </View>
 
-          <AccountTile rowText = "Register" style = {styles.row1} />
-          <AccountTile rowText = "Login" style = {styles.row2} />
-          <AccountTile rowText = "Settings" style = {styles.row2} />
-          <AccountTile rowText = "Premium" style = {styles.row2} />
-          <AccountTile rowText = "Contact" style = {styles.row2} />
-          <AccountTile2 
+          <AccountScreenRow1 rowText = "Register" style = {styles.row1} />
+          <AccountScreenRow2 rowText = "Login" style = {styles.row2} />
+          <AccountScreenRow3 rowText = "Settings" style = {styles.row2} />
+          <AccountScreenRow4 rowText = "Premium" style = {styles.row2} />
+          <AccountScreenRow5 rowText = "Contact" style = {styles.row2} />
+          <AccountScreenRow6 
                 rowText = "Delete Account" 
                 style = {styles.row3} 
                 />          

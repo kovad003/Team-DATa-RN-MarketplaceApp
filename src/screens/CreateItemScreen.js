@@ -17,7 +17,7 @@ function CreateItemScreen(props) {
       <View style={styles.container}>     
         <ImageUploader style={styles.imageUploader}></ImageUploader> 
           <CreateItemForm
-            style={styles.iconInputBoxAttached}>
+            style={styles.CreateItemForm}>
           </CreateItemForm>     
         <View style={styles.buttonContainer}>
           <AppButton button="Upload" style={styles.uploadButton}></AppButton>
@@ -39,23 +39,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
 
     marginVertical: Margins.xnarrow,
-  },
-
-  // AD - testing
-  headerContainer:{
-    flex:1,
-    //height: 60,
-    justifyContent:'center',
-    alignItems:'center'
-
-  },
-  // AD - testing
-  header: {
-    flex:1,   
-    width: '100%',
-    //height: 60,   
-  },
-  
+  },  
   imageUploader: {
     height: 104,
     width: 339,
@@ -63,7 +47,7 @@ const styles = StyleSheet.create({
     marginTop: Margins.narrow, // AD - added margin Top
     marginBottom: Margins.xlarge, // AD - added margin bottom  
   },
-  iconInputBoxAttached: {
+  CreateItemForm: {
     height: 44,
     width: 317,
     alignItems: 'center', // AD - added align
@@ -76,42 +60,6 @@ const styles = StyleSheet.create({
     alignItems: 'center', // AD - added align  
     marginBottom: Margins.narrow, // AD - added margin bottom
   },
-
-  /* AD - an extra container for the title */
-  titleContainer: {  
-    height: 42,
-    paddingVertical: Paddings.xnarrow,
-    width: '93%',
-    alignItems: 'center', // AD - added align
-    backgroundColor: 'red',
-    marginTop: Margins.large, // AD - added margin Top  
-    borderRadius: 15,
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-
-    backgroundColor: colors.light2,
-  
-  },
-  /* AD - added placeholder stylings */
-  placeholder: {
-    //fontFamily: "roboto-regular",
-    color: "#121212", // "#121212"
-    height: 30,
-    width: 249,
-    backgroundColor: "rgba(255,255,255,1)",
-    borderRadius: 15,
-    textAlign: "center",
-    marginLeft: 18
-  },
-
-  /* AD - added text stylings */
-  customText: {
-
-  },
-
   uploadButton: {
     width: 206,
     height: 36,
@@ -124,8 +72,7 @@ const styles = StyleSheet.create({
     overflow: "visible",
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
-    backgroundColor: colors.light5, // AD - added color
-    
+    backgroundColor: colors.light5, // AD - added color    
   }
 });
 
