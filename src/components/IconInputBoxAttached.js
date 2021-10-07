@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput } from "react-native";
 // Added for extra icons
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import Icon2 from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/FontAwesome5";
 import Icon3 from "react-native-vector-icons/Entypo";
 import Icon4 from "react-native-vector-icons/FontAwesome";
 
@@ -28,7 +28,7 @@ function IconInputBoxAttached(props) {
         {/* AD - extra additions */}
         <View style={styles.inputFieldRow2}>        
           <View style={styles.formIconRow}>
-            <Icon2 name="euro" style={styles.formIcon}></Icon2>
+            <Icon2 name="euro-sign" style={styles.formIcon}></Icon2>
             <TextInput
               placeholder="Price"
               style={styles.placeholder}
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   /* AD - extra row stylings*/
   inputFieldRow3: {
     width: 317,
-    height: 98, //44, 66
+    height: 128, //44, 66
     flexDirection: "row",
     marginTop: 10, //31
     marginLeft: 7 //10
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   placeholder2: {
     //fontFamily: "roboto-regular",
     color: "#121212",
-    height: 90, //30, 60
+    height: 120, //30, 60
     width: 249,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 15,
