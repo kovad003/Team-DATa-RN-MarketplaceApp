@@ -4,6 +4,13 @@ import Logo from "../components/Logo";
 import IconTextbox from "../components/IconTextbox";
 import AppButton from "../components/AppButton";
 import LinkButton from "../components/LinkButton";
+import {Dimensions} from 'react-native';
+export const {height, width} = Dimensions.get('screen');
+export const Style = {
+  loginpagebgColor: '#333333',
+  textInputbgColor: '#9B9B9B',
+  GamepadButton: '#FFC600',
+};
 
 function LoginScreen(props) {
   return (
@@ -44,7 +51,7 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Style.textInputbgColor,
+    backgroundColor: "rgba(206,206,206,1)",
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: -100
