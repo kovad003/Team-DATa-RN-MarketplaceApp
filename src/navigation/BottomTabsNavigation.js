@@ -16,7 +16,7 @@ import HomeScreen from '../screens/HomeScreen'
 import CategoryStackNavigation from '../navigation/CategoryStackNavigation'
 import HomeStackNavigation from '../navigation/HomeStackNavigation'
 import LoginScreen from '../screens/LoginScreen'
-import AccountScreen from '../screens/AccountScreen'
+
 
 
 const Tab = createBottomTabNavigator();
