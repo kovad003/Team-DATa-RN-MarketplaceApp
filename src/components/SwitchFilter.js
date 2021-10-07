@@ -24,20 +24,20 @@ const styles = StyleSheet.create({
   container: {
     // backgroundColor: colors.light2,
     backgroundColor: 'white',
-    borderRadius: 15,
-    marginVertical: 3,
-    marginHorizontal: 50,
+    borderRadius: 0,
+    marginVertical: 1,
+    marginHorizontal: 0,
     // ------------------------------
     //android shadows
     elevation: 3,
     //ios sahdows
     shadowColor: "black",
     shadowOffset: {
-      width: 3,
-      height: 3
+      width: 1,
+      height: 1
     },
     shadowOpacity: 0.5,
-    shadowRadius: 1,
+    shadowRadius: 0.5,
     // ------------------------------
   },
   row: {

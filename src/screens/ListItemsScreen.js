@@ -3,52 +3,52 @@ import { StyleSheet, View, Text, FlatList } from "react-native";
 
 import { POSTEDITEMS } from "../data/dummy-data";
 import MyItemCard from "../components/MyItemCard";
+import MyItemCardSmall from "../components/MyItemCardSmall";
+import ItemDetailScreen from '../screens/ItemDetailScreen';
+
+
 import EditableCard from "../components/EditableCard";
-import HeaderComponent from "../components/HeaderComponent";
+import Logo from "../components/Logo";
 
 
 function ListItemsScreen(props) {
 
   
-  // created By Hossein to read data from dummy-data
-  // const myItemsList = POSTEDITEMS.find(posted => posted.customerId === 'p004');
-  const myItemsList = POSTEDITEMS.filter(
-        posted => posted.customerId.indexOf('p004') >= 0);
+  // HH - created to read data from dummy-data to find the items with our selected Category
+  const { catId } = props.route.params;
+  const selectedCategoryId = catId;
+    //console.log(selectedCategoryId)
 
-  // created by Hossein to render MyItemCard component details*****************
+  const selectedItem = POSTEDITEMS.filter(
+      cat => cat.categoryId.indexOf(selectedCategoryId) >= 0);
+
+  // HH - created  to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
         //console.log(myItemsList);
         return( 
-            <MyItemCard 
+            <MyItemCardSmall 
             title={itemData.item.title} 
             price={itemData.item.price}
             condition={itemData.item.condition}            
             description={itemData.item.description}
-            onSelectPost={()=>{}}
+            onSelect={()=> {props.navigation.navigate('ItemDetail',{ itemId:itemData.item.id }) ; console.log(itemData.item.id)} }
             imageUrl={itemData.item.imageUrl}
             />
           );
-    };
+            
 
+    };
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>My Items...</Text>
-      </View>
       <View style={styles.rect}>
-        {/* <EditableCard style={styles.editableCard}></EditableCard> */}
-
         <FlatList
-        data={myItemsList}
+        data={selectedItem}
         keyExtractor={(item, index)=> item.id}
         renderItem={renderMyItem}
         style={{width:'80%', }}
         />
 
-      </View>
-      <View style={styles.headerContainer}>
-        <HeaderComponent style={styles.header}></HeaderComponent>
       </View>
     </View>
   );
@@ -57,6 +57,7 @@ function ListItemsScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems:'center',
   },
   titleContainer:{
     flex:1,
@@ -89,7 +90,11 @@ const styles = StyleSheet.create({
   },
   editableCard: {
     width: '80%',
-  }
+  },
+  logoContainer:{
+    marginTop:30,
+    
+  },
 });
 
 export default ListItemsScreen;

@@ -6,17 +6,19 @@ import { Text, View } from "react-native";
 import HeaderComponent from "./src/components/HeaderComponent";
 
 // Screen Imports
-import MainScreen from "./src/screens/MainScreen";
+// import MainScreen from "./src/screens/MainScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import CreateItemScreen from "./src/screens/CreateItemScreen";
 import ListItemsScreen from "./src/screens/ListItemsScreen";
+import MyItemScreen from "./src/screens/MyItemScreen";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import SearchResultScreen from "./src/screens/SearchResultScreen";
-
+import ItemDetailScreen from './src/screens/ItemDetailScreen'
+import CategoryScreen from './src/screens/CategoryScreen'
 import AccountScreen from "./src/screens/AccountScreen";
-
 import BottomTabsNavigation from './src/navigation/BottomTabsNavigation'
+import CategoryStackNavigation from './src/navigation/CategoryStackNavigation'
 
 
 // Font Imports
@@ -37,15 +39,20 @@ function App(props) {
   if(fontloaded){
     return (
 
-      // <MainScreen />
+
+      // <CategoryScreen />
       // <RegistrationScreen />
       // <LoginScreen />
       // <SearchScreen />
       // <SearchResultScreen />
       // <CreateItemScreen />
-      // <ListItemsScreen />
+       // <ListItemsScreen id='c3'/>
+      // <MyItemScreen />
       // <AccountScreen /> 
-      <BottomTabsNavigation /> 
+       <BottomTabsNavigation /> 
+      //<ItemDetailScreen />
+      //<CategoryStackNavigation />
+
 
     );
   } else {

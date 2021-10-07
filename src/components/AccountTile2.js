@@ -8,13 +8,15 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountTile(props) {
+function AccountTile2(props) {
   return (
-    <View style={[styles.container, props.style]}>  
-      <TouchableOpacity style={styles.rowContainer}>
-        <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon name="right" style={styles.icon}></Icon>        
-      </TouchableOpacity>
+    <View style={[styles.container, props.style]}>
+  
+        <TouchableOpacity style={styles.rowContainer}>
+        <Text style={TextStyling.textWhiteMedium}>Delete Account</Text>
+        <Icon name="right" style={styles.icon}></Icon>
+        </TouchableOpacity>
+       
     </View>
   );
 }
@@ -30,23 +32,22 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 0.31,
     shadowRadius: 0,
-    backgroundColor: "#E6E6E6",  
-    height: 53,   
-    
-    justifyContent:'space-between', // center
+    backgroundColor: colors.danger,  
+    height: 53,    
+    justifyContent:'space-between', //center
     alignItems:'center',
     flexDirection: 'row',
     paddingLeft: '20%',
-    paddingRight: Paddings.large    
+    paddingRight: Paddings.large  
   },
 
   icon: {
-    color: "rgba(128,128,128,1)",
-    fontSize: 30,
+    color: colors.white,
+    fontSize: 30,  
     justifyContent:'center',
     alignItems:'center'
   },
-
+  
 });
 
-export default AccountTile;
+export default AccountTile2;
