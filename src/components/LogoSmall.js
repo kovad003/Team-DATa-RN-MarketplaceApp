@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   logoHolderStack: {
     width: 152, // 172
-    height: 90 // 110
+    height: 80 // 110
   }
 });
 
