@@ -67,10 +67,7 @@ const styles = StyleSheet.create({
     height: 44,
     width: 317,
     alignItems: 'center', // AD - added align
-    marginLeft: Margins.narrow, // AD - added margin left
-   
-    
-   
+    marginLeft: Margins.narrow, // AD - added margin left   
   },  
   buttonContainer: {
     height: 89,
@@ -78,8 +75,6 @@ const styles = StyleSheet.create({
     width: '80%',
     alignItems: 'center', // AD - added align  
     marginBottom: Margins.narrow, // AD - added margin bottom
-    
-   
   },
 
   /* AD - an extra container for the title */

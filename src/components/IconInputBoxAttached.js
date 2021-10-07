@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
+// Added for extra icons
 import Icon from "react-native-vector-icons/FontAwesome";
 
-// Added for extra icons
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import Icon3 from "react-native-vector-icons/Entypo";
 import Icon4 from "react-native-vector-icons/FontAwesome";
@@ -17,9 +17,9 @@ function IconInputBoxAttached(props) {
       <View style={styles.formContainer}>
         <View style={styles.inputFieldRow}>
           <View style={styles.formIconRow}>
-            <Icon name="bookmark" style={styles.formIcon}></Icon>
+            <Icon name="tag" style={styles.formIcon}></Icon>
             <TextInput
-              placeholder="placeholder"
+              placeholder="Item Name"
               style={styles.placeholder}
             ></TextInput>
           </View>
@@ -30,7 +30,7 @@ function IconInputBoxAttached(props) {
           <View style={styles.formIconRow}>
             <Icon2 name="euro" style={styles.formIcon}></Icon2>
             <TextInput
-              placeholder="placeholder"
+              placeholder="Price"
               style={styles.placeholder}
             ></TextInput>
           </View>
@@ -41,8 +41,8 @@ function IconInputBoxAttached(props) {
           <View style={styles.formIconRow}>
             <Icon3 name="edit" style={styles.formIcon}></Icon3>
             <TextInput
-              placeholder="placeholder"
-              style={styles.placeholder}
+              placeholder="Brief Description"
+              style={styles.placeholder2}
             ></TextInput>
           </View>
         </View>
@@ -50,9 +50,9 @@ function IconInputBoxAttached(props) {
         {/* AD - extra additions */}
         <View style={styles.inputFieldRow4}>        
           <View style={styles.formIconRow}>
-            <Icon name="map-marker" style={styles.formIcon}></Icon>
+            <Icon4 name="map-marker" style={styles.formIcon}></Icon4>
             <TextInput
-              placeholder="placeholder"
+              placeholder="Item Location"
               style={styles.placeholder}
             ></TextInput>
           </View>
@@ -87,39 +87,38 @@ const styles = StyleSheet.create({
     width: 317,
     height: 44,
     flexDirection: "row",
-    //marginTop: 31,
-    marginTop: 20,
-    marginLeft: 10
+    marginTop: 10, //31
+    marginLeft: 7 //10
   },
   /* AD - extra row stylings*/
   inputFieldRow2: {
     width: 317,
     height: 44,
     flexDirection: "row",
-    marginTop: 31,
-    marginLeft: 10
+    marginTop: 10, //31
+    marginLeft: 7 //10
   },
   /* AD - extra row stylings*/
   inputFieldRow3: {
     width: 317,
-    height: 44,
+    height: 98, //44, 66
     flexDirection: "row",
-    marginTop: 31,
-    marginLeft: 10
+    marginTop: 10, //31
+    marginLeft: 7 //10
   },
   /* AD - extra row stylings*/
   inputFieldRow4: {
     width: 317,
     height: 44,
     flexDirection: "row",
-    marginTop: 31,
-    marginLeft: 10
+    marginTop: 10, //31
+    marginLeft: 7 //10
   },
   formIcon: {
     color: "rgba(128,128,128,1)",
     fontSize: 30,
     height: 30,
-    width: 21
+    width: 25 //21    
   },  
   placeholder: {
     //fontFamily: "roboto-regular",
@@ -130,7 +129,17 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     textAlign: "center",
     marginLeft: 18
-  },
+  }, 
+  placeholder2: {
+    //fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 90, //30, 60
+    width: 249,
+    backgroundColor: "rgba(255,255,255,1)",
+    borderRadius: 15,
+    textAlign: "center",
+    marginLeft: 18
+  }, 
   formIconRow: {
     height: 30,
     flexDirection: "row",
