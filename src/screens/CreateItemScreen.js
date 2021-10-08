@@ -278,10 +278,12 @@ function CreateItemScreen(props) {
       */
       <View style={styles.container}>  
 
-      <View style={styles.centralContainer}>
+      
         <View style={styles.logoContainer}>
             <LogoSmall style={styles.logo}></LogoSmall>
         </View>
+
+        <View style={styles.centralContainer}>
 
       <View style={styles.screen}>
         <Text>{hasMessage}</Text>
@@ -291,12 +293,16 @@ function CreateItemScreen(props) {
         */}
         <Button color='dodgerblue' title='Add new Item' onPress={()=>setVisibility(true)} />
         {/* AD - was originally ListInput */}
+
+        
+     
         <CreatedItemInput 
           visibility={isVisible} 
           onAddItem={onAddItem}
           itemList={items} 
           onCancelItem={cancelAddItem} 
         />
+        
         <FlatList
           keyExtractor={(item) => item.id.toString()} 
           data={items}
@@ -308,7 +314,12 @@ function CreateItemScreen(props) {
             category={itemData.item.category}
             onDelete={()=>onDeleteItem(itemData.item.id)} 
         />}
+
+        
       />
+   
+       
+
       </View>
 
 
@@ -356,7 +367,7 @@ function CreateItemScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center', // AD - added align
+    //alignItems: 'center', // AD - added align
     backgroundColor: colors.light4, // AD - added background
     width:'100%',
     justifyContent:'center',
@@ -365,11 +376,15 @@ const styles = StyleSheet.create({
   },  
 
   logoContainer:{
-    marginTop: 26, //25
+    marginTop: 26, //26
     alignItems: 'center',   
   },
 
-  /*
+  flatListContainer: {
+    width: '90%',
+    backgroundColor: 'green',
+  },
+
   centralContainer: {
     flex: 1,   
     justifyContent: 'center',
@@ -380,7 +395,7 @@ const styles = StyleSheet.create({
 
     margin: Margins.midsize,
   },
-  */
+ 
 
   imageUploader: {
     height: 104,
@@ -423,6 +438,7 @@ const styles = StyleSheet.create({
     //padding: 30, // 60
     height: '100%',
 
+    //alignItems: 'center',
     backgroundColor: 'blue',
   },
   listItem:{
