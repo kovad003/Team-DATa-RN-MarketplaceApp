@@ -9,6 +9,7 @@ export const Paddings={
 };
 
 export const Margins={
+    xxnarrow: 1,
     xnarrow: 5,
     narrow: 10, 
     midsize: 20, 
