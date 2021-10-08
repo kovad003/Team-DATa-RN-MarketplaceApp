@@ -10,7 +10,6 @@ import Logo from "../components/Logo";
 
 
 function HomeScreen(props) {
-
   
   // HH - created to read data from dummy-data
   // const myItemsList = POSTEDITEMS.find(posted => posted.customerId === 'p004');

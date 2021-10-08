@@ -10,7 +10,7 @@ import Icon4 from "react-native-vector-icons/FontAwesome";
 // Added for margins and paddings
 import { Margins, Paddings } from "../constants/constvalues";
 
-function IconInputBoxAttached(props) {
+function CreateItemForm(props) {
   return (
     <View style={[styles.container, props.style]}>
 
@@ -57,8 +57,6 @@ function IconInputBoxAttached(props) {
             ></TextInput>
           </View>
         </View>
-
-
 
       </View>
     </View>
@@ -151,4 +149,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default IconInputBoxAttached;
+export default CreateItemForm;
