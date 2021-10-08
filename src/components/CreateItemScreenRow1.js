@@ -8,11 +8,16 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+import LogoTiny from "../components/LogoTiny";
+
 function CreateItemScreenRow1(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
+       <LogoTiny />
+          {/*
         <Icon name="adduser" style={styles.icon1}></Icon>
+            */}
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
         <Icon name="right" style={styles.icon2}></Icon>        
       </TouchableOpacity>

@@ -284,12 +284,14 @@ function CreateItemScreen(props) {
       */
       <View style={styles.container}>  
 
-      
+        {/* 
         <View style={styles.logoContainer}>
             <LogoTiny style={styles.logo}></LogoTiny>
         </View>
+        */}
 
         <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} />
+ 
         <CreateItemScreenRow2 rowText = "Support" style = {styles.row1}/>
 
         <View style={styles.centralContainer}>
