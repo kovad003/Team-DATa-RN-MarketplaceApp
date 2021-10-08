@@ -15,6 +15,9 @@ import LogoSmall from "../components/LogoSmall";
 import ListCreatedItem from "../components/ListCreatedItem";
 import CreatedItemInput from "../components/CreatedItemInput";
 
+// AD - Component Rows
+import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
+
 function CreateItemScreen(props) {
 
   //
@@ -283,6 +286,7 @@ function CreateItemScreen(props) {
             <LogoSmall style={styles.logo}></LogoSmall>
         </View>
 
+        <CreateItemScreenRow1 />
         <View style={styles.centralContainer}>
 
       <View style={styles.screen}>
