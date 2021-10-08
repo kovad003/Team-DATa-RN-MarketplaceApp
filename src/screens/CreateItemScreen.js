@@ -286,7 +286,9 @@ function CreateItemScreen(props) {
             <LogoSmall style={styles.logo}></LogoSmall>
         </View>
 
-        <CreateItemScreenRow1 />
+        <CreateItemScreenRow1 rowText = "Register" />
+        <CreateItemScreenRow1 rowText = "Register" />
+
         <View style={styles.centralContainer}>
 
       <View style={styles.screen}>
@@ -380,7 +382,7 @@ const styles = StyleSheet.create({
   },  
 
   logoContainer:{
-    marginTop: 26, //26
+    //marginTop: 1, //26
     alignItems: 'center',   
   },
 
@@ -398,6 +400,18 @@ const styles = StyleSheet.create({
     padding: Paddings.midsize,
 
     margin: Margins.midsize,
+  },
+
+  row1: {
+    marginVertical: Margins.large, // xlarge
+  },
+
+  row2: {
+    marginVertical: Margins.xxnarrow, // narrow
+  },
+
+  row3: {
+    marginVertical: Margins.large, // xlarge
   },
  
 
