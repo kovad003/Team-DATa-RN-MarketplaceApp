@@ -1,125 +1,148 @@
-import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
-import Logo from "../components/Logo";
-import IconTextbox from "../components/IconTextbox";
-import AppButton from "../components/AppButton";
-import LinkButton from "../components/LinkButton";
-import {Dimensions} from 'react-native';
-export const {height, width} = Dimensions.get('screen');
-export const Style = {
-  loginpagebgColor: '#333333',
-  textInputbgColor: '#9B9B9B',
-  GamepadButton: '#FFC600',
-};
-
-function LoginScreen(props) {
+import React, {useState} from 'react';
+import {
+  Button,
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Dimensions,
+  SafeAreaView,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+const Home = () => {
   return (
-    <View style={styles.container}>
-      <Logo style={styles.logo}></Logo>
-      <View style={styles.loginContainer}>
-        <IconTextbox
-          inputStyle="Label"
-          inputStyle="Username"
-          style={styles.inputStyle}
-        ></IconTextbox>
-        <IconTextbox
-          inputStyle="Label"
-          iconStyleName="account"
-          inputStyle="Password"
-          iconStyle="eye"
-          style={styles.inputStyle}
-        ></IconTextbox>
-        <AppButton button="Login" style={styles.loginButton}></AppButton>
-        <LinkButton
-          label="Resend Password"
-          style={styles.linkButton}
-        ></LinkButton>
-      </View>
-      <View style={styles.buttonContainer}>
-        <View style={styles.registerButtonRow}>
-          <AppButton
-            button="Register"
-            style={styles.registerButton}
-          ></AppButton>
-          <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
+    <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+      <View
+        style={{
+          paddingHorizontal: 10,
+          paddingVertical: 10,
+          marginVertical: 10,
+          marginHorizontal: 10,
+          backgroundColor: '#fff',
+          borderRadius: 10,
+        }}>
+        <View style={{alignSelf: 'center', marginTop: 50, marginBottom: 50}}>
+          <Text style={{fontSize: 32, fontWeight: 'bold'}}>Login</Text>
+        </View>
+        <View style={{}}>
+          <View style={{marginVertical: 10}}>
+            <Text style={{fontSize: 16, marginBottom: 5}}>Username</Text>
+            <TextInput
+              placeholderTextColor="#bdbdbd"
+              placeholder="Enter your username"
+              style={styles.TextInput}
+            />
+          </View>
+          <View>
+            <Text style={{fontSize: 16, marginBottom: 5}}>Password</Text>
+            <TextInput
+              placeholderTextColor="#bdbdbd"
+              secureTextEntry={true}
+              placeholder="Enter your password"
+              style={styles.TextInput}
+            />
+          </View>
+          <View style={{alignSelf: 'center', width: '100%', marginTop: 50}}>
+              <TouchableOpacity
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#FF4500',
+                  paddingTop: 20,
+                  paddingBottom: 20,
+                  borderRadius: 10,
+                }}>
+                <Text style={{fontSize: 18, color: '#fff'}}>Log in</Text>
+              </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{marginTop: 50}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+            <View>
+                <TouchableOpacity
+                  style={{
+                    paddingLeft: 25,
+                    paddingRight: 25,
+                    paddingTop: 15,
+                    paddingBottom: 15,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#1E90FF',
+                    borderRadius: 10,
+                  }}>
+                  <Text style={{color: '#fff'}}>Register</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+                <TouchableOpacity
+                  style={{
+                    paddingLeft: 25,
+                    paddingRight: 25,
+                    paddingTop: 15,
+                    paddingBottom: 15,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: "#1E90FF",
+                    borderRadius: 10, 
+                  }}>
+                  <Text style={{color: '#fff'}}>Cancel</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <View style={{alignSelf: 'center', marginTop: 50, paddingBottom: 50}}>
+          <View style={{alignSelf: 'center', marginBottom: 20}}>
+            <Text style={{fontSize: 18}}>Or sign in with :</Text>
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+              flexDirection: 'row',
+
+justifyContent: 'space-between',
+            }}>
+            <TouchableOpacity>
+              <Image
+                source={{
+                  uri: 'https://s3-symbol-logo.tradingview.com/facebook--600.png',
+                }}
+                resizeMode="cover"
+                style={{width: 50, height: 50, borderRadius: 50}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={{marginLeft: 10, marginRight: 10}}>
+              <Image
+                source={{
+                  uri: 'https://play-lh.googleusercontent.com/wIf3HtczQDjHzHuu7vezhqNs0zXAG85F7VmP7nhsTxO3OHegrVXlqIh_DWBYi86FTIGk',
+                }}
+                resizeMode="cover"
+                style={{width: 50, height: 50, borderRadius: 50}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                source={{
+                  uri: 'https://www.dexibell.com/app/uploads/2018/05/google-logo.png',
+                }}
+                resizeMode="cover"
+                style={{width: 50, height: 50, borderRadius: 50}}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
   );
-}
-
+};
+export default Home;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "rgba(206,206,206,1)",
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -100
+  view: {height: 60, width: '100%', backgroundColor: 'red'},
+  TextInput: {
+    height: 50,
+    borderBottomColor: '#bdbdbd',
+    borderBottomWidth: 2,
+    fontSize: 18,
   },
-  logo: {
-    width: 172,
-    height: 110,
-    marginTop: 46,
-    marginBottom: 50,
-    alignSelf: "center"
-  },
-  loginContainer: {
-    width: 306,
-    height: 244,
-    backgroundColor: "rgba(206,206,206,1)",
-    borderRadius: 15,
-    marginTop: 29,
-    marginLeft: 25
-  },
-  textboxUsername: {
-    height: 43,
-    width: 240,
-    overflow: "hidden",
-    marginTop: 25,
-    marginLeft: 33
-  },
-  textboxPassword: {
-    height: 43,
-    width: 240,
-    overflow: "hidden",
-    marginTop: 15,
-    marginLeft: 33
-  },
-  loginButton: {
-    height: 36,
-    width: 138,
-    marginTop: 17,
-    marginLeft: 86
-  },
-  linkButton: {
-    height: 38,
-    width: 161,
-    overflow: "hidden",
-    marginTop: 15,
-    marginLeft: 74
-  },
-  buttonContainer: {
-    width: 305,
-    height: 36,
-    flexDirection: "row",
-    marginTop: 13,
-    marginLeft: 26
-  },
-  registerButton: {
-    width: 139,
-    backgroundColor: "rgba(11,129,217,1)"    
-  },
-  cancelButton: {
-    width: 138,
-    backgroundColor: "rgba(11,129,217,1)",
-    marginLeft: 28
-  },
-  registerButtonRow: {
-    height: 36,
-    flexDirection: "row",
-    flex: 1,
-    marginTop: 70
-  }
 });
-
-export default LoginScreen;
