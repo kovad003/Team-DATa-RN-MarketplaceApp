@@ -12,12 +12,14 @@ import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
 import LogoSmall from "../components/LogoSmall";
+import LogoTiny from "../components/LogoTiny";
 import ListCreatedItem from "../components/ListCreatedItem";
 import CreatedItemInput from "../components/CreatedItemInput";
 
 // AD - Component Rows
 import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
 import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
+import CreateItemScreenRow3 from "../components/CreateItemScreenRow3";
 
 function CreateItemScreen(props) {
 
@@ -284,7 +286,7 @@ function CreateItemScreen(props) {
 
       
         <View style={styles.logoContainer}>
-            <LogoSmall style={styles.logo}></LogoSmall>
+            <LogoTiny style={styles.logo}></LogoTiny>
         </View>
 
         <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} />
@@ -299,6 +301,8 @@ function CreateItemScreen(props) {
         <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
         */}
         <Button color='dodgerblue' title='Add new Item' onPress={()=>setVisibility(true)} />
+        
+        
         {/* AD - was originally ListInput */}
 
         
@@ -374,7 +378,7 @@ function CreateItemScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //alignItems: 'center', // AD - added align
+    alignItems: 'center', // AD - added align
     backgroundColor: colors.light4, // AD - added background
     width:'100%',
     //justifyContent:'center',
@@ -398,11 +402,12 @@ const styles = StyleSheet.create({
     width: '90%', 
     //backgroundColor: colors.light4,
     //backgroundColor: 'red',
-    padding: Paddings.narrow,
+    padding: Paddings.midsize,
 
     paddingBottom: Paddings.midsize,
 
-    margin: Margins.midsize,
+    //margin: Margins.midsize,
+    margin: Margins.narrow,
 
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
@@ -507,7 +512,7 @@ container: {},
 /* AD - stylings related to the list functionality */
   screen: {
     marginTop: 10,
-    //padding: 30, // 60
+    padding: 10, // 60
     height: '100%',
 
     //alignItems: 'center',
