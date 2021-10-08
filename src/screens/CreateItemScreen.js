@@ -285,8 +285,10 @@ function CreateItemScreen(props) {
 
       <View style={styles.screen}>
         <Text>{hasMessage}</Text>
+        {/*
         <Button color='grey' title='Fetch from DB' onPress={()=>fetchData()} />
         <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
+        */}
         <Button color='dodgerblue' title='Add new Item' onPress={()=>setVisibility(true)} />
         {/* AD - was originally ListInput */}
         <CreatedItemInput 
@@ -367,6 +369,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',   
   },
 
+  /*
   centralContainer: {
     flex: 1,   
     justifyContent: 'center',
@@ -376,8 +379,8 @@ const styles = StyleSheet.create({
     padding: Paddings.midsize,
 
     margin: Margins.midsize,
-   
   },
+  */
 
   imageUploader: {
     height: 104,
@@ -417,8 +420,10 @@ const styles = StyleSheet.create({
 /* AD - stylings related to the list functionality */
   screen: {
     marginTop: 10,
-    padding: 60,
-    height: '100%'
+    //padding: 30, // 60
+    height: '100%',
+
+    backgroundColor: 'blue',
   },
   listItem:{
     padding: 10,

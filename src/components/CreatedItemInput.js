@@ -82,7 +82,7 @@ const styles=StyleSheet.create({
         borderWidth: 2, 
         borderColor: 'red', 
         padding: 10,
-        width:'80%',
+        width:'80%', // 80%
         marginBottom:10,
       },
       buttonView:{
