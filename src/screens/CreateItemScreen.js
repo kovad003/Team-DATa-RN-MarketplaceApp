@@ -278,6 +278,7 @@ function CreateItemScreen(props) {
       */
       <View style={styles.container}>  
 
+      <View style={styles.centralContainer}>
         <View style={styles.logoContainer}>
             <LogoSmall style={styles.logo}></LogoSmall>
         </View>
@@ -308,7 +309,12 @@ function CreateItemScreen(props) {
       />
       </View>
 
+
       </View>
+
+      </View>
+
+
       /*
       </ScrollView>
       */
@@ -359,6 +365,18 @@ const styles = StyleSheet.create({
   logoContainer:{
     marginTop: 26, //25
     alignItems: 'center',   
+  },
+
+  centralContainer: {
+    flex: 1,   
+    justifyContent: 'center',
+    width: '90%', 
+    //backgroundColor: colors.light4,
+    backgroundColor: 'red',
+    padding: Paddings.midsize,
+
+    margin: Margins.midsize,
+   
   },
 
   imageUploader: {
