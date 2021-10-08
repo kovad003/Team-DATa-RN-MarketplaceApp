@@ -292,7 +292,7 @@ function CreateItemScreen(props) {
 
         <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} />
  
-        <CreateItemScreenRow2 rowText = "Support" style = {styles.row1}/>
+        <CreateItemScreenRow2 rowText = "Support" style = {styles.row2}/>
 
         <View style={styles.centralContainer}>
 
@@ -303,7 +303,7 @@ function CreateItemScreen(props) {
         <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
         */}
         <Button color='dodgerblue' title='Add new Item' onPress={()=>setVisibility(true)} />
-        
+        <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>
         
         {/* AD - was originally ListInput */}
 
@@ -465,6 +465,7 @@ container: {},
 
   row1: {
     marginVertical: Margins.xxnarrow, // xlarge
+    marginTop: 15,
   },
 
   row2: {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import Icon1 from "react-native-vector-icons/Fontisto";
+import Icon2 from "react-native-vector-icons/AntDesign";
 
 // AD - constants
 import TextStyling from '../constants/fontstyling'
@@ -12,9 +13,9 @@ function CreateItemScreenRow2(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
-        <Icon name="adduser" style={styles.icon1}></Icon>
+        <Icon1 name="email" style={styles.icon1}></Icon1>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon name="right" style={styles.icon2}></Icon>        
+        <Icon2 name="right" style={styles.icon2}></Icon2>        
       </TouchableOpacity>
     </View>
   );
