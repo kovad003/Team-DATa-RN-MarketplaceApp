@@ -11,9 +11,9 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-// AD - for testing only (might delete later)
-import ListItem from "../components/ListItem";
-import ItemInput from "../components/ItemInput";
+import LogoSmall from "../components/LogoSmall";
+import ListCreatedItem from "../components/ListCreatedItem";
+import CreatedItemInput from "../components/CreatedItemInput";
 
 function CreateItemScreen(props) {
 
@@ -273,8 +273,14 @@ function CreateItemScreen(props) {
     console.log('else{');
     return (
 
+      /*
       <ScrollView>
+      */
       <View style={styles.container}>  
+
+        <View style={styles.logoContainer}>
+            <LogoSmall style={styles.logo}></LogoSmall>
+        </View>
 
       <View style={styles.screen}>
         <Text>{hasMessage}</Text>
@@ -282,7 +288,7 @@ function CreateItemScreen(props) {
         <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
         <Button color='dodgerblue' title='Add new Item' onPress={()=>setVisibility(true)} />
         {/* AD - was originally ListInput */}
-        <ItemInput 
+        <CreatedItemInput 
           visibility={isVisible} 
           onAddItem={onAddItem}
           itemList={items} 
@@ -292,7 +298,7 @@ function CreateItemScreen(props) {
           keyExtractor={(item) => item.id.toString()} 
           data={items}
           renderItem={itemData => 
-            <ListItem id={itemData.item.id} 
+            <ListCreatedItem id={itemData.item.id} 
             name={itemData.item.name}
             price={itemData.item.price}
             description={itemData.item.description}
@@ -303,7 +309,9 @@ function CreateItemScreen(props) {
       </View>
 
       </View>
+      /*
       </ScrollView>
+      */
     );
   }
 };
@@ -347,6 +355,12 @@ const styles = StyleSheet.create({
 
     marginVertical: Margins.xnarrow,
   },  
+
+  logoContainer:{
+    marginTop: 26, //25
+    alignItems: 'center',   
+  },
+
   imageUploader: {
     height: 104,
     width: 339,

@@ -25,7 +25,7 @@ function AccountScreen(props) {
         <View style={styles.centralContainer}>
    
           <View style={styles.logoContainer}>
-            <LogoSmall style={styles.logo}></LogoSmall>
+            <LogoSmall></LogoSmall>
           </View>
 
           <AccountScreenRow1 rowText = "Register" style = {styles.row1} />

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle} from 'react-native';
 
-const ItemInput=(props)=>{
+const CreatedItemInput=(props)=>{
     const data = "This is data from Child Component to the Parent Component. :)"
     const [name, setName]=useState('');
     const [price, setPrice]=useState(0);
@@ -95,4 +95,4 @@ const styles=StyleSheet.create({
       }
 });
 
-export default ItemInput;
+export default CreatedItemInput;

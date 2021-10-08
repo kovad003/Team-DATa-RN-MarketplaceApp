@@ -2,7 +2,7 @@ import React from 'react';
 
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const ListItem=(props)=>{
+const ListCreatedItem=(props)=>{
     return(
         <TouchableOpacity activeOpacity={0.8} onLongPress={props.onDelete}>
             <View style={styles.listItemStyle}>
@@ -24,4 +24,4 @@ const styles = StyleSheet.create ({
     },
   });
 
-  export default ListItem;
+  export default ListCreatedItem;
