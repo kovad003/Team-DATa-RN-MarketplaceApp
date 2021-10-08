@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle} from 'react-native';
 
+import LogoSmall from "../components/LogoSmall";
+import colors from "../constants/colors";
+
 const CreatedItemInput=(props)=>{
     const data = "This is data from Child Component to the Parent Component. :)"
     const [name, setName]=useState('');
@@ -46,6 +49,9 @@ const CreatedItemInput=(props)=>{
     return (
         <Modal visible={props.visibility} animationType="slide">
             <View style={styles.formStyle}>
+
+                <LogoSmall></LogoSmall>
+
                 <TextInput placeholder="Item's name" 
                     style={styles.inputStyle} 
                     onChangeText={nameInputHandler}/>
@@ -76,7 +82,9 @@ const styles=StyleSheet.create({
         flex:1,
         flexDirection: 'column',
         justifyContent:'center',
-        alignItems:"center"
+        alignItems:"center",
+
+        backgroundColor: colors.light4,
       },
       inputStyle: {
         borderWidth: 2, 

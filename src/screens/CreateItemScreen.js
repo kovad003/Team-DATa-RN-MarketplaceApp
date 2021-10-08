@@ -302,9 +302,12 @@ function CreateItemScreen(props) {
         <Button color='grey' title='Fetch from DB' onPress={()=>fetchData()} />
         <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
         */}
-        <Button color='dodgerblue' title='Add new Item' onPress={()=>setVisibility(true)} />
+         
+        <Button color = '#000080'/* color='dodgerblue' */ title='Add new Item' onPress={()=>setVisibility(true)} />
+        <Text style = {TextStyling.textBlackSmall}>(Scrollable)</Text>
         <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>
         
+
         {/* AD - was originally ListInput */}
 
         
