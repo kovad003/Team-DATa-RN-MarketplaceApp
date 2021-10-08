@@ -53,16 +53,14 @@ function BottomTabsNavigation () {
             <Tab.Screen 
             name="Home" 
             component={HomeStackNavigation} 
+            options={{headerShown: false}}  
             />
             <Tab.Screen 
             name="Categories" 
             component={CategoryStackNavigation} 
             options={{headerShown: false}}  
             />
-            <Tab.Screen 
-            name="Profile" 
-            component={AccountScreen}   
-            />        
+       
             <Tab.Screen 
             name="Search" 
             component={SearchScreen}   
@@ -71,6 +69,10 @@ function BottomTabsNavigation () {
             name="Create Item" 
             component={CreateItemScreen}   
             />
+            <Tab.Screen 
+            name="Profile" 
+            component={AccountScreen}   
+            /> 
         </Tab.Navigator>
     </NavigationContainer>
 
