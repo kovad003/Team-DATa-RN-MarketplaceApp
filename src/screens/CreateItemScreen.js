@@ -17,6 +17,7 @@ import CreatedItemInput from "../components/CreatedItemInput";
 
 // AD - Component Rows
 import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
+import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
 
 function CreateItemScreen(props) {
 
@@ -286,8 +287,8 @@ function CreateItemScreen(props) {
             <LogoSmall style={styles.logo}></LogoSmall>
         </View>
 
-        <CreateItemScreenRow1 rowText = "Register" />
-        <CreateItemScreenRow1 rowText = "Register" />
+        <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} />
+        <CreateItemScreenRow2 rowText = "Support" style = {styles.row1}/>
 
         <View style={styles.centralContainer}>
 
@@ -376,9 +377,9 @@ const styles = StyleSheet.create({
     //alignItems: 'center', // AD - added align
     backgroundColor: colors.light4, // AD - added background
     width:'100%',
-    justifyContent:'center',
+    //justifyContent:'center',
 
-    marginVertical: Margins.xnarrow,
+    //marginVertical: Margins.xnarrow,
   },  
 
   logoContainer:{
@@ -396,14 +397,67 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%', 
     //backgroundColor: colors.light4,
-    backgroundColor: 'red',
-    padding: Paddings.midsize,
+    //backgroundColor: 'red',
+    padding: Paddings.narrow,
+
+    paddingBottom: Paddings.midsize,
 
     margin: Margins.midsize,
+
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    elevation: 5,
+    shadowOpacity: 0.31,
+    shadowRadius: 0,
+    backgroundColor: colors.danger,
+
+/*
+container: {},
+  rowContainer: {    
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    elevation: 5,
+    shadowOpacity: 0.31,
+    shadowRadius: 0,
+    backgroundColor: "#E6E6E6",  
+    height: 53,   
+    
+    justifyContent:'space-between', // center
+    alignItems:'center',
+    flexDirection: 'row',
+    paddingLeft: '9%', // '20%'
+    paddingRight: Paddings.large    
+  },
+*/
+
+
+
   },
 
+  /*
+
+  shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    elevation: 5,
+    shadowOpacity: 0.31,
+    shadowRadius: 0,
+    backgroundColor: colors.danger,
+
+
+
+  */
+
   row1: {
-    marginVertical: Margins.large, // xlarge
+    marginVertical: Margins.xxnarrow, // xlarge
   },
 
   row2: {
@@ -457,7 +511,19 @@ const styles = StyleSheet.create({
     height: '100%',
 
     //alignItems: 'center',
-    backgroundColor: 'blue',
+    //backgroundColor: 'blue',
+
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    elevation: 5,
+    shadowOpacity: 0.31,
+    shadowRadius: 0,
+    backgroundColor: "#E6E6E6",  
+   
+
   },
   listItem:{
     padding: 10,
