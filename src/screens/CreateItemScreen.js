@@ -239,10 +239,10 @@ function CreateItemScreen(props) {
       <View style={styles.container}>  
         <View style={styles.centralContainer}>        
 
-          <MenuRow style = {styles.row1} rowText = "Seller's guide"
-            icon1 = "account-plus-outline"/>
-          <MenuRow style = {styles.row2} rowText = "Support"
-            icon1 = "face-agent" />
+          <MenuRow style = {styles.row1} rowText = "Seller's Guide"
+            icon1 = "book-open-page-variant"/>
+          <MenuRow style = {styles.row2} rowText = "Notifications"
+            icon1 = "bell-ring-outline" />
           
 
           <View style={styles.logoContainer}>
@@ -252,27 +252,25 @@ function CreateItemScreen(props) {
           <MenuRow style = {styles.row1} 
             bckgcol = {colors.darkBlueCustom} 
             rowText = "Post New Item"
-            icon1 = "delete-forever"
-            icon2 = "alert-octagon"
+            icon1 = "tag-plus-outline"
+            //icon2 = "plus"
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
             icon2color = "white"  />
           <MenuRow style = {styles.row2} 
             bckgcol = {colors.darkGreenCustom} 
             rowText = "My Posted Items"
-            icon1 = "delete-forever"
-            icon2 = "alert-octagon"
+            icon1 = "pin-outline"
+            //icon2 = "alert-octagon"
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
             icon2color = "white"  />
-          
-
           <MenuRow style = {styles.row2} rowText = "My Watchlist"
-            icon1 = "cog-outline" />
-          <MenuRow style = {styles.row2} rowText = "Premium"
-            icon1 = "crown" />          
-          <MenuRow style = {styles.row3} rowText = "Support"
-          icon1 = "face-agent" />
+            icon1 = "eye-outline" />
+          <MenuRow style = {styles.row2} rowText = "My Purchases"
+            icon1 = "shopping-outline" />          
+          <MenuRow style = {styles.row3} rowText = "Trending"
+          icon1 = "trending-up" />
         </View>
       </View>
     </ScrollView>   
@@ -525,11 +523,6 @@ const styles = StyleSheet.create({
   row1: {
     marginTop: 17,
     marginBottom: Margins.xxnarrow,
-  },
-
-  row1a: {
-    marginTop: Margins.xxnarrow,
-    marginBottom: Margins.large,
   },
 
   row2: {
