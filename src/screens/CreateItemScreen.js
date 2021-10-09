@@ -147,21 +147,7 @@ function CreateItemScreen(props) {
         category: "update" 
       })
     };
-/* 
-    let requestOptions = {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({
-        id: idParam*1, // *1 -> numbers only
-        name: nameParam.toString(), 
-        price: priceParam*1, // *1 -> numbers only
-        description: descrParam.toString(), 
-        category: categoryParam.toString() 
-      })
-    };
- */
+
     try {
       response = await fetch("http://10.0.2.2:8080/rest/itemservice/updatejsonitem", requestOptions)
     } catch (error) {
@@ -204,38 +190,6 @@ function CreateItemScreen(props) {
     }
   }
 
-  //Delivers URI @PathParam
-/*   async function deleteData(idParam) {
-    console.log('async function deleteData() {');
-    let response = null;
-    let requestOptions = {
-        method: 'DELETE',
-        headers: { 
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': '',
-            'My-Custom-Header': 'id'
-        }
-    };
-    try {
-      response = await fetch('http://10.0.2.2:8080/rest/itemservice/deleteitem/' + idParam, requestOptions)
-    } catch (error) {
-      showError(error);
-    }   
-    try {
-      let responseData = await response.json();
-      showConfirmation("Item was successfully removed!")
-      console.log('responseData: ' + responseData); // JAVA Service method returnes a boolean
-      if (responseData == false){
-        var error = 'Removal was not verified! Please check DB.';
-        console.log(error);
-        showError(error); 
-      }
-    } catch (error) {
-      showError(error);
-    }
-  } */
-
-
 /*   
   This is called every time the view is rendered
   The new calls of fetchData (and others) must be stopped somehow, because in
@@ -271,7 +225,10 @@ function CreateItemScreen(props) {
         <Text>{hasMessage}</Text>
         <Text>{""+messageDisplayed}</Text>
         <ItemSuccessfullyAdded />
-        <Button color = '#000080' title='close' onPress={()=>closeMessage()}/>
+        <Button 
+        color = '#000080' 
+        title='close' 
+        onPress={()=>closeMessage()}/>
       </View>
 
       </View>
@@ -435,48 +392,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.31,
     shadowRadius: 0,
     backgroundColor: colors.danger,
-
-/*
-container: {},
-  rowContainer: {    
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: "#E6E6E6",  
-    height: 53,   
-    
-    justifyContent:'space-between', // center
-    alignItems:'center',
-    flexDirection: 'row',
-    paddingLeft: '9%', // '20%'
-    paddingRight: Paddings.large    
   },
-*/
-
-
-
-  },
-
-  /*
-
-  shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: colors.danger,
-
-
-
-  */
 
   row1: {
     marginVertical: Margins.xxnarrow, // xlarge

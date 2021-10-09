@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
     alignItems:'center',
     flexDirection: 'row',
     paddingLeft: '9%', // '20%'
-    paddingRight: Paddings.large,  
+    paddingRight: Paddings.large,  //large
+
+   
   },
 
   icon1: {

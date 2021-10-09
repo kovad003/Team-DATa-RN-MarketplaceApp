@@ -13,12 +13,12 @@ import colors from "../constants/colors";
 function ItemSuccessfullyAdded(props) {
   return (
     <View style={[styles.container, props.style]}>  
-      <TouchableOpacity style={styles.rowContainer}>
+      <View style={styles.rowContainer}>
         <Icon1 name="pushpino" style={styles.icon1}></Icon1>
         <Icon2 name="sticker-emoji" style={styles.icon2}></Icon2>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
         <Icon3 name="right" style={styles.icon3}></Icon3>        
-      </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: '9%', // '20%'
     paddingRight: Paddings.large,  
+
+    marginHorizontal: Margins.xxnarrow,
   },
 
   icon1: {
