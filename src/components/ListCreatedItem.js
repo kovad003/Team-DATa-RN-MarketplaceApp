@@ -22,22 +22,7 @@ const styles = StyleSheet.create ({
       padding: 5,       
       marginVertical:5,
 
-      backgroundColor:"#f0f8ff", // #abc
-      //backgroundColor:"#f0f8ff", // #abc
-      //backgroundColor:"#f0f8ff", // #abc
-      //opacity: 0.50, // AD - added for effect
-      
-      /* 
-      shadowColor: "rgba(0,0,0,1)",
-      shadowOffset: {
-      width: 3,
-      height: 3
-      },
-      elevation: 5,
-      shadowOpacity: 0.31,
-      shadowRadius: 0,
-      */
-
+      backgroundColor:"#f0f8ff", // #abc 
      },
 
   });

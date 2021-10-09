@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle} from 'react-native';
+import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text} from 'react-native';
 
-import LogoSmall from "../components/LogoSmall";
+import LogoSmall from "./LogoSmall";
 import colors from "../constants/colors";
 
 import Icon1 from "react-native-vector-icons/FontAwesome";
@@ -10,8 +10,9 @@ import Icon3 from "react-native-vector-icons/Entypo";
 import Icon4 from "react-native-vector-icons/MaterialIcons";
 
 import { Margins, Paddings } from "../constants/constvalues";
+import { ScrollView } from 'react-native-gesture-handler';
 
-const CreatedItemInput=(props)=>{
+const CreateItemInput=(props)=>{
     const data = "This is data from Child Component to the Parent Component. :)"
     const [name, setName]=useState('');
     const [price, setPrice]=useState(0);
@@ -61,6 +62,7 @@ const CreatedItemInput=(props)=>{
                 <LogoSmall></LogoSmall>
                 </View>
 
+                <Text>Item Name</Text>
                 <View style={styles.itemNameRow}>
                 <Icon1 name="tag" style={styles.iconStyling}></Icon1>
                 <TextInput placeholder="Item's name" 
@@ -68,20 +70,25 @@ const CreatedItemInput=(props)=>{
                     onChangeText={nameInputHandler}/>
                 </View>
 
+                <Text>Price</Text>
                 <View style={styles.itemNameRow}>
-                <Icon2 name="euro-sign" style={styles.iconStyling2}></Icon2>    
+                <Icon2 name="euro-sign" style={styles.iconStyling2}></Icon2>  
+                
                 <TextInput placeholder="Item's price" 
                     style={styles.inputStyle} 
                     onChangeText={priceInputHandler}/>
+                  
                 </View>
 
-                <View style={styles.itemNameRow}>
+                <Text>Description</Text>
+                <View style={styles.itemNameRow}>               
                 <Icon3 name="edit" style={styles.iconStyling3}></Icon3>    
-                <TextInput placeholder="Item's description" 
+                <TextInput placeholder="Item's description"                
                     style={styles.inputStyle2} 
-                    onChangeText={descriptionInputHandler}/>
+                    onChangeText={descriptionInputHandler}/>               
                 </View>
-
+                 
+                <Text>Category</Text>
                 <View style={styles.itemNameRow}>
                 <Icon4 name="category" style={styles.iconStyling}></Icon4> 
                 <TextInput placeholder="Item's category" 
@@ -122,6 +129,8 @@ const styles=StyleSheet.create({
         padding: 10,
         width:'85%', // 80%
         marginBottom:10,
+
+        backgroundColor: 'white',
                
       },
 
@@ -134,6 +143,8 @@ const styles=StyleSheet.create({
         marginBottom:10,
 
         height: 100,
+
+        backgroundColor: 'white',
       },
 
       itemNameRow: {
@@ -191,4 +202,4 @@ const styles=StyleSheet.create({
       },
 });
 
-export default CreatedItemInput;
+export default CreateItemInput;

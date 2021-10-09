@@ -14,7 +14,7 @@ import colors from "../constants/colors";
 import LogoSmall from "../components/LogoSmall";
 import LogoTiny from "../components/LogoTiny";
 import ListCreatedItem from "../components/ListCreatedItem";
-import CreatedItemInput from "../components/CreatedItemInput";
+import CreateItemInput from "../components/CreateItemInput";
 
 // AD - Component Rows
 import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
@@ -264,7 +264,7 @@ function CreateItemScreen(props) {
         <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
         */}
          
-        <Button color = '#000080'/* color='dodgerblue' */ title='Add new Item' onPress={()=>setVisibility(true)} />
+        <Button color = '#000080'/* color='dodgerblue' */ title='Post new Item' onPress={()=>setVisibility(true)} />
         <Text style = {TextStyling.textBlackSmall}>(Scrollable)</Text>
         <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>
         
@@ -273,7 +273,7 @@ function CreateItemScreen(props) {
 
         
      
-        <CreatedItemInput 
+        <CreateItemInput 
           visibility={isVisible} 
           onAddItem={onAddItem}
           itemList={items} 
