@@ -29,12 +29,12 @@ const styles = StyleSheet.create({
     top: 0, //
     left: 31, // 31
     width: 90, // 110
-    height: 90, // 110
+    height: 75, // 110
     position: "absolute"
   },
   logoHolderStack: {
     width: 152, // 172
-    height: 80 // 110
+    height: 70 // 110
   }
 });
 
