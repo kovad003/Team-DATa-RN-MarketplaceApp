@@ -29,12 +29,12 @@ function BottomTabsNavigation () {
         tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
-        if (route.name === 'Home') {
+        if (route.name === 'HomeStack') {
             iconName = focused
             ? 'home' : 'home';
         } else if (route.name === 'Create Item') {
             iconName = focused ? 'plus-circle' : 'plus-circle';
-        } else if (route.name === 'Categories') {
+        } else if (route.name === 'CategoriesStack') {
             iconName = focused ? 'shape' : 'shape';
         }else if (route.name === 'Search') {
             iconName = focused ? 'magnify' : 'magnify';
@@ -51,12 +51,12 @@ function BottomTabsNavigation () {
       >
         
             <Tab.Screen 
-            name="Home" 
+            name="HomeStack" 
             component={HomeStackNavigation} 
             options={{headerShown: false}}  
             />
             <Tab.Screen 
-            name="Categories" 
+            name="CategoriesStack" 
             component={CategoryStackNavigation} 
             options={{headerShown: false}}  
             />

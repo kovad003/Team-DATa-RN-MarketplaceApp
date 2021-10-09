@@ -1,5 +1,5 @@
 class Category {
-    constructor(id, title, color, imageUrl){
+    constructor(id, title, color, description, imageUrl){
         this.id = id;
         this.title = title;
         this.color = color;
