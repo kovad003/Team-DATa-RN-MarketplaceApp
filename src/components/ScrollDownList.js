@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     marginVertical: 1,
     marginHorizontal: 0,
+    height: 50,
+    justifyContent: 'center',
     // ------------------------------
     //android shadows
     elevation: 3,
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   label:{
-    fontFamily: 'caballar',
+    //fontFamily: 'caballar',
     fontSize: 22,
     color: 'black'
   },

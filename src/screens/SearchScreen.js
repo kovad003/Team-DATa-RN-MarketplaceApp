@@ -42,28 +42,27 @@ function SearchScreen(props) {
 
   return (
     <View style={styles.container}>
-
-      <View style={styles.searchBar}>
-        <SearchBar style={styles.searchBar}/>
+      <View >
+        <SearchBar/>
       </View>
         <View>
           {/* ---------------------------------------------------------------------------- */}
-          <View style={styles.categoriesContainer}>
+          <View>
             <Text style={styles.fontTitle}>Categories:</Text>
-
+            <ScrollDownList label="Set Category..."/>
             {/* <ScrollView horizontal={false}>
               {categoryList.map((category)=>
                 <SwitchFilter label={category.name}></SwitchFilter>)}
             </ScrollView> */}
-            <SwitchFilter label='All' value='true'/>
-            <FlatList //FlatList shouldnt be used with ScrollView
+            {/* <SwitchFilter label='All' value='true'/> */}
+            {/* <FlatList //FlatList shouldnt be used with ScrollView
                 keyExtractor={item=>item.id}
                 data={categoryList}
                 renderItem={itemData => <SwitchFilter label={itemData.item.name}/>}
-            />
+            /> */}   
           </View>
           {/* ---------------------------------------------------------------------------- */}
-          <View style={styles.locationContainer}>
+          <View>
             <Text style={styles.fontTitle}>Location:</Text>
             <ScrollDownList label="Set Location..."/>
             <ScrollDownList label="Set Radius..."/>
@@ -71,8 +70,9 @@ function SearchScreen(props) {
           {/* ---------------------------------------------------------------------------- */}
           <View>
             <Text style={styles.fontTitle}>Price:</Text>
-            <PriceSetter label='Min: €'/>
-            <PriceSetter label='Max: €'/>
+            <ScrollDownList label="Set Price..."/>
+            {/* <PriceSetter label='Min: €'/>
+            <PriceSetter label='Max: €'/> */}
           </View>
           {/* ---------------------------------------------------------------------------- */}
         </View>    
@@ -81,33 +81,18 @@ function SearchScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    
-  },
   container: {
     flex: 1,
     // backgroundColor: colors.light3,
     backgroundColor: '#f5eeeb',
     // backgroundColor: '#e7ecf2'
   },
-  categoriesContainer: {
-    height: 215,
-  },
-  searchBar: {
-    height: 90,
-    //flex: 0.15,
-    // backgroundColor set in then component file
-  },
   fontTitle: {
     marginLeft: 5,
     marginTop: 15,
-    fontFamily: 'cake-n-truffles',
+    //fontFamily: 'cake-n-truffles',
     fontSize: 26,
-    // fontWeight: '900',
     color: '#2d3553',
-    //fontStyle:'italic',
-    
-
   }
 });
 
