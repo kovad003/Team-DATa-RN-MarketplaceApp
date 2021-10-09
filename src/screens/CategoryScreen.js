@@ -9,6 +9,8 @@ import HeaderComponent from "../components/HeaderComponent";
 import CategoryButton from "../components/CategoryButton";
 import { CATEGORIES } from "../data/dummy-data";
 import ListItemsScreen from '../screens/ListItemsScreen'
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
 
 function CategoryScreen(props) {
 
@@ -146,11 +148,12 @@ const styles = StyleSheet.create({
     flex:1,
     width:'100%',
     justifyContent:'center',
+    backgroundColor:colors.light4,
 
   },
   scrollArea: {
     flex:1,
-    height:'90%',
+    height:'100%',
     width: '100%',
     justifyContent:'center',
     alignItems:'center',
