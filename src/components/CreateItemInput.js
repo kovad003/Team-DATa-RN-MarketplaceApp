@@ -137,6 +137,7 @@ const styles=StyleSheet.create({
         marginBottom:10,
 
         backgroundColor: 'white',
+        color: '#000080',
 
         marginRight: Margins.midsize,
                
@@ -151,6 +152,7 @@ const styles=StyleSheet.create({
         height: 100,
         backgroundColor: 'white',
 
+        color: '#000080',
         marginRight: Margins.midsize,
       },
 
