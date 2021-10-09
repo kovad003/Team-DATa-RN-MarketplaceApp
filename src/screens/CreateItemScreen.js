@@ -266,6 +266,7 @@ function CreateItemScreen(props) {
       <ScrollView>
       <View style={styles.container}>  
 
+      <LogoSmall style={styles.logoItemModal}/>
       <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
         <Text>{hasMessage}</Text>
         <Text>{""+messageDisplayed}</Text>
@@ -397,6 +398,10 @@ const styles = StyleSheet.create({
   logoContainer:{
     //marginTop: 1, //26
     alignItems: 'center',   
+  },
+
+  logoItemModal: {
+    marginTop: Margins.xlarge,
   },
 
   flatListContainer: {
