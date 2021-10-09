@@ -15,9 +15,9 @@ function ItemSuccessfullyAdded(props) {
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
         <Icon1 name="pushpino" style={styles.icon1}></Icon1>
-        <Icon2 name="sticker-emoji" style={styles.icon1}></Icon2>
+        <Icon2 name="sticker-emoji" style={styles.icon2}></Icon2>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon3 name="right" style={styles.icon2}></Icon3>        
+        <Icon3 name="right" style={styles.icon3}></Icon3>        
       </TouchableOpacity>
     </View>
   );
@@ -53,6 +53,15 @@ const styles = StyleSheet.create({
   },
 
   icon2: {
+    color: colors.danger,
+    fontSize: 30,
+    justifyContent:'center',
+    alignItems:'center',
+    paddingLeft: '11%',
+    paddingTop: '1%',
+  },
+
+  icon3: {
     color: "rgba(128,128,128,1)",
     fontSize: 30,
     justifyContent:'center',
