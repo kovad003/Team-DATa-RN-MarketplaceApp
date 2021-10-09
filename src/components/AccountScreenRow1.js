@@ -11,10 +11,18 @@ import colors from "../constants/colors";
 function AccountScreenRow1(props) {
   return (
     <View style={props.style}>  
-      <TouchableOpacity style={[styles.rowContainer, {backgroundColor: props.bckgcol || "#E6E6E6"}]}>
-        <Icon name={props.icon1} style={styles.icon1}></Icon>
-        <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon name={props.icon2 || "chevron-right"} style={styles.icon2}></Icon>        
+      <TouchableOpacity 
+        style={[styles.rowContainer, {backgroundColor: props.bckgcol || "#E6E6E6"}]}>
+        <Icon 
+          name={props.icon1 || "chevron-left"} 
+          style={[styles.icon1, {color: props.icon1color || colors.danger}]}
+        />
+        <Text 
+          style={props.textstyling || TextStyling.textBlackMedium}>{props.rowText}
+        </Text>
+        <Icon 
+          name={props.icon2 || "chevron-right"} style={[styles.icon2, {color: props.icon2color || "#808080"}]}
+        />      
       </TouchableOpacity>
     </View>
   );
@@ -50,8 +58,8 @@ const styles = StyleSheet.create({
   },
 
   icon2: {
-    color: "rgba(128,128,128,1)",
-    fontSize: 40,
+    color: "#808080",
+    fontSize: 30,
     justifyContent:'center',
     alignItems:'center'
   },
