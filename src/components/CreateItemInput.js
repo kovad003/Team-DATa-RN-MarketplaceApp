@@ -90,7 +90,7 @@ const CreateItemInput=(props)=>{
                  
                 <Text>Category</Text>
                 <View style={styles.itemNameRow}>
-                <Icon4 name="category" style={styles.iconStyling}></Icon4> 
+                <Icon4 name="category" style={styles.iconStyling4}></Icon4> 
                 <TextInput placeholder="Item's category" 
                     style={styles.inputStyle} 
                     onChangeText={categoryInputHandler}/>
@@ -115,7 +115,6 @@ const styles=StyleSheet.create({
         flexDirection: 'column',
         justifyContent:'center',
         alignItems:"center",
-
         backgroundColor: colors.light4,
         paddingHorizontal: 10,
       },
@@ -124,10 +123,9 @@ const styles=StyleSheet.create({
       },
       inputStyle: {
         borderWidth: 2, 
-        //borderColor: 'red', 
         borderColor: '#000080', 
         padding: 10,
-        width:'85%', // 80%
+        width:'85%',
         marginBottom:10,
 
         backgroundColor: 'white',
@@ -136,21 +134,17 @@ const styles=StyleSheet.create({
 
       inputStyle2: {
         borderWidth: 2, 
-        //borderColor: 'red', 
         borderColor: '#000080', 
         padding: 10,
         width:'85%', // 80%
         marginBottom:10,
-
         height: 100,
-
         backgroundColor: 'white',
       },
 
       itemNameRow: {
         flexDirection: 'row',
         justifyContent: 'center',
-
       },
 
       buttonView:{
@@ -166,21 +160,18 @@ const styles=StyleSheet.create({
       },
 
       iconStyling: {
-        //color: "rgba(128,128,128,1)",
-        //color: colors.danger,
-        color: '#000080',
         fontSize: 30,
         justifyContent:'center',
         alignItems:'center',
       
         paddingRight: Paddings.narrow,
         paddingTop: Paddings.narrow,
+
+        color: colors.danger,
       },
 
       iconStyling2: {
-        //color: "rgba(128,128,128,1)",
-        color: colors.danger,
-        //color: '#000080',
+        color: '#000080',
         fontSize: 30,
         justifyContent:'center',
         alignItems:'center',
@@ -190,8 +181,6 @@ const styles=StyleSheet.create({
       },
 
       iconStyling3: {
-        //color: "rgba(128,128,128,1)",
-        //color: colors.danger,
         color: '#000080',
         fontSize: 30,
         justifyContent:'center',
@@ -199,6 +188,16 @@ const styles=StyleSheet.create({
       
         paddingRight: Paddings.narrow,
         paddingTop: 37,
+      },
+
+      iconStyling4: {
+        color: '#000080',
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',
+      
+        paddingRight: Paddings.narrow,
+        paddingTop: Paddings.narrow,
       },
 });
 
