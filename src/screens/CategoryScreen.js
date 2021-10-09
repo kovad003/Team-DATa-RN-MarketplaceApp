@@ -7,7 +7,7 @@ import 'react-native-gesture-handler';
 
 import HeaderComponent from "../components/HeaderComponent";
 import CategoryButton from "../components/CategoryButton";
-import { CATEGORIES } from "../data/dummy-data";
+//import { CATEGORIES } from "../data/dummy-data"; // dummy-data
 import ListItemsScreen from '../screens/ListItemsScreen'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
