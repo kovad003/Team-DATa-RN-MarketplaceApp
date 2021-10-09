@@ -234,23 +234,10 @@ function CreateItemScreen(props) {
     console.log('else{');
     return (
 
-      /*
-      <ScrollView>
-      */
-      <View style={styles.container}>  
-
-        {/* 
-        <View style={styles.logoContainer}>
-            <LogoTiny style={styles.logo}></LogoTiny>
-        </View>
-        */}
-
-        <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} />
- 
+      <View style={styles.container}> 
+        <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} /> 
         <CreateItemScreenRow2 rowText = "Support" style = {styles.row2}/>
-
         <View style={styles.centralContainer}>
-
       <View style={styles.screen}>
         <Text>{hasMessage}</Text>
         {/*
@@ -260,20 +247,14 @@ function CreateItemScreen(props) {
          
         <Button color = '#000080'/* color='dodgerblue' */ title='Post new Item' onPress={()=>setVisibility(true)} />
         <Text style = {TextStyling.textBlackSmall}>(Scrollable)</Text>
-        <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>
-        
-
-        {/* AD - was originally ListInput */}
-
-        
+        <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>    
      
         <CreateItemInput 
           visibility={isVisible} 
           onAddItem={onAddItem}
           itemList={items} 
           onCancelItem={cancelAddItem} 
-        />
-        
+        />        
         <FlatList
           keyExtractor={(item) => item.id.toString()} 
           data={items}
@@ -284,24 +265,11 @@ function CreateItemScreen(props) {
             description={itemData.item.description}
             category={itemData.item.category}
             onDelete={()=>onDeleteItem(itemData.item.id)} 
-        />}
-
-        
+        />}        
       />
-   
-       
-
       </View>
-
-
       </View>
-
-      </View>
-
-
-      /*
-      </ScrollView>
-      */
+      </View>   
     );
   }
 };
@@ -313,24 +281,33 @@ function CreateItemScreen(props) {
 
   /* AD - original 
 
-  return (
-    
-      <ScrollView>
-      <View style={styles.container}>     
-        <ImageUploader style={styles.imageUploader}></ImageUploader> 
-          <CreateItemForm
-            style={styles.CreateItemForm}>
-          </CreateItemForm>     
-        <View style={styles.buttonContainer}>
-          <AppButton button="Upload" style={styles.uploadButton}></AppButton>
-          <AppButton button="Cancel" style={styles.cancelButton}></AppButton>
+<ScrollView style={styles.scrollStyle}>
+      <View style={styles.container}>  
+        <View style={styles.centralContainer}>
+   
+          <View style={styles.logoContainer}>
+            <LogoSmall></LogoSmall>
+          </View>
+
+          <MenuRow style = {styles.row1} rowText = "Register"
+            icon1 = "account-plus-outline"/>
+          <MenuRow style = {styles.row2} rowText = "Login"
+            icon1 = "login" />
+          <MenuRow style = {styles.row2} rowText = "Settings"
+            icon1 = "cog-outline" />
+          <MenuRow style = {styles.row2} rowText = "Premium"
+            icon1 = "crown" />
+          <MenuRow style = {styles.row2} rowText = "Support"
+            icon1 = "face-agent" />
+          <MenuRow style = {styles.row3} bckgcol = {colors.danger}    rowText = "Delete Account"
+            icon1 = "delete-forever"
+            icon2 = "alert-octagon"
+            textstyling = {TextStyling.textWhiteMedium}
+            icon1color = "white"
+            icon2color = "white"  />        
         </View>
-      
       </View>
-      </ScrollView>
-        
-  );
-}
+    </ScrollView>        
 
 */
 
