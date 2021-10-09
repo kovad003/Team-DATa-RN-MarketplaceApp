@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
-import HeaderComponent from "../components/HeaderComponent";
-import ImageUploader from "../components/ImageUploader";
-import CreateItemForm from "../components/CreateItemForm";
+
 import AccountScreenRow1 from "../components/AccountScreenRow1";
-import AccountScreenRow2 from "../components/AccountScreenRow2";
-import AccountScreenRow3 from "../components/AccountScreenRow3";
-import AccountScreenRow4 from "../components/AccountScreenRow4";
-import AccountScreenRow5 from "../components/AccountScreenRow5";
-import AccountScreenRow6 from "../components/AccountScreenRow6";
-import AppButton from "../components/AppButton";
 import LogoSmall from "../components/LogoSmall";
 
 // AD - constants

@@ -1,10 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
-import HeaderComponent from "../components/HeaderComponent";
-import ImageUploader from "../components/ImageUploader";
-import CreateItemForm from "../components/CreateItemForm";
-import AppButton from "../components/AppButton";
 
 // AD - constants
 import TextStyling from '../constants/fontstyling'
@@ -12,14 +8,12 @@ import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
 import LogoSmall from "../components/LogoSmall";
-import LogoTiny from "../components/LogoTiny";
 import ListCreatedItem from "../components/ListCreatedItem";
 import CreateItemInput from "../components/CreateItemInput";
 
 // AD - Component Rows
 import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
 import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
-import AccountScreenRow1 from "../components/AccountScreenRow1";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 
 
