@@ -270,6 +270,10 @@ function CreateItemScreen(props) {
           <Button title = "ok" onPress={()=>setVisibility(true)} />
           */}
  
+
+
+
+
           <Text 
             text = 'submit'
             style = {TextStyling.textBlackSmall}
@@ -281,6 +285,9 @@ function CreateItemScreen(props) {
             style = {TextStyling.textBlackSmall}
             onPress={()=>setflatListVisibility(true)} >
             Press Me FlatList</Text>
+
+
+            
 
           <MenuRow 
             style = {styles.row1} 
