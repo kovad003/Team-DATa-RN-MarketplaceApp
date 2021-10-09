@@ -17,6 +17,7 @@ import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import MyPostedItems from "../components/MyPostedItems";
 
 
 function CreateItemScreen(props) {
@@ -33,6 +34,8 @@ function CreateItemScreen(props) {
   const [isLoading, setLoading] = useState(true);
   const [isVisible, setVisibility] = useState(false);
 
+  const [isflatListVisible, setflatListVisibility] = useState(false);
+
   // Custom Functions ****************************************************************************************
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
@@ -47,6 +50,11 @@ function CreateItemScreen(props) {
 
   const cancelAddItem=()=>{
     setVisibility(false);
+    setLoading(false);
+  }
+
+  const cancelAddItem2=()=>{
+    setflatListVisibility(false);
     setLoading(false);
   }
 
@@ -271,7 +279,7 @@ function CreateItemScreen(props) {
             <Text 
             text = 'submit'
             style = {TextStyling.textBlackSmall}
-            onPress={()=>setVisibility(true)} >
+            onPress={()=>setflatListVisibility(true)} >
             Press Me FlatList</Text>
 
           <MenuRow 
@@ -306,7 +314,16 @@ function CreateItemScreen(props) {
           onAddItem={onAddItem}
           itemList={items} 
           onCancelItem={cancelAddItem} 
-          />  
+          /> 
+
+          {/* AD - For the hidden modal view */}
+        
+        <MyPostedItems 
+          visibility={isflatListVisible} 
+          onAddItem={onAddItem}
+          itemList={items} 
+          onCancelItem={cancelAddItem2} 
+          /> 
           
 
         </View>
