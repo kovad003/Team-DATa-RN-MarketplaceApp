@@ -19,6 +19,8 @@ import CreatedItemInput from "../components/CreatedItemInput";
 // AD - Component Rows
 import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
 import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
+import AccountScreenRow1 from "../components/AccountScreenRow1";
+import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 
 
 function CreateItemScreen(props) {
@@ -267,7 +269,8 @@ function CreateItemScreen(props) {
       <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
         <Text>{hasMessage}</Text>
         <Text>{""+messageDisplayed}</Text>
-        <Button title='close' onPress={()=>closeMessage()}/>
+        <ItemSuccessfullyAdded />
+        <Button color = '#000080' title='close' onPress={()=>closeMessage()}/>
       </View>
 
       </View>
