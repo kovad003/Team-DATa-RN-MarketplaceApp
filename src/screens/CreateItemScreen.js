@@ -263,7 +263,7 @@ function CreateItemScreen(props) {
     console.log('else if(hasError){');
     return(
 
-      <ScrollView>
+      <ScrollView style={styles.scrollViewCustom}>
       <View style={styles.container}>  
 
       <LogoSmall style={styles.logoItemModal}/>
@@ -398,6 +398,10 @@ const styles = StyleSheet.create({
   logoContainer:{
     //marginTop: 1, //26
     alignItems: 'center',   
+  },
+
+  scrollViewCustom: {
+    backgroundColor: colors.light4, // AD - added background
   },
 
   logoItemModal: {
