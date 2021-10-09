@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
-import HeaderComponent from "../components/HeaderComponent";
-import ImageUploader from "../components/ImageUploader";
-import CreateItemForm from "../components/CreateItemForm";
-import AccountScreenRow1 from "../components/AccountScreenRow1";
-import AccountScreenRow2 from "../components/AccountScreenRow2";
-import AccountScreenRow3 from "../components/AccountScreenRow3";
-import AccountScreenRow4 from "../components/AccountScreenRow4";
-import AccountScreenRow5 from "../components/AccountScreenRow5";
-import AccountScreenRow6 from "../components/AccountScreenRow6";
-import AppButton from "../components/AppButton";
+
+import MenuRow from "../components/MenuRow";
 import LogoSmall from "../components/LogoSmall";
 
 // AD - constants
@@ -28,15 +20,22 @@ function AccountScreen(props) {
             <LogoSmall></LogoSmall>
           </View>
 
-          <AccountScreenRow1 rowText = "Register" style = {styles.row1} />
-          <AccountScreenRow2 rowText = "Login" style = {styles.row2} />
-          <AccountScreenRow3 rowText = "Settings" style = {styles.row2} />
-          <AccountScreenRow4 rowText = "Premium" style = {styles.row2} />
-          <AccountScreenRow5 rowText = "Support" style = {styles.row2} />
-          <AccountScreenRow6 
-                rowText = "Delete Account" 
-                style = {styles.row3} 
-                />          
+          <MenuRow style = {styles.row1} rowText = "Register"
+            icon1 = "account-plus-outline"/>
+          <MenuRow style = {styles.row2} rowText = "Login"
+            icon1 = "login" />
+          <MenuRow style = {styles.row2} rowText = "Settings"
+            icon1 = "cog-outline" />
+          <MenuRow style = {styles.row2} rowText = "Premium"
+            icon1 = "crown" />
+          <MenuRow style = {styles.row2} rowText = "Support"
+            icon1 = "face-agent" />
+          <MenuRow style = {styles.row3} bckgcol = {colors.danger}    rowText = "Delete Account"
+            icon1 = "delete-forever"
+            icon2 = "alert-octagon"
+            textstyling = {TextStyling.textWhiteMedium}
+            icon1color = "white"
+            icon2color = "white"  />        
         </View>
       </View>
     </ScrollView>        
