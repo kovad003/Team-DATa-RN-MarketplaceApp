@@ -28,15 +28,20 @@ function AccountScreen(props) {
             <LogoSmall></LogoSmall>
           </View>
 
-          <AccountScreenRow1 rowText = "Register" style = {styles.row1} />
-          <AccountScreenRow2 rowText = "Login" style = {styles.row2} />
-          <AccountScreenRow3 rowText = "Settings" style = {styles.row2} />
-          <AccountScreenRow4 rowText = "Premium" style = {styles.row2} />
-          <AccountScreenRow5 rowText = "Support" style = {styles.row2} />
-          <AccountScreenRow6 
-                rowText = "Delete Account" 
-                style = {styles.row3} 
-                />          
+          <AccountScreenRow1 style = {styles.row1} rowText = "Register"
+            
+            icon1 = "account-plus-outline"/>
+          <AccountScreenRow1 style = {styles.row2} rowText = "Login"
+            icon1 = "login" />
+          <AccountScreenRow1 style = {styles.row2} rowText = "Settings"
+            icon1 = "cog-outline" />
+          <AccountScreenRow1 style = {styles.row2} rowText = "Premium"
+            icon1 = "crown" />
+          <AccountScreenRow1 style = {styles.row2} rowText = "Support"
+            icon1 = "face-agent" />
+          <AccountScreenRow1 style = {styles.row3} bckgcol = {colors.danger} rowText = "Delete Account"
+            icon1 = "delete-forever"
+            icon2 = "alert-octagon"  />        
         </View>
       </View>
     </ScrollView>        
