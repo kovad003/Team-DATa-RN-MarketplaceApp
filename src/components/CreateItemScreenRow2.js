@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     color: colors.danger,
     fontSize: 30,
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    paddingRight: Paddings.narrow,
   },
 
   icon2: {
