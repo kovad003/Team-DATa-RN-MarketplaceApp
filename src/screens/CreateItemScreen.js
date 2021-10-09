@@ -236,6 +236,14 @@ function CreateItemScreen(props) {
     return (
 
 <ScrollView style={styles.scrollStyle}>
+
+          {/*
+          <View>
+          <Button title='Post new Item' onPress={()=>setVisibility(true)} />
+          </View>
+          */}
+          
+
       <View style={styles.container}>  
         <View style={styles.centralContainer}>        
 
@@ -248,8 +256,13 @@ function CreateItemScreen(props) {
           <View style={styles.logoContainer}>
             <LogoSmall></LogoSmall>
           </View>
+          
+          {/* 
+          <Button title = "ok" onPress={()=>setVisibility(true)} />
+          */}
 
-          <MenuRow style = {styles.row1} 
+          <MenuRow 
+            style = {styles.row1} 
             bckgcol = {colors.darkBlueCustom} 
             rowText = "Post New Item"
             icon1 = "tag-plus-outline"
@@ -257,6 +270,8 @@ function CreateItemScreen(props) {
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
             icon2color = "white"  />
+         
+
           <MenuRow style = {styles.row2} 
             bckgcol = {colors.darkGreenCustom} 
             rowText = "My Posted Items"
@@ -271,6 +286,15 @@ function CreateItemScreen(props) {
             icon1 = "shopping-outline" />          
           <MenuRow style = {styles.row3} rowText = "Trending"
           icon1 = "trending-up" />
+
+        {/* AD - For the hidden modal view */}
+        <CreateItemInput 
+          visibility={isVisible} 
+          onAddItem={onAddItem}
+          itemList={items} 
+          onCancelItem={cancelAddItem} 
+          />  
+
         </View>
       </View>
     </ScrollView>   
