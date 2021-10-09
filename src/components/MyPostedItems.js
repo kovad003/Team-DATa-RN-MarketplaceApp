@@ -1,28 +1,23 @@
 import React, { Component, useState, useEffect } from "react";
-import { StyleSheet, View, Text, FlatList, 
-  ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent, Modal } from "react-native";
+import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, FlatList} from 'react-native';
 
-// AD - constants
-import TextStyling from '../constants/fontstyling'
-import { Margins, Paddings } from "../constants/constvalues";
+import LogoSmall from "./LogoSmall";
+import CreateItemInputLogo from "./CreateItemInputLogo";
+
 import colors from "../constants/colors";
 
-import LogoSmall from "../components/LogoSmall";
+import Icon1 from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/FontAwesome5";
+import Icon3 from "react-native-vector-icons/Entypo";
+import Icon4 from "react-native-vector-icons/MaterialIcons";
+
+import { Margins, Paddings } from "../constants/constvalues";
+import { ScrollView } from 'react-native-gesture-handler';
+
+import TextStyling from '../constants/fontstyling'
 import ListCreatedItem from "../components/ListCreatedItem";
-import CreateItemInput from "../components/CreateItemInput";
-
-// AD - Component Rows
-import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
-import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
-import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
-import MenuRow from "../components/MenuRow";
-import { TouchableOpacity } from "react-native-gesture-handler";
-
-
 
 const MyPostedItems=(props)=>{
-
-
     const data = "This is data from Child Component to the Parent Component. :)"
     const [name, setName]=useState('');
     const [price, setPrice]=useState(0);
@@ -43,8 +38,7 @@ const MyPostedItems=(props)=>{
         props.onCancelItem();
     }
 
-
-  //
+    //
   //
   //
   // functions related to the input field functionality
@@ -55,8 +49,6 @@ const MyPostedItems=(props)=>{
   const [itemList, addItemToList] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [isVisible, setVisibility] = useState(false);
-
-  const [isflatListVisible, setflatListVisibility] = useState(false);
 
   // Custom Functions ****************************************************************************************
   const onAddItem = (childdata) => {
@@ -72,11 +64,6 @@ const MyPostedItems=(props)=>{
 
   const cancelAddItem=()=>{
     setVisibility(false);
-    setLoading(false);
-  }
-
-  const cancelAddItem2=()=>{
-    setflatListVisibility(false);
     setLoading(false);
   }
 
@@ -229,6 +216,10 @@ const MyPostedItems=(props)=>{
     }
   });
 
+
+  /*
+
+
   // If the 'fetch' is not ready yet, an activityindicator is shown
   if (isLoading==true) {
     console.log('if(isLoading==true) {');
@@ -264,255 +255,174 @@ const MyPostedItems=(props)=>{
   //Otherwise the list is shown
   else{
     console.log('else{');
-    return (
-
-<Modal visible={props.visibility} animationType="slide">
-
-<View style={styles.button}>
-            <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
-            </View>
-
-<ScrollView style={styles.scrollStyle}>
-
-      <View style={styles.container}>  
-        <View style={styles.centralContainer}>        
-
-          <MenuRow style = {styles.row1} rowText = "Seller's Guide"
-            icon1 = "book-open-page-variant"/>
-          
-
-          <View style={styles.logoContainer}>
-            <LogoSmall></LogoSmall>
-          </View>
-      
-          <MenuRow style = {styles.row3} rowText = "Trending"
-          icon1 = "trending-up" />
-
-        {/* AD - For the hidden modal view 
-        <CreateItemInput 
-          visibility={isVisible} 
-          onAddItem={onAddItem}
-          itemList={items} 
-          onCancelItem={cancelAddItem} 
-          /> 
-        */}
-
-          {/* AD - For the hidden modal view 
-        
-        <MyPostedItems 
-          visibility={isflatListVisible} 
-          onAddItem={onAddItem}
-          itemList={items} 
-          onCancelItem={cancelAddItem2} 
-          /> 
-          */}
-
-            
-
-        </View>
-      </View>
-    </ScrollView>  
-
-    </Modal> 
-      
-    );
-  }
-};
-
-  //
-  //
-  //
-
-
-  /* AD - original 
-
-<ScrollView style={styles.scrollStyle}>
-      <View style={styles.container}>  
-        <View style={styles.centralContainer}>
    
-          <View style={styles.logoContainer}>
-            <LogoSmall></LogoSmall>
-          </View>
-
-          <MenuRow style = {styles.row1} rowText = "Register"
-            icon1 = "account-plus-outline"/>
-          <MenuRow style = {styles.row2} rowText = "Login"
-            icon1 = "login" />
-          <MenuRow style = {styles.row2} rowText = "Settings"
-            icon1 = "cog-outline" />
-          <MenuRow style = {styles.row2} rowText = "Premium"
-            icon1 = "crown" />
-          <MenuRow style = {styles.row2} rowText = "Support"
-            icon1 = "face-agent" />
-          <MenuRow style = {styles.row3} bckgcol = {colors.danger}    rowText = "Delete Account"
-            icon1 = "delete-forever"
-            icon2 = "alert-octagon"
-            textstyling = {TextStyling.textWhiteMedium}
-            icon1color = "white"
-            icon2color = "white"  />        
-        </View>
-      </View>
-    </ScrollView>    
-    
-    
-
-
-<View style={styles.container}> 
-        <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} /> 
-        <CreateItemScreenRow2 rowText = "Support" style = {styles.row2}/>
-        <View style={styles.centralContainer}>
-      <View style={styles.screen}>
-        <Text>{hasMessage}</Text>
-
-        
-        <Button color='grey' title='Fetch from DB' onPress={()=>fetchData()} />
-        <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
-        
-         
-        <Button color = '#000080' title='Post new Item' onPress={()=>setVisibility(true)} />
-        <Text style = {TextStyling.textBlackSmall}>(Scrollable)</Text>
-        <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>    
-     
-        <CreateItemInput 
-          visibility={isVisible} 
-          onAddItem={onAddItem}
-          itemList={items} 
-          onCancelItem={cancelAddItem} 
-        />        
-        <FlatList
-          keyExtractor={(item) => item.id.toString()} 
-          data={items}
-          renderItem={itemData => 
-            <ListCreatedItem id={itemData.item.id} 
-            name={itemData.item.name}
-            price={itemData.item.price}
-            description={itemData.item.description}
-            category={itemData.item.category}
-            onDelete={()=>onDeleteItem(itemData.item.id)} 
-        />}        
-      />
-      </View>
-      </View>
-      </View>   
-
-    
 
 */
 
 
-const styles = StyleSheet.create({
 
-/* The previous GOOD VERSION 
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: colors.light4,
-    width:'100%',
-  },  
-*/
+    //
+    //
+    //
 
-/* The previous GOOD VERSION 
-  logoContainer:{
-    //marginTop: 1, //26
-    alignItems: 'center',   
-  },
-  */
+    // Return
+    return (
+        <Modal visible={props.visibility} animationType="slide">
+            <View style={styles.formStyle}>
 
-  scrollViewCustom: {
-    backgroundColor: colors.light4, // AD - added background
-  },
+                <View style={styles.logoCustom} >
+                <CreateItemInputLogo></CreateItemInputLogo>
+                </View>
+                <View style={styles.buttonView}>
+                    <View style={styles.button}>
+                    <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
+                    </View>
+                   
+                </View>
 
-  logoItemModal: {
-    marginTop: Margins.xlarge,
-  },
+                <View style={styles.formStyle}>
 
-  flatListContainer: {
-    width: '90%',
-    backgroundColor: 'green',
-  },
+                    {/* 
+                <FlatList
+                    keyExtractor={(item) => item.id.toString()} 
+                    data={items}
+                    renderItem={itemData => 
+                        <ListCreatedItem id={itemData.item.id} 
+                        name={itemData.item.name}
+                        price={itemData.item.price}
+                        description={itemData.item.description}
+                        category={itemData.item.category}
+                        onDelete={()=>onDeleteItem(itemData.item.id)} 
+                    />}
 
-  /* AD - Previous GOOD version
+                    />
+                    */}
 
-  centralContainer: {
-    flex: 1,   
-    justifyContent: 'center',
-    width: '90%', 
-    //backgroundColor: colors.light4,
-    //backgroundColor: 'red',
-    padding: Paddings.midsize,
+                </View>
+            </View>
+            <FlatList
+                    keyExtractor={(item) => item.id.toString()} 
+                    data={items}
+                    renderItem={itemData => 
+                        <ListCreatedItem id={itemData.item.id} 
+                        name={itemData.item.name}
+                        price={itemData.item.price}
+                        description={itemData.item.description}
+                        category={itemData.item.category}
+                        onDelete={()=>onDeleteItem(itemData.item.id)} 
+                    />}
 
-    paddingBottom: Paddings.midsize,
+                    />
+        </Modal>
+    );
+}
 
-    //margin: Margins.midsize,
-    margin: Margins.narrow,
+const styles=StyleSheet.create({
+    formStyle: {
+        flex:1,
+        flexDirection: 'column',
+        justifyContent:'center',
+        alignItems:"center",
+        backgroundColor: colors.light4,
+        paddingHorizontal: 10,
 
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: colors.danger,
-  },
+        
+      },
+      logoCustom: {
+        
+        marginTop: Margins.large,
+        //marginBottom: Margins.narrow,
+        
+        //marginTop: Margins.xxnarrow,
+      },
+      inputStyle: {
+        borderWidth: 2, 
+        borderColor: '#000080', 
+        padding: 10,
+        width:'80%', // '85%'
+        marginBottom:10,
 
-  */
+        backgroundColor: 'white',
+        color: '#000080',
 
+        marginRight: Margins.midsize,
+               
+      },
 
+      inputStyle2: {
+        borderWidth: 2, 
+        borderColor: '#000080', 
+        padding: 10,
+        width:'80%', // '85%'
+        marginBottom:10,
+        height: 100,
+        backgroundColor: 'white',
 
+        color: '#000080',
+        marginRight: Margins.midsize,
+      },
 
-  /* AD - The original GOOD version
-  row1: {
-    marginVertical: Margins.xxnarrow,
-    marginTop: 15,
-  },
+      itemNameRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+      },
 
-  row2: {
-    marginVertical: Margins.xxnarrow,
-  },
+      buttonView:{
+        width:'60%',
+        flexDirection: 'row',
+        justifyContent:"space-around",
+        //marginTop: Margins.midsize,
 
-  row3: {
-    marginVertical: Margins.large,
-  },
- */
+        //paddingLeft: 20,
 
-  imageUploader: {
-    height: 104,
-    width: 339,
-    alignItems: 'center', // AD - added
-    marginTop: Margins.narrow, // AD - added margin Top
-    marginBottom: Margins.xlarge, // AD - added margin bottom  
-  },
-  CreateItemForm: {
-    height: 44,
-    width: 317,
-    alignItems: 'center', // AD - added align
-    marginLeft: Margins.narrow, // AD - added margin left   
-  },  
-  buttonContainer: {
-    height: 89,
-    marginTop: 250,
-    width: '80%',
-    alignItems: 'center', // AD - added align  
-    marginBottom: Margins.narrow, // AD - added margin bottom
-  },
-  uploadButton: {
-    width: 206,
-    height: 36,
-    marginTop: 4,
-    backgroundColor: colors.light2, // AD - added color
-  },
-  cancelButton: {
-    width: 206,
-    height: 36,
-    overflow: "visible",
-    backgroundColor: "rgba(11,67,130,1)",
-    marginTop: 9,
-    backgroundColor: colors.light5, // AD - added color    
-  },
+        marginBottom: Margins.large,
+      },
+      button:{
+        width:'40%',
+      },
 
-/* AD - stylings related to the list functionality */
+      iconStyling: {
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',
+      
+        paddingRight: Paddings.narrow,
+        paddingTop: Paddings.narrow,
+
+        color: colors.danger,
+      },
+
+      iconStyling2: {
+        color: '#000080',
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',
+      
+        paddingRight: 18.7,
+        paddingTop: Paddings.narrow,
+      },
+
+      iconStyling3: {
+        color: '#000080',
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',
+      
+        paddingRight: Paddings.narrow,
+        paddingTop: 37,
+      },
+
+      iconStyling4: {
+        color: '#000080',
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',
+      
+        paddingRight: Paddings.narrow,
+        paddingTop: Paddings.narrow,
+      },
+
+      /* AD - stylings related to the list functionality */
   screen: {
     //marginTop: 5,//10
     //padding: 10, // 10
@@ -531,56 +441,16 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 0.31,
     shadowRadius: 0,
-    backgroundColor: "#E6E6E6",  
-   
-
-  },
-  listItem:{
-    padding: 10,
-    marginVertical: 10,
-    borderWidth: 2,
-    borderColor: '#0f0',
-    backgroundColor: '#fce',    
+    backgroundColor: "#E6E6E6", 
   },
 
-  /* AD - Originally from the Account Screen */
-  scrollStyle: {
-    backgroundColor: colors.light4,
-    //justifyContent: 'center',
-  },
-
-  container: {
-    flex: 1,
-    alignItems: 'center',   
-    width:'100%',    
-  },   
-  
-  logoContainer:{
-    marginTop: 17, //20
-    alignItems: 'center',   
-  },
-
-  row1: {
-    marginTop: 17,
-    marginBottom: Margins.xxnarrow,
-  },
-
-  row2: {
-    marginVertical: Margins.xxnarrow, // narrow
-  },
-
-  row3: {
-    marginVertical: Margins.midsize, // xlarge
-  },
-
-  centralContainer: {
-    flex: 1,   
-    justifyContent: 'center',
-    width: '100%', 
-    backgroundColor: colors.light4,
-    
-  },
-
+    listItem:{
+        padding: 10,
+        marginVertical: 10,
+        borderWidth: 2,
+        borderColor: '#0f0',
+        backgroundColor: '#fce',    
+    }
 });
 
 export default MyPostedItems;
