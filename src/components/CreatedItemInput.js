@@ -4,7 +4,10 @@ import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle} from 'react-
 import LogoSmall from "../components/LogoSmall";
 import colors from "../constants/colors";
 
-import Icon1 from "react-native-vector-icons/Fontisto";
+import Icon1 from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/FontAwesome5";
+import Icon3 from "react-native-vector-icons/Entypo";
+import Icon4 from "react-native-vector-icons/MaterialIcons";
 
 import { Margins, Paddings } from "../constants/constvalues";
 
@@ -58,19 +61,34 @@ const CreatedItemInput=(props)=>{
                 <LogoSmall></LogoSmall>
                 </View>
 
-                <Icon1 name="email" style={styles.icon1}></Icon1>
+                <View style={styles.itemNameRow}>
+                <Icon1 name="tag" style={styles.iconStyling}></Icon1>
                 <TextInput placeholder="Item's name" 
                     style={styles.inputStyle} 
                     onChangeText={nameInputHandler}/>
+                </View>
+
+                <View style={styles.itemNameRow}>
+                <Icon2 name="euro-sign" style={styles.iconStyling2}></Icon2>    
                 <TextInput placeholder="Item's price" 
                     style={styles.inputStyle} 
                     onChangeText={priceInputHandler}/>
+                </View>
+
+                <View style={styles.itemNameRow}>
+                <Icon3 name="edit" style={styles.iconStyling3}></Icon3>    
                 <TextInput placeholder="Item's description" 
                     style={styles.inputStyle2} 
                     onChangeText={descriptionInputHandler}/>
+                </View>
+
+                <View style={styles.itemNameRow}>
+                <Icon4 name="category" style={styles.iconStyling}></Icon4> 
                 <TextInput placeholder="Item's category" 
                     style={styles.inputStyle} 
-                    onChangeText={categoryInputHandler}/>    
+                    onChangeText={categoryInputHandler}/>
+                </View>
+
                 <View style={styles.buttonView}>
                     <View style={styles.button}>
                     <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
@@ -103,6 +121,8 @@ const styles=StyleSheet.create({
         padding: 10,
         width:'80%', // 80%
         marginBottom:10,
+        
+        
       },
 
       inputStyle2: {
@@ -116,6 +136,12 @@ const styles=StyleSheet.create({
         height: 100,
       },
 
+      itemNameRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+
+      },
+
       buttonView:{
         width:'60%',
         flexDirection: 'row',
@@ -126,12 +152,37 @@ const styles=StyleSheet.create({
         width:'40%',
       },
 
-      icon1: {
+      iconStyling: {
         //color: "rgba(128,128,128,1)",
         color: colors.danger,
         fontSize: 30,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+      
+        paddingRight: Paddings.narrow,
+        paddingTop: Paddings.narrow,
+      },
+
+      iconStyling2: {
+        //color: "rgba(128,128,128,1)",
+        color: colors.danger,
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',
+      
+        paddingRight: 18.7,
+        paddingTop: Paddings.narrow,
+      },
+
+      iconStyling3: {
+        //color: "rgba(128,128,128,1)",
+        color: colors.danger,
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',
+      
+        paddingRight: Paddings.narrow,
+        paddingTop: 37,
       },
 });
 
