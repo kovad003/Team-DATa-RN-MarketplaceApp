@@ -16,6 +16,7 @@ import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
 import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 function CreateItemScreen(props) {
@@ -260,6 +261,18 @@ function CreateItemScreen(props) {
           {/* 
           <Button title = "ok" onPress={()=>setVisibility(true)} />
           */}
+ 
+          <Text 
+            text = 'submit'
+            style = {TextStyling.textBlackSmall}
+            onPress={()=>setVisibility(true)} >
+            Press Me</Text>
+
+            <Text 
+            text = 'submit'
+            style = {TextStyling.textBlackSmall}
+            onPress={()=>setVisibility(true)} >
+            Press Me FlatList</Text>
 
           <MenuRow 
             style = {styles.row1} 
@@ -294,6 +307,7 @@ function CreateItemScreen(props) {
           itemList={items} 
           onCancelItem={cancelAddItem} 
           />  
+          
 
         </View>
       </View>

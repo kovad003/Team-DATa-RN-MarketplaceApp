@@ -23,7 +23,7 @@ function MenuRow(props) {
         <Icon 
           name={props.icon2 || "chevron-right"} style={[styles.icon2, {color: props.icon2color || "#808080"}]}
         />      
-      </TouchableOpacity>
+      </TouchableOpacity>          
     </View>
   );
 }
