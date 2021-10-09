@@ -8,7 +8,7 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountScreenRow1(props) {
+function MenuRow(props) {
   return (
     <View style={props.style}>  
       <TouchableOpacity 
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default AccountScreenRow1;
+export default MenuRow;
