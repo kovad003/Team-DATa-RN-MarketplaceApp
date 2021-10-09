@@ -110,6 +110,7 @@ const styles=StyleSheet.create({
         alignItems:"center",
 
         backgroundColor: colors.light4,
+        paddingHorizontal: 10,
       },
       logoCustom: {
         marginBottom: Margins.large,
@@ -119,10 +120,9 @@ const styles=StyleSheet.create({
         //borderColor: 'red', 
         borderColor: '#000080', 
         padding: 10,
-        width:'80%', // 80%
+        width:'85%', // 80%
         marginBottom:10,
-        
-        
+               
       },
 
       inputStyle2: {
@@ -130,7 +130,7 @@ const styles=StyleSheet.create({
         //borderColor: 'red', 
         borderColor: '#000080', 
         padding: 10,
-        width:'80%', // 80%
+        width:'85%', // 80%
         marginBottom:10,
 
         height: 100,
@@ -147,6 +147,8 @@ const styles=StyleSheet.create({
         flexDirection: 'row',
         justifyContent:"space-around",
         marginTop: Margins.midsize,
+
+        paddingLeft: 20,
       },
       button:{
         width:'40%',
@@ -154,7 +156,8 @@ const styles=StyleSheet.create({
 
       iconStyling: {
         //color: "rgba(128,128,128,1)",
-        color: colors.danger,
+        //color: colors.danger,
+        color: '#000080',
         fontSize: 30,
         justifyContent:'center',
         alignItems:'center',
@@ -166,6 +169,7 @@ const styles=StyleSheet.create({
       iconStyling2: {
         //color: "rgba(128,128,128,1)",
         color: colors.danger,
+        //color: '#000080',
         fontSize: 30,
         justifyContent:'center',
         alignItems:'center',
@@ -176,7 +180,8 @@ const styles=StyleSheet.create({
 
       iconStyling3: {
         //color: "rgba(128,128,128,1)",
-        color: colors.danger,
+        //color: colors.danger,
+        color: '#000080',
         fontSize: 30,
         justifyContent:'center',
         alignItems:'center',

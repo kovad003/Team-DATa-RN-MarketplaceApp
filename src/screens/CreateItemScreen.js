@@ -517,8 +517,10 @@ container: {},
 
 /* AD - stylings related to the list functionality */
   screen: {
-    marginTop: 10,
-    padding: 10, // 60
+    //marginTop: 5,//10
+    //padding: 10, // 10
+    paddingHorizontal: 10,
+    paddingBottom: 10,
     height: '100%',
 
     //alignItems: 'center',
