@@ -237,28 +237,40 @@ function CreateItemScreen(props) {
 
 <ScrollView style={styles.scrollStyle}>
       <View style={styles.container}>  
-        <View style={styles.centralContainer}>
-   
+        <View style={styles.centralContainer}>        
+
+          <MenuRow style = {styles.row1} rowText = "Seller's guide"
+            icon1 = "account-plus-outline"/>
+          <MenuRow style = {styles.row2} rowText = "Support"
+            icon1 = "face-agent" />
+          
+
           <View style={styles.logoContainer}>
             <LogoSmall></LogoSmall>
           </View>
 
-          <MenuRow style = {styles.row1} rowText = "Register"
-            icon1 = "account-plus-outline"/>
-          <MenuRow style = {styles.row1a} rowText = "Login"
-            icon1 = "login" />
-          <MenuRow style = {styles.row2} rowText = "About"
-            icon1 = "information-outline" />
-          <MenuRow style = {styles.row2} rowText = "Settings"
-            icon1 = "cog-outline" />
-          <MenuRow style = {styles.row2} rowText = "Premium"
-            icon1 = "crown" />          
-          <MenuRow style = {styles.row2} bckgcol = {colors.danger} rowText = "Delete Account"
+          <MenuRow style = {styles.row1} 
+            bckgcol = {colors.darkBlueCustom} 
+            rowText = "Post New Item"
             icon1 = "delete-forever"
             icon2 = "alert-octagon"
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
             icon2color = "white"  />
+          <MenuRow style = {styles.row2} 
+            bckgcol = {colors.darkGreenCustom} 
+            rowText = "My Posted Items"
+            icon1 = "delete-forever"
+            icon2 = "alert-octagon"
+            textstyling = {TextStyling.textWhiteMedium}
+            icon1color = "white"
+            icon2color = "white"  />
+          
+
+          <MenuRow style = {styles.row2} rowText = "My Watchlist"
+            icon1 = "cog-outline" />
+          <MenuRow style = {styles.row2} rowText = "Premium"
+            icon1 = "crown" />          
           <MenuRow style = {styles.row3} rowText = "Support"
           icon1 = "face-agent" />
         </View>
