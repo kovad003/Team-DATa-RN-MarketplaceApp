@@ -9,8 +9,8 @@ import TextStyling from '../constants/fontstyling'
 
 
 const CategoryButton = props => {
-const imageUrl = props.image;
-
+const imageUrl = props.imageUrl;
+console.log(imageUrl);
 return (
     <View style={styles.gridItem} >
     <TouchableOpacity 

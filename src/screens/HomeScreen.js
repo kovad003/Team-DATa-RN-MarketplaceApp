@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 
-import { POSTEDITEMS } from "../data/dummy-data";
+import { ITEM } from "../data/dummy-data";
 import MyItemCard from "../components/MyItemCard";
 import MyItemCardSmall from "../components/MyItemCardSmall";
 
 import EditableCard from "../components/EditableCard";
 import Logo from "../components/Logo";
-
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
 
 function HomeScreen(props) {
   
   // HH - created to read data from dummy-data
-  // const myItemsList = POSTEDITEMS.find(posted => posted.customerId === 'p004');
-  const AllItemsList = POSTEDITEMS;
+  // const myItemsList = ITEM.find(posted => posted.customerId === 'p004');
+  const AllItemsList = ITEM;
 
   // HH - created  to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems:'center',
+    backgroundColor: colors.light4,
   },
   titleContainer:{
     flex:1,
