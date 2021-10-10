@@ -5,12 +5,13 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import { Margins, Paddings } from "../constants/constvalues";
 
 import colors from "../constants/colors";
+import TextStyling from '../constants/fontstyling';
 
 const ListCreatedItem=(props)=>{
     return(
 
         <View style={styles.ListOuterContainer}>
-        <TouchableOpacity activeOpacity={0.8} onLongPress={props.onDelete}>
+        <View activeOpacity={0.8} onLongPress={props.onDelete}>
             <View style={styles.listItemStyle}>
 
                 <View style={styles.LeftInnerContainer}>
@@ -30,51 +31,37 @@ const ListCreatedItem=(props)=>{
                     </View>
 
                     <View style={styles.innerRowContainer3}>
-                        <Text>Button 1 and Button 2</Text>
+                        <Text style={TextStyling.textBlackSmall}>MORE INFO</Text>
+                        <Text style={TextStyling.textBlackSmall}>UPDATE</Text>
+                        <Text style={TextStyling.textBlackSmall}>DELETE</Text>
                     </View>
 
                 </View>
 
             </View>
-        </TouchableOpacity>
+        </View>
         </View>
     );
 }
 const styles = StyleSheet.create ({
-    listItemStyle: {
-    /* 
-     borderWidth: 1, 
-      borderColor: '#000080', 
-      padding: 5,       
-      marginVertical:5,
-      backgroundColor:"white",
-    */
-      
+    listItemStyle: { 
       borderWidth: 1, 
       borderColor: '#000080',       
       marginVertical:5,
-      backgroundColor:"white",
-
-      //display: "flex",
+      backgroundColor:"white",   
       flexDirection: "row",
-      width: '100%',
-
-      //paddingHorizontal: 5,
+      width: '100%',     
      },
 
      image: {
-        width: 70, // 70
-        height: 70, //70
+        width: 70,
+        height: 70,
         borderRadius: 35,
      },
      ListOuterContainer: {
          marginHorizontal: Margins.narrow,         
      },
      LeftInnerContainer: {
-        //backgroundColor: Color,
-        //maxWidth: '70%',
-        //paddingLeft: Paddings.narrow,
-
         backgroundColor: colors.danger,
         width: '20%',
 
@@ -88,22 +75,28 @@ const styles = StyleSheet.create ({
 
      },
      rightInnerContainer: {
-        backgroundColor: 'blue',
+        backgroundColor: colors.danger,
         width: '76.3%',
-        paddingHorizontal: 5,     
+        paddingHorizontal: 7, //5  
         marginVertical: 5,    
         justifyContent: "center"
     },
     innerRowContainer1: {
-        backgroundColor: 'red',
+        backgroundColor: colors.light4,
+        paddingHorizontal: Paddings.xnarrow,
+        //paddingVertical: Paddings.xnarrow,
     },
     innerRowContainer2: {
-        backgroundColor: 'yellow',
+        backgroundColor: colors.light4,
+        paddingHorizontal: Paddings.xnarrow,
+        //paddingVertical: Paddings.xnarrow,
     },
     innerRowContainer3: {
-        backgroundColor: 'green',
+        backgroundColor: colors.light4,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingHorizontal: Paddings.midsize,
     },
-
   });
 
   export default ListCreatedItem;
