@@ -4,6 +4,8 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 import { Margins, Paddings } from "../constants/constvalues";
 
+import colors from "../constants/colors";
+
 const ListCreatedItem=(props)=>{
     return(
 
@@ -59,21 +61,28 @@ const styles = StyleSheet.create ({
          marginHorizontal: Margins.narrow,         
      },
      LeftInnerContainer: {
-        backgroundColor: 'red',
+        //backgroundColor: Color,
         //maxWidth: '70%',
         //paddingLeft: Paddings.narrow,
+
+        backgroundColor: colors.danger,
         width: '20%',
 
         alignItems: "center",
         paddingHorizontal: 5,
         marginHorizontal: 5,
         marginVertical: 5,
-        
+
+        alignItems: "center",
+        justifyContent: "center"
+
      },
      rightInnerContainer: {
         backgroundColor: 'blue',
-        width: '78%',
-        paddingHorizontal: 5,
+        width: '76.3%',
+        paddingHorizontal: 5,     
+        marginVertical: 5,    
+        justifyContent: "center"
     },
   });
 
