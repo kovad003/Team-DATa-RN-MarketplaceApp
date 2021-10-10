@@ -5,6 +5,7 @@ import colors from "../constants/colors";
 import { Margins, Paddings } from "../constants/constvalues";
 import ListCreatedItem from "../components/ListCreatedItem";
 import TextStyling from '../constants/fontstyling';
+import MyPostedItemsDelete from "./createItem/MyPostedItemsDelete";
 
 const MyPostedItems=(props)=>{
     const data = "This is data from Child Component to the Parent Component. :)"
@@ -213,7 +214,7 @@ const MyPostedItems=(props)=>{
           <View style={styles.buttonView}>
               <View style={styles.button}>
               <Button color='#c83232' title="Back" onPress={cancelItem}/>
-              </View>             
+          </View>             
           
           
           </View>

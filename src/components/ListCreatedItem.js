@@ -31,10 +31,32 @@ const ListCreatedItem=(props)=>{
                     </View>
 
                     <View style={styles.innerRowContainer3}>
-                        <Text style={[TextStyling.textBlackSmall, styles.moreButton]}>MORE INFO</Text>
-                        <Text style={[TextStyling.textBlackSmall, styles.updateButton]}>UPDATE</Text>
-                        <Text style={[TextStyling.textBlackSmall, styles.deleteButton]}>DELETE</Text>
+                        <Text 
+                            style={[TextStyling.textBlackSmall, styles.moreButton]}>
+                            MORE INFO
+                        </Text>
+                        <Text 
+                            style={[TextStyling.textBlackSmall, styles.updateButton]}>
+                            UPDATE
+                        </Text>
+                        <Text
+                            text = 'submit' 
+                            activeOpacity={0.8} onLongPress={props.onDelete}
+                            style={[TextStyling.textBlackSmall, styles.deleteButton]}>
+                            DELETE
+                        </Text>
+                        
                     </View>
+
+                    {/* 
+                    <Text 
+
+                        text = 'submit'
+                        style = {TextStyling.textBlackSmall}
+                        onPress={()=>setVisibility(true)} >
+                        Press Me</Text>
+
+                    */}
 
                 </View>
 
