@@ -218,7 +218,7 @@ const MyPostedItems=(props)=>{
           
           </View>
         
-        <Text style={TextStyling.textBlackSmall}>My Posted Items</Text>
+        <Text style={TextStyling.textBlackSmall}>My Posted Items:</Text>
         </View>        
 
         
