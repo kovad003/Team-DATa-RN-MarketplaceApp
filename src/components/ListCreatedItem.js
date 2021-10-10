@@ -11,7 +11,7 @@ const ListCreatedItem=(props)=>{
                 <Text>{props.itemId}&#41; {props.title}</Text>
                 <Text>Price: {props.price}€ </Text>
                 <Text>Description: {props.description}</Text>
-                <Text>Category: {props.category}</Text>
+                <Text>Posted on: {props.datePosted}</Text>
             </View>
         </TouchableOpacity>
     );

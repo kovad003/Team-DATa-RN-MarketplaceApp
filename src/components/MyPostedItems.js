@@ -308,7 +308,7 @@ const MyPostedItems=(props)=>{
                         title={itemData.item.title}
                         price={itemData.item.price}
                         description={itemData.item.description}
-                        category={itemData.item.category}
+                        datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
                         onDelete={()=>onDeleteItem(itemData.item.itemId)} 
                     />}
 
