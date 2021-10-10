@@ -324,46 +324,12 @@ function CreateItemScreen(props) {
 };
 
 const styles = StyleSheet.create({
-
   scrollViewCustom: {
     backgroundColor: colors.light4, // AD - added background
   },
-
   logoItemModal: {
     marginTop: Margins.xlarge,
-  },
-
-  flatListContainer: {
-    width: '90%',
-    backgroundColor: 'green',
-  },
-
-  imageUploader: {
-    height: 104,
-    width: 339,
-    alignItems: 'center', // AD - added
-    marginTop: Margins.narrow, // AD - added margin Top
-    marginBottom: Margins.xlarge, // AD - added margin bottom  
-  },
-  CreateItemForm: {
-    height: 44,
-    width: 317,
-    alignItems: 'center', // AD - added align
-    marginLeft: Margins.narrow, // AD - added margin left   
-  },  
-  buttonContainer: {
-    height: 89,
-    marginTop: 250,
-    width: '80%',
-    alignItems: 'center', // AD - added align  
-    marginBottom: Margins.narrow, // AD - added margin bottom
-  },
-  uploadButton: {
-    width: 206,
-    height: 36,
-    marginTop: 4,
-    backgroundColor: colors.light2, // AD - added color
-  },
+  }, 
   cancelButton: {
     width: 206,
     height: 36,
@@ -371,30 +337,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
     backgroundColor: colors.light5, // AD - added color    
-  },
-
-/* AD - stylings related to the list functionality */
-  screen: {
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    height: '100%',
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: "#E6E6E6",     
-
-  },
-  listItem:{
-    padding: 10,
-    marginVertical: 10,
-    borderWidth: 2,
-    borderColor: '#0f0',
-    backgroundColor: '#fce',    
   },
 
   /* AD - Originally from the Account Screen */
