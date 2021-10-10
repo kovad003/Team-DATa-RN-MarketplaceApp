@@ -244,133 +244,28 @@ const styles=StyleSheet.create({
         justifyContent:'center',
         alignItems:"center",
         backgroundColor: colors.light4,
-        paddingHorizontal: 10,
-
-        
+        paddingHorizontal: 10,        
       },
-      logoCustom: {
-        
-        marginTop: Margins.large,
-        //marginBottom: Margins.narrow,
-        
-        //marginTop: Margins.xxnarrow,
-      },
-      inputStyle: {
-        borderWidth: 2, 
-        borderColor: '#000080', 
-        padding: 10,
-        width:'80%', // '85%'
-        marginBottom:10,
-
-        backgroundColor: 'white',
-        color: '#000080',
-
-        marginRight: Margins.midsize,
-               
-      },
-
-      inputStyle2: {
-        borderWidth: 2, 
-        borderColor: '#000080', 
-        padding: 10,
-        width:'80%', // '85%'
-        marginBottom:10,
-        height: 100,
-        backgroundColor: 'white',
-
-        color: '#000080',
-        marginRight: Margins.midsize,
-      },
-
-      itemNameRow: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-      },
-
+      logoCustom: {        
+        marginTop: Margins.large,      
+      },      
       buttonView:{
         width:'60%',
         flexDirection: 'row',
         justifyContent:"space-around",
-        //marginTop: Margins.midsize,
-
-        //paddingLeft: 20,
-
         marginBottom: Margins.large,
       },
       button:{
         width:'40%',
       },
-
       iconStyling: {
         fontSize: 30,
         justifyContent:'center',
-        alignItems:'center',
-      
+        alignItems:'center',      
         paddingRight: Paddings.narrow,
         paddingTop: Paddings.narrow,
-
         color: colors.danger,
-      },
-
-      iconStyling2: {
-        color: '#000080',
-        fontSize: 30,
-        justifyContent:'center',
-        alignItems:'center',
-      
-        paddingRight: 18.7,
-        paddingTop: Paddings.narrow,
-      },
-
-      iconStyling3: {
-        color: '#000080',
-        fontSize: 30,
-        justifyContent:'center',
-        alignItems:'center',
-      
-        paddingRight: Paddings.narrow,
-        paddingTop: 37,
-      },
-
-      iconStyling4: {
-        color: '#000080',
-        fontSize: 30,
-        justifyContent:'center',
-        alignItems:'center',
-      
-        paddingRight: Paddings.narrow,
-        paddingTop: Paddings.narrow,
-      },
-
-      /* AD - stylings related to the list functionality */
-  screen: {
-    //marginTop: 5,//10
-    //padding: 10, // 10
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    height: '100%',
-
-    //alignItems: 'center',
-    //backgroundColor: 'blue',
-
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: "#E6E6E6", 
-  },
-
-    listItem:{
-        padding: 10,
-        marginVertical: 10,
-        borderWidth: 2,
-        borderColor: '#0f0',
-        backgroundColor: '#fce',    
-    }
+      },     
 });
 
 export default MyPostedItems;
