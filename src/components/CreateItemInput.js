@@ -117,7 +117,7 @@ const CreateItemInput=(props)=>{
 
               <Text style={TextStyling.textBlackSmall}>Category</Text>
               <View style={styles.itemNameRow}>
-              <Icon4 name="category" style={styles.iconStyling4}></Icon4> 
+              <Icon4 name="category" style={styles.iconStyling5}></Icon4> 
               <TextInput placeholder="Item's category" 
                   style={styles.inputStyle} 
                   onChangeText={categoryInputHandler}/>
@@ -125,7 +125,7 @@ const CreateItemInput=(props)=>{
 
               <Text style={TextStyling.textBlackSmall}>Condition</Text>
               <View style={styles.itemNameRow}>
-              <Icon4 name="build-circle" style={styles.iconStyling4}></Icon4> 
+              <Icon4 name="build-circle" style={styles.iconStyling5}></Icon4> 
               <TextInput placeholder="Item's condition" 
                   style={styles.inputStyle} 
                   onChangeText={conditionInputHandler}/>
@@ -133,7 +133,7 @@ const CreateItemInput=(props)=>{
 
               <Text style={TextStyling.textBlackSmall}>Location</Text>
               <View style={styles.itemNameRow}>
-              <Icon4 name="location-pin" style={styles.iconStyling4}></Icon4> 
+              <Icon4 name="my-location" style={styles.iconStyling5}></Icon4> 
               <TextInput placeholder="Item's location"
                   style={styles.inputStyle}
                   onChangeText={locationInputHandler}/>
@@ -171,10 +171,8 @@ const styles=StyleSheet.create({
       inputStyle: {
         borderWidth: 2, 
         borderColor: '#000080', 
-        //padding: 10,
         paddingLeft: Paddings.xnarrow,
-        width:'80%', // '85%'
-        //marginBottom:10,
+        width:'80%',
         backgroundColor: 'white',
         color: '#000080',
         marginRight: Margins.midsize, 
@@ -184,8 +182,7 @@ const styles=StyleSheet.create({
         borderWidth: 2, 
         borderColor: '#000080', 
         padding: 10,
-        width:'80%', // '85%'
-        //marginBottom:10,
+        width:'80%',
         height: 80,
         backgroundColor: 'white',
         color: '#000080',
@@ -195,8 +192,7 @@ const styles=StyleSheet.create({
         borderWidth: 2, 
         borderColor: '#000080', 
         padding: 10,
-        width:'80%', // '85%'
-        //marginBottom:10,
+        width:'80%',
         height: 70,
         backgroundColor: 'white',
         color: '#000080',
@@ -210,10 +206,8 @@ const styles=StyleSheet.create({
         width:'60%',
         flexDirection: 'row',
         justifyContent:"space-around",
-        marginTop: Margins.midsize,
         paddingLeft: 20,
-        //marginBottom: Margins.midsize,
-        //marginVertical: Margins.midsize,
+        marginVertical: Margins.midsize,
       },
       button:{
         width:'40%',
@@ -223,7 +217,7 @@ const styles=StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',      
         paddingRight: Paddings.narrow,
-        paddingTop: Paddings.narrow,
+        paddingTop: 6,
         color: colors.danger,
       },
       iconStyling2: {
@@ -232,7 +226,7 @@ const styles=StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',      
         paddingRight: 18.7,
-        paddingTop: Paddings.narrow,
+        paddingTop: 6,
       },
       iconStyling3: {
         color: '#000080',
@@ -240,7 +234,7 @@ const styles=StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',      
         paddingRight: Paddings.narrow,
-        paddingTop: 37,
+        paddingTop: 28,
       },
       iconStyling3a: {
         color: '#000080',
@@ -257,6 +251,14 @@ const styles=StyleSheet.create({
         alignItems:'center',      
         paddingRight: Paddings.narrow,
         paddingTop: Paddings.narrow,
+      },
+      iconStyling5: {
+        color: '#000080',
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',      
+        paddingRight: Paddings.narrow,
+        paddingTop: 6,
       },
 });
 
