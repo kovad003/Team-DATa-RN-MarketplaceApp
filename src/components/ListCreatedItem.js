@@ -31,9 +31,9 @@ const ListCreatedItem=(props)=>{
                     </View>
 
                     <View style={styles.innerRowContainer3}>
-                        <Text style={TextStyling.textBlackSmall}>MORE INFO</Text>
-                        <Text style={TextStyling.textBlackSmall}>UPDATE</Text>
-                        <Text style={TextStyling.textBlackSmall}>DELETE</Text>
+                        <Text style={[TextStyling.textBlackSmall, styles.moreButton]}>MORE INFO</Text>
+                        <Text style={[TextStyling.textBlackSmall, styles.updateButton]}>UPDATE</Text>
+                        <Text style={[TextStyling.textBlackSmall, styles.deleteButton]}>DELETE</Text>
                     </View>
 
                 </View>
@@ -97,6 +97,15 @@ const styles = StyleSheet.create ({
         justifyContent: "space-between",
         paddingHorizontal: Paddings.large,
         paddingVertical: Paddings.xnarrow,
+    },
+    moreButton: {
+        color: "green",
+    },
+    updateButton: {
+        color: "blue",
+    },
+    deleteButton: {
+        color: "red",
     },
   });
 
