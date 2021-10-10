@@ -203,40 +203,34 @@ const MyPostedItems=(props)=>{
 
     // Return
     return (
-        <Modal visible={props.visibility} animationType="slide">
-            <View style={styles.formStyle}>
+    <Modal visible={props.visibility} animationType="slide">
+        <View style={styles.formStyle}>
+          <View style={styles.logoCustom} >
+          <CreateItemInputLogo></CreateItemInputLogo>
+          </View>
 
-            <View style={styles.logoCustom} >
-            <CreateItemInputLogo></CreateItemInputLogo>
-            </View>
+          <View style={styles.buttonView}>
+              <View style={styles.button}>
+              <Button color='#c83232' title="Back" onPress={cancelItem}/>
+              </View>             
+          </View>
+        </View>        
 
-            <View style={styles.buttonView}>
-                <View style={styles.button}>
-                <Button color='#c83232' title="Back" onPress={cancelItem}/>
-                </View>             
-            </View>
-
-                <View style={styles.formStyle}>
-
-                </View>
-            </View>        
-
-            <View style = {styles.flatListOuterContainer}>
-            <FlatList
-                    keyExtractor={(item) => item.itemId.toString()} 
-                    data={items}
-                    renderItem={itemData => 
-                        <ListCreatedItem itemId={itemData.item.itemId} 
-                        title={itemData.item.title}
-                        price={itemData.item.price}
-                        description={itemData.item.description}
-                        datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
-                        onDelete={()=>onDeleteItem(itemData.item.itemId)} 
-                    />}
-                    />
-
-            </View>
-        </Modal>
+        <View style = {styles.flatListOuterContainer}>
+          <FlatList
+                  keyExtractor={(item) => item.itemId.toString()} 
+                  data={items}
+                  renderItem={itemData => 
+                      <ListCreatedItem itemId={itemData.item.itemId} 
+                      title={itemData.item.title}
+                      price={itemData.item.price}
+                      description={itemData.item.description}
+                      datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
+                      onDelete={()=>onDeleteItem(itemData.item.itemId)} 
+                  />}
+                  />
+        </View>
+    </Modal>
     );
 }
 

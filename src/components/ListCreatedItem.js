@@ -36,36 +36,44 @@ const styles = StyleSheet.create ({
       padding: 5,       
       marginVertical:5,
       backgroundColor:"white",
-    
-    
     */
       
       borderWidth: 1, 
-      borderColor: '#000080', 
-      padding: 5,       
+      borderColor: '#000080',       
       marginVertical:5,
       backgroundColor:"white",
 
       //display: "flex",
       flexDirection: "row",
+      width: '100%',
 
-
-
+      //paddingHorizontal: 5,
      },
 
      image: {
-        width: 70,
-        height: 70,
+        width: 70, // 70
+        height: 70, //70
         borderRadius: 35,
      },
      ListOuterContainer: {
-         marginHorizontal: Margins.midsize,         
+         marginHorizontal: Margins.narrow,         
      },
      LeftInnerContainer: {
         backgroundColor: 'red',
+        //maxWidth: '70%',
+        //paddingLeft: Paddings.narrow,
+        width: '20%',
+
+        alignItems: "center",
+        paddingHorizontal: 5,
+        marginHorizontal: 5,
+        marginVertical: 5,
+        
      },
      rightInnerContainer: {
         backgroundColor: 'blue',
+        width: '78%',
+        paddingHorizontal: 5,
     },
   });
 
