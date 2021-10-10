@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon1 from "react-native-vector-icons/Fontisto";
 import Icon2 from "react-native-vector-icons/AntDesign";
 
 // AD - constants
@@ -9,11 +9,11 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountScreenRow2(props) {
+function CreateItemScreenRow2(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
-        <Icon1 name="login" style={styles.icon1}></Icon1>
+        <Icon1 name="email" style={styles.icon1}></Icon1>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
         <Icon2 name="right" style={styles.icon2}></Icon2>        
       </TouchableOpacity>
@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     color: colors.danger,
     fontSize: 30,
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    paddingRight: Paddings.narrow,
   },
 
   icon2: {
@@ -59,4 +60,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default AccountScreenRow2;
+export default CreateItemScreenRow2;

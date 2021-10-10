@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 
-import { POSTEDITEMS } from "../data/dummy-data";
+import { ITEM } from "../data/dummy-data";
 import MyItemCard from "../components/MyItemCard";
 import MyItemCardSmall from "../components/MyItemCardSmall";
 import ItemDetailScreen from '../screens/ItemDetailScreen';
@@ -9,6 +9,8 @@ import ItemDetailScreen from '../screens/ItemDetailScreen';
 
 import EditableCard from "../components/EditableCard";
 import Logo from "../components/Logo";
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
 
 
 function ListItemsScreen(props) {
@@ -19,7 +21,7 @@ function ListItemsScreen(props) {
   const selectedCategoryId = catId;
     //console.log(selectedCategoryId)
 
-  const selectedItem = POSTEDITEMS.filter(
+  const selectedItem = ITEM.filter(
       cat => cat.categoryId.indexOf(selectedCategoryId) >= 0);
 
   // HH - created  to render MyItemCard component details*****************
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems:'center',
+    backgroundColor:colors.light4,
   },
   titleContainer:{
     flex:1,

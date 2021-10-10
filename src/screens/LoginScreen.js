@@ -23,7 +23,7 @@ const Home = () => {
           backgroundColor: '#fff',
           borderRadius: 10,
         }}>
-        <View style={{alignSelf: 'center', marginTop: 50, marginBottom: 50}}>
+        <View style={{alignSelf: 'center', marginTop: 70, marginBottom: 50}}>
           <Text style={{fontSize: 32, fontWeight: 'bold'}}>Login</Text>
         </View>
         <View style={{}}>
@@ -54,7 +54,7 @@ const Home = () => {
                   paddingBottom: 20,
                   borderRadius: 10,
                 }}>
-                <Text style={{fontSize: 18, color: '#fff'}}>Log in</Text>
+                <Text style={{fontSize: 20, color: '#fff'}}>Log in</Text>
               </TouchableOpacity>
           </View>
         </View>

@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import Icon1 from "react-native-vector-icons/Ionicons";
-import Icon2 from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/AntDesign";
 
 // AD - constants
+// HH - modified a bit - remove the icon
 import TextStyling from '../constants/fontstyling'
 // Added for margins and paddings
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountScreenRow3(props) {
+function AccountScreenRow(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
-        <Icon1 name="settings-outline" style={styles.icon1}></Icon1>
+        <Icon name={props.icon} style={styles.icon1}></Icon>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon2 name="right" style={styles.icon2}></Icon2>        
+        <Icon name="right" style={styles.icon2}></Icon>        
       </TouchableOpacity>
     </View>
   );
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default AccountScreenRow3;
+export default AccountScreenRow;

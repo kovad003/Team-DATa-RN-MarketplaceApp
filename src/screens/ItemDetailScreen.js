@@ -1,29 +1,39 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity, ScrollView } from "react-native";
+import React, { Component, useState } from "react";
+import { StyleSheet, View, Text, FlatList, Image,Button, Modal, TouchableOpacity, ScrollView } from "react-native";
 
-import { POSTEDITEMS } from "../data/dummy-data";
+import { ITEM } from "../data/dummy-data";
 import MyItemCard from "../components/MyItemCard";
 import MyItemCardSmall from "../components/MyItemCardSmall";
 import Icon from "react-native-vector-icons/AntDesign";
 import AppButton from "../components/AppButton";
 import EditableCard from "../components/EditableCard";
+import AccountScreenRow from '../components/AccountScreenRow';
+
+// Styling iports
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
 
 // in this Component we can see all details of the selected Item
 function itemDetailScreen(props) {
 
+    const [infoVisible , setInfoVisible] = useState(false);
   
   // HH - created to read data from dummy-data
     console.log(props.route.params);
 
     const { itemId } = props.route.params;
     const selectedItemId = itemId;
-    // const selectedItem = POSTEDITEMS.filter(
+    // const selectedItem = ITEM.filter(
     //     cat => cat.categoryId.nidexOf(props.selectedItemId) >= 0);
-  const selectedItem = POSTEDITEMS.find(item => item.id === selectedItemId);
-  //console.log(selectedItem);
+  const selectedItem = ITEM.find(item => item.id === selectedItemId);
 
-  //console.log(selectedItem[0].imageUrl);
-
+  const ContactInfo = ()=>{
+    setInfoVisible(true);
+  }
+  const CancelContactInfo = ()=>{
+    setInfoVisible(false);
+  }
+  
 
   return (
     <View style={styles.container}>
@@ -56,22 +66,30 @@ function itemDetailScreen(props) {
             <Text style={styles.rowText} >{selectedItem.description}</Text>
           </View>
         </View>
-
-        <View style={styles.rowLineContainer2}>
-            <TouchableOpacity style={styles.rowContainer}>
-            <Text>Guide for shopping safe</Text>
-            <Icon name="right" style={styles.icon}></Icon>
-            </TouchableOpacity>
-        </View>
-        <View style={styles.rowLineContainer2}>
-            <TouchableOpacity style={styles.rowContainer}>
-            <Text>Report</Text>
-            <Icon name="right" style={styles.icon}></Icon>
-            </TouchableOpacity>
-        </View>
+        <AccountScreenRow icon="question" rowText='Guid for shopping Safe' style = {styles.row2}/>
+        <AccountScreenRow icon="info" rowText='Report' style = {styles.row2}/>
       </ScrollView>
       <View style={styles.uploadButton}>
-        <AppButton button="Contact Information" />
+        <Button title="Contact Information" onPress={ContactInfo}/>
+      </View>
+      <View >
+        <Modal 
+        visible={infoVisible} 
+        animationType="slide"
+        transparent={true}
+        >
+          <View style={styles.contactModal}>
+            <View style={styles.contactModal2}>
+              <View >
+                <Text style={styles.contactInfoText}>Hossein Hazratgholizadeh</Text>
+                <Text style={styles.contactInfoText}>Phone number : +358403771254</Text>
+              </View>
+              <View style={styles.uploadButton}>
+              <Button title="Back" onPress={CancelContactInfo}/>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     </View>
   );
@@ -81,6 +99,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent:'space-between',
+    fontSize:24,
+    backgroundColor:colors.light4,
+  },
+  contactModal:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffffee',
+    marginTop: '75%',
+    borderRadius:30,
+
+  },
+  contactModal2:{
+    alignItems: 'center',
+    height: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+
+  },
+  contactInfoText:{
     fontSize:24,
   },
   mainContainer:{
@@ -93,7 +133,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 10,
     flexDirection:'row',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    marginVertical:3,
   },
   rowTextBold:{
     fontSize:20,
@@ -122,6 +163,9 @@ const styles = StyleSheet.create({
   },
   rowLineContainer2 : {
     marginVertical: 5, // AD - added margin vertical (narros is the best)
+  },
+  row2: {
+    marginVertical: Margins.xxnarrow, // narrow
   },
 uploadButton:{
   height:40,

@@ -15,5 +15,7 @@ export default {
 // AD extra colors
     light4: '#f0f8ff', // aliceblue (AD)
     light5: '#F44336', // D's app button red (AD)
+    darkBlueCustom: '#000080',
+    darkGreenCustom: '#006400',
 };
 

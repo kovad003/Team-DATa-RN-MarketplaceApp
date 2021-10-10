@@ -1,4 +1,4 @@
-class PostedItem {
+class Item {
     constructor(id,categoryId, customerId, title, price,  description, condition, postDate, city,  imageUrl){
         this.id = id;
         this.categoryId = categoryId;
@@ -13,4 +13,4 @@ class PostedItem {
     }
 
 }
-export default PostedItem;
+export default Item;

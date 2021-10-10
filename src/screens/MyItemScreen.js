@@ -12,6 +12,7 @@ function MyItemScreen(props) {
   
   // created By Hossein to read data from dummy-data
   // const myItemsList = POSTEDITEMS.find(posted => posted.customerId === 'p004');
+  // HH - following line is read data from Dummy-data
   const myItemsList = POSTEDITEMS.filter(
         posted => posted.customerId.indexOf('p004') >= 0);
 

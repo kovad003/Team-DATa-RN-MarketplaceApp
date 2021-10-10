@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
         borderWidth:0,
         borderRadius:10,
         overflow: 'hidden',
-        backgroundColor: '#C5CBE3',
         marginVertical:10,
     },
     titleContainer:{

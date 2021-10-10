@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import Icon1 from "react-native-vector-icons/AntDesign";
+import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon3 from "react-native-vector-icons/AntDesign";
 
 // AD - constants
 import TextStyling from '../constants/fontstyling'
@@ -8,13 +10,14 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountScreenRow1(props) {
+function ItemSuccessfullyAdded(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
-        <Icon name="adduser" style={styles.icon1}></Icon>
+        <Icon1 name="pushpino" style={styles.icon1}></Icon1>
+        <Icon2 name="sticker-emoji" style={styles.icon2}></Icon2>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon name="right" style={styles.icon2}></Icon>        
+        <Icon3 name="right" style={styles.icon3}></Icon3>        
       </TouchableOpacity>
     </View>
   );
@@ -38,7 +41,9 @@ const styles = StyleSheet.create({
     alignItems:'center',
     flexDirection: 'row',
     paddingLeft: '9%', // '20%'
-    paddingRight: Paddings.large    
+    paddingRight: Paddings.large,  //large
+
+   
   },
 
   icon1: {
@@ -50,6 +55,15 @@ const styles = StyleSheet.create({
   },
 
   icon2: {
+    color: colors.danger,
+    fontSize: 30,
+    justifyContent:'center',
+    alignItems:'center',
+    paddingLeft: '11%',
+    paddingTop: '1%',
+  },
+
+  icon3: {
     color: "rgba(128,128,128,1)",
     fontSize: 30,
     justifyContent:'center',
@@ -58,4 +72,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default AccountScreenRow1;
+export default ItemSuccessfullyAdded;
