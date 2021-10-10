@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text} from 'react-native';
-
-import LogoSmall from "./LogoSmall";
 import CreateItemInputLogo from "./CreateItemInputLogo";
-
 import colors from "../constants/colors";
-
 import Icon1 from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/FontAwesome5";
 import Icon3 from "react-native-vector-icons/Entypo";
 import Icon4 from "react-native-vector-icons/MaterialIcons";
-
 import { Margins, Paddings } from "../constants/constvalues";
 import { ScrollView } from 'react-native-gesture-handler';
-
 import TextStyling from '../constants/fontstyling'
 
 const CreateItemInput=(props)=>{

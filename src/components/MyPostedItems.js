@@ -1,20 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
 import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, FlatList} from 'react-native';
-
-import LogoSmall from "./LogoSmall";
 import CreateItemInputLogo from "./CreateItemInputLogo";
-
 import colors from "../constants/colors";
-
-import Icon1 from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/FontAwesome5";
-import Icon3 from "react-native-vector-icons/Entypo";
-import Icon4 from "react-native-vector-icons/MaterialIcons";
-
 import { Margins, Paddings } from "../constants/constvalues";
-import { ScrollView } from 'react-native-gesture-handler';
-
-import TextStyling from '../constants/fontstyling'
 import ListCreatedItem from "../components/ListCreatedItem";
 
 const MyPostedItems=(props)=>{
@@ -38,9 +26,6 @@ const MyPostedItems=(props)=>{
         props.onCancelItem();
     }
 
-    //
-  //
-  //
   // functions related to the input field functionality
 
   const [hasMessage, setMessage] = useState(false);
@@ -215,55 +200,6 @@ const MyPostedItems=(props)=>{
         setLoading(false);
     }
   });
-
-
-  /*
-
-
-  // If the 'fetch' is not ready yet, an activityindicator is shown
-  if (isLoading==true) {
-    console.log('if(isLoading==true) {');
-    return (
-      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
-        <ActivityIndicator size="large" color="#00ff00" />
-      </View>
-    );
-  }
-  // If error or confirm message needs to be displayed
-  else if(hasMessage){
-    console.log('else if(hasError){');
-    return(
-
-      <ScrollView style={styles.scrollViewCustom}>
-      <View style={styles.container}>  
-
-      <LogoSmall style={styles.logoItemModal}/>
-      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
-        <Text>{hasMessage}</Text>
-        <Text>{""+messageDisplayed}</Text>
-        <ItemSuccessfullyAdded />
-        <Button 
-        color = '#000080' 
-        title='close' 
-        onPress={()=>closeMessage()}/>
-      </View>
-
-      </View>
-      </ScrollView>
-    );
-  }
-  //Otherwise the list is shown
-  else{
-    console.log('else{');
-   
-
-*/
-
-
-
-    //
-    //
-    //
 
     // Return
     return (

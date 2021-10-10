@@ -1,30 +1,17 @@
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
-
-// AD - constants
 import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
-
 import LogoSmall from "../components/LogoSmall";
-import ListCreatedItem from "../components/ListCreatedItem";
 import CreateItemInput from "../components/CreateItemInput";
-
-// AD - Component Rows
-import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
-import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import MyPostedItems from "../components/MyPostedItems";
-
 
 function CreateItemScreen(props) {
 
-  //
-  //
-  //
   // functions related to the input field functionality
 
   const [hasMessage, setMessage] = useState(false);
@@ -259,13 +246,6 @@ function CreateItemScreen(props) {
 
 <ScrollView style={styles.scrollStyle}>
 
-          {/*
-          <View>
-          <Button title='Post new Item' onPress={()=>setVisibility(true)} />
-          </View>
-          */}
-          
-
       <View style={styles.container}>  
         <View style={styles.centralContainer}>        
 
@@ -277,15 +257,7 @@ function CreateItemScreen(props) {
 
           <View style={styles.logoContainer}>
             <LogoSmall></LogoSmall>
-          </View>
-          
-          {/* 
-          <Button title = "ok" onPress={()=>setVisibility(true)} />
-          */}
- 
-
-
-
+          </View> 
 
           <Text 
             text = 'submit'
@@ -297,10 +269,7 @@ function CreateItemScreen(props) {
             text = 'submit'
             style = {TextStyling.textBlackSmall}
             onPress={()=>setflatListVisibility(true)} >
-            Press Me FlatList</Text>
-
-
-            
+            Press Me FlatList</Text>            
 
           <MenuRow 
             style = {styles.row1} 
@@ -354,104 +323,7 @@ function CreateItemScreen(props) {
   }
 };
 
-  //
-  //
-  //
-
-
-  /* AD - original 
-
-<ScrollView style={styles.scrollStyle}>
-      <View style={styles.container}>  
-        <View style={styles.centralContainer}>
-   
-          <View style={styles.logoContainer}>
-            <LogoSmall></LogoSmall>
-          </View>
-
-          <MenuRow style = {styles.row1} rowText = "Register"
-            icon1 = "account-plus-outline"/>
-          <MenuRow style = {styles.row2} rowText = "Login"
-            icon1 = "login" />
-          <MenuRow style = {styles.row2} rowText = "Settings"
-            icon1 = "cog-outline" />
-          <MenuRow style = {styles.row2} rowText = "Premium"
-            icon1 = "crown" />
-          <MenuRow style = {styles.row2} rowText = "Support"
-            icon1 = "face-agent" />
-          <MenuRow style = {styles.row3} bckgcol = {colors.danger}    rowText = "Delete Account"
-            icon1 = "delete-forever"
-            icon2 = "alert-octagon"
-            textstyling = {TextStyling.textWhiteMedium}
-            icon1color = "white"
-            icon2color = "white"  />        
-        </View>
-      </View>
-    </ScrollView>    
-    
-    
-
-
-<View style={styles.container}> 
-        <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} /> 
-        <CreateItemScreenRow2 rowText = "Support" style = {styles.row2}/>
-        <View style={styles.centralContainer}>
-      <View style={styles.screen}>
-        <Text>{hasMessage}</Text>
-
-        
-        <Button color='grey' title='Fetch from DB' onPress={()=>fetchData()} />
-        <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
-        
-         
-        <Button color = '#000080' title='Post new Item' onPress={()=>setVisibility(true)} />
-        <Text style = {TextStyling.textBlackSmall}>(Scrollable)</Text>
-        <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>    
-     
-        <CreateItemInput 
-          visibility={isVisible} 
-          onAddItem={onAddItem}
-          itemList={items} 
-          onCancelItem={cancelAddItem} 
-        />        
-        <FlatList
-          keyExtractor={(item) => item.id.toString()} 
-          data={items}
-          renderItem={itemData => 
-            <ListCreatedItem id={itemData.item.id} 
-            name={itemData.item.name}
-            price={itemData.item.price}
-            description={itemData.item.description}
-            category={itemData.item.category}
-            onDelete={()=>onDeleteItem(itemData.item.id)} 
-        />}        
-      />
-      </View>
-      </View>
-      </View>   
-
-    
-
-*/
-
-
 const styles = StyleSheet.create({
-
-/* The previous GOOD VERSION 
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: colors.light4,
-    width:'100%',
-  },  
-*/
-
-/* The previous GOOD VERSION 
-  logoContainer:{
-    //marginTop: 1, //26
-    alignItems: 'center',   
-  },
-  */
 
   scrollViewCustom: {
     backgroundColor: colors.light4, // AD - added background
@@ -465,52 +337,6 @@ const styles = StyleSheet.create({
     width: '90%',
     backgroundColor: 'green',
   },
-
-  /* AD - Previous GOOD version
-
-  centralContainer: {
-    flex: 1,   
-    justifyContent: 'center',
-    width: '90%', 
-    //backgroundColor: colors.light4,
-    //backgroundColor: 'red',
-    padding: Paddings.midsize,
-
-    paddingBottom: Paddings.midsize,
-
-    //margin: Margins.midsize,
-    margin: Margins.narrow,
-
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: colors.danger,
-  },
-
-  */
-
-
-
-
-  /* AD - The original GOOD version
-  row1: {
-    marginVertical: Margins.xxnarrow,
-    marginTop: 15,
-  },
-
-  row2: {
-    marginVertical: Margins.xxnarrow,
-  },
-
-  row3: {
-    marginVertical: Margins.large,
-  },
- */
 
   imageUploader: {
     height: 104,
@@ -549,15 +375,9 @@ const styles = StyleSheet.create({
 
 /* AD - stylings related to the list functionality */
   screen: {
-    //marginTop: 5,//10
-    //padding: 10, // 10
     paddingHorizontal: 10,
     paddingBottom: 10,
     height: '100%',
-
-    //alignItems: 'center',
-    //backgroundColor: 'blue',
-
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
       width: 3,
@@ -566,8 +386,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 0.31,
     shadowRadius: 0,
-    backgroundColor: "#E6E6E6",  
-   
+    backgroundColor: "#E6E6E6",     
 
   },
   listItem:{
@@ -580,8 +399,7 @@ const styles = StyleSheet.create({
 
   /* AD - Originally from the Account Screen */
   scrollStyle: {
-    backgroundColor: colors.light4,
-    //justifyContent: 'center',
+    backgroundColor: colors.light4, 
   },
 
   container: {
@@ -612,8 +430,7 @@ const styles = StyleSheet.create({
     flex: 1,   
     justifyContent: 'center',
     width: '100%', 
-    backgroundColor: colors.light4,
-    
+    backgroundColor: colors.light4,    
   },
 
 });
