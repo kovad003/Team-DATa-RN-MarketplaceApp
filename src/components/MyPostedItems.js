@@ -206,20 +206,24 @@ const MyPostedItems=(props)=>{
         <Modal visible={props.visibility} animationType="slide">
             <View style={styles.formStyle}>
 
-                <View style={styles.logoCustom} >
-                <CreateItemInputLogo></CreateItemInputLogo>
-                </View>
-                <View style={styles.buttonView}>
-                    <View style={styles.button}>
-                    <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
-                    </View>
-                   
-                </View>
+            <View style={styles.logoCustom} >
+            <CreateItemInputLogo></CreateItemInputLogo>
+            </View>
+
+            <View style={styles.buttonView}>
+                <View style={styles.button}>
+                <Button color='#c83232' title="Back" onPress={cancelItem}/>
+                </View>             
+            </View>
 
                 <View style={styles.formStyle}>
 
                 </View>
             </View>
+
+            {/* 
+
+            <View style = {styles.flatListOuterContainer}>
             <FlatList
                     keyExtractor={(item) => item.itemId.toString()} 
                     data={items}
@@ -231,8 +235,14 @@ const MyPostedItems=(props)=>{
                         datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
                         onDelete={()=>onDeleteItem(itemData.item.itemId)} 
                     />}
-
                     />
+
+
+            </View>
+
+*/}
+
+
         </Modal>
     );
 }
@@ -247,17 +257,23 @@ const styles=StyleSheet.create({
         paddingHorizontal: 10,        
       },
       logoCustom: {        
-        marginTop: Margins.large,      
-      },      
+        marginTop: Margins.narrow,      
+      },   
+       
       buttonView:{
         width:'60%',
         flexDirection: 'row',
         justifyContent:"space-around",
-        marginBottom: Margins.large,
+        //marginBottom: Margins.large,
+        //marginVertical: Margins.midsize,
+        marginBottom: Margins.midsize,
       },
+      
+     
       button:{
         width:'40%',
       },
+      
       iconStyling: {
         fontSize: 30,
         justifyContent:'center',
@@ -266,6 +282,9 @@ const styles=StyleSheet.create({
         paddingTop: Paddings.narrow,
         color: colors.danger,
       },     
+      flatListOuterContainer: {
+        marginTop: Margins.xsuperLarge,
+      },
 });
 
 export default MyPostedItems;
