@@ -218,7 +218,7 @@ const MyPostedItems=(props)=>{
           
           </View>
         
-        <Text style={TextStyling.textBlackSmall}>My Posted Items:</Text>
+        <Text style={[TextStyling.textBlackSmall, styles.headerText]}>My Posted Items:</Text>
         </View>        
 
         
@@ -273,6 +273,13 @@ const styles=StyleSheet.create({
         //marginTop: Margins.xsuperLarge,
         flex: 1,
         backgroundColor: colors.light4,
+      },
+      headerText: {
+        marginVertical: Margins.xnarrow,
+        borderTopWidth:1,
+        borderBottomWidth:1,
+        borderColor: '#000080', //  '#000080'
+        paddingVertical: Paddings.xnarrow,
       },
 });
 

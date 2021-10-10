@@ -11,7 +11,7 @@ const ListCreatedItem=(props)=>{
     return(
 
         <View style={styles.ListOuterContainer}>
-        <View activeOpacity={0.8} onLongPress={props.onDelete}>
+        <View /* activeOpacity={0.8} onLongPress={props.onDelete} */>
             <View style={styles.listItemStyle}>
 
                 <View style={styles.LeftInnerContainer}>
@@ -113,12 +113,15 @@ const styles = StyleSheet.create ({
     },
     moreButton: {
         color: "green",
+        fontWeight: "bold",
     },
     updateButton: {
         color: "blue",
+        fontWeight: "bold",
     },
     deleteButton: {
         color: "red",
+        fontWeight: "bold",
     },
   });
 
