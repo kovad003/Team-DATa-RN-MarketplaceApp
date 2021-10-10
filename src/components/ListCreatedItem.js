@@ -21,7 +21,7 @@ const ListCreatedItem=(props)=>{
 
                 <View style={styles.rightInnerContainer}>
                     <View style={styles.innerRowContainer1}>
-                        <Text style={{color : "#000080", fontWeight: "bold"}}>{props.itemId}&#41; {props.title}</Text>
+                        <Text style={[TextStyling.textBlackSmall, styles.titleName]}>{props.itemId}&#41; {props.title}</Text>
                     </View>
 
                     <View style={styles.innerRowContainer2}>
@@ -88,14 +88,27 @@ const styles = StyleSheet.create ({
     },
     innerRowContainer2: {
         backgroundColor: colors.light4,
-        paddingHorizontal: 22,
+        //paddingHorizontal: 26, //22
         //paddingVertical: Paddings.xnarrow,
+        paddingRight: Paddings.xnarrow,
+        paddingLeft: Paddings.xnarrow,
+
+        paddingVertical: Paddings.xnarrow,
     },
     innerRowContainer3: {
         backgroundColor: colors.light4,
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: Paddings.large,
+        paddingVertical: Paddings.xnarrow,
+    },
+    titleName: {
+        color: colors.darkBlueCustom,
+        fontWeight: "bold",
+        //fontSize: 17,
+        //borderWidth: 1, 
+        borderBottomWidth:1,
+        borderColor: '#000080', //  '#000080'
         paddingVertical: Paddings.xnarrow,
     },
     moreButton: {

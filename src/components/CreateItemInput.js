@@ -171,7 +171,7 @@ const styles=StyleSheet.create({
       inputStyle: {
         //borderWidth: 1,
         borderBottomWidth:1,
-        borderColor: '#5f9ea0', //  '#000080' #5f9ea0
+        borderColor: colors.darkBlueCustom, //  '#000080' '#5f9ea0'
         paddingLeft: Paddings.narrow,
         width:'80%',
         backgroundColor: 'white',
@@ -183,7 +183,7 @@ const styles=StyleSheet.create({
       inputStyle2: {
         //borderWidth: 1, 
         borderBottomWidth:1,
-        borderColor: '#5f9ea0', //  '#000080'
+        borderColor: colors.darkBlueCustom, //  '#000080' '#5f9ea0'
         paddingLeft: Paddings.narrow,
         width:'80%',
         height: 80,
@@ -195,7 +195,7 @@ const styles=StyleSheet.create({
       inputStyle3: {
         //borderWidth: 1, 
         borderBottomWidth:1, 
-        borderColor: '#5f9ea0', //  '#c83232'
+        borderColor: colors.darkBlueCustom, //  '#000080' '#5f9ea0'
         paddingLeft: Paddings.narrow,
         width:'80%',
         height: 70,
