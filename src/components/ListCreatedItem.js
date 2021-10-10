@@ -18,11 +18,21 @@ const ListCreatedItem=(props)=>{
                     source={{uri: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg'}} style={styles.image}/>
                 </View> 
 
-                <View style={styles.rightInnerContainer}>   
-                    <Text>{props.itemId}&#41; {props.title}</Text>
-                    <Text>Price: {props.price}€ </Text>
-                    <Text>Description: {props.description}</Text>
-                    <Text>Posted on: {props.datePosted}</Text>
+                <View style={styles.rightInnerContainer}>
+                    <View style={styles.innerRowContainer1}>
+                        <Text>{props.itemId}&#41; {props.title}</Text>
+                    </View>
+
+                    <View style={styles.innerRowContainer2}>
+                        <Text>Price: {props.price}€ </Text>
+                        <Text>Description: {props.description}</Text>
+                        <Text>Posted on: {props.datePosted}</Text>
+                    </View>
+
+                    <View style={styles.innerRowContainer3}>
+                        <Text>Button 1 and Button 2</Text>
+                    </View>
+
                 </View>
 
             </View>
@@ -84,6 +94,16 @@ const styles = StyleSheet.create ({
         marginVertical: 5,    
         justifyContent: "center"
     },
+    innerRowContainer1: {
+        backgroundColor: 'red',
+    },
+    innerRowContainer2: {
+        backgroundColor: 'yellow',
+    },
+    innerRowContainer3: {
+        backgroundColor: 'green',
+    },
+
   });
 
   export default ListCreatedItem;
