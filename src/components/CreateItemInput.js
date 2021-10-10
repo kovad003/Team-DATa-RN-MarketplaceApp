@@ -171,7 +171,7 @@ const styles=StyleSheet.create({
       inputStyle: {
         borderWidth: 2, 
         borderColor: '#000080', 
-        paddingLeft: Paddings.xnarrow,
+        paddingLeft: Paddings.narrow,
         width:'80%',
         backgroundColor: 'white',
         color: '#000080',
@@ -181,7 +181,7 @@ const styles=StyleSheet.create({
       inputStyle2: {
         borderWidth: 2, 
         borderColor: '#000080', 
-        padding: 10,
+        paddingLeft: Paddings.narrow,
         width:'80%',
         height: 80,
         backgroundColor: 'white',
@@ -191,7 +191,7 @@ const styles=StyleSheet.create({
       inputStyle3: {
         borderWidth: 2, 
         borderColor: '#000080', 
-        padding: 10,
+        paddingLeft: Paddings.narrow,
         width:'80%',
         height: 70,
         backgroundColor: 'white',

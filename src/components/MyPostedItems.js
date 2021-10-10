@@ -4,6 +4,7 @@ import CreateItemInputLogo from "./CreateItemInputLogo";
 import colors from "../constants/colors";
 import { Margins, Paddings } from "../constants/constvalues";
 import ListCreatedItem from "../components/ListCreatedItem";
+import TextStyling from '../constants/fontstyling';
 
 const MyPostedItems=(props)=>{
     const data = "This is data from Child Component to the Parent Component. :)"
@@ -213,9 +214,14 @@ const MyPostedItems=(props)=>{
               <View style={styles.button}>
               <Button color='#c83232' title="Back" onPress={cancelItem}/>
               </View>             
+          
+          
           </View>
+        
+        <Text style={TextStyling.textBlackSmall}>My Posted Items</Text>
         </View>        
 
+        
         <View style = {styles.flatListOuterContainer}>
           <FlatList
                   keyExtractor={(item) => item.itemId.toString()} 
@@ -250,9 +256,7 @@ const styles=StyleSheet.create({
         width:'60%',
         flexDirection: 'row',
         justifyContent:"space-around",
-        //marginBottom: Margins.large,
-        //marginVertical: Margins.midsize,
-        marginBottom: Margins.midsize,
+        marginBottom: Margins.xnarrow,
       },     
       button:{
         width:'40%',
