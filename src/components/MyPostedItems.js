@@ -282,22 +282,6 @@ const MyPostedItems=(props)=>{
 
                 <View style={styles.formStyle}>
 
-                    {/* 
-                <FlatList
-                    keyExtractor={(item) => item.id.toString()} 
-                    data={items}
-                    renderItem={itemData => 
-                        <ListCreatedItem id={itemData.item.id} 
-                        name={itemData.item.name}
-                        price={itemData.item.price}
-                        description={itemData.item.description}
-                        category={itemData.item.category}
-                        onDelete={()=>onDeleteItem(itemData.item.id)} 
-                    />}
-
-                    />
-                    */}
-
                 </View>
             </View>
             <FlatList

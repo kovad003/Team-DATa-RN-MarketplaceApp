@@ -2,8 +2,12 @@ import React from 'react';
 
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
+import { Margins, Paddings } from "../constants/constvalues";
+
 const ListCreatedItem=(props)=>{
     return(
+
+        <View style={styles.ListOuterContainer}>
         <TouchableOpacity activeOpacity={0.8} onLongPress={props.onDelete}>
             <View style={styles.listItemStyle}>
                 <Image 
@@ -14,6 +18,7 @@ const ListCreatedItem=(props)=>{
                 <Text>Posted on: {props.datePosted}</Text>
             </View>
         </TouchableOpacity>
+        </View>
     );
 }
 const styles = StyleSheet.create ({
@@ -30,6 +35,10 @@ const styles = StyleSheet.create ({
         width: 70,
         height: 70,
         borderRadius: 35,
+     },
+     ListOuterContainer: {
+         marginHorizontal: Margins.midsize,
+         
      }
   });
 
