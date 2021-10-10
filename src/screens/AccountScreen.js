@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
-import HeaderComponent from "../components/HeaderComponent";
-import ImageUploader from "../components/ImageUploader";
-import CreateItemForm from "../components/CreateItemForm";
-import AccountScreenRow1 from "../components/AccountScreenRow1";
-import AccountScreenRow2 from "../components/AccountScreenRow2";
-import AccountScreenRow3 from "../components/AccountScreenRow3";
-import AccountScreenRow4 from "../components/AccountScreenRow4";
-import AccountScreenRow5 from "../components/AccountScreenRow5";
-import AccountScreenRow6 from "../components/AccountScreenRow6";
-import AppButton from "../components/AppButton";
+
+import MenuRow from "../components/MenuRow";
 import LogoSmall from "../components/LogoSmall";
 
 // AD - constants
@@ -25,18 +17,27 @@ function AccountScreen(props) {
         <View style={styles.centralContainer}>
    
           <View style={styles.logoContainer}>
-            <LogoSmall style={styles.logo}></LogoSmall>
+            <LogoSmall></LogoSmall>
           </View>
 
-          <AccountScreenRow1 rowText = "Register" style = {styles.row1} />
-          <AccountScreenRow2 rowText = "Login" style = {styles.row2} />
-          <AccountScreenRow3 rowText = "Settings" style = {styles.row2} />
-          <AccountScreenRow4 rowText = "Premium" style = {styles.row2} />
-          <AccountScreenRow5 rowText = "Support" style = {styles.row2} />
-          <AccountScreenRow6 
-                rowText = "Delete Account" 
-                style = {styles.row3} 
-                />          
+          <MenuRow style = {styles.row1} rowText = "Register"
+            icon1 = "account-plus-outline"/>
+          <MenuRow style = {styles.row1a} rowText = "Login"
+            icon1 = "login" />
+          <MenuRow style = {styles.row2} rowText = "About"
+            icon1 = "information-outline" />
+          <MenuRow style = {styles.row2} rowText = "Settings"
+            icon1 = "cog-outline" />
+          <MenuRow style = {styles.row2} rowText = "Premium"
+            icon1 = "crown" />          
+          <MenuRow style = {styles.row2} bckgcol = {colors.danger} rowText = "Delete Account"
+            icon1 = "delete-forever"
+            icon2 = "alert-octagon"
+            textstyling = {TextStyling.textWhiteMedium}
+            icon1color = "white"
+            icon2color = "white"  />
+          <MenuRow style = {styles.row3} rowText = "Support"
+          icon1 = "face-agent" />
         </View>
       </View>
     </ScrollView>        
@@ -56,12 +57,18 @@ const styles = StyleSheet.create({
   },   
   
   logoContainer:{
-    marginTop: 26, //25
+    marginTop: 17, //20
     alignItems: 'center',   
   },
 
   row1: {
-    marginVertical: Margins.large, // xlarge
+    marginTop: 17,
+    marginBottom: Margins.xxnarrow,
+  },
+
+  row1a: {
+    marginTop: Margins.xxnarrow,
+    marginBottom: Margins.large,
   },
 
   row2: {
@@ -69,7 +76,7 @@ const styles = StyleSheet.create({
   },
 
   row3: {
-    marginVertical: Margins.large, // xlarge
+    marginVertical: Margins.midsize, // xlarge
   },
 
   centralContainer: {
@@ -77,6 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%', 
     backgroundColor: colors.light4,
+    
   },
 
 });

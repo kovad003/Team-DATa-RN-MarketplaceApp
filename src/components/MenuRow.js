@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import Icon1 from "react-native-vector-icons/Ionicons";
-import Icon2 from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // AD - constants
 import TextStyling from '../constants/fontstyling'
@@ -9,14 +8,22 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountScreenRow3(props) {
+function MenuRow(props) {
   return (
-    <View style={[styles.container, props.style]}>  
-      <TouchableOpacity style={styles.rowContainer}>
-        <Icon1 name="settings-outline" style={styles.icon1}></Icon1>
-        <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon2 name="right" style={styles.icon2}></Icon2>        
-      </TouchableOpacity>
+    <View style={props.style}>  
+      <TouchableOpacity 
+        style={[styles.rowContainer, {backgroundColor: props.bckgcol || "#E6E6E6"}]}>
+        <Icon 
+          name={props.icon1 || "chevron-left"} 
+          style={[styles.icon1, {color: props.icon1color || colors.danger}]}
+        />
+        <Text 
+          style={props.textstyling || TextStyling.textBlackMedium}>{props.rowText}
+        </Text>
+        <Icon 
+          name={props.icon2 || "chevron-right"} style={[styles.icon2, {color: props.icon2color || "#808080"}]}
+        />      
+      </TouchableOpacity>          
     </View>
   );
 }
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 0.31,
     shadowRadius: 0,
-    backgroundColor: "#E6E6E6",  
+    //backgroundColor: "#E6E6E6",  
     height: 53,   
     
     justifyContent:'space-between', // center
@@ -51,7 +58,7 @@ const styles = StyleSheet.create({
   },
 
   icon2: {
-    color: "rgba(128,128,128,1)",
+    color: "#808080",
     fontSize: 30,
     justifyContent:'center',
     alignItems:'center'
@@ -59,4 +66,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default AccountScreenRow3;
+export default MenuRow;

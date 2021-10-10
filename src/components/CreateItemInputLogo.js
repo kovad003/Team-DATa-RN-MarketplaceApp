@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image } from "react-native";
 
-function LogoSmall(props) {
+function CreateItemInputLogo(props) {
   return (
     <View style={[styles.container, props.style]}>
       <View style={styles.logoHolderStack}>
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
     top: 0, //
     left: 31, // 31
     width: 90, // 110
-    height: 75, // 110
+    height: 70, // 90, 110
     position: "absolute"
   },
   logoHolderStack: {
     width: 152, // 172
-    height: 70 // 110
+    height: 80 // 80, 110
   }
 });
 
-export default LogoSmall;
+export default CreateItemInputLogo;

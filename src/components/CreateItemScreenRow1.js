@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon2 from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/AntDesign";
 
 // AD - constants
 import TextStyling from '../constants/fontstyling'
@@ -9,13 +8,18 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-function AccountScreenRow4(props) {
+import LogoTiny from "../components/LogoTiny";
+
+function CreateItemScreenRow1(props) {
   return (
     <View style={[styles.container, props.style]}>  
       <TouchableOpacity style={styles.rowContainer}>
-        <Icon1 name="crown" style={styles.icon1}></Icon1>
+       <LogoTiny />
+          {/*
+        <Icon name="adduser" style={styles.icon1}></Icon>
+            */}
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
-        <Icon2 name="right" style={styles.icon2}></Icon2>        
+        <Icon name="right" style={styles.icon2}></Icon>        
       </TouchableOpacity>
     </View>
   );
@@ -59,4 +63,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default AccountScreenRow4;
+export default CreateItemScreenRow1;
