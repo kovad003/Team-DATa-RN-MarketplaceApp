@@ -221,7 +221,7 @@ const MyPostedItems=(props)=>{
                 </View>
             </View>
 
-            {/* 
+        
 
             <View style = {styles.flatListOuterContainer}>
             <FlatList
@@ -240,7 +240,7 @@ const MyPostedItems=(props)=>{
 
             </View>
 
-*/}
+
 
 
         </Modal>
@@ -249,9 +249,9 @@ const MyPostedItems=(props)=>{
 
 const styles=StyleSheet.create({
     formStyle: {
-        flex:1,
-        flexDirection: 'column',
-        justifyContent:'center',
+        //flex:1,
+        //flexDirection: 'column',
+        //justifyContent:'center',
         alignItems:"center",
         backgroundColor: colors.light4,
         paddingHorizontal: 10,        
@@ -283,7 +283,9 @@ const styles=StyleSheet.create({
         color: colors.danger,
       },     
       flatListOuterContainer: {
-        marginTop: Margins.xsuperLarge,
+        //marginTop: Margins.xsuperLarge,
+        flex: 1,
+        backgroundColor: colors.light4,
       },
 });
 
