@@ -8,6 +8,9 @@ import SearchBar from "../components/SearchBar";
 // Constants
 import TextStyling from '../constants/fontstyling'
 import colors from "../constants/colors";
+import MenuSwipableRow from "../components/swipable/MenuSwipableRow";
+import MenuRightSwipeAction from "../components/swipable/MenuRightSwipeAction";
+import MenuLeftSwipeAction from "../components/swipable/MenuLeftSwipeAction";
 
 function SearchScreen(props) {
 // Creating mock data
@@ -37,77 +40,81 @@ function SearchScreen(props) {
     {id: '10', name: 'Electronics'},
     {id: '11', name: 'Other'}, */
   ]
-  
   console.log('categoryList: ' + categoryList);
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  function onPressFunction(){
+    console.log('swipable was pressed')
+  }
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   return (
     <View style={styles.container}>
-
-      <View style={styles.searchBar}>
-        <SearchBar style={styles.searchBar}/>
+      <View >
+        <SearchBar/>
       </View>
         <View>
           {/* ---------------------------------------------------------------------------- */}
-          <View style={styles.categoriesContainer}>
-            <Text style={styles.fontTitle}>Categories:</Text>
-
+            <MenuSwipableRow 
+              iconMain="tag-multiple"
+              iconColor="black"
+              label="Category"
+              onPress={onPressFunction}
+              renderLeftActions = {MenuLeftSwipeAction}
+              renderRightActions = {MenuRightSwipeAction}
+            />
             {/* <ScrollView horizontal={false}>
               {categoryList.map((category)=>
                 <SwitchFilter label={category.name}></SwitchFilter>)}
             </ScrollView> */}
-            <SwitchFilter label='All' value='true'/>
-            <FlatList //FlatList shouldnt be used with ScrollView
+            {/* <SwitchFilter label='All' value='true'/> */}
+            {/* <FlatList //FlatList shouldnt be used with ScrollView
                 keyExtractor={item=>item.id}
                 data={categoryList}
                 renderItem={itemData => <SwitchFilter label={itemData.item.name}/>}
+            /> */}   
+            <MenuSwipableRow
+              iconMain="map-marker"
+              iconColor="black"
+              label="Location"
+              onPress={onPressFunction}
+              renderLeftActions = {MenuLeftSwipeAction}
+              renderRightActions = {MenuRightSwipeAction}
             />
-          </View>
-          {/* ---------------------------------------------------------------------------- */}
-          <View style={styles.locationContainer}>
-            <Text style={styles.fontTitle}>Location:</Text>
-            <ScrollDownList label="Set Location..."/>
-            <ScrollDownList label="Set Radius..."/>
-          </View>
-          {/* ---------------------------------------------------------------------------- */}
-          <View>
-            <Text style={styles.fontTitle}>Price:</Text>
-            <PriceSetter label='Min: €'/>
-            <PriceSetter label='Max: €'/>
-          </View>
-          {/* ---------------------------------------------------------------------------- */}
-        </View>    
+            <MenuSwipableRow 
+              iconMain="database"
+              iconColor="black"
+              label="Price"
+              onPress={onPressFunction}
+              renderLeftActions = {MenuLeftSwipeAction}
+              renderRightActions = {MenuRightSwipeAction}
+            />
+            <MenuSwipableRow 
+              iconMain="eye"
+              iconColor="black"
+              label="Condition"
+              onPress={onPressFunction}
+              renderLeftActions = {MenuLeftSwipeAction}
+              renderRightActions = {MenuRightSwipeAction}
+            />  
+        </View>  
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  title: {
-    
-  },
   container: {
     flex: 1,
     // backgroundColor: colors.light3,
     backgroundColor: '#f5eeeb',
     // backgroundColor: '#e7ecf2'
   },
-  categoriesContainer: {
-    height: 215,
-  },
-  searchBar: {
-    height: 90,
-    //flex: 0.15,
-    // backgroundColor set in then component file
-  },
   fontTitle: {
     marginLeft: 5,
     marginTop: 15,
-    fontFamily: 'cake-n-truffles',
+    //fontFamily: 'cake-n-truffles',
     fontSize: 26,
-    // fontWeight: '900',
     color: '#2d3553',
-    //fontStyle:'italic',
-    
-
   }
 });
 

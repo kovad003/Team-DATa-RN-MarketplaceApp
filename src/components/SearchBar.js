@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
     // backgroundColor:colors.light2,
     backgroundColor: '#8b91ad',
     flexDirection: "row",
-    flex: 1,
+    //flex: 1,
     alignItems: 'center',
+    height: 60,
     // only for android
     elevation: 8,
     // only for ios
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
   searchRow: {
     flexDirection: "row",
     flex: 1,
-    marginHorizontal: Paddings.midsize,
-    marginTop: Margins.midsize,
+    marginHorizontal: Paddings.narrow,
+    //marginTop: Margins.midsize,
   },
   inputField: {
     flex:1,
