@@ -76,13 +76,13 @@ const CreateItemInput=(props)=>{
     // Return
     return (
         <Modal visible={props.visibility} animationType="slide">
-          <ScrollView>
+          <ScrollView style={styles.scrollView}>
             <View style={styles.formStyle}>
               <View style={styles.logoCustom} >
               <CreateItemInputLogo></CreateItemInputLogo>
               </View>
 
-              <Text style={TextStyling.textBlackMedium}>Item Name</Text>
+              <Text style={TextStyling.textBlackSmall}>Item Name</Text>
               <View style={styles.itemNameRow}>
               <Icon1 name="tag" style={styles.iconStyling}></Icon1>
               <TextInput placeholder="Item's name" 
@@ -90,17 +90,16 @@ const CreateItemInput=(props)=>{
                   onChangeText={titleInputHandler}/>
               </View>
 
-              <Text style={TextStyling.textBlackMedium}>Price</Text>
+              <Text style={TextStyling.textBlackSmall}>Price</Text>
               <View style={styles.itemNameRow}>
               <Icon2 name="euro-sign" style={styles.iconStyling2}></Icon2>  
               
               <TextInput placeholder="Item's price" 
                   style={styles.inputStyle} 
-                  onChangeText={priceInputHandler}/>
-                
+                  onChangeText={priceInputHandler}/>                
               </View>
 
-              <Text style={TextStyling.textBlackMedium}>Description</Text>
+              <Text style={TextStyling.textBlackSmall}>Description</Text>
               <View style={styles.itemNameRow}>               
               <Icon3 name="edit" style={styles.iconStyling3}></Icon3>    
               <TextInput placeholder="Item's description"                
@@ -108,15 +107,15 @@ const CreateItemInput=(props)=>{
                   onChangeText={descriptionInputHandler}/>               
               </View>
                 
-              <Text style={TextStyling.textBlackMedium}>Image</Text>
+              <Text style={TextStyling.textBlackSmall}>Image</Text>
               <View style={styles.itemNameRow}>               
-              <Icon3 name="edit" style={styles.iconStyling3}></Icon3>    
+              <Icon3 name="image" style={styles.iconStyling3a}></Icon3>    
               <TextInput placeholder="Item's image"                
-                  style={styles.inputStyle2} 
+                  style={styles.inputStyle3} 
                   onChangeText={imageInputHandler}/>               
               </View>
 
-              <Text style={TextStyling.textBlackMedium}>Category</Text>
+              <Text style={TextStyling.textBlackSmall}>Category</Text>
               <View style={styles.itemNameRow}>
               <Icon4 name="category" style={styles.iconStyling4}></Icon4> 
               <TextInput placeholder="Item's category" 
@@ -124,17 +123,17 @@ const CreateItemInput=(props)=>{
                   onChangeText={categoryInputHandler}/>
               </View>
 
-              <Text style={TextStyling.textBlackMedium}>Condition</Text>
+              <Text style={TextStyling.textBlackSmall}>Condition</Text>
               <View style={styles.itemNameRow}>
-              <Icon4 name="category" style={styles.iconStyling4}></Icon4> 
+              <Icon4 name="build-circle" style={styles.iconStyling4}></Icon4> 
               <TextInput placeholder="Item's condition" 
                   style={styles.inputStyle} 
                   onChangeText={conditionInputHandler}/>
               </View>
 
-              <Text style={TextStyling.textBlackMedium}>Location</Text>
+              <Text style={TextStyling.textBlackSmall}>Location</Text>
               <View style={styles.itemNameRow}>
-              <Icon4 name="category" style={styles.iconStyling4}></Icon4> 
+              <Icon4 name="location-pin" style={styles.iconStyling4}></Icon4> 
               <TextInput placeholder="Item's location"
                   style={styles.inputStyle}
                   onChangeText={locationInputHandler}/>
@@ -155,104 +154,107 @@ const CreateItemInput=(props)=>{
 }
 
 const styles=StyleSheet.create({
+      scrollView: {
+        backgroundColor: colors.light4,
+      },
     formStyle: {
         flex:1,
         flexDirection: 'column',
         justifyContent:'center',
         alignItems:"center",
         backgroundColor: colors.light4,
-        paddingHorizontal: 10,
-
-        
+        paddingHorizontal: 10,        
       },
       logoCustom: {
-        marginBottom: Margins.narrow,
-        
-        //marginTop: Margins.xxnarrow,
+        marginTop: Margins.narrow,
       },
       inputStyle: {
         borderWidth: 2, 
         borderColor: '#000080', 
-        padding: 10,
+        //padding: 10,
+        paddingLeft: Paddings.xnarrow,
         width:'80%', // '85%'
-        marginBottom:10,
-
+        //marginBottom:10,
         backgroundColor: 'white',
         color: '#000080',
-
-        marginRight: Margins.midsize,
-               
+        marginRight: Margins.midsize, 
+        height: 40,              
       },
-
       inputStyle2: {
         borderWidth: 2, 
         borderColor: '#000080', 
         padding: 10,
         width:'80%', // '85%'
-        marginBottom:10,
-        height: 100,
+        //marginBottom:10,
+        height: 80,
         backgroundColor: 'white',
-
         color: '#000080',
         marginRight: Margins.midsize,
       },
-
+      inputStyle3: {
+        borderWidth: 2, 
+        borderColor: '#000080', 
+        padding: 10,
+        width:'80%', // '85%'
+        //marginBottom:10,
+        height: 70,
+        backgroundColor: 'white',
+        color: '#000080',
+        marginRight: Margins.midsize,
+      },
       itemNameRow: {
         flexDirection: 'row',
         justifyContent: 'center',
       },
-
       buttonView:{
         width:'60%',
         flexDirection: 'row',
         justifyContent:"space-around",
         marginTop: Margins.midsize,
-
         paddingLeft: 20,
-
-        marginBottom: Margins.large,
+        //marginBottom: Margins.midsize,
+        //marginVertical: Margins.midsize,
       },
       button:{
         width:'40%',
       },
-
       iconStyling: {
         fontSize: 30,
         justifyContent:'center',
-        alignItems:'center',
-      
+        alignItems:'center',      
         paddingRight: Paddings.narrow,
         paddingTop: Paddings.narrow,
-
         color: colors.danger,
       },
-
       iconStyling2: {
         color: '#000080',
         fontSize: 30,
         justifyContent:'center',
-        alignItems:'center',
-      
+        alignItems:'center',      
         paddingRight: 18.7,
         paddingTop: Paddings.narrow,
       },
-
       iconStyling3: {
         color: '#000080',
         fontSize: 30,
         justifyContent:'center',
-        alignItems:'center',
-      
+        alignItems:'center',      
         paddingRight: Paddings.narrow,
         paddingTop: 37,
       },
-
+      iconStyling3a: {
+        color: '#000080',
+        fontSize: 30,
+        justifyContent:'center',
+        alignItems:'center',      
+        paddingRight: Paddings.narrow,
+        paddingTop: Paddings.midsize,
+      },
       iconStyling4: {
         color: '#000080',
         fontSize: 30,
         justifyContent:'center',
-        alignItems:'center',
-      
+        alignItems:'center',      
         paddingRight: Paddings.narrow,
         paddingTop: Paddings.narrow,
       },

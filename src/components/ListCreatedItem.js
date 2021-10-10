@@ -29,7 +29,7 @@ const styles = StyleSheet.create ({
       padding: 5,       
       marginVertical:5,
 
-      backgroundColor:"#f0f8ff", // #abc 
+      backgroundColor:"white", // #f0f8ff 
      },
      image: {
         width: 70,

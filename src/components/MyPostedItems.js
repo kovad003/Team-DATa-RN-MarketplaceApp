@@ -219,9 +219,7 @@ const MyPostedItems=(props)=>{
                 <View style={styles.formStyle}>
 
                 </View>
-            </View>
-
-        
+            </View>        
 
             <View style = {styles.flatListOuterContainer}>
             <FlatList
@@ -237,12 +235,7 @@ const MyPostedItems=(props)=>{
                     />}
                     />
 
-
             </View>
-
-
-
-
         </Modal>
     );
 }
@@ -258,8 +251,7 @@ const styles=StyleSheet.create({
       },
       logoCustom: {        
         marginTop: Margins.narrow,      
-      },   
-       
+      },       
       buttonView:{
         width:'60%',
         flexDirection: 'row',
@@ -267,13 +259,10 @@ const styles=StyleSheet.create({
         //marginBottom: Margins.large,
         //marginVertical: Margins.midsize,
         marginBottom: Margins.midsize,
-      },
-      
-     
+      },     
       button:{
         width:'40%',
-      },
-      
+      },      
       iconStyling: {
         fontSize: 30,
         justifyContent:'center',
