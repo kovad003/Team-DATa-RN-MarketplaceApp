@@ -39,11 +39,17 @@ function CreateItemScreen(props) {
   // Custom Functions ****************************************************************************************
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
-    console.log('childdata from child onAddItem App.js: ' + childdata.name);
-    console.log('childdata from child onAddItem App.js: ' + childdata.price);
-    console.log('childdata from child onAddItem App.js: ' + childdata.description);
-    console.log('childdata from child onAddItem App.js: ' + childdata.category);
-    addData(childdata.name, childdata.price, childdata.description, childdata.category);
+
+    console.log('childdata.categoryId: ' + childdata.categoryId);
+    console.log('childdata.customerId: ' + childdata.customerId);
+    console.log('childdata.title: ' + childdata.title);
+    console.log('childdata.price: ' + childdata.price);
+    console.log('childdata.description: ' + childdata.description);
+    console.log('childdata.description: ' + childdata.image);
+    console.log('childdata.condition: ' + childdata.condition);
+    console.log('childdata.location: ' + childdata.location);
+
+    addData(childdata.categoryId, childdata.customerId, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
     setVisibility(false);
     //setLoading(true);
   }
@@ -104,7 +110,7 @@ function CreateItemScreen(props) {
   }
 
   // *** POST ***
-  async function addData(nameParam, priceParam, descrParam, categoryParam) {
+  async function addData(categoryParam, customerParam, titleParam, priceParam, descrParam, imageParam, conditionParam, locationParam) {
     console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
     let response = null;
     let requestOptions = {
@@ -113,10 +119,14 @@ function CreateItemScreen(props) {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        name: nameParam.toString(), 
-        price: priceParam*1, // *1 -> numbers only
-        description: descrParam.toString(), 
-        category: categoryParam.toString() 
+        categoryId: categoryParam*1,
+        customerId: customerParam*1,
+        title: titleParam.toString(),
+        price: priceParam*1,
+        description: descrParam.toString(),
+        image: imageParam.toString(),
+        condition: conditionParam.toString(),
+        location: locationParam.toString(),
       })
     };
     try {
@@ -144,11 +154,14 @@ function CreateItemScreen(props) {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        id: 1,
-        name: "update", 
+        itemId: 1,
+        categoryId: 1,
+        customerId: 1,
+        title: "new title",
         price: 1,
-        description: "update", 
-        category: "update" 
+        description: "new description",
+        condition: "used",
+        location: "new location"
       })
     };
 
@@ -168,7 +181,7 @@ function CreateItemScreen(props) {
 
   // *** DELETE ***
   // Delivers parameter as JSON data 
-  async function deleteData(idParam) {
+  async function deleteData(itemIdParam) {
     console.log('started:  async function deleteData(idParam) {');
     let response = null;
     let requestOptions = {
@@ -177,7 +190,7 @@ function CreateItemScreen(props) {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        id: idParam*1, // *1 -> numbers only
+        itemId: itemIdParam*1, // *1 -> numbers only
       })
     };
     try {

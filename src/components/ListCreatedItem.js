@@ -1,12 +1,14 @@
 import React from 'react';
 
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const ListCreatedItem=(props)=>{
     return(
         <TouchableOpacity activeOpacity={0.8} onLongPress={props.onDelete}>
             <View style={styles.listItemStyle}>
-                <Text>{props.id}&#41; {props.name}</Text>
+                <Image 
+                source={{uri: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg'}} style={styles.image}/>
+                <Text>{props.itemId}&#41; {props.title}</Text>
                 <Text>Price: {props.price}€ </Text>
                 <Text>Description: {props.description}</Text>
                 <Text>Category: {props.category}</Text>
@@ -24,7 +26,11 @@ const styles = StyleSheet.create ({
 
       backgroundColor:"#f0f8ff", // #abc 
      },
-
+     image: {
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+     }
   });
 
   export default ListCreatedItem;
