@@ -169,8 +169,9 @@ const styles=StyleSheet.create({
         marginTop: Margins.narrow,
       },
       inputStyle: {
-        borderWidth: 1, 
-        borderColor: '#5f9ea0', //  '#000080'
+        //borderWidth: 1,
+        borderBottomWidth:1,
+        borderColor: '#5f9ea0', //  '#000080' #5f9ea0
         paddingLeft: Paddings.narrow,
         width:'80%',
         backgroundColor: 'white',
@@ -180,7 +181,8 @@ const styles=StyleSheet.create({
         borderRadius: 5,            
       },
       inputStyle2: {
-        borderWidth: 1, 
+        //borderWidth: 1, 
+        borderBottomWidth:1,
         borderColor: '#5f9ea0', //  '#000080'
         paddingLeft: Paddings.narrow,
         width:'80%',
@@ -191,7 +193,8 @@ const styles=StyleSheet.create({
         borderRadius: 5,  
       },
       inputStyle3: {
-        borderWidth: 1, 
+        //borderWidth: 1, 
+        borderBottomWidth:1, 
         borderColor: '#5f9ea0', //  '#c83232'
         paddingLeft: Paddings.narrow,
         width:'80%',
