@@ -24,7 +24,7 @@ const MyPostedItems=(props)=>{
 
     // State variable
     const [item, setItem] = useState({
-        name: 'some name',
+        title: 'some name',
         price: 0,
         description: 'some description',
         category: 'some category',
@@ -301,15 +301,15 @@ const MyPostedItems=(props)=>{
                 </View>
             </View>
             <FlatList
-                    keyExtractor={(item) => item.id.toString()} 
+                    keyExtractor={(item) => item.itemId.toString()} 
                     data={items}
                     renderItem={itemData => 
-                        <ListCreatedItem id={itemData.item.id} 
-                        name={itemData.item.name}
+                        <ListCreatedItem itemId={itemData.item.itemId} 
+                        title={itemData.item.title}
                         price={itemData.item.price}
                         description={itemData.item.description}
-                        category={itemData.item.category}
-                        onDelete={()=>onDeleteItem(itemData.item.id)} 
+                        datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
+                        onDelete={()=>onDeleteItem(itemData.item.itemId)} 
                     />}
 
                     />
