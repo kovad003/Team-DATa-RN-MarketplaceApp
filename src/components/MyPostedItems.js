@@ -241,10 +241,7 @@ const MyPostedItems=(props)=>{
 }
 
 const styles=StyleSheet.create({
-    formStyle: {
-        //flex:1,
-        //flexDirection: 'column',
-        //justifyContent:'center',
+    formStyle: {      
         alignItems:"center",
         backgroundColor: colors.light4,
         paddingHorizontal: 10,        
@@ -269,8 +266,7 @@ const styles=StyleSheet.create({
         paddingTop: Paddings.narrow,
         color: colors.danger,
       },     
-      flatListOuterContainer: {
-        //marginTop: Margins.xsuperLarge,
+      flatListOuterContainer: {      
         flex: 1,
         backgroundColor: colors.light4,
       },

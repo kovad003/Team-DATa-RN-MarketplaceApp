@@ -84,29 +84,21 @@ const styles = StyleSheet.create ({
     innerRowContainer1: {
         backgroundColor: colors.light4,
         paddingHorizontal: Paddings.xnarrow,
-        //paddingVertical: Paddings.xnarrow,
     },
     innerRowContainer2: {
         backgroundColor: colors.light4,
-        //paddingHorizontal: 26, //22
-        //paddingVertical: Paddings.xnarrow,
-        paddingRight: Paddings.xnarrow,
-        paddingLeft: Paddings.xnarrow,
-
-        paddingVertical: Paddings.xnarrow,
+        padding: Paddings.xnarrow,    
     },
     innerRowContainer3: {
         backgroundColor: colors.light4,
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: Paddings.large,
-        paddingVertical: Paddings.xnarrow,
+        paddingVertical: Paddings.xnarrow,       
     },
     titleName: {
         color: colors.darkBlueCustom,
-        fontWeight: "bold",
-        //fontSize: 17,
-        //borderWidth: 1, 
+        fontWeight: "bold",     
         borderBottomWidth:1,
         borderColor: '#000080', //  '#000080'
         paddingVertical: Paddings.xnarrow,
