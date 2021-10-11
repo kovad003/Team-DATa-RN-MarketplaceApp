@@ -6,7 +6,6 @@ import { Text, View } from "react-native";
 import HeaderComponent from "./src/components/HeaderComponent";
 
 // Screen Imports
-// import MainScreen from "./src/screens/MainScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import CreateItemScreen from "./src/screens/CreateItemScreen";
@@ -19,7 +18,7 @@ import CategoryScreen from './src/screens/CategoryScreen'
 import AccountScreen from "./src/screens/AccountScreen";
 import BottomTabsNavigation from './src/navigation/BottomTabsNavigation'
 import CategoryStackNavigation from './src/navigation/CategoryStackNavigation'
-
+import CustomerProfileScreen from './src/screens/CustomerProfileScreen'
 
 // Font Imports
 import * as Font from 'expo-font';
@@ -46,12 +45,13 @@ function App(props) {
       // <SearchScreen />
       // <SearchResultScreen />
       // <CreateItemScreen />
-       // <ListItemsScreen id='c3'/>
+      // <ListItemsScreen id='c3'/>
       // <MyItemScreen />
       // <AccountScreen /> 
        <BottomTabsNavigation /> 
-      //<ItemDetailScreen />
-      //<CategoryStackNavigation />
+      // <ItemDetailScreen />
+      // <CategoryStackNavigation />
+      // <CustomerProfileScreen />
 
 
     );
