@@ -17,5 +17,7 @@ export const Margins={
     xlarge: 40,
     xxlarge: 50,
     xxxlarge: 65,
+    superLarge: 90,
+    xsuperLarge:150,
 };
 

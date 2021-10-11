@@ -18,7 +18,8 @@ function HomeScreen(props) {
 
   // HH - created  to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
-        //console.log(myItemsList);
+        // HH - just for test
+        //console.log(itemData.item.id);
         return( 
             <MyItemCardSmall 
             title={itemData.item.title} 
@@ -89,8 +90,14 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   logoContainer:{
-    marginTop:30,
-    
+    marginTop:40,
+    padding: 5,
+    width:'95%',
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+    borderTopColor: 'grey',
+    borderTopWidth: 1,
+    alignItems:'center',
   },
 });
 

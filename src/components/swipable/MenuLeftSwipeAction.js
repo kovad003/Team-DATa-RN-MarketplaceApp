@@ -3,6 +3,13 @@ import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import colors from "../../constants/colors";
 
+function BroomPressed(){
+  console.log("Swipe BTN pressed: broom");
+}
+function FilterPressed(){
+  console.log("Swipe BTN pressed: filter");
+}
+
 function MenuLeftSwipeAction(props) {
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>

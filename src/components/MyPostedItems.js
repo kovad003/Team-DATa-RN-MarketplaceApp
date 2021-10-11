@@ -1,21 +1,11 @@
 import React, { Component, useState, useEffect } from "react";
-import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, FlatList} from 'react-native';
-
-import LogoSmall from "./LogoSmall";
+import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, FlatList, Alert} from 'react-native';
 import CreateItemInputLogo from "./CreateItemInputLogo";
-
 import colors from "../constants/colors";
-
-import Icon1 from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/FontAwesome5";
-import Icon3 from "react-native-vector-icons/Entypo";
-import Icon4 from "react-native-vector-icons/MaterialIcons";
-
 import { Margins, Paddings } from "../constants/constvalues";
-import { ScrollView } from 'react-native-gesture-handler';
-
-import TextStyling from '../constants/fontstyling'
 import ListCreatedItem from "../components/ListCreatedItem";
+import TextStyling from '../constants/fontstyling';
+import MyPostedItemsDelete from "./createItem/MyPostedItemsDelete";
 
 const MyPostedItems=(props)=>{
     const data = "This is data from Child Component to the Parent Component. :)"
@@ -24,7 +14,7 @@ const MyPostedItems=(props)=>{
 
     // State variable
     const [item, setItem] = useState({
-        name: 'some name',
+        title: 'some name',
         price: 0,
         description: 'some description',
         category: 'some category',
@@ -38,9 +28,6 @@ const MyPostedItems=(props)=>{
         props.onCancelItem();
     }
 
-    //
-  //
-  //
   // functions related to the input field functionality
 
   const [hasMessage, setMessage] = useState(false);
@@ -216,241 +203,81 @@ const MyPostedItems=(props)=>{
     }
   });
 
-
-  /*
-
-
-  // If the 'fetch' is not ready yet, an activityindicator is shown
-  if (isLoading==true) {
-    console.log('if(isLoading==true) {');
-    return (
-      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
-        <ActivityIndicator size="large" color="#00ff00" />
-      </View>
-    );
-  }
-  // If error or confirm message needs to be displayed
-  else if(hasMessage){
-    console.log('else if(hasError){');
-    return(
-
-      <ScrollView style={styles.scrollViewCustom}>
-      <View style={styles.container}>  
-
-      <LogoSmall style={styles.logoItemModal}/>
-      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
-        <Text>{hasMessage}</Text>
-        <Text>{""+messageDisplayed}</Text>
-        <ItemSuccessfullyAdded />
-        <Button 
-        color = '#000080' 
-        title='close' 
-        onPress={()=>closeMessage()}/>
-      </View>
-
-      </View>
-      </ScrollView>
-    );
-  }
-  //Otherwise the list is shown
-  else{
-    console.log('else{');
-   
-
-*/
-
-
-
-    //
-    //
-    //
-
     // Return
     return (
-        <Modal visible={props.visibility} animationType="slide">
-            <View style={styles.formStyle}>
+    <Modal visible={props.visibility} animationType="slide">
+        <View style={styles.formStyle}>
+          <View style={styles.logoCustom} >
+          <CreateItemInputLogo></CreateItemInputLogo>
+          </View>
 
-                <View style={styles.logoCustom} >
-                <CreateItemInputLogo></CreateItemInputLogo>
-                </View>
-                <View style={styles.buttonView}>
-                    <View style={styles.button}>
-                    <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
-                    </View>
-                   
-                </View>
+          <View style={styles.buttonView}>
+              <View style={styles.button}>
+              <Button color='#c83232' title="Back" onPress={cancelItem}/>
+          </View>             
+          
+          
+          </View>
+        
+        <Text style={[TextStyling.textBlackSmall, styles.headerText]}>My Posted Items:</Text>
+        </View>        
 
-                <View style={styles.formStyle}>
-
-                    {/* 
-                <FlatList
-                    keyExtractor={(item) => item.id.toString()} 
-                    data={items}
-                    renderItem={itemData => 
-                        <ListCreatedItem id={itemData.item.id} 
-                        name={itemData.item.name}
-                        price={itemData.item.price}
-                        description={itemData.item.description}
-                        category={itemData.item.category}
-                        onDelete={()=>onDeleteItem(itemData.item.id)} 
-                    />}
-
-                    />
-                    */}
-
-                </View>
-            </View>
-            <FlatList
-                    keyExtractor={(item) => item.id.toString()} 
-                    data={items}
-                    renderItem={itemData => 
-                        <ListCreatedItem id={itemData.item.id} 
-                        name={itemData.item.name}
-                        price={itemData.item.price}
-                        description={itemData.item.description}
-                        category={itemData.item.category}
-                        onDelete={()=>onDeleteItem(itemData.item.id)} 
-                    />}
-
-                    />
-        </Modal>
+        
+        <View style = {styles.flatListOuterContainer}>
+          <FlatList
+                  keyExtractor={(item) => item.itemId.toString()} 
+                  data={items}
+                  renderItem={itemData => 
+                      <ListCreatedItem itemId={itemData.item.itemId} 
+                      title={itemData.item.title}
+                      price={itemData.item.price}
+                      description={itemData.item.description}
+                      datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
+                      onDelete={()=>onDeleteItem(itemData.item.itemId)} 
+                  />}
+                  />
+        </View>
+    </Modal>
     );
 }
 
 const styles=StyleSheet.create({
-    formStyle: {
-        flex:1,
-        flexDirection: 'column',
-        justifyContent:'center',
+    formStyle: {      
         alignItems:"center",
         backgroundColor: colors.light4,
-        paddingHorizontal: 10,
-
-        
+        paddingHorizontal: 10,        
       },
-      logoCustom: {
-        
-        marginTop: Margins.large,
-        //marginBottom: Margins.narrow,
-        
-        //marginTop: Margins.xxnarrow,
-      },
-      inputStyle: {
-        borderWidth: 2, 
-        borderColor: '#000080', 
-        padding: 10,
-        width:'80%', // '85%'
-        marginBottom:10,
-
-        backgroundColor: 'white',
-        color: '#000080',
-
-        marginRight: Margins.midsize,
-               
-      },
-
-      inputStyle2: {
-        borderWidth: 2, 
-        borderColor: '#000080', 
-        padding: 10,
-        width:'80%', // '85%'
-        marginBottom:10,
-        height: 100,
-        backgroundColor: 'white',
-
-        color: '#000080',
-        marginRight: Margins.midsize,
-      },
-
-      itemNameRow: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-      },
-
+      logoCustom: {        
+        marginTop: Margins.narrow,      
+      },       
       buttonView:{
         width:'60%',
         flexDirection: 'row',
         justifyContent:"space-around",
-        //marginTop: Margins.midsize,
-
-        //paddingLeft: 20,
-
-        marginBottom: Margins.large,
-      },
+        marginBottom: Margins.xnarrow,
+      },     
       button:{
         width:'40%',
-      },
-
+      },      
       iconStyling: {
         fontSize: 30,
         justifyContent:'center',
-        alignItems:'center',
-      
+        alignItems:'center',      
         paddingRight: Paddings.narrow,
         paddingTop: Paddings.narrow,
-
         color: colors.danger,
+      },     
+      flatListOuterContainer: {      
+        flex: 1,
+        backgroundColor: colors.light4,
       },
-
-      iconStyling2: {
-        color: '#000080',
-        fontSize: 30,
-        justifyContent:'center',
-        alignItems:'center',
-      
-        paddingRight: 18.7,
-        paddingTop: Paddings.narrow,
+      headerText: {
+        marginVertical: Margins.xnarrow,
+        borderTopWidth:1,
+        borderBottomWidth:1,
+        borderColor: '#000080', //  '#000080'
+        paddingVertical: Paddings.xnarrow,
       },
-
-      iconStyling3: {
-        color: '#000080',
-        fontSize: 30,
-        justifyContent:'center',
-        alignItems:'center',
-      
-        paddingRight: Paddings.narrow,
-        paddingTop: 37,
-      },
-
-      iconStyling4: {
-        color: '#000080',
-        fontSize: 30,
-        justifyContent:'center',
-        alignItems:'center',
-      
-        paddingRight: Paddings.narrow,
-        paddingTop: Paddings.narrow,
-      },
-
-      /* AD - stylings related to the list functionality */
-  screen: {
-    //marginTop: 5,//10
-    //padding: 10, // 10
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    height: '100%',
-
-    //alignItems: 'center',
-    //backgroundColor: 'blue',
-
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: "#E6E6E6", 
-  },
-
-    listItem:{
-        padding: 10,
-        marginVertical: 10,
-        borderWidth: 2,
-        borderColor: '#0f0',
-        backgroundColor: '#fce',    
-    }
 });
 
 export default MyPostedItems;

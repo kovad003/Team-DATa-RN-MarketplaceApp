@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView, Text, FlatList } from "react-native";
 import SwitchFilter from "../components/SwitchFilter";
 import ScrollDownList from "../components/ScrollDownList";
@@ -13,6 +13,12 @@ import MenuRightSwipeAction from "../components/swipable/MenuRightSwipeAction";
 import MenuLeftSwipeAction from "../components/swipable/MenuLeftSwipeAction";
 
 function SearchScreen(props) {
+const [hasMessage, setMessage] = useState(false);
+const [messageDisplayed, setMessageDisplayed] = useState('');
+const [items, setItems] = useState([]);
+const [itemList, addItemToList] = useState([]);
+const [isLoading, setLoading] = useState(true);
+const [isVisible, setVisibility] = useState(false);
 // Creating mock data
 
 //usestat -> causing cont rendering issues bc add function is not wired to a button
@@ -44,8 +50,18 @@ function SearchScreen(props) {
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   function onPressFunction(){
-    console.log('swipable was pressed')
+    console.log('swipable was pressed');
   }
+  function hello(){
+    console.log('hello');
+  }
+  useEffect(() => {
+    console.log('useEffect(() => {'); 
+      if (isLoading==true){
+        //fetchData();
+        setLoading(false);
+    }
+  });
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   return (
@@ -60,9 +76,25 @@ function SearchScreen(props) {
               iconColor="black"
               label="Category"
               onPress={onPressFunction}
-              renderLeftActions = {MenuLeftSwipeAction}
-              renderRightActions = {MenuRightSwipeAction}
+             /*  renderLeftActions = {MenuLeftSwipeAction} */
+             renderLeftActions = {() => (
+              <MenuLeftSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
+              renderRightActions = {() => (
+              <MenuRightSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
+              
+              /* renderRightActions={() => (
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )} */
+
+              /* onRef={(ref) => {this.inputs['projectDescription'] = ref;}} */
             />
+            {/* const Greeting = ({ greeting }) => <h1>{greeting}</h1>; */}
             {/* <ScrollView horizontal={false}>
               {categoryList.map((category)=>
                 <SwitchFilter label={category.name}></SwitchFilter>)}
@@ -78,24 +110,48 @@ function SearchScreen(props) {
               iconColor="black"
               label="Location"
               onPress={onPressFunction}
-              renderLeftActions = {MenuLeftSwipeAction}
-              renderRightActions = {MenuRightSwipeAction}
+              renderLeftActions = {() => (
+              <MenuLeftSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
+              renderRightActions = {() => (
+              <MenuRightSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
             />
             <MenuSwipableRow 
               iconMain="database"
               iconColor="black"
               label="Price"
               onPress={onPressFunction}
-              renderLeftActions = {MenuLeftSwipeAction}
-              renderRightActions = {MenuRightSwipeAction}
+              renderLeftActions = {() => (
+              <MenuLeftSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
+              renderRightActions = {() => (
+              <MenuRightSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
             />
             <MenuSwipableRow 
               iconMain="eye"
               iconColor="black"
               label="Condition"
               onPress={onPressFunction}
-              renderLeftActions = {MenuLeftSwipeAction}
-              renderRightActions = {MenuRightSwipeAction}
+              renderLeftActions = {() => (
+              <MenuLeftSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
+              renderRightActions = {() => (
+              <MenuRightSwipeAction 
+                onPress={() => onPressFunction()} 
+              />
+            )}
             />  
         </View>  
     </View>
