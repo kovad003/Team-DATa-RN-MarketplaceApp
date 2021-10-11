@@ -18,7 +18,8 @@ function HomeScreen(props) {
 
   // HH - created  to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
-        console.log(itemData.item.id);
+        // HH - just for test
+        //console.log(itemData.item.id);
         return( 
             <MyItemCardSmall 
             title={itemData.item.title} 
