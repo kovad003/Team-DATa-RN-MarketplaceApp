@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native';
 
 import { Margins, Paddings } from "../constants/constvalues";
 
@@ -37,6 +37,36 @@ const ListCreatedItem=(props)=>{
         //setLoading(false);
       }
 
+      // AD - a dunny More Info alert
+        const moreInfoAlert = () =>
+        Alert.alert(
+        "Dummy More Info",
+        "Here is more information about your post!",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+        );
+
+        // AD - a dunny Update Info alert
+        const updateAlert = () =>
+        Alert.alert(
+        "Dummy Update Info",
+        "Your post was successfully updated!",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+        );
+
     return(
 
         <View style={styles.ListOuterContainer}>
@@ -60,11 +90,13 @@ const ListCreatedItem=(props)=>{
                     </View>
 
                     <View style={styles.innerRowContainer3}>
-                        <Text 
+                        <Text
+                            onPress={moreInfoAlert} 
                             style={[TextStyling.textBlackSmall, styles.moreButton]}>
                             MORE INFO
                         </Text>
                         <Text 
+                            onPress={updateAlert}
                             style={[TextStyling.textBlackSmall, styles.updateButton]}>
                             UPDATE
                         </Text>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text} from 'react-native';
+import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, Alert } from 'react-native';
 import CreateItemInputLogo from '../CreateItemInputLogo';
 import colors from '../../constants/colors';
 import Icon1 from "react-native-vector-icons/FontAwesome";
@@ -12,13 +12,32 @@ import TextStyling from '../../constants/fontstyling';
 
 const MyPostedItemsDelete=(props)=>{
        
-    // For Controlling modal
+    /* For Controlling modal
     const addItem=()=>{
         props.onAddItem(item);
     }
     const cancelItem=()=>{
         props.onCancelItem();
     }
+    */
+
+    const cancelDeletion=()=>{
+      props.onCancelItem();
+  }
+
+  const deleteAlert = () =>
+    Alert.alert(
+      "Dummy Deletion",
+      "Your Posted Item was deleted!",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
 
     // Return
     return (
@@ -52,10 +71,10 @@ const MyPostedItemsDelete=(props)=>{
               
               <View style={styles.buttonView}>
                   <View style={styles.button}>
-                  <Button color='#000080' title="Cancel" onPress={cancelItem}/>
+                  <Button color='#000080' title="Cancel" onPress={cancelDeletion}/>
                   </View>
                   <View style={styles.button}>
-                  <Button color='#c83232' title="DELETE" /* onPress={addItem} */ />
+                  <Button color='#c83232' title="DELETE"  onPress={deleteAlert}  />
                   </View>
               </View>          
             </View>
