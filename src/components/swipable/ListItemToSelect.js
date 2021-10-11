@@ -6,8 +6,9 @@ const ListItemToSelect=(props)=>{
     return(
         <TouchableOpacity 
             activeOpacity={0.8} 
-            onLongPress={props.onDelete}
-            onPress={props.onClick}>
+            onLongPress={props.onLongPress}
+            onPress={props.onPress}
+            onSelect={props.onSelect}>
             <View style={styles.listItemStyle}>
                 <Text>{props.id}&#41; {props.name}</Text>
                 {/* <Text>Price: {props.price}€ </Text>

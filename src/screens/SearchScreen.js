@@ -20,6 +20,7 @@ const SearchScreen = (props) => {
   const [regionList, addRegionToList] = useState([null]);
   const [isLoading, setLoading] = useState(true);
   const [isVisible, setVisibility] = useState(false);
+  const [isCityListVisible, setCityListVisibility] = useState(false);
 
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -34,7 +35,8 @@ const SearchScreen = (props) => {
   // Swipe Actions ------------------------------------ 
   const showModal=()=>{
     setVisibility(true);
-    //setLoading(true);
+    setLoading(true);
+
   }
   const clearSelection=()=>{
     console.log("clear selection");
@@ -45,8 +47,10 @@ const SearchScreen = (props) => {
   }
   // --------------------------------------------------
   // ListItem actions ---------------------------------
-  const markSelection=(/* selectedItem */)=>{
-    console.log("selected item: " /*+  selectedItem */);
+  const markSelection=(selectedItem)=>{
+    console.log("selected item: " +  JSON.stringify(selectedItem));
+    setCityListVisibility(true);
+    setVisibility(false);
   }
   // --------------------------------------------------
 
@@ -58,6 +62,32 @@ const SearchScreen = (props) => {
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       // response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
       response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
+    }
+    catch(error){
+      console.log(error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      console.log(responseData);//Just for checking.....
+      //setRegion(responseData);
+      //addRegionToList(regionList =>[...regionList, responseData]);
+      addRegionToList(responseData);
+      console.log('regionList: ' + regionList)
+      
+      //addRegionToList(responseData);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+  async function getAllCityInRegion(regionId) {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      // response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
+      response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
     }
     catch(error){
       console.log(error);
@@ -95,26 +125,29 @@ const SearchScreen = (props) => {
         <SearchBar/>
       </View>
         <View>
+{/* MODALS -------------------------------------------------------------------------------- */}
             <Modal visible={isVisible}>
-              {<Button title='Cancel' onPress={onCancel} />}
               <FlatList
                 keyExtractor={(region) => region.regionId.toString()} 
                 data={regionList}
                 renderItem={regionData =>
-                  <ListItemToSelect onPress={() => markSelection(/* regionData.item */)}
-                    id={regionData.item.regionId} 
+                  <ListItemToSelect 
+                    id={regionData.item.regionId}
                     name={regionData.item.regionName}
+                    onSelect={() => markSelection(regionData.item)}
+                    onPress={() => markSelection(regionData.item)}
                   />}
               />
+              <Button title='Cancel' onPress={onCancel} />
             </Modal>
-          {/* ---------------------------------------------------------------------------- */}
+             
+{/* --------------------------------------------------------------------------------------- */}
             <MenuSwipableRow 
               iconMain="tag-multiple"
               iconColor="black"
               label="Category"
               onPress={onPressFunction}
-             /*  renderLeftActions = {MenuLeftSwipeAction} */
-             renderLeftActions = {() => (
+              renderLeftActions = {() => (
                <MenuSwipeActionResetFilter 
                 onPress={() => clearSelection()} 
               />      
@@ -170,26 +203,10 @@ const SearchScreen = (props) => {
             )}
               renderRightActions = {() => (
               <MenuSwipeActionFilter 
-                onPress={() => showModal()} 
+                onPress={() => showModal()}
               />
             )}
-            /> 
-
-                
-             
-            {/* const Greeting = ({ greeting }) => <h1>{greeting}</h1>; */}
-            {/* <ScrollView horizontal={false}>
-              {categoryList.map((category)=>
-                <SwitchFilter label={category.name}></SwitchFilter>)}
-            </ScrollView> */}
-            {/* <SwitchFilter label='All' value='true'/> */}
-            {/* <FlatList //FlatList shouldnt be used with ScrollView
-                keyExtractor={item=>item.id}
-                data={categoryList}
-                renderItem={itemData => <SwitchFilter label={itemData.item.name}/>}
-            /> */}   
-            
-            
+            />    
         </View>  
     </View>
   );
