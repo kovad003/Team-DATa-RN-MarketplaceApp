@@ -11,22 +11,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import TextStyling from '../../constants/fontstyling';
 
 const MyPostedItemsDelete=(props)=>{
-    const data = "This is data from Child Component to the Parent Component. :)"
-    const [name, setName]=useState('');
-    const [price, setPrice]=useState(0);
-
-    // State variable
-    const [item, setItem] = useState({
-        categoryId: 1,
-        customerId: 1, //TODO
-        title: 'some name',
-        price: 0,
-        description: 'some description',
-        image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
-        condition: 'used',
-        location: 'Hämeenlinna',
-    });
-    
+       
     // For Controlling modal
     const addItem=()=>{
         props.onAddItem(item);
