@@ -98,10 +98,10 @@ const MyPostedItemsDelete=(props)=>{
 
               <View style={styles.buttonView}>
                   <View style={styles.button}>
-                  <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
+                  <Button color='#000080' title="Cancel" onPress={cancelItem}/>
                   </View>
                   <View style={styles.button}>
-                  <Button color='#000080' title="Add" onPress={addItem}/>
+                  <Button color='#c83232' title="DELETE" /* onPress={addItem} */ />
                   </View>
               </View>          
             </View>

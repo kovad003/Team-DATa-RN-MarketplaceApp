@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, useState, useEffect } from "react";
 
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
@@ -6,8 +6,37 @@ import { Margins, Paddings } from "../constants/constvalues";
 
 import colors from "../constants/colors";
 import TextStyling from '../constants/fontstyling';
+import MyPostedItemsDelete from './createItem/MyPostedItemsDelete';
 
 const ListCreatedItem=(props)=>{
+
+    const [items, setItems] = useState([]);
+    const [itemList, addItemToList] = useState([]);
+
+    const [isDeleteVisible, setDeleteVisibility] = useState(false);
+
+    const onAddItem = (childdata) => {
+        addItemToList(itemList =>[...itemList, childdata]);
+    
+        console.log('childdata.categoryId: ' + childdata.categoryId);
+        console.log('childdata.customerId: ' + childdata.customerId);
+        console.log('childdata.title: ' + childdata.title);
+        console.log('childdata.price: ' + childdata.price);
+        console.log('childdata.description: ' + childdata.description);
+        console.log('childdata.description: ' + childdata.image);
+        console.log('childdata.condition: ' + childdata.condition);
+        console.log('childdata.location: ' + childdata.location);
+    
+        addData(childdata.categoryId, childdata.customerId, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
+        setDeleteVisibility(false);
+        //setLoading(true);
+      }
+
+      const cancelAddItem=()=>{
+        setDeleteVisibility(false);
+        //setLoading(false);
+      }
+
     return(
 
         <View style={styles.ListOuterContainer}>
@@ -41,7 +70,7 @@ const ListCreatedItem=(props)=>{
                         </Text>
                         <Text
                             text = 'submit' 
-                            activeOpacity={0.8} onLongPress={props.onDelete}
+                            onPress={()=>setDeleteVisibility(true)}
                             style={[TextStyling.textBlackSmall, styles.deleteButton]}>
                             DELETE
                         </Text>
@@ -56,7 +85,28 @@ const ListCreatedItem=(props)=>{
                         onPress={()=>setVisibility(true)} >
                         Press Me</Text>
 
+                        <Text 
+                            text = 'submit'
+                            style = {TextStyling.textBlackSmall}
+                            onPress={()=>setflatListVisibility(true)} >
+                            Press Me FlatList</Text>  
+
+
+                        <MyPostedItems 
+                            visibility={isflatListVisible} 
+                            onAddItem={onAddItem}
+                            itemList={items} 
+                            onCancelItem={cancelAddItem2} 
+                            />
+
                     */}
+
+                            <MyPostedItemsDelete 
+                            visibility={isDeleteVisible} 
+                            onAddItem={onAddItem}
+                            itemList={items} 
+                            onCancelItem={cancelAddItem} 
+                            />
 
                 </View>
 
