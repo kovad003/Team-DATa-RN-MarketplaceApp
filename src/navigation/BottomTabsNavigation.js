@@ -15,6 +15,7 @@ import HomeScreen from '../screens/HomeScreen'
 import CategoryStackNavigation from '../navigation/CategoryStackNavigation'
 import HomeStackNavigation from '../navigation/HomeStackNavigation'
 import LoginScreen from '../screens/LoginScreen'
+import RegistrationScreen from '../screens/RegistrationScreen'
 
 
 
@@ -70,7 +71,7 @@ function BottomTabsNavigation () {
             />
             <Tab.Screen 
             name="Profile" 
-            component={AccountScreen}   
+            component={LoginScreen}   // Change back to AccountScreen after testing
             /> 
         </Tab.Navigator>
     </NavigationContainer>
