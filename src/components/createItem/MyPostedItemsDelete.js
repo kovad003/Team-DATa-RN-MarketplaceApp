@@ -29,13 +29,21 @@ const MyPostedItemsDelete=(props)=>{
               <CreateItemInputLogo></CreateItemInputLogo>
               </View>
 
+              <Text style={[TextStyling.textBlackSmall, styles.centeredCustom]}>
+                {"\n"}Hold up!                    
+                </Text>             
+            
              
               <View style={styles.itemNameRow}>
 
                 <Text style={[TextStyling.textBlackSmall, styles.centeredCustom]}>
-                {"\n"}You are about to delete a posted item! {"\n"}                    
+                {"\n"}You are about to delete a posted item!{"\n"}                    
                 </Text>             
               </View>
+
+              <Text style={[TextStyling.textBlackSmall, styles.centeredCustom]}>
+                Once deleted, the post is non-recoverable.{"\n"}                
+               </Text> 
 
               <Text style={[TextStyling.textBlackSmall, styles.centeredCustom]}>
                 Are you sure?{"\n"}                
@@ -69,7 +77,7 @@ const styles=StyleSheet.create({
         paddingHorizontal: 10,        
       },
       logoCustom: {
-        marginTop: Margins.narrow,
+        marginTop: Margins.xxlarge,
       },
       inputStyle: {
         //borderWidth: 1,
