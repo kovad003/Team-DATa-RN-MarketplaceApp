@@ -83,32 +83,13 @@ function ListItemsScreen(props) {
     setLoading(true);
   }
 
-    setItemsInCat(allItems.map(
-    //   item => if(item.categoryId.toString()===catId){return item});
-      item => console.log(item.categoryId)))
+    // setItemsInCat(allItems.map(
+    // //   item => if(item.categoryId.toString()===catId){return item});
+    //   item => console.log(item.categoryId)))
 
     //   console.log(itemsInCat)
 
  // ****************************************************************************** end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   // HH - created  to render MyItemCard component details*****************
@@ -120,7 +101,7 @@ function ListItemsScreen(props) {
             price={itemData.item.price}
             condition={itemData.item.condition}            
             description={itemData.item.description}
-            onSelect={()=> {props.navigation.navigate('ItemDetail',{ itemId:itemData.item.id })} }
+            onSelect={()=> {props.navigation.navigate('ItemDetail',{ itemId:itemData.item.itemId })} }
             imageUrl={itemData.item.image}
             />
           );
