@@ -27,11 +27,11 @@ const Home = () => {
           backgroundColor: '#fff',
           borderRadius: 10,
         }}>
-        <View style={{alignSelf: 'center', marginTop: 20, marginBottom: 50}}>
+        <View style={{alignSelf: 'center', marginTop: 7, marginBottom: 20}}>
           <Text style={{fontSize: 32, fontWeight: 'bold'}}>Registration</Text>
         </View>
         <View style={{}}>
-          <View style={{marginVertical: 10}}>
+          <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 5}}>Username</Text>
             <TextInput
               placeholderTextColor="#bdbdbd"
@@ -39,16 +39,32 @@ const Home = () => {
               style={styles.TextInput}
             />
           </View>
-          <View style={{marginVertical: 10}}>
-            <Text style={{fontSize: 16, marginBottom: 5}}>Firstname</Text>
+          <View style={{marginVertical: 5}}>
+            <Text style={{fontSize: 16, marginBottom: 3}}>Firstname</Text>
             <TextInput
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Firstname"
               style={styles.TextInput}
             />
           </View>
-          <View style={{marginVertical: 10}}>
-            <Text style={{fontSize: 16, marginBottom: 5}}>Password</Text>
+          <View style={{marginVertical: 5}}>
+            <Text style={{fontSize: 16, marginBottom: 3}}>Lastname</Text>
+            <TextInput
+              placeholderTextColor="#bdbdbd"
+              placeholder="Enter your Lastname"
+              style={styles.TextInput}
+            />
+          </View>
+          <View style={{marginVertical: 5}}>
+            <Text style={{fontSize: 16, marginBottom: 3}}>Email</Text>
+            <TextInput
+              placeholderTextColor="#bdbdbd"
+              placeholder="Enter your email"
+              style={styles.TextInput}
+            />
+            </View>
+          <View style={{marginVertical: 5}}>
+            <Text style={{fontSize: 16, marginBottom: 3}}>Password</Text>
             <TextInput
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
@@ -56,8 +72,8 @@ const Home = () => {
               style={styles.TextInput}
             />
           </View>
-          <View style={{marginVertical: 10}}>
-            <Text style={{fontSize: 16, marginBottom: 5}}>
+          <View style={{marginVertical: 5}}>
+            <Text style={{fontSize: 16, marginBottom: 3}}>
               Confirm Password
             </Text>
             <TextInput
@@ -98,7 +114,7 @@ export default Home;
 const styles = StyleSheet.create({
   view: {height: 60, width: '100%', backgroundColor: 'red'},
   TextInput: {
-    height: 50,
+    height: 43,
     borderBottomColor: '#bdbdbd',
     borderBottomWidth: 2,
     fontSize: 18,
@@ -128,6 +144,6 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: "row",
     flex: 1,
-    marginTop: -5
+    marginTop: 10
   }
 });
