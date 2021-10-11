@@ -26,45 +26,7 @@ const MyPostedItemsDelete=(props)=>{
         condition: 'used',
         location: 'Hämeenlinna',
     });
-    /* const [formChecker, setFormChecker] = useState({
-        categoryinput: 'false',
-    }) */
-    const categoryInputHandler=(enteredText)=>{
-        item.categoryId = enteredText;
-        console.log('entered text/categoryId: ' + enteredText);
-    }
-
-    const titleInputHandler=(enteredText)=>{
-        item.title = enteredText;
-        console.log('entered text/title: ' + enteredText);
-    }
-
-    const priceInputHandler=(enteredText)=>{
-        item.price = enteredText;
-        console.log('entered text/price: ' + enteredText);
-    }
-
-    const descriptionInputHandler=(enteredText)=>{
-        item.description = enteredText;
-        console.log('entered text/description: ' + enteredText);
-    }
-
-    const imageInputHandler=(enteredText)=>{
-        item.image = enteredText;
-        console.log('entered text/image: ' + enteredText);
-    }
-
-    const conditionInputHandler=(enteredText)=>{
-        item.condition = enteredText;
-        console.log('entered text/condition: ' + enteredText);
-    }
-
-    const locationInputHandler=(enteredText)=>{
-        item.location = enteredText;
-        console.log('entered text/location: ' + enteredText);
-    }
     
-
     // For Controlling modal
     const addItem=()=>{
         props.onAddItem(item);
@@ -82,20 +44,19 @@ const MyPostedItemsDelete=(props)=>{
               <CreateItemInputLogo></CreateItemInputLogo>
               </View>
 
-              <Text style={TextStyling.textBlackSmall}>Item Name</Text>
+             
               <View style={styles.itemNameRow}>
-              <Icon1 name="tag" style={styles.iconStyling}></Icon1>
-              <TextInput placeholder="Item's name" 
-                  style={styles.inputStyle} 
-                  onChangeText={titleInputHandler}/>
+
+                <Text style={[TextStyling.textBlackSmall, styles.centeredCustom]}>
+                {"\n"}You are about to delete a posted item! {"\n"}                    
+                </Text>             
               </View>
 
-              <Text style={TextStyling.textBlackSmall}>Price</Text>
-              <View style={styles.itemNameRow}>
-              <Icon2 name="euro-sign" style={styles.iconStyling2}></Icon2>  
+              <Text style={[TextStyling.textBlackSmall, styles.centeredCustom]}>
+                Are you sure?{"\n"}                
+               </Text> 
+
               
-              </View>
-
               <View style={styles.buttonView}>
                   <View style={styles.button}>
                   <Button color='#000080' title="Cancel" onPress={cancelItem}/>
@@ -222,6 +183,9 @@ const styles=StyleSheet.create({
         alignItems:'center',      
         paddingRight: Paddings.narrow,
         paddingTop: 6,
+      },
+      centeredCustom: {
+        alignItems: "center"
       },
 });
 
