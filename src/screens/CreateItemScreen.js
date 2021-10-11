@@ -1,30 +1,17 @@
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
-
-// AD - constants
 import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
-
 import LogoSmall from "../components/LogoSmall";
-import ListCreatedItem from "../components/ListCreatedItem";
 import CreateItemInput from "../components/CreateItemInput";
-
-// AD - Component Rows
-import CreateItemScreenRow1 from "../components/CreateItemScreenRow1";
-import CreateItemScreenRow2 from "../components/CreateItemScreenRow2";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import MyPostedItems from "../components/MyPostedItems";
-
 
 function CreateItemScreen(props) {
 
-  //
-  //
-  //
   // functions related to the input field functionality
 
   const [hasMessage, setMessage] = useState(false);
@@ -39,11 +26,17 @@ function CreateItemScreen(props) {
   // Custom Functions ****************************************************************************************
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
-    console.log('childdata from child onAddItem App.js: ' + childdata.name);
-    console.log('childdata from child onAddItem App.js: ' + childdata.price);
-    console.log('childdata from child onAddItem App.js: ' + childdata.description);
-    console.log('childdata from child onAddItem App.js: ' + childdata.category);
-    addData(childdata.name, childdata.price, childdata.description, childdata.category);
+
+    console.log('childdata.categoryId: ' + childdata.categoryId);
+    console.log('childdata.customerId: ' + childdata.customerId);
+    console.log('childdata.title: ' + childdata.title);
+    console.log('childdata.price: ' + childdata.price);
+    console.log('childdata.description: ' + childdata.description);
+    console.log('childdata.description: ' + childdata.image);
+    console.log('childdata.condition: ' + childdata.condition);
+    console.log('childdata.location: ' + childdata.location);
+
+    addData(childdata.categoryId, childdata.customerId, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
     setVisibility(false);
     //setLoading(true);
   }
@@ -104,7 +97,7 @@ function CreateItemScreen(props) {
   }
 
   // *** POST ***
-  async function addData(nameParam, priceParam, descrParam, categoryParam) {
+  async function addData(categoryParam, customerParam, titleParam, priceParam, descrParam, imageParam, conditionParam, locationParam) {
     console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
     let response = null;
     let requestOptions = {
@@ -113,10 +106,14 @@ function CreateItemScreen(props) {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        name: nameParam.toString(), 
-        price: priceParam*1, // *1 -> numbers only
-        description: descrParam.toString(), 
-        category: categoryParam.toString() 
+        categoryId: categoryParam*1,
+        customerId: customerParam*1,
+        title: titleParam.toString(),
+        price: priceParam*1,
+        description: descrParam.toString(),
+        image: imageParam.toString(),
+        condition: conditionParam.toString(),
+        location: locationParam.toString(),
       })
     };
     try {
@@ -144,11 +141,14 @@ function CreateItemScreen(props) {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        id: 1,
-        name: "update", 
+        itemId: 1,
+        categoryId: 1,
+        customerId: 1,
+        title: "new title",
         price: 1,
-        description: "update", 
-        category: "update" 
+        description: "new description",
+        condition: "used",
+        location: "new location"
       })
     };
 
@@ -168,7 +168,7 @@ function CreateItemScreen(props) {
 
   // *** DELETE ***
   // Delivers parameter as JSON data 
-  async function deleteData(idParam) {
+  async function deleteData(itemIdParam) {
     console.log('started:  async function deleteData(idParam) {');
     let response = null;
     let requestOptions = {
@@ -177,7 +177,7 @@ function CreateItemScreen(props) {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        id: idParam*1, // *1 -> numbers only
+        itemId: itemIdParam*1, // *1 -> numbers only
       })
     };
     try {
@@ -246,13 +246,6 @@ function CreateItemScreen(props) {
 
 <ScrollView style={styles.scrollStyle}>
 
-          {/*
-          <View>
-          <Button title='Post new Item' onPress={()=>setVisibility(true)} />
-          </View>
-          */}
-          
-
       <View style={styles.container}>  
         <View style={styles.centralContainer}>        
 
@@ -264,15 +257,7 @@ function CreateItemScreen(props) {
 
           <View style={styles.logoContainer}>
             <LogoSmall></LogoSmall>
-          </View>
-          
-          {/* 
-          <Button title = "ok" onPress={()=>setVisibility(true)} />
-          */}
- 
-
-
-
+          </View> 
 
           <Text 
             text = 'submit'
@@ -284,10 +269,7 @@ function CreateItemScreen(props) {
             text = 'submit'
             style = {TextStyling.textBlackSmall}
             onPress={()=>setflatListVisibility(true)} >
-            Press Me FlatList</Text>
-
-
-            
+            Press Me FlatList</Text>            
 
           <MenuRow 
             style = {styles.row1} 
@@ -341,190 +323,13 @@ function CreateItemScreen(props) {
   }
 };
 
-  //
-  //
-  //
-
-
-  /* AD - original 
-
-<ScrollView style={styles.scrollStyle}>
-      <View style={styles.container}>  
-        <View style={styles.centralContainer}>
-   
-          <View style={styles.logoContainer}>
-            <LogoSmall></LogoSmall>
-          </View>
-
-          <MenuRow style = {styles.row1} rowText = "Register"
-            icon1 = "account-plus-outline"/>
-          <MenuRow style = {styles.row2} rowText = "Login"
-            icon1 = "login" />
-          <MenuRow style = {styles.row2} rowText = "Settings"
-            icon1 = "cog-outline" />
-          <MenuRow style = {styles.row2} rowText = "Premium"
-            icon1 = "crown" />
-          <MenuRow style = {styles.row2} rowText = "Support"
-            icon1 = "face-agent" />
-          <MenuRow style = {styles.row3} bckgcol = {colors.danger}    rowText = "Delete Account"
-            icon1 = "delete-forever"
-            icon2 = "alert-octagon"
-            textstyling = {TextStyling.textWhiteMedium}
-            icon1color = "white"
-            icon2color = "white"  />        
-        </View>
-      </View>
-    </ScrollView>    
-    
-    
-
-
-<View style={styles.container}> 
-        <CreateItemScreenRow1 rowText = "Sellers Guide" style = {styles.row1} /> 
-        <CreateItemScreenRow2 rowText = "Support" style = {styles.row2}/>
-        <View style={styles.centralContainer}>
-      <View style={styles.screen}>
-        <Text>{hasMessage}</Text>
-
-        
-        <Button color='grey' title='Fetch from DB' onPress={()=>fetchData()} />
-        <Button color='darkorange' title='Update Item' onPress={()=>updateData()} />
-        
-         
-        <Button color = '#000080' title='Post new Item' onPress={()=>setVisibility(true)} />
-        <Text style = {TextStyling.textBlackSmall}>(Scrollable)</Text>
-        <Text style = {TextStyling.textBlackSmall}>Items you are currently selling:</Text>    
-     
-        <CreateItemInput 
-          visibility={isVisible} 
-          onAddItem={onAddItem}
-          itemList={items} 
-          onCancelItem={cancelAddItem} 
-        />        
-        <FlatList
-          keyExtractor={(item) => item.id.toString()} 
-          data={items}
-          renderItem={itemData => 
-            <ListCreatedItem id={itemData.item.id} 
-            name={itemData.item.name}
-            price={itemData.item.price}
-            description={itemData.item.description}
-            category={itemData.item.category}
-            onDelete={()=>onDeleteItem(itemData.item.id)} 
-        />}        
-      />
-      </View>
-      </View>
-      </View>   
-
-    
-
-*/
-
-
 const styles = StyleSheet.create({
-
-/* The previous GOOD VERSION 
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: colors.light4,
-    width:'100%',
-  },  
-*/
-
-/* The previous GOOD VERSION 
-  logoContainer:{
-    //marginTop: 1, //26
-    alignItems: 'center',   
-  },
-  */
-
   scrollViewCustom: {
     backgroundColor: colors.light4, // AD - added background
   },
-
   logoItemModal: {
     marginTop: Margins.xlarge,
-  },
-
-  flatListContainer: {
-    width: '90%',
-    backgroundColor: 'green',
-  },
-
-  /* AD - Previous GOOD version
-
-  centralContainer: {
-    flex: 1,   
-    justifyContent: 'center',
-    width: '90%', 
-    //backgroundColor: colors.light4,
-    //backgroundColor: 'red',
-    padding: Paddings.midsize,
-
-    paddingBottom: Paddings.midsize,
-
-    //margin: Margins.midsize,
-    margin: Margins.narrow,
-
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: colors.danger,
-  },
-
-  */
-
-
-
-
-  /* AD - The original GOOD version
-  row1: {
-    marginVertical: Margins.xxnarrow,
-    marginTop: 15,
-  },
-
-  row2: {
-    marginVertical: Margins.xxnarrow,
-  },
-
-  row3: {
-    marginVertical: Margins.large,
-  },
- */
-
-  imageUploader: {
-    height: 104,
-    width: 339,
-    alignItems: 'center', // AD - added
-    marginTop: Margins.narrow, // AD - added margin Top
-    marginBottom: Margins.xlarge, // AD - added margin bottom  
-  },
-  CreateItemForm: {
-    height: 44,
-    width: 317,
-    alignItems: 'center', // AD - added align
-    marginLeft: Margins.narrow, // AD - added margin left   
-  },  
-  buttonContainer: {
-    height: 89,
-    marginTop: 250,
-    width: '80%',
-    alignItems: 'center', // AD - added align  
-    marginBottom: Margins.narrow, // AD - added margin bottom
-  },
-  uploadButton: {
-    width: 206,
-    height: 36,
-    marginTop: 4,
-    backgroundColor: colors.light2, // AD - added color
-  },
+  }, 
   cancelButton: {
     width: 206,
     height: 36,
@@ -534,41 +339,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light5, // AD - added color    
   },
 
-/* AD - stylings related to the list functionality */
-  screen: {
-    //marginTop: 5,//10
-    //padding: 10, // 10
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    height: '100%',
-
-    //alignItems: 'center',
-    //backgroundColor: 'blue',
-
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3
-    },
-    elevation: 5,
-    shadowOpacity: 0.31,
-    shadowRadius: 0,
-    backgroundColor: "#E6E6E6",  
-   
-
-  },
-  listItem:{
-    padding: 10,
-    marginVertical: 10,
-    borderWidth: 2,
-    borderColor: '#0f0',
-    backgroundColor: '#fce',    
-  },
-
   /* AD - Originally from the Account Screen */
   scrollStyle: {
-    backgroundColor: colors.light4,
-    //justifyContent: 'center',
+    backgroundColor: colors.light4, 
   },
 
   container: {
@@ -599,8 +372,7 @@ const styles = StyleSheet.create({
     flex: 1,   
     justifyContent: 'center',
     width: '100%', 
-    backgroundColor: colors.light4,
-    
+    backgroundColor: colors.light4,    
   },
 
 });
