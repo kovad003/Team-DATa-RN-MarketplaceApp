@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, View, Text, FlatList, Image,Button, Modal, TouchableOpacity, ScrollView } from "react-native";
 
 import { ITEM } from "../data/dummy-data";
@@ -14,102 +14,32 @@ import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
 // in this Component we can see all details of the selected Item
-function itemDetailScreen(props) {
-
+function CustomerProfileScreen(props) {
 
     const [infoVisible , setInfoVisible] = useState(false);
-    const [selectedItem, setSelectedItem] = useState([]);
-    const [messageDisplayed, setMessageDisplayed] = useState('');
-    const [isLoading, setLoading] = useState(true);
-    const [hasMessage, setMessage] = useState(false);
-
-
-
-  // HH - data from dummy-data***********************************Start
-  // // HH - created to read data from dummy-data
-  //   console.log(props.route.params);
-
-  //   const { itemId } = props.route.params;
-  //   const selectedItemId = itemId;
-  //   // const selectedItem = ITEM.filter(
-  //   //     cat => cat.categoryId.nidexOf(props.selectedItemId) >= 0);
-  //  const selectedItem = ITEM.find(item => item.id === selectedItemId);
-  //**************************************************************Ends 
-  const { itemId } = props.route.params;
-  const selectedItemId = itemId;
-
   
-  const ContactInfo = ()=>{
-    setInfoVisible(true);
-  }
-  const CancelContactInfo = ()=>{
-    setInfoVisible(false);
-  }
-  
-  // HH - for read data for selected item ******************************************** start
-  // *** GET ***
-  async function fetchCatData() {
-    //Variable res is used later, so it must be introduced before try block and so cannot be const.
-    let response = null;
-    try{
-      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getjsonitemtoupdate/"+selectedItemId);
+  // HH - created to read data from dummy-data
+    console.log(props.route.params);
 
-    }
-    catch(error){
-      showError(error);
-    }
-    try{
-      //Getting json from the response
-      let responseData = await response.json();
-      //console.log(responseData);//Just for checking.....
-      setSelectedItem(responseData);
-    }
-    catch(error){
-      showError(error);
-    }
-  }
-  // HH- only for test and see detail of result
-  //console.log(setSelectedItem);
-
-  useEffect(() => {
-    //console.log('useEffect(() => {'); 
-      if (isLoading==true){
-        //fetchData();
-        fetchCatData();
-        setLoading(false);
-    }
-  });
-  function showError(error){
-    setMessage(true);
-    setMessageDisplayed("Error: " + error);
-    console.log(messageDisplayed);
-  }
-  function showConfirmation(message){
-    setMessageDisplayed("Confirmation: " + message);
-    setMessage(true);
-  }
-  function closeMessage() {
-    setMessage(false);
-    setLoading(true);
-  }
- // ****************************************************************************** end
-
+    const { itemId } = props.route.params;
+    const selectedItemId = itemId;
+    // const selectedItem = ITEM.filter(
+    //     cat => cat.categoryId.nidexOf(props.selectedItemId) >= 0);
+  const selectedItem = ITEM.find(item => item.id === selectedItemId);
 
   return (
     <View style={styles.container}>
       <ScrollView>
         <View>
           <Image
-          source={{ uri: selectedItem.image }}
+          source={{ uri: selectedItem.imageUrl }}
           style={{ width: '100%', height: 300 }}
           />
         </View>
         <View style={styles.mainContainer}>
           <Text style={{fontSize:30, padding:10,}}>{selectedItem.title}</Text>
           <View style={styles.rowContent}>
-            <Text style={styles.rowText}>Posted at {selectedItem.datePosted} in {selectedItem.location}</Text>
+            <Text style={styles.rowText}>Posted at {selectedItem.postDate} in {selectedItem.city}</Text>
           </View>
           <View style={styles.rowContent}>
             <Text style={styles.rowTextBold}>Condition:</Text>
@@ -131,9 +61,6 @@ function itemDetailScreen(props) {
         <AccountScreenRow icon="question" rowText='Guid for shopping Safe' style = {styles.row2}/>
         <AccountScreenRow icon="info" rowText='Report' style = {styles.row2}/>
       </ScrollView>
-      <View style={styles.uploadButton}>
-        <Button title="Contact Information" onPress={ContactInfo}/>
-      </View>
       <View >
         <Modal 
         visible={infoVisible} 
@@ -143,7 +70,7 @@ function itemDetailScreen(props) {
           <View style={styles.contactModal}>
             <View style={styles.contactModal2}>
               <View >
-                <Text style={styles.contactInfoText}>Customer with ID : {selectedItem.customerId}</Text>
+                <Text style={styles.contactInfoText}>Hossein Hazratgholizadeh</Text>
                 <Text style={styles.contactInfoText}>Phone number : +358403771254</Text>
               </View>
               <View style={styles.uploadButton}>
@@ -238,4 +165,4 @@ uploadButton:{
 }
 });
 
-export default itemDetailScreen;
+export default CustomerProfileScreen;

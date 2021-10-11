@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 
 import { ITEM } from "../data/dummy-data";
@@ -15,14 +15,101 @@ import colors from "../constants/colors";
 
 function ListItemsScreen(props) {
 
-  
+    const [itemsInCat, setItemsInCat] = useState([]);
+    const [allItems, setAllItems] = useState([]);
+    const [messageDisplayed, setMessageDisplayed] = useState('');
+    const [isLoading, setLoading] = useState(true);
+    const [hasMessage, setMessage] = useState(false);
+
+
+
   // HH - created to read data from dummy-data to find the items with our selected Category
   const { catId } = props.route.params;
   const selectedCategoryId = catId;
     //console.log(selectedCategoryId)
 
-  const selectedItem = ITEM.filter(
-      cat => cat.categoryId.indexOf(selectedCategoryId) >= 0);
+// // HH - for dummy data
+  // const selectedItem = ITEM.filter(
+  //     cat => cat.categoryId.indexOf(selectedCategoryId) >= 0);
+
+
+
+// HH - for read item table and select items with selected category id************************************* start
+  // *** GET ***
+  async function fetchCatData() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+
+    }
+    catch(error){
+      showError(error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      console.log(responseData);//Just for checking.....
+      setAllItems(responseData);
+    }
+    catch(error){
+      showError(error);
+    }
+  }
+
+
+  console.log(allItems);
+  useEffect(() => {
+    console.log('useEffect(() => {'); 
+      if (isLoading==true){
+        //fetchData();
+        fetchCatData();
+        setLoading(false);
+    }
+  });
+  function showError(error){
+    setMessage(true);
+    setMessageDisplayed("Error: " + error);
+    console.log(messageDisplayed);
+  }
+  function showConfirmation(message){
+    setMessageDisplayed("Confirmation: " + message);
+    setMessage(true);
+  }
+  function closeMessage() {
+    setMessage(false);
+    setLoading(true);
+  }
+
+    setItemsInCat(allItems.map(
+    //   item => if(item.categoryId.toString()===catId){return item});
+      item => console.log(item.categoryId)))
+
+    //   console.log(itemsInCat)
+
+ // ****************************************************************************** end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // HH - created  to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
@@ -33,8 +120,8 @@ function ListItemsScreen(props) {
             price={itemData.item.price}
             condition={itemData.item.condition}            
             description={itemData.item.description}
-            onSelect={()=> {props.navigation.navigate('ItemDetail',{ itemId:itemData.item.id }) ; console.log(itemData.item.id)} }
-            imageUrl={itemData.item.imageUrl}
+            onSelect={()=> {props.navigation.navigate('ItemDetail',{ itemId:itemData.item.id })} }
+            imageUrl={itemData.item.image}
             />
           );
             
@@ -45,8 +132,8 @@ function ListItemsScreen(props) {
     <View style={styles.container}>
       <View style={styles.rect}>
         <FlatList
-        data={selectedItem}
-        keyExtractor={(item, index)=> item.id}
+        data={allItems}
+        keyExtractor={(item, index)=> item.itemId.toString()}
         renderItem={renderMyItem}
         style={{width:'80%', }}
         />
