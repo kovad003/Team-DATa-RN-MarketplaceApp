@@ -110,7 +110,7 @@ function HomeScreen(props) {
       <View style={styles.rect}>
         <FlatList
         data={allItems}
-        keyExtractor={(item, index)=> item.itemId}
+        keyExtractor={(item, index)=> item.itemId.toString()}
         renderItem={renderMyItem}
         style={{width:'80%', }}
         />

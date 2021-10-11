@@ -16,7 +16,7 @@ import colors from "../constants/colors";
 function ListItemsScreen(props) {
 
     const [itemsInCat, setItemsInCat] = useState([]);
-    const [allItems, setAllItems] = useState([]);
+    // const [allItems, setAllItems] = useState([]);
     const [messageDisplayed, setMessageDisplayed] = useState('');
     const [isLoading, setLoading] = useState(true);
     const [hasMessage, setMessage] = useState(false);
@@ -26,7 +26,7 @@ function ListItemsScreen(props) {
   // HH - created to read data from dummy-data to find the items with our selected Category
   const { catId } = props.route.params;
   const selectedCategoryId = catId;
-    //console.log(selectedCategoryId)
+  console.log('cat: '+selectedCategoryId)
 
 // // HH - for dummy data
   // const selectedItem = ITEM.filter(
@@ -42,7 +42,7 @@ function ListItemsScreen(props) {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getItemsincategory/"+selectedCategoryId);
 
     }
     catch(error){
@@ -51,16 +51,15 @@ function ListItemsScreen(props) {
     try{
       //Getting json from the response
       let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
-      setAllItems(responseData);
+      //console.log(responseData);//Just for checking.....
+      setItemsInCat(responseData);
     }
     catch(error){
       showError(error);
     }
   }
 
-
-  console.log(allItems);
+  console.log(itemsInCat)
   useEffect(() => {
     console.log('useEffect(() => {'); 
       if (isLoading==true){
@@ -82,19 +81,13 @@ function ListItemsScreen(props) {
     setMessage(false);
     setLoading(true);
   }
+  console.log(messageDisplayed);
 
-    // setItemsInCat(allItems.map(
-    // //   item => if(item.categoryId.toString()===catId){return item});
-    //   item => console.log(item.categoryId)))
-
-    //   console.log(itemsInCat)
-
- // ****************************************************************************** end
+ // ********************************************************************************** end
 
 
   // HH - created  to render MyItemCard component details*****************
     const renderMyItem = itemData =>{
-        //console.log(myItemsList);
         return( 
             <MyItemCardSmall 
             title={itemData.item.title} 
@@ -113,7 +106,7 @@ function ListItemsScreen(props) {
     <View style={styles.container}>
       <View style={styles.rect}>
         <FlatList
-        data={allItems}
+        data={itemsInCat}
         keyExtractor={(item, index)=> item.itemId.toString()}
         renderItem={renderMyItem}
         style={{width:'80%', }}

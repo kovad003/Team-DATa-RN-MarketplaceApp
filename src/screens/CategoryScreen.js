@@ -95,7 +95,7 @@ function CategoryScreen(props) {
       color={itemData.item.color}
       description={itemData.item.description}
       imageUrl={itemData.item.imageUrl}
-      onSelect={()=> props.navigation.navigate('CategoryList',{ catId:itemData.item.id })}
+      onSelect={()=> props.navigation.navigate('CategoryList',{ catId: itemData.item.id })}
     />
       );
   };
