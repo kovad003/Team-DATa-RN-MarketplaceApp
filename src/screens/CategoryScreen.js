@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, Alert, ActivityIndicator, FlatList } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Alert, ActivityIndicator, FlatList } from "react-native";
 import 'react-native-gesture-handler';
 
 

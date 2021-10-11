@@ -1,7 +1,7 @@
 import React, { Component , useState , useEffect } from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, Alert, ActivityIndicator, FlatList } from "react-native";
 
-import { ITEM } from "../data/dummy-data";
+//import { ITEM } from "../data/dummy-data";
 import MyItemCard from "../components/MyItemCard";
 import MyItemCardSmall from "../components/MyItemCardSmall";
 
@@ -101,23 +101,45 @@ function HomeScreen(props) {
           );
     };
 
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Logo style={styles.logo}></Logo>
+if (isLoading==true) {
+    console.log('if(isLoading==true) {');
+    return (
+      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
+        <ActivityIndicator size="large" color="#00ff00" />
       </View>
-      <View style={styles.rect}>
-        <FlatList
-        data={allItems}
-        keyExtractor={(item, index)=> item.itemId.toString()}
-        renderItem={renderMyItem}
-        style={{width:'80%', }}
-        />
-
+    );
+  }
+  // If error or confirm message needs to be displayed
+  else if(hasMessage){
+    console.log('else if(hasError){');
+    return(
+      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
+        <Text>{hasMessage}</Text>
+        <Text>{""+messageDisplayed}</Text>
+        <Button title='close' onPress={()=>closeMessage()}/>
       </View>
-    </View>
-  );
+    );
+  }
+  //Otherwise the list is shown
+  else{
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.logoContainer}>
+          <Logo style={styles.logo}></Logo>
+        </View>
+        <View style={styles.rect}>
+          <FlatList
+          data={allItems}
+          keyExtractor={(item, index)=> item.itemId.toString()}
+          renderItem={renderMyItem}
+          style={{width:'80%', }}
+          />
+
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
