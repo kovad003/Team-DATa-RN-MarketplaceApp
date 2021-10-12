@@ -54,13 +54,13 @@ useEffect(() => {
           <MenuRow style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
 
-          <View>
+        
             <Text 
             text = 'submit'
             style = {TextStyling.textBlackSmall}
             onPress={()=>setLoginVisible(true)} >
-            Login Button</Text>
-            </View>
+            Login</Text>
+          
 
           <MenuRow style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
