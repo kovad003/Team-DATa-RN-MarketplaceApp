@@ -68,7 +68,7 @@ id: 1,
 const onAddCustomer = (childdata) => {
   addCustomerToList(customerList =>[...customerList, childdata]);
 
-  console.log('childdata.customerId: ' + childdata.customerId);
+  //console.log('childdata.customerId: ' + childdata.customerId);
   console.log('childdata.firstName: ' + childdata.firstName);
   console.log('childdata.lastName: ' + childdata.lastName);
   console.log('childdata.userName: ' + childdata.userName);
@@ -79,7 +79,7 @@ const onAddCustomer = (childdata) => {
   console.log('childdata.image: ' + childdata.image);
 
   addCustomerData(
-    childdata.customerId, 
+    //childdata.customerId, 
     childdata.firstName, 
     childdata.lastName, 
     childdata.userName, 
@@ -297,7 +297,7 @@ function closeMessage() {
  
 
   // *** POST ***
-  async function addCustomerData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
+  async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
     console.log('started: async function addCustomerData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
     let response = null;
     let requestOptions = {
@@ -306,7 +306,7 @@ function closeMessage() {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        customerId: customerIdParam*1,
+        //customerId: customerIdParam*1,
         firstName: firstNameParam.toString(),
         lastName: lastNameParam.toString(),
         userName: userNameParam.toString(),
@@ -325,7 +325,7 @@ function closeMessage() {
     try {
       let responseData = await response.json();
       console.log('responseData: ' + responseData);
-      showConfirmation("Item was successfully added!")
+      showConfirmation("Customer was successfully added!")
     } catch (error) {
       showError(error);
     }
