@@ -17,12 +17,49 @@ import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 
 function AccountScreen(props) {
 
-  // State variable
-  const [customer, setCustomer] = useState({
-    id: 1,
+
+const [hasMessage, setMessage] = useState(false);
+const [messageDisplayed, setMessageDisplayed] = useState('');
+const [items, setItems] = useState([]);
+
+const [itemList, addItemToList] = useState([]);
+const [isLoading, setLoading] = useState(true);
+const [isVisible, setVisibility] = useState(false);
+
+const [isflatListVisible, setflatListVisibility] = useState(false);
+
+//const [customers, setCustomer] = useState([]);
+const [customerList, addCustomerToList] = useState([]);
+
+const [customer, setCustomer] = useState([]);
+
+/* AD - for the AccountScreen -> login page modal visibility */
+const [isLoginVisible, setLoginVisible] = useState(false);
+const [isRegisterVisible, setRegisterVisible] = useState(false);
+
+
+ /*
+
+id: 1,
     customerId: 1, //TODO
     password: 'password',
+    */
+
+
+    /*
+      const [customer, setCustomer] = useState({
+    customerId: 1,
+    firstName: "default firstName", //TODO
+    lastName: 'default lastName',
+    userName: 'default userName',
+    password: "default password",
+    dateOfBirth: 'default dateOfBirth',
+    email: 'default email',
+    phone: 'default phone',
+    image: 'default image',
 });
+
+*/
 
 
 // AD new consts
@@ -41,7 +78,8 @@ const onAddCustomer = (childdata) => {
   console.log('childdata.phone: ' + childdata.phone);
   console.log('childdata.image: ' + childdata.image);
 
-  addData(childdata.customerId, 
+  addCustomerData(
+    childdata.customerId, 
     childdata.firstName, 
     childdata.lastName, 
     childdata.userName, 
@@ -63,10 +101,7 @@ const addCustomer=()=>{
 */
 
 
-  /* AD - for the AccountScreen -> login page modal visibility */
-  const [isLoginVisible, setLoginVisible] = useState(false);
-  const [isRegisterVisible, setRegisterVisible] = useState(false);
-
+  
   //
 
 
@@ -149,17 +184,9 @@ const cancelItem=()=>{
 
 // functions related to the input field functionality
 
-const [hasMessage, setMessage] = useState(false);
-const [messageDisplayed, setMessageDisplayed] = useState('');
-const [items, setItems] = useState([]);
-const [itemList, addItemToList] = useState([]);
-const [isLoading, setLoading] = useState(true);
-const [isVisible, setVisibility] = useState(false);
 
-const [isflatListVisible, setflatListVisibility] = useState(false);
 
-//const [customers, setCustomer] = useState([]);
-const [customerList, addCustomerToList] = useState([]);
+
 
 // Custom Functions ****************************************************************************************
 const onAddItem = (childdata) => {
@@ -175,7 +202,8 @@ const onAddItem = (childdata) => {
   console.log('childdata.phone: ' + childdata.phone);
   console.log('childdata.image: ' + childdata.image);
 
-  addData(childdata.customerId, 
+  addData(
+    childdata.customerId, 
     childdata.firstName, 
     childdata.lastName, 
     childdata.userName, 
@@ -266,10 +294,11 @@ function closeMessage() {
       showError(error);
     }
   }
+ 
 
   // *** POST ***
   async function addCustomerData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
-    console.log('started: async function addData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
+    console.log('started: async function addCustomerData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
     let response = null;
     let requestOptions = {
       method:'POST',
@@ -283,8 +312,8 @@ function closeMessage() {
         userName: userNameParam.toString(),
         password: passwordParam.toString(),
         dateOfBirth: dateOfBirthParam.toString(),
-        condition: emailParam.toString(),
-        location: phoneParam.toString(),
+        email: emailParam.toString(),
+        phone: phoneParam.toString(),
         image: imageParam.toString(),
       })
     };
