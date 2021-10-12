@@ -96,6 +96,17 @@ const confirmPasswordInputHandler=(enteredText)=>{
     props.onCancelItem2();
     }
 
+  
+    // For Controlling modal
+    const addItem=()=>{
+      props.onAddItem(item);
+  }
+  /*
+  const cancelItem=()=>{
+      props.onCancelItem();
+  }
+  */
+
   return (
     <Modal visible={props.visibility} animationType="slide">
     <ScrollView style={styles.scrollView}>
@@ -192,7 +203,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
                 paddingBottom: 20,
                 borderRadius: 10,
               }}>
-              <Text style={{fontSize: 20, color: '#fff'}}>Register</Text>            
+              <Text onPress={addItem} style={{fontSize: 20, color: '#fff'}}>Register</Text>            
             </TouchableOpacity>
 
             <TouchableOpacity
