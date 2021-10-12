@@ -24,47 +24,68 @@ function RegistrationScreen(props) {
 
   // State variable
   const [item, setItem] = useState({
-    categoryId: 1,
-    customerId: 1, //TODO
-    title: 'some name',
-    price: 0,
-    description: 'some description',
-    image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
-    condition: 'used',
-    location: 'Hämeenlinna',
+    customerId: 1,
+    firstName: "default firstName", //TODO
+    lastName: 'default lastName',
+    userName: 'default userName',
+    password: "default password",
+    dateOfBirth: 'default dateOfBirth',
+    email: 'default email',
+    phone: 'default phone',
+    image: 'default image',
 });
 /* const [formChecker, setFormChecker] = useState({
     categoryinput: 'false',
 }) */
-const userNameInputHandler=(enteredText)=>{
-  item.title = enteredText;
-  console.log('entered text/firstname: ' + enteredText);
-}
 const firstNameInputHandler=(enteredText)=>{
-  item.title = enteredText;
-  console.log('entered text/firstname: ' + enteredText);
+  item.firstName = enteredText;
+  console.log('entered text/firstName: ' + enteredText);
 }
-
 const lastNameInputHandler=(enteredText)=>{
-    item.price = enteredText;
-    console.log('entered text/lastname: ' + enteredText);
+  item.lastName = enteredText;
+  console.log('entered text/lastName: ' + enteredText);
 }
 
-const emailInputHandler=(enteredText)=>{
-    item.description = enteredText;
-    console.log('entered text/email: ' + enteredText);
+const userNameInputHandler=(enteredText)=>{
+  item.userName = enteredText;
+  console.log('entered text/userName: ' + enteredText);
 }
 
 const passwordInputHandler=(enteredText)=>{
-    item.image = enteredText;
+    item.password = enteredText;
     console.log('entered text/password: ' + enteredText);
 }
 
+const dateOfBirthInputHandler=(enteredText)=>{
+    item.dateOfBirth = enteredText;
+    console.log('entered text/dateOfBirth: ' + enteredText);
+}
+
+const emailInputHandler=(enteredText)=>{
+  item.email = enteredText;
+  console.log('entered text/email: ' + enteredText);
+}
+
+const phoneInputHandler=(enteredText)=>{
+  item.phone = enteredText;
+  console.log('entered text/phone: ' + enteredText);
+}
+
+const imageInputHandler=(enteredText)=>{
+    item.image = enteredText;
+    console.log('entered text/image: ' + enteredText);
+}
+
+
+
+
+
+/*
 const confirmPasswordInputHandler=(enteredText)=>{
     item.condition = enteredText;
     console.log('entered text/confirmPassword: ' + enteredText);
 }
-
+*/
 
 
   // For Controlling modal
@@ -109,7 +130,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Firstname"
               style={styles.TextInput}
-              onChangeText={lastNameInputHandler}
+              onChangeText={firstNameInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -118,7 +139,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Lastname"
               style={styles.TextInput}
-              onChangeText={emailInputHandler}
+              onChangeText={lastNameInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -127,7 +148,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your email"
               style={styles.TextInput}
-              onChangeText={passwordInputHandler}
+              onChangeText={emailInputHandler}
             />
             </View>
           <View style={{marginVertical: 5}}>
@@ -137,7 +158,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               secureTextEntry={true}
               placeholder="Enter your password"
               style={styles.TextInput}
-              onChangeText={confirmPasswordInputHandler}
+              onChangeText={passwordInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -149,6 +170,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               secureTextEntry={true}
               placeholder="Enter your confirm Password"
               style={styles.TextInput}
+              onChangeText={passwordInputHandler} // might not be necessary
             />
           </View>
           <View style={styles.eulaRow}>
