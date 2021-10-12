@@ -14,43 +14,60 @@ import MenuSwipeActionFilter from "../components/swipable/MenuSwipeActionFilter"
 import ListItemToSelect from "../components/swipable/ListItemToSelect";
 
 const SearchScreen = (props) => {
+  const [isLoadingRegions, setLoadingRegions] = useState(true);
+  const [isLoadingCities, setLoadingCities] = useState(false);
+
   const [hasMessage, setMessage] = useState(false);
   const [messageDisplayed, setMessageDisplayed] = useState('');
-  const [region, setRegion] = useState([]);
-  const [regionList, addRegionToList] = useState([null]);
-  const [isLoading, setLoading] = useState(true);
-  const [isVisible, setVisibility] = useState(false);
-  const [isCityListVisible, setCityListVisibility] = useState(false);
 
+  const [regionList, addRegionToList] = useState([null]);
+  const [selectedRegionId, setRegionId] = useState();
+
+  const [cityList, addCityToList] = useState([null]);
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const [isRegionModalVisible, setRegionModalVisibility] = useState(false);
+  const [isCityModalVisible, setCityModalVisibility] = useState(false);
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   function onPressFunction(){
     console.log('swipable was pressed');
-    setLoading(true);
+    console.log("regionList: " + JSON.stringify(regionList));
+    //setLoading(true);
   }
   function hello(){
     console.log('hello');
   }
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   // Swipe Actions ------------------------------------ 
-  const showModal=()=>{
-    setVisibility(true);
-    setLoading(true);
-
+  const showRegionModal=()=>{
+    setRegionModalVisibility(true);
+  }
+  const showCityModal=()=>{
+    setCityModalVisibility(true);
   }
   const clearSelection=()=>{
     console.log("clear selection");
   }
   const onCancel=()=>{
-    setVisibility(false);
-    setLoading(false);
+    setRegionModalVisibility(false);
+    setCityModalVisibility(false);
+    setLoadingRegions(false);
   }
   // --------------------------------------------------
   // ListItem actions ---------------------------------
-  const markSelection=(selectedItem)=>{
+  const markRegionSelection=(selectedItem)=>{
     console.log("selected item: " +  JSON.stringify(selectedItem));
-    setCityListVisibility(true);
-    setVisibility(false);
+    setRegionModalVisibility(false);
+    console.log("setRegion to " +selectedItem.regionId);
+    setRegionId(selectedItem.regionId)
+    setLoadingCities(true);
+  }
+  const markCitySelection=(selectedItem)=>{
+    console.log("selected item: " +  JSON.stringify(selectedItem));
+    setSelectedCity(selectedItem);
+    setRegionModalVisibility(false);
+    //setLoadingRegions(true);
   }
   // --------------------------------------------------
 
@@ -60,7 +77,6 @@ const SearchScreen = (props) => {
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      // response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
       response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
     }
     catch(error){
@@ -69,24 +85,20 @@ const SearchScreen = (props) => {
     try{
       //Getting json from the response
       let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
-      //setRegion(responseData);
-      //addRegionToList(regionList =>[...regionList, responseData]);
+      console.log(responseData);
       addRegionToList(responseData);
       console.log('regionList: ' + regionList)
-      
-      //addRegionToList(responseData);
     }
     catch(error){
       console.log(error);
     }
   }
   async function getAllCityInRegion(regionId) {
+    console.log('regionId = ' + regionId);
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      // response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
       response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
     }
     catch(error){
@@ -95,28 +107,25 @@ const SearchScreen = (props) => {
     try{
       //Getting json from the response
       let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
-      //setRegion(responseData);
-      //addRegionToList(regionList =>[...regionList, responseData]);
-      addRegionToList(responseData);
-      console.log('regionList: ' + regionList)
-      
-      //addRegionToList(responseData);
+      console.log("cities in region" + JSON.stringify(responseData.regionCities));
+      addCityToList(responseData.regionCities);
     }
     catch(error){
       console.log(error);
     }
   }
-
-
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   // Will Rerender the screen in case the isLoading boolean is set to true
   useEffect(() => {
     console.log('useEffect(() => {'); 
-      if (isLoading==true){
-        getAllRegion();
-        setLoading(false);
-    }
+      if (isLoadingRegions==true){
+        getAllRegion();   
+        setLoadingRegions(false);
+      }
+      if(isLoadingCities==true){
+          getAllCityInRegion(selectedRegionId);
+          setLoadingCities(false);
+      }
   });
 
   return (
@@ -126,7 +135,7 @@ const SearchScreen = (props) => {
       </View>
         <View>
 {/* MODALS -------------------------------------------------------------------------------- */}
-            <Modal visible={isVisible}>
+            <Modal visible={isRegionModalVisible}>
               <FlatList
                 keyExtractor={(region) => region.regionId.toString()} 
                 data={regionList}
@@ -134,8 +143,23 @@ const SearchScreen = (props) => {
                   <ListItemToSelect 
                     id={regionData.item.regionId}
                     name={regionData.item.regionName}
-                    onSelect={() => markSelection(regionData.item)}
-                    onPress={() => markSelection(regionData.item)}
+                    onSelect={() => markRegionSelection(regionData.item)}
+                    onPress={() => markRegionSelection(regionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+
+            <Modal visible={isCityModalVisible}>
+              <FlatList
+                keyExtractor={(city) => city.cityId.toString()}
+                data={cityList}
+                renderItem={cityData =>
+                  <ListItemToSelect 
+                    id={cityData.item.cityId}
+                    name={cityData.item.cityName}
+                    onSelect={() => markCitySelection(cityData.item)}
+                    onPress={() => markCitySelection(cityData.item)}
                   />}
               />
               <Button title='Cancel' onPress={onCancel} />
@@ -154,13 +178,13 @@ const SearchScreen = (props) => {
             )}
               renderRightActions = {() => (
               <MenuSwipeActionFilter 
-                onPress={() => showModal()} 
+                onPress={() => showRegionModal()} 
               />
             )}
             />
 
             <MenuSwipableRow
-              iconMain="map-marker"
+              iconMain="map"
               iconColor="black"
               label="Region"
               onPress={onPressFunction}
@@ -171,10 +195,28 @@ const SearchScreen = (props) => {
             )}
               renderRightActions = {() => (
               <MenuSwipeActionFilter 
-                onPress={() => showModal()} 
+                onPress={() => showRegionModal()} 
               />
             )}
             />
+
+            <MenuSwipableRow
+              iconMain="map-marker"
+              iconColor="black"
+              label="City"
+              onPress={onPressFunction}
+              renderLeftActions = {() => (
+              <MenuSwipeActionResetFilter  
+                onPress={() => clearSelection()}
+              />
+            )}
+              renderRightActions = {() => (
+              <MenuSwipeActionFilter 
+                onPress={() => showCityModal()} 
+              />
+            )}
+            />
+
             <MenuSwipableRow 
               iconMain="database"
               iconColor="black"
@@ -187,7 +229,7 @@ const SearchScreen = (props) => {
             )}
               renderRightActions = {() => (
               <MenuSwipeActionFilter 
-                onPress={() => showModal()} 
+                onPress={() => showRegionModal()} 
               />
             )}
             />
@@ -203,7 +245,7 @@ const SearchScreen = (props) => {
             )}
               renderRightActions = {() => (
               <MenuSwipeActionFilter 
-                onPress={() => showModal()}
+                onPress={() => showRegionModal()}
               />
             )}
             />    
