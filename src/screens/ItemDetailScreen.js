@@ -1,13 +1,14 @@
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, Image,Button, Modal, TouchableOpacity, ScrollView } from "react-native";
 
-import { ITEM } from "../data/dummy-data";
+//import { ITEM } from "../data/dummy-data";
 import MyItemCard from "../components/MyItemCard";
 import MyItemCardSmall from "../components/MyItemCardSmall";
 import Icon from "react-native-vector-icons/AntDesign";
 import AppButton from "../components/AppButton";
 import EditableCard from "../components/EditableCard";
 import AccountScreenRow from '../components/AccountScreenRow';
+import ContactInformation from '../components/ContactInformation';
 
 // Styling iports
 import { Margins, Paddings } from "../constants/constvalues";
@@ -70,8 +71,7 @@ function itemDetailScreen(props) {
       showError(error);
     }
   }
-  // HH- only for test and see detail of result
-  //console.log(setSelectedItem);
+
 
   useEffect(() => {
     //console.log('useEffect(() => {'); 
@@ -94,6 +94,7 @@ function itemDetailScreen(props) {
     setMessage(false);
     setLoading(true);
   }
+  console.log(selectedItem);
  // ****************************************************************************** end
 
 
@@ -128,7 +129,7 @@ function itemDetailScreen(props) {
             <Text style={styles.rowText} >{selectedItem.description}</Text>
           </View>
         </View>
-        <AccountScreenRow icon="question" rowText='Guid for shopping Safe' style = {styles.row2}/>
+        <AccountScreenRow icon="question" rowText='Guid for shopping Safe' style = {styles.row2} onSelect={()=> props.navigation.navigate('Guid')} />
         <AccountScreenRow icon="info" rowText='Report' style = {styles.row2}/>
       </ScrollView>
       <View style={styles.uploadButton}>
@@ -140,17 +141,9 @@ function itemDetailScreen(props) {
         animationType="slide"
         transparent={true}
         >
-          <View style={styles.contactModal}>
-            <View style={styles.contactModal2}>
-              <View >
-                <Text style={styles.contactInfoText}>Customer with ID : {selectedItem.customerId}</Text>
-                <Text style={styles.contactInfoText}>Phone number : +358403771254</Text>
-              </View>
-              <View style={styles.uploadButton}>
-              <Button title="Back" onPress={CancelContactInfo}/>
-              </View>
-            </View>
-          </View>
+          <ContactInformation 
+          customerId={selectedItem.customerId}
+          CancelContactInfo={CancelContactInfo}/>
         </Modal>
       </View>
     </View>
@@ -164,27 +157,7 @@ const styles = StyleSheet.create({
     fontSize:24,
     backgroundColor:colors.light4,
   },
-  contactModal:{
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffffffee',
-    marginTop: '75%',
-    borderRadius:30,
-
-  },
-  contactModal2:{
-    alignItems: 'center',
-    height: 300,
-    justifyContent: 'center',
-    alignItems: 'center',
-
-
-  },
-  contactInfoText:{
-    fontSize:24,
-  },
+  
   mainContainer:{
     justifyContent:'center',
     alignItems:'center',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, Alert, ActivityIndicator, FlatList } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Alert, ActivityIndicator, FlatList } from "react-native";
 import 'react-native-gesture-handler';
 
 
@@ -95,7 +95,7 @@ function CategoryScreen(props) {
       color={itemData.item.color}
       description={itemData.item.description}
       imageUrl={itemData.item.imageUrl}
-      onSelect={()=> props.navigation.navigate('CategoryList',{ catId:itemData.item.id })}
+      onSelect={()=> props.navigation.navigate('CategoryList',{ catId: itemData.item.id })}
     />
       );
   };
