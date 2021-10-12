@@ -92,7 +92,7 @@ function LoginScreen(props) {
     setLoading(false);
 
     if (loginDetails.password === null || loginDetails.password===password){
-      console.log('You are loged in')
+      console.log('You are logged in')
       setIsLogin(true)
     }else{
       console.log('you dont have account or username and password are not correct')

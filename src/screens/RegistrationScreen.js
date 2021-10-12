@@ -172,18 +172,20 @@ const confirmPasswordInputHandler=(enteredText)=>{
               onChangeText={passwordInputHandler}
             />
           </View>
+
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>
-              Confirm Password
+              Phone number
             </Text>
             <TextInput
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
-              placeholder="Enter your confirm Password"
+              placeholder="Enter your phone number"
               style={styles.TextInput}
-              onChangeText={passwordInputHandler} // might not be necessary
+              onChangeText={phoneInputHandler} // might not be necessary
             />
           </View>
+
           <View style={styles.eulaRow}>
         <View style={styles.eulaCheckBoxRow}>
           <Checkbox style={styles.eulaCheckBox}></Checkbox>
