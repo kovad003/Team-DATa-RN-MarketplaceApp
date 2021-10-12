@@ -20,6 +20,53 @@ import Logo from "../components/Logo";
 //const Home = () => {
 function RegistrationScreen(props) {
 
+  // For the inputs
+
+  // State variable
+  const [item, setItem] = useState({
+    categoryId: 1,
+    customerId: 1, //TODO
+    title: 'some name',
+    price: 0,
+    description: 'some description',
+    image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
+    condition: 'used',
+    location: 'Hämeenlinna',
+});
+/* const [formChecker, setFormChecker] = useState({
+    categoryinput: 'false',
+}) */
+const userNameInputHandler=(enteredText)=>{
+  item.title = enteredText;
+  console.log('entered text/firstname: ' + enteredText);
+}
+const firstNameInputHandler=(enteredText)=>{
+  item.title = enteredText;
+  console.log('entered text/firstname: ' + enteredText);
+}
+
+const lastNameInputHandler=(enteredText)=>{
+    item.price = enteredText;
+    console.log('entered text/lastname: ' + enteredText);
+}
+
+const emailInputHandler=(enteredText)=>{
+    item.description = enteredText;
+    console.log('entered text/email: ' + enteredText);
+}
+
+const passwordInputHandler=(enteredText)=>{
+    item.image = enteredText;
+    console.log('entered text/password: ' + enteredText);
+}
+
+const confirmPasswordInputHandler=(enteredText)=>{
+    item.condition = enteredText;
+    console.log('entered text/confirmPassword: ' + enteredText);
+}
+
+
+
   // For Controlling modal
   const addItem2=()=>{
     props.onAddItem2(item);
@@ -53,6 +100,7 @@ function RegistrationScreen(props) {
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your username"
               style={styles.TextInput}
+              onChangeText={userNameInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -61,6 +109,7 @@ function RegistrationScreen(props) {
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Firstname"
               style={styles.TextInput}
+              onChangeText={lastNameInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -69,6 +118,7 @@ function RegistrationScreen(props) {
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Lastname"
               style={styles.TextInput}
+              onChangeText={emailInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -77,6 +127,7 @@ function RegistrationScreen(props) {
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your email"
               style={styles.TextInput}
+              onChangeText={passwordInputHandler}
             />
             </View>
           <View style={{marginVertical: 5}}>
@@ -86,6 +137,7 @@ function RegistrationScreen(props) {
               secureTextEntry={true}
               placeholder="Enter your password"
               style={styles.TextInput}
+              onChangeText={confirmPasswordInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>

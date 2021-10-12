@@ -27,7 +27,30 @@ function LoginScreen(props) {
     props.onCancelItem();
     }
 
+    /* Input handlers */
 
+    const [item, setItem] = useState({
+      categoryId: 1,
+      customerId: 1, //TODO
+      title: 'some name',
+      price: 0,
+      description: 'some description',
+      image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
+      condition: 'used',
+      location: 'Hämeenlinna',
+  });
+  /* const [formChecker, setFormChecker] = useState({
+      categoryinput: 'false',
+  }) */
+  const usernameInputHandler=(enteredText)=>{
+      item.categoryId = enteredText;
+      console.log('entered text/username: ' + enteredText);
+  }
+
+  const passwordInputHandler=(enteredText)=>{
+      item.title = enteredText;
+      console.log('entered text/password: ' + enteredText);
+  }
 
 
 
@@ -55,6 +78,7 @@ function LoginScreen(props) {
                 placeholderTextColor="#bdbdbd"
                 placeholder="Enter your username"
                 style={styles.TextInput}
+                onChangeText={usernameInputHandler}
               />
             </View>
             <View>
@@ -64,6 +88,7 @@ function LoginScreen(props) {
                 secureTextEntry={true}
                 placeholder="Enter your password"
                 style={styles.TextInput}
+                onChangeText={passwordInputHandler}
               />
             </View>
             <View style={{alignSelf: 'center', width: '100%', marginTop: 40}}>

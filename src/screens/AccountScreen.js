@@ -14,10 +14,22 @@ import CreateItemInput from "../components/CreateItemInput";
 
 function AccountScreen(props) {
 
+  // State variable
+  const [customer, setCustomer] = useState({
+    id: 1,
+    customerId: 1, //TODO
+    password: 'password',
+});
+
   /* AD - for the AccountScreen -> login page modal visibility */
   const [isLoginVisible, setLoginVisible] = useState(false);
   const [isRegisterVisible, setRegisterVisible] = useState(false);
 
+  //
+
+
+
+  //
   const onAddItem=()=>{
     setLoginVisible(true);
   }
@@ -33,6 +45,14 @@ function AccountScreen(props) {
   const cancelAddItem2 = ()=>{
     setRegisterVisible(false);
   }
+
+  // For Controlling modal
+const addItem=()=>{
+  props.onAddItem(item);
+}
+const cancelItem=()=>{
+  props.onCancelItem();
+}
 
   /*   
   This is called every time the view is rendered
