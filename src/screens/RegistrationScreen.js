@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { Component, useState, useEffect } from "react";
+
 import {
   Button,
   View,
@@ -10,12 +11,27 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Modal
 } from 'react-native';
 import Checkbox from "../components/Checkbox";
 import LinkButton from "../components/LinkButton";
 import Logo from "../components/Logo";
-const Home = () => {
+
+//const Home = () => {
+function RegistrationScreen(props) {
+
+  // For Controlling modal
+  const addItem2=()=>{
+    props.onAddItem2(item);
+    }
+  const cancelItem2=()=>{
+    props.onCancelItem2();
+    }
+
   return (
+    <Modal visible={props.visibility} animationType="slide">
+    <ScrollView style={styles.scrollView}>
+
     <View style={{flex: 1, backgroundColor: '#ffffff'}}>
       <Logo style={styles.logo}></Logo>
       <View
@@ -102,15 +118,33 @@ const Home = () => {
                 paddingBottom: 20,
                 borderRadius: 10,
               }}>
-              <Text style={{fontSize: 20, color: '#fff'}}>Register</Text>
+              <Text style={{fontSize: 20, color: '#fff'}}>Register</Text>            
             </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#c83232',
+                paddingTop: 20,
+                paddingBottom: 20,
+                borderRadius: 10,
+
+                marginVertical: 10,
+              }}>
+              <Text onPress = {cancelItem2} style={{fontSize: 20, color: '#fff'}}>Cancel</Text>            
+            </TouchableOpacity>
+    
           </View>
         </View>
       </View>
     </View>
+
+    </ScrollView>
+    </Modal>
   );
 };
-export default Home;
+
 const styles = StyleSheet.create({
   view: {height: 60, width: '100%', backgroundColor: 'red'},
   TextInput: {
@@ -147,3 +181,5 @@ const styles = StyleSheet.create({
     marginTop: 10
   }
 });
+
+export default RegistrationScreen;

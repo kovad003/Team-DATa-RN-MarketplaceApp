@@ -9,12 +9,14 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 import LoginScreen from "./LoginScreen";
+import RegistrationScreen from "./RegistrationScreen";
 import CreateItemInput from "../components/CreateItemInput";
 
 function AccountScreen(props) {
 
   /* AD - for the AccountScreen -> login page modal visibility */
   const [isLoginVisible, setLoginVisible] = useState(false);
+  const [isRegisterVisible, setRegisterVisible] = useState(false);
 
   const onAddItem=()=>{
     setLoginVisible(true);
@@ -22,6 +24,14 @@ function AccountScreen(props) {
 
   const cancelAddItem = ()=>{
     setLoginVisible(false);
+  }
+
+  const onAddItem2=()=>{
+    setRegisterVisible(true);
+  }
+
+  const cancelAddItem2 = ()=>{
+    setRegisterVisible(false);
   }
 
   /*   
@@ -60,6 +70,12 @@ useEffect(() => {
             style = {TextStyling.textBlackSmall}
             onPress={()=>setLoginVisible(true)} >
             Login</Text>
+
+            <Text 
+            text = 'submit'
+            style = {TextStyling.textBlackSmall}
+            onPress={()=>setRegisterVisible(true)} >
+            Registration</Text> 
           
 
           <MenuRow style = {styles.row2} rowText = "About"
@@ -80,8 +96,15 @@ useEffect(() => {
           <LoginScreen 
           visibility={isLoginVisible} 
           onAddItem={onAddItem}
-          onCancelItem={cancelAddItem} 
-         
+          /* itemList={items} */
+          onCancelItem={cancelAddItem}         
+          /> 
+
+          <RegistrationScreen 
+          visibility={isRegisterVisible} 
+          onAddItem2={onAddItem2}
+          /* itemList={items} */
+          onCancelItem2={cancelAddItem2} 
           /> 
         </View>
       </View>         

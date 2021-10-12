@@ -23,7 +23,7 @@ function LoginScreen(props) {
   const addItem=()=>{
     props.onAddItem(item);
     }
-const cancelItem=()=>{
+  const cancelItem=()=>{
     props.onCancelItem();
     }
 
@@ -66,7 +66,7 @@ const cancelItem=()=>{
                 style={styles.TextInput}
               />
             </View>
-            <View style={{alignSelf: 'center', width: '100%', marginTop: 50}}>
+            <View style={{alignSelf: 'center', width: '100%', marginTop: 40}}>
                 <TouchableOpacity
                   style={{
                     alignItems: 'center',
@@ -175,7 +175,8 @@ const styles = StyleSheet.create({
 /* Extra modifications */
 scrollView: {
  //flex:1,
- padding:20,
+ paddingVertical:10,
+ paddingHorizontal:15,
 },
 });
 
