@@ -108,11 +108,12 @@ const SearchScreen = (props) => {
     setLoadingRegions(false);
   }
   // --------------------------------------------------
-  // ListItem actions ---------------------------------
+  // Handle Selections ---------------------------------
   const handleRegionSelection=(selectedItem)=>{
     setRegionModalVisibility(false);
     setRegionId(selectedItem.regionId);
     setRegionNameToDisplay(selectedItem.regionName)
+    changeCitySwipeAccessibility();
     setLoadingCities(true);
     // ToConsole
     console.log("selected item: " +  JSON.stringify(selectedItem));
@@ -186,7 +187,7 @@ const SearchScreen = (props) => {
       }
       if(isLoadingCities==true){
           getAllCityInRegion(selectedRegionId);
-          changeCitySwipeAccessibility();
+          // changeCitySwipeAccessibility();
           setLoadingCities(false);
       }
   });
@@ -201,6 +202,7 @@ const SearchScreen = (props) => {
         <View>
 {/* MODALS -------------------------------------------------------------------------------- */}
             <Modal visible={isRegionModalVisible}>
+              <Text style={styles.modalTitle}>Available Regions</Text>
               <FlatList
                 keyExtractor={(region) => region.regionId.toString()} 
                 data={regionList}
@@ -216,6 +218,7 @@ const SearchScreen = (props) => {
             </Modal>
 
             <Modal visible={isCityModalVisible}>
+              <Text style={styles.modalTitle}>Region: {regionNameToDisplay}</Text>
               <FlatList
                 keyExtractor={(city) => city.cityId.toString()}
                 data={cityList}
@@ -313,7 +316,17 @@ const styles = StyleSheet.create({
     //fontFamily: 'cake-n-truffles',
     fontSize: 26,
     color: '#2d3553',
-  }
+  },
+  modalTitle:{
+    textAlign:'center',
+    marginBottom: 15,
+    padding: 5,
+    //fontFamily: 'cake-n-truffles',
+    fontSize: 20,
+    fontWeight: "bold",
+    color: '#2d3553',
+    backgroundColor: colors.light1,
+  },
 });
 // ========================================================================================================================
 export default SearchScreen;

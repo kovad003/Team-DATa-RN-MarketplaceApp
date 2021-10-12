@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   subTitle: {
-    color: "black",
+    color: "darkblue",
     fontSize: 18,
   },
 });
