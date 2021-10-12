@@ -11,6 +11,9 @@ import ItemDetailScreen from '../screens/ItemDetailScreen'
 import 'react-native-gesture-handler';
 //import Colors from '../constants/Colors';
 
+import GuidForShoppingScreen from '../screens/GuidForShoppingScreen'
+
+
 const Stack = createStackNavigator();
 function CategoryStackNavigation () {
 
@@ -31,6 +34,12 @@ function CategoryStackNavigation () {
           component={ItemDetailScreen}           
           options={{
             headerTitle: 'Item Details'} }
+          />
+          <Stack.Screen 
+          name="Guid"  
+          component={GuidForShoppingScreen}           
+          options={{
+            headerTitle: 'Guid'} }
           />
         </Stack.Navigator>
     );

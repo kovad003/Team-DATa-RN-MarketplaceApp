@@ -4,7 +4,7 @@ import { color } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import colors from "../../constants/colors";
 
-function MenuRightSwipeAction(props) {
+function MenuSwipeActionFilter(props) {
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
       <View style={styles.container}>
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MenuRightSwipeAction;
+export default MenuSwipeActionFilter;

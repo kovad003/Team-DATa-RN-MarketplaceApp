@@ -12,7 +12,7 @@ import colors from "../constants/colors";
 function AccountScreenRow(props) {
   return (
     <View style={[styles.container, props.style]}>  
-      <TouchableOpacity style={styles.rowContainer}>
+      <TouchableOpacity style={styles.rowContainer} onPress={props.onSelect}>
         <Icon name={props.icon} style={styles.icon1}></Icon>
         <Text style={TextStyling.textBlackMedium}>{props.rowText}</Text>
         <Icon name="right" style={styles.icon2}></Icon>        

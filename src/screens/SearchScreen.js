@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, Text, FlatList } from "react-native";
+import { StyleSheet, View, ScrollView, Text, FlatList, Modal, Button } from "react-native";
 import SwitchFilter from "../components/SwitchFilter";
 import ScrollDownList from "../components/ScrollDownList";
 import PriceSetter from "../components/PriceSetter";
@@ -9,60 +9,124 @@ import SearchBar from "../components/SearchBar";
 import TextStyling from '../constants/fontstyling'
 import colors from "../constants/colors";
 import MenuSwipableRow from "../components/swipable/MenuSwipableRow";
-import MenuRightSwipeAction from "../components/swipable/MenuRightSwipeAction";
-import MenuLeftSwipeAction from "../components/swipable/MenuLeftSwipeAction";
+import MenuSwipeActionResetFilter from "../components/swipable/MenuSwipeActionResetFilter";
+import MenuSwipeActionFilter from "../components/swipable/MenuSwipeActionFilter";
+import ListItemToSelect from "../components/swipable/ListItemToSelect";
 
-function SearchScreen(props) {
-const [hasMessage, setMessage] = useState(false);
-const [messageDisplayed, setMessageDisplayed] = useState('');
-const [items, setItems] = useState([]);
-const [itemList, addItemToList] = useState([]);
-const [isLoading, setLoading] = useState(true);
-const [isVisible, setVisibility] = useState(false);
-// Creating mock data
+const SearchScreen = (props) => {
+  const [isLoadingRegions, setLoadingRegions] = useState(true);
+  const [isLoadingCities, setLoadingCities] = useState(false);
 
-//usestat -> causing cont rendering issues bc add function is not wired to a button
-/* 
-  const [categoryList, addToCategoryList] = useState([]);
+  const [hasMessage, setMessage] = useState(false);
+  const [messageDisplayed, setMessageDisplayed] = useState('');
 
-  const addNewCategory=(idParam, nameParam)=>{
-    addToCategoryList(categoryList=>[...categoryList, {id:idParam, name:nameParam}])
-  }
+  const [regionList, addRegionToList] = useState([null]);
+  const [selectedRegionId, setRegionId] = useState();
 
-  addNewCategory('1', 'Furniture');
- */
+  const [cityList, addCityToList] = useState([null]);
+  const [selectedCity, setSelectedCity] = useState(null);
 
-  const categoryList = [
-    /* {id: '0', name: 'All'}, */
-    {id: '1', name: 'Furniture'},
-    {id: '2', name: 'Sports'},
-    {id: '3', name: 'Clothes'},
-    {id: '4', name: 'Electronics'},
-    {id: '5', name: 'Other'},
- /*    {id: '6', name: 'Clothes'},
-    {id: '7', name: 'Electronics'},
-    {id: '8', name: 'Other'},
-    {id: '9', name: 'Clothes'},
-    {id: '10', name: 'Electronics'},
-    {id: '11', name: 'Other'}, */
-  ]
-  console.log('categoryList: ' + categoryList);
+  const [isRegionModalVisible, setRegionModalVisibility] = useState(false);
+  const [isCityModalVisible, setCityModalVisibility] = useState(false);
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   function onPressFunction(){
     console.log('swipable was pressed');
+    console.log("regionList: " + JSON.stringify(regionList));
+    //setLoading(true);
   }
   function hello(){
     console.log('hello');
   }
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // Swipe Actions ------------------------------------ 
+  const showRegionModal=()=>{
+    setRegionModalVisibility(true);
+  }
+  const showCityModal=()=>{
+    setCityModalVisibility(true);
+  }
+  const clearSelection=()=>{
+    console.log("clear selection");
+  }
+  const onCancel=()=>{
+    setRegionModalVisibility(false);
+    setCityModalVisibility(false);
+    setLoadingRegions(false);
+  }
+  // --------------------------------------------------
+  // ListItem actions ---------------------------------
+  const markRegionSelection=(selectedItem)=>{
+    console.log("selected item: " +  JSON.stringify(selectedItem));
+    setRegionModalVisibility(false);
+    console.log("setRegion to " +selectedItem.regionId);
+    setRegionId(selectedItem.regionId)
+    setLoadingCities(true);
+  }
+  const markCitySelection=(selectedItem)=>{
+    console.log("selected item: " +  JSON.stringify(selectedItem));
+    setSelectedCity(selectedItem);
+    setRegionModalVisibility(false);
+    //setLoadingRegions(true);
+  }
+  // --------------------------------------------------
+
+  // *** GET ***
+  async function getAllRegion() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
+    }
+    catch(error){
+      console.log(error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      console.log(responseData);
+      addRegionToList(responseData);
+      console.log('regionList: ' + regionList)
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+  async function getAllCityInRegion(regionId) {
+    console.log('regionId = ' + regionId);
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
+    }
+    catch(error){
+      console.log(error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      console.log("cities in region" + JSON.stringify(responseData.regionCities));
+      addCityToList(responseData.regionCities);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // Will Rerender the screen in case the isLoading boolean is set to true
   useEffect(() => {
     console.log('useEffect(() => {'); 
-      if (isLoading==true){
-        //fetchData();
-        setLoading(false);
-    }
+      if (isLoadingRegions==true){
+        getAllRegion();   
+        setLoadingRegions(false);
+      }
+      if(isLoadingCities==true){
+          getAllCityInRegion(selectedRegionId);
+          setLoadingCities(false);
+      }
   });
-  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   return (
     <View style={styles.container}>
@@ -70,70 +134,102 @@ const [isVisible, setVisibility] = useState(false);
         <SearchBar/>
       </View>
         <View>
-          {/* ---------------------------------------------------------------------------- */}
+{/* MODALS -------------------------------------------------------------------------------- */}
+            <Modal visible={isRegionModalVisible}>
+              <FlatList
+                keyExtractor={(region) => region.regionId.toString()} 
+                data={regionList}
+                renderItem={regionData =>
+                  <ListItemToSelect 
+                    id={regionData.item.regionId}
+                    name={regionData.item.regionName}
+                    onSelect={() => markRegionSelection(regionData.item)}
+                    onPress={() => markRegionSelection(regionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+
+            <Modal visible={isCityModalVisible}>
+              <FlatList
+                keyExtractor={(city) => city.cityId.toString()}
+                data={cityList}
+                renderItem={cityData =>
+                  <ListItemToSelect 
+                    id={cityData.item.cityId}
+                    name={cityData.item.cityName}
+                    onSelect={() => markCitySelection(cityData.item)}
+                    onPress={() => markCitySelection(cityData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+             
+{/* --------------------------------------------------------------------------------------- */}
             <MenuSwipableRow 
               iconMain="tag-multiple"
               iconColor="black"
               label="Category"
               onPress={onPressFunction}
-             /*  renderLeftActions = {MenuLeftSwipeAction} */
-             renderLeftActions = {() => (
-              <MenuLeftSwipeAction 
-                onPress={() => onPressFunction()} 
+              renderLeftActions = {() => (
+               <MenuSwipeActionResetFilter 
+                onPress={() => clearSelection()} 
+              />      
+            )}
+              renderRightActions = {() => (
+              <MenuSwipeActionFilter 
+                onPress={() => showRegionModal()} 
+              />
+            )}
+            />
+
+            <MenuSwipableRow
+              iconMain="map"
+              iconColor="black"
+              label="Region"
+              onPress={onPressFunction}
+              renderLeftActions = {() => (
+              <MenuSwipeActionResetFilter  
+                onPress={() => clearSelection()}
               />
             )}
               renderRightActions = {() => (
-              <MenuRightSwipeAction 
-                onPress={() => onPressFunction()} 
+              <MenuSwipeActionFilter 
+                onPress={() => showRegionModal()} 
               />
             )}
-              
-              /* renderRightActions={() => (
-              <ListItemDeleteAction onPress={() => handleDelete(item)} />
-            )} */
-
-              /* onRef={(ref) => {this.inputs['projectDescription'] = ref;}} */
             />
-            {/* const Greeting = ({ greeting }) => <h1>{greeting}</h1>; */}
-            {/* <ScrollView horizontal={false}>
-              {categoryList.map((category)=>
-                <SwitchFilter label={category.name}></SwitchFilter>)}
-            </ScrollView> */}
-            {/* <SwitchFilter label='All' value='true'/> */}
-            {/* <FlatList //FlatList shouldnt be used with ScrollView
-                keyExtractor={item=>item.id}
-                data={categoryList}
-                renderItem={itemData => <SwitchFilter label={itemData.item.name}/>}
-            /> */}   
+
             <MenuSwipableRow
               iconMain="map-marker"
               iconColor="black"
-              label="Location"
+              label="City"
               onPress={onPressFunction}
               renderLeftActions = {() => (
-              <MenuLeftSwipeAction 
-                onPress={() => onPressFunction()} 
+              <MenuSwipeActionResetFilter  
+                onPress={() => clearSelection()}
               />
             )}
               renderRightActions = {() => (
-              <MenuRightSwipeAction 
-                onPress={() => onPressFunction()} 
+              <MenuSwipeActionFilter 
+                onPress={() => showCityModal()} 
               />
             )}
             />
+
             <MenuSwipableRow 
               iconMain="database"
               iconColor="black"
               label="Price"
               onPress={onPressFunction}
               renderLeftActions = {() => (
-              <MenuLeftSwipeAction 
-                onPress={() => onPressFunction()} 
+              <MenuSwipeActionResetFilter  
+                onPress={() => clearSelection()} 
               />
             )}
               renderRightActions = {() => (
-              <MenuRightSwipeAction 
-                onPress={() => onPressFunction()} 
+              <MenuSwipeActionFilter 
+                onPress={() => showRegionModal()} 
               />
             )}
             />
@@ -143,16 +239,16 @@ const [isVisible, setVisibility] = useState(false);
               label="Condition"
               onPress={onPressFunction}
               renderLeftActions = {() => (
-              <MenuLeftSwipeAction 
-                onPress={() => onPressFunction()} 
+              <MenuSwipeActionResetFilter 
+                onPress={() => clearSelection()} 
               />
             )}
               renderRightActions = {() => (
-              <MenuRightSwipeAction 
-                onPress={() => onPressFunction()} 
+              <MenuSwipeActionFilter 
+                onPress={() => showRegionModal()}
               />
             )}
-            />  
+            />    
         </View>  
     </View>
   );

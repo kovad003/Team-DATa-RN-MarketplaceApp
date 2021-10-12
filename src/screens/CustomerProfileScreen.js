@@ -16,8 +16,6 @@ import colors from "../constants/colors";
 // in this Component we can see all details of the selected Item
 function CustomerProfileScreen(props) {
 
-    const [infoVisible , setInfoVisible] = useState(false);
-  
   // HH - created to read data from dummy-data
     console.log(props.route.params);
 

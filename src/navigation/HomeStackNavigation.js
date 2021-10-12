@@ -10,6 +10,7 @@ import CategoryScreen from '../screens/CategoryScreen'
 import ListItemsScreen from '../screens/ListItemsScreen'
 import ItemDetailScreen from '../screens/ItemDetailScreen'
 import HomeScreen from '../screens/HomeScreen'
+import GuidForShoppingScreen from '../screens/GuidForShoppingScreen'
 
 //import Colors from '../constants/Colors';
 
@@ -28,6 +29,12 @@ function HomeStackNavigation () {
           component={ItemDetailScreen}           
           options={{
             headerTitle: 'Item Details'} }
+          />
+          <Stack.Screen 
+          name="Guid"  
+          component={GuidForShoppingScreen}           
+          options={{
+            headerTitle: 'Guid'} }
           />
         </Stack.Navigator>
     );
