@@ -84,8 +84,12 @@ const ListCreatedItem=(props)=>{
                     </View>
 
                     <View style={styles.innerRowContainer2}>
-                        <Text style={TextStyling.textBlackSmall}>Price: {props.price}€ </Text>
-                        <Text style={TextStyling.textBlackSmall}>Description: {props.description}</Text>
+
+                        <Text style={TextStyling.textBlackSmall}>Price: </Text>
+                        <Text style={TextStyling.textBlackSmall}>{props.price}€</Text>
+
+                        <Text style={TextStyling.textBlackSmall}>Condition: {props.condition}</Text>
+                        <Text style={TextStyling.textBlackSmall}>Location: {props.location}</Text>
                         <Text style={TextStyling.textBlackSmall}>Posted on: {props.datePosted}</Text>
                     </View>
 
@@ -219,6 +223,9 @@ const styles = StyleSheet.create ({
         color: "red",
         fontWeight: "bold",
     },
+    fontCustomBold: {
+        fontWeight: "bold",
+    }
   });
 
   export default ListCreatedItem;

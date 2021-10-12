@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 
 import MenuRow from "../components/MenuRow";
@@ -8,8 +8,67 @@ import LogoSmall from "../components/LogoSmall";
 import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
+import LoginScreen from "./LoginScreen";
+import RegistrationScreen from "./RegistrationScreen";
+import CreateItemInput from "../components/CreateItemInput";
 
 function AccountScreen(props) {
+
+  // State variable
+  const [customer, setCustomer] = useState({
+    id: 1,
+    customerId: 1, //TODO
+    password: 'password',
+});
+
+  /* AD - for the AccountScreen -> login page modal visibility */
+  const [isLoginVisible, setLoginVisible] = useState(false);
+  const [isRegisterVisible, setRegisterVisible] = useState(false);
+
+  //
+
+
+
+  //
+  const onAddItem=()=>{
+    setLoginVisible(true);
+  }
+
+  const cancelAddItem = ()=>{
+    setLoginVisible(false);
+  }
+
+  const onAddItem2=()=>{
+    setRegisterVisible(true);
+  }
+
+  const cancelAddItem2 = ()=>{
+    setRegisterVisible(false);
+  }
+
+  // For Controlling modal
+const addItem=()=>{
+  props.onAddItem(item);
+}
+const cancelItem=()=>{
+  props.onCancelItem();
+}
+
+  /*   
+  This is called every time the view is rendered
+  The new calls of fetchData (and others) must be stopped somehow, because in
+  those methods are statevariables set, which cause a new re-render. 
+
+useEffect(() => {
+  console.log('useEffect(() => {'); 
+    if (isLoading==true){
+      fetchData();
+      setLoading(false);
+  }
+});
+
+*/
+
   return (
 
     <ScrollView style={styles.scrollStyle}>
@@ -24,6 +83,21 @@ function AccountScreen(props) {
             icon1 = "account-plus-outline"/>
           <MenuRow style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
+
+        
+            <Text 
+            text = 'submit'
+            style = {TextStyling.textBlackSmall}
+            onPress={()=>setLoginVisible(true)} >
+            Login</Text>
+
+            <Text 
+            text = 'submit'
+            style = {TextStyling.textBlackSmall}
+            onPress={()=>setRegisterVisible(true)} >
+            Registration</Text> 
+          
+
           <MenuRow style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
           <MenuRow style = {styles.row2} rowText = "Settings"
@@ -38,8 +112,23 @@ function AccountScreen(props) {
             icon2color = "white"  />
           <MenuRow style = {styles.row3} rowText = "Support"
           icon1 = "face-agent" />
+
+          <LoginScreen 
+          visibility={isLoginVisible} 
+          onAddItem={onAddItem}
+          /* itemList={items} */
+          onCancelItem={cancelAddItem}         
+          /> 
+
+          <RegistrationScreen 
+          visibility={isRegisterVisible} 
+          onAddItem2={onAddItem2}
+          /* itemList={items} */
+          onCancelItem2={cancelAddItem2} 
+          /> 
         </View>
-      </View>
+      </View>         
+
     </ScrollView>        
   );
 }

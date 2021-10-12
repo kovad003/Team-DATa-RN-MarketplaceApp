@@ -28,6 +28,10 @@ const MyPostedItems=(props)=>{
         props.onCancelItem();
     }
 
+
+
+
+
   // functions related to the input field functionality
 
   const [hasMessage, setMessage] = useState(false);
@@ -231,7 +235,8 @@ const MyPostedItems=(props)=>{
                       <ListCreatedItem itemId={itemData.item.itemId} 
                       title={itemData.item.title}
                       price={itemData.item.price}
-                      description={itemData.item.description}
+                      condition={itemData.item.condition}
+                      location={itemData.item.location}
                       datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
                       onDelete={()=>onDeleteItem(itemData.item.itemId)} 
                   />}
