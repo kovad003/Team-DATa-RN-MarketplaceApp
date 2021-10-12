@@ -12,9 +12,6 @@ import colors from "../constants/colors";
 
 function HomeScreen(props) {
   
-
-
-
   // HH - add for reding data from MYSQL database**********start
   const [hasMessage, setMessage] = useState(false);
   const [messageDisplayed, setMessageDisplayed] = useState('');
