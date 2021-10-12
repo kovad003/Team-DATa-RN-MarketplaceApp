@@ -30,7 +30,7 @@ function LoginScreen(props) {
     /* Input handlers */
 
     const [item, setItem] = useState({
-      categoryId: 1,
+      categoryId: 1, // This all needs to be changed
       customerId: 1, //TODO
       title: 'some name',
       price: 0,
@@ -39,6 +39,9 @@ function LoginScreen(props) {
       condition: 'used',
       location: 'Hämeenlinna',
   });
+  
+
+
   const [userName , setUserName] = useState('')
   const [password , setPassword] = useState('')
   const [loginDetails, setLoginDetails] = useState([]);

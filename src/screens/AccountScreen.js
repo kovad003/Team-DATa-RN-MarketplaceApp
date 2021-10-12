@@ -24,13 +24,58 @@ function AccountScreen(props) {
     password: 'password',
 });
 
+
+// AD new consts
+
+// Custom Functions ****************************************************************************************
+const onAddCustomer = (childdata) => {
+  addCustomerToList(customerList =>[...customerList, childdata]);
+
+  console.log('childdata.customerId: ' + childdata.customerId);
+  console.log('childdata.firstName: ' + childdata.firstName);
+  console.log('childdata.lastName: ' + childdata.lastName);
+  console.log('childdata.userName: ' + childdata.userName);
+  console.log('childdata.password: ' + childdata.password);
+  console.log('childdata.dateOfBirth: ' + childdata.dateOfBirth);
+  console.log('childdata.email: ' + childdata.email);
+  console.log('childdata.phone: ' + childdata.phone);
+  console.log('childdata.image: ' + childdata.image);
+
+  addData(childdata.customerId, 
+    childdata.firstName, 
+    childdata.lastName, 
+    childdata.userName, 
+    childdata.password, 
+    childdata.dateOfBirth, 
+    childdata.email, 
+    childdata.phone, 
+    childdata.image);
+  setVisibility(false);
+  //setLoading(true);
+}
+
+
+
+/*
+const addCustomer=()=>{
+  props.onAddCustomer(customer);
+}
+*/
+
+
   /* AD - for the AccountScreen -> login page modal visibility */
   const [isLoginVisible, setLoginVisible] = useState(false);
   const [isRegisterVisible, setRegisterVisible] = useState(false);
 
   //
 
-  /* For the registration modal (cancelRegistrationModal)*/
+
+  const cancelLoginModal = ()=>{
+    setLoginVisible(false);
+  }
+
+
+  /* For the registration modal (cancelRegistrationModal)
 
   const cancelLoginModal = ()=>{
     setLoginVisible(false);
@@ -38,6 +83,14 @@ function AccountScreen(props) {
 
   const cancelRegistrationModal = ()=>{
     setRegisterVisible(false);
+  }
+  */
+
+  // AD new consts
+
+  const cancelAddCustomer=()=>{
+    setVisibility(false);
+    setLoading(false);
   }
 
 
@@ -104,6 +157,9 @@ const [isLoading, setLoading] = useState(true);
 const [isVisible, setVisibility] = useState(false);
 
 const [isflatListVisible, setflatListVisibility] = useState(false);
+
+//const [customers, setCustomer] = useState([]);
+const [customerList, addCustomerToList] = useState([]);
 
 // Custom Functions ****************************************************************************************
 const onAddItem = (childdata) => {
@@ -178,6 +234,86 @@ function closeMessage() {
   setMessage(false);
   setLoading(true);
 }
+
+
+//
+
+//
+
+//
+
+// AD - customer service additions
+
+// Service Functions ****************************************************************************************
+  // *** GET ***
+  async function fetchCustomerData() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/customerservice/getall");
+    }
+    catch(error){
+      showError(error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      console.log(responseData);//Just for checking.....
+      setItems(responseData);
+    }
+    catch(error){
+      showError(error);
+    }
+  }
+
+  // *** POST ***
+  async function addCustomerData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
+    console.log('started: async function addData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
+    let response = null;
+    let requestOptions = {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        customerId: customerIdParam*1,
+        firstName: firstNameParam.toString(),
+        lastName: lastNameParam.toString(),
+        userName: userNameParam.toString(),
+        password: passwordParam.toString(),
+        dateOfBirth: dateOfBirthParam.toString(),
+        condition: emailParam.toString(),
+        location: phoneParam.toString(),
+        image: imageParam.toString(),
+      })
+    };
+    try {
+      response = await fetch("http://10.0.2.2:8080/rest/customerservice/addjsoncustomer", requestOptions)
+    } catch (error) {
+      showError(error);
+    }
+    try {
+      let responseData = await response.json();
+      console.log('responseData: ' + responseData);
+      showConfirmation("Item was successfully added!")
+    } catch (error) {
+      showError(error);
+    }
+  }
+
+  
+
+//
+
+//
+
+//
+
+//
+
+
+
 
 // Service Functions ****************************************************************************************
 // *** GET ***
@@ -384,7 +520,7 @@ else{
             <Text 
             text = 'submit'
             style = {TextStyling.textBlackSmall}
-            onPress={()=>setRegisterVisible(true)} >
+            onPress={()=>setVisibility(true)} >{/* onPress={()=>setRegisterVisible(true) */}
             Registration</Text> 
           
 
@@ -411,11 +547,10 @@ else{
           /> 
 
           <RegistrationScreen 
-          visibility={isRegisterVisible} 
-          
-          //onAddItem2={onAddItem2} 
-          /* itemList={items} */
-          onCancelItem2={cancelRegistrationModal} // onCancelItem2 = cancelAddItem2
+          visibility={isVisible} 
+          onAddCustomer={onAddCustomer}
+          customerList={customer} 
+          onCancelCustomer={cancelAddCustomer}  // onCancelItem2 = cancelAddItem2
           /> 
         </View>
       </View>         

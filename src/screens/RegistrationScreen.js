@@ -23,7 +23,7 @@ function RegistrationScreen(props) {
   // For the inputs
 
   // State variable
-  const [item, setItem] = useState({
+  const [customer, setCustomer] = useState({
     customerId: 1,
     firstName: "default firstName", //TODO
     lastName: 'default lastName',
@@ -37,42 +37,62 @@ function RegistrationScreen(props) {
 /* const [formChecker, setFormChecker] = useState({
     categoryinput: 'false',
 }) */
+
+/* For Controlling modal
+    const addItem=()=>{
+      props.onAddItem(item);
+  }
+*/
+
+// AD new consts
+
+const addCustomer=()=>{
+  props.onAddCustomer(customer);
+}
+
+const cancelCustomer=()=>{
+  props.onCancelCustomer();
+}
+
+
+
+
 const firstNameInputHandler=(enteredText)=>{
-  item.firstName = enteredText;
+  customer.firstName = enteredText;
   console.log('entered text/firstName: ' + enteredText);
 }
 const lastNameInputHandler=(enteredText)=>{
-  item.lastName = enteredText;
+  customer.lastName = enteredText;
   console.log('entered text/lastName: ' + enteredText);
 }
 
 const userNameInputHandler=(enteredText)=>{
-  item.userName = enteredText;
+  customer.userName = enteredText;
   console.log('entered text/userName: ' + enteredText);
 }
 
 const passwordInputHandler=(enteredText)=>{
-    item.password = enteredText;
+  customer.password = enteredText;
     console.log('entered text/password: ' + enteredText);
 }
 
 const dateOfBirthInputHandler=(enteredText)=>{
-    item.dateOfBirth = enteredText;
+  customer.dateOfBirth = enteredText;
     console.log('entered text/dateOfBirth: ' + enteredText);
 }
 
 const emailInputHandler=(enteredText)=>{
-  item.email = enteredText;
+  customer.email = enteredText;
   console.log('entered text/email: ' + enteredText);
 }
 
 const phoneInputHandler=(enteredText)=>{
-  item.phone = enteredText;
+  customer.phone = enteredText;
   console.log('entered text/phone: ' + enteredText);
 }
 
 const imageInputHandler=(enteredText)=>{
-    item.image = enteredText;
+  customer.image = enteredText;
     console.log('entered text/image: ' + enteredText);
 }
 
@@ -88,7 +108,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
 */
 
 
-  // For Controlling modal
+  /* For Controlling modal
   const addItem2=()=>{
     props.onAddItem2(item);
     }
@@ -96,11 +116,14 @@ const confirmPasswordInputHandler=(enteredText)=>{
     props.onCancelItem2();
     }
 
+    */
+
   
-    // For Controlling modal
-    const addItem=()=>{
-      props.onAddItem(item);
-  }
+    
+  
+
+
+
   /*
   const cancelItem=()=>{
       props.onCancelItem();
@@ -205,7 +228,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
                 paddingBottom: 20,
                 borderRadius: 10,
               }}>
-              <Text onPress={addItem} style={{fontSize: 20, color: '#fff'}}>Register</Text>            
+              <Text onPress={addCustomer} style={{fontSize: 20, color: '#fff'}}>Register</Text>            
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -219,7 +242,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
 
                 marginVertical: 10,
               }}>
-              <Text onPress = {cancelItem2} style={{fontSize: 20, color: '#fff'}}>Cancel</Text>            
+              <Text onPress = {cancelCustomer} style={{fontSize: 20, color: '#fff'}}>Cancel</Text>            
             </TouchableOpacity>
     
           </View>
