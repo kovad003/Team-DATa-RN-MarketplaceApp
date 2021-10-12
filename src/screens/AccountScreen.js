@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 
 import MenuRow from "../components/MenuRow";
@@ -8,8 +8,37 @@ import LogoSmall from "../components/LogoSmall";
 import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
+import LoginScreen from "./LoginScreen";
+import CreateItemInput from "../components/CreateItemInput";
 
 function AccountScreen(props) {
+
+  /* AD - for the AccountScreen -> login page modal visibility */
+  const [isLoginVisible, setLoginVisible] = useState(false);
+
+  const onAddItem=()=>{
+    setLoginVisible(true);
+  }
+
+  const cancelAddItem = ()=>{
+    setLoginVisible(false);
+  }
+
+  /*   
+  This is called every time the view is rendered
+  The new calls of fetchData (and others) must be stopped somehow, because in
+  those methods are statevariables set, which cause a new re-render. 
+
+useEffect(() => {
+  console.log('useEffect(() => {'); 
+    if (isLoading==true){
+      fetchData();
+      setLoading(false);
+  }
+});
+
+*/
+
   return (
 
     <ScrollView style={styles.scrollStyle}>
@@ -24,6 +53,15 @@ function AccountScreen(props) {
             icon1 = "account-plus-outline"/>
           <MenuRow style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
+
+          <View>
+            <Text 
+            text = 'submit'
+            style = {TextStyling.textBlackSmall}
+            onPress={()=>setLoginVisible(true)} >
+            Login Button</Text>
+            </View>
+
           <MenuRow style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
           <MenuRow style = {styles.row2} rowText = "Settings"
@@ -38,8 +76,16 @@ function AccountScreen(props) {
             icon2color = "white"  />
           <MenuRow style = {styles.row3} rowText = "Support"
           icon1 = "face-agent" />
+
+          <LoginScreen 
+          visibility={isLoginVisible} 
+          onAddItem={onAddItem}
+          onCancelItem={cancelAddItem} 
+         
+          /> 
         </View>
-      </View>
+      </View>         
+
     </ScrollView>        
   );
 }

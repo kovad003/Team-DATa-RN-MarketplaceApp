@@ -11,10 +11,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import TextStyling from '../constants/fontstyling'
 
 const CreateItemInput=(props)=>{
-    const data = "This is data from Child Component to the Parent Component. :)"
-    const [name, setName]=useState('');
-    const [price, setPrice]=useState(0);
-
     // State variable
     const [item, setItem] = useState({
         categoryId: 1,

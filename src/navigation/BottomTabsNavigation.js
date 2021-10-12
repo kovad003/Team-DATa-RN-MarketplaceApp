@@ -63,15 +63,15 @@ function BottomTabsNavigation () {
        
             <Tab.Screen 
             name="Search" 
-            component={SearchScreen}   
+            component={LoginScreen}   // Change back to SearchScreen after testing
             />        
             <Tab.Screen 
             name="Create Item" 
-            component={CreateItemScreen}   
+            component={RegistrationScreen}   // Change back to CreateItemScreen after testing
             />
             <Tab.Screen 
             name="Profile" 
-            component={LoginScreen}   // Change back to AccountScreen after testing
+            component={AccountScreen}   // Change back to AccountScreen after testing
             /> 
         </Tab.Navigator>
     </NavigationContainer>
