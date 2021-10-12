@@ -10,7 +10,7 @@ function FilterPressed(){
   console.log("Swipe BTN pressed: filter");
 }
 
-function MenuLeftSwipeAction(props) {
+function MenuSwipeActionFilter(props) {
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
       <View style={styles.container}>
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MenuLeftSwipeAction;
+export default MenuSwipeActionFilter;
