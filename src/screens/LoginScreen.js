@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect} from 'react';
 import {
   Button,
   View,
@@ -39,17 +39,80 @@ function LoginScreen(props) {
       condition: 'used',
       location: 'Hämeenlinna',
   });
+  const [userName , setUserName] = useState('')
+  const [password , setPassword] = useState('')
+  const [loginDetails, setLoginDetails] = useState([]);
+  const [hasMessage, setMessage] = useState(false);
+  const [messageDisplayed, setMessageDisplayed] = useState('');
+  const [isLoading, setLoading] = useState(true);
+  const [isLogin , setIsLogin] = useState (false)
+
   /* const [formChecker, setFormChecker] = useState({
       categoryinput: 'false',
   }) */
   const usernameInputHandler=(enteredText)=>{
       item.customerId = enteredText;
-      console.log('entered text/username: ' + enteredText);
+      //console.log('entered text/username: ' + enteredText);
   }
 
   const passwordInputHandler=(enteredText)=>{
       item.password = enteredText;
-      console.log('entered text/password: ' + enteredText);
+      //console.log('entered text/password: ' + enteredText);
+  }
+  const LoginInputHandler = () =>{
+    setUserName(item.customerId);
+    setPassword(item.password);
+    //console.log ('username:'+userName)
+    //console.log ('Password:'+password)
+
+
+    async function fetchLoginData() {
+      //Variable res is used later, so it must be introduced before try block and so cannot be const.
+      let response = null;
+      try{
+        //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+        //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+        response = await fetch("http://10.0.2.2:8080/rest/loginservice/getlogindetails/"+userName);
+
+      }
+      catch(error){
+        showError(error);
+      }
+      try{
+        //Getting json from the response
+        let responseData = await response.json();
+        console.log(responseData);//Just for checking.....
+        setLoginDetails(responseData);
+      }
+      catch(error){
+        showError(error);
+      }
+    }
+    fetchLoginData()
+    setLoading(false);
+
+    if (loginDetails.password === null || loginDetails.password===password){
+      console.log('You are loged in')
+      setIsLogin(true)
+    }else{
+      console.log('you dont have account or username and password are not correct')
+      setIsLogin(false)
+    }
+
+    function showError(error){
+    setMessage(true);
+    setMessageDisplayed("Error: " + error);
+    console.log(messageDisplayed);
+    }
+    function showConfirmation(message){
+      setMessageDisplayed("Confirmation: " + message);
+      setMessage(true);
+    }
+    function closeMessage() {
+      setMessage(false);
+      setLoading(true);
+    }
+
   }
 
 
@@ -93,6 +156,7 @@ function LoginScreen(props) {
             </View>
             <View style={{alignSelf: 'center', width: '100%', marginTop: 40}}>
                 <TouchableOpacity
+                  onPress={LoginInputHandler}
                   style={{
                     alignItems: 'center',
                     justifyContent: 'center',
