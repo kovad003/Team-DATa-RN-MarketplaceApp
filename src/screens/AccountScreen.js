@@ -23,7 +23,7 @@ const [messageDisplayed, setMessageDisplayed] = useState('');
 const [items, setItems] = useState([]);
 
 const [itemList, addItemToList] = useState([]);
-const [isLoading, setLoading] = useState(true);
+const [isLoading, setLoading] = useState(false); //was true
 const [isVisible, setVisibility] = useState(false);
 
 const [isflatListVisible, setflatListVisibility] = useState(false);
