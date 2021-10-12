@@ -43,12 +43,12 @@ function LoginScreen(props) {
       categoryinput: 'false',
   }) */
   const usernameInputHandler=(enteredText)=>{
-      item.categoryId = enteredText;
+      item.customerId = enteredText;
       console.log('entered text/username: ' + enteredText);
   }
 
   const passwordInputHandler=(enteredText)=>{
-      item.title = enteredText;
+      item.password = enteredText;
       console.log('entered text/password: ' + enteredText);
   }
 
@@ -101,7 +101,7 @@ function LoginScreen(props) {
                     paddingBottom: 20,
                     borderRadius: 10,
                   }}>
-                  <Text style={{fontSize: 20, color: '#fff'}}>Log in</Text>
+                  <Text style={{fontSize: 20, color: '#fff'}}>Login</Text>
                 </TouchableOpacity>
             </View>
           </View>
