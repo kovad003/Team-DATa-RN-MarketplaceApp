@@ -10,38 +10,19 @@ import {
     TextInput,
     TouchableOpacity,
     Image,
-    Modal,
-    Alert
+    Modal
 } from 'react-native';
 import Logo from "../Logo";
 import { Margins } from '../../constants/constvalues';
 //import LogoSmall from "../src/components/LogoSmall";
 
 //const AppSupport = () => {
-const AppSupport=(props)=>{
-
-/* contact form alert, will add later 
-    const contactFormAlert = () =>
-    Alert.alert(
-    "Customer Contact Form",
-    "Your form was successfully sent!",
-    "We will be in touch with 24 hours!",
-    [
-        {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-    ]
-    );
-    */
+const AboutModal=(props)=>{
     
-    const cancelSupport=()=>{
-        props.onCancelSupport();
+    const cancelAbout=()=>{
+        props.onCancelAbout();
     }
     
-
     return (
 
         <Modal visible={props.visibility} animationType="slide">
@@ -60,7 +41,7 @@ const AppSupport=(props)=>{
                     borderRadius: 10,
                 }}>
                 <View style={{ alignSelf: "center" }}>
-                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>Contact Us</Text>
+                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>About Modal</Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <View style={{ marginVertical: 5 }}>
@@ -118,10 +99,12 @@ const AppSupport=(props)=>{
 
                         <View style={styles.buttonView}>
                             <View style={styles.button}>
-                            <Button color='#c83232' title="Cancel" onPress={cancelSupport}/>
+                            <Button color='#c83232' title="OK" onPress={cancelAbout}/>
                             </View>
-                            <View style={styles.button}>
-                            <Button color='#000080' title="Add" />
+
+                            <View 
+                            style={styles.button}>
+                            
                             </View>
                         </View> 
 
@@ -167,4 +150,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default AppSupport;
+export default AboutModal;

@@ -36,6 +36,7 @@ import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
 import LogoSmall from "../components/LogoSmall";
 import AppSupport from "../components/account/AppSupport";
+import AboutModal from "../components/account/AboutModal";
 
 /* AD - Redundant, might delete later
     import CreateItemInput from "../components/CreateItemInput";
@@ -58,6 +59,7 @@ const [isVisible, setVisibility] = useState(false);
 
 const [isflatListVisible, setflatListVisibility] = useState(false);
 const [isSupportVisible, setSupportVisibility] = useState(false);
+const [isAboutVisible, setAboutVisibility] = useState(false);
 
 //const [customers, setCustomer] = useState([]);
 const [customerList, addCustomerToList] = useState([]);
@@ -198,6 +200,12 @@ const cancelAddItem2=()=>{
 /* For the support modal */
 const onCancelSupport2=()=>{
   setSupportVisibility(false);
+  //setLoading(false);
+}
+
+/* For the About Modal */
+const onCancelAbout2=()=>{
+  setAboutVisibility(false);
   //setLoading(false);
 }
 
@@ -487,7 +495,7 @@ else{
             style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
           <MenuRow 
-            onSelect={comingSoonAlert}
+            onSelect = {()=>setAboutVisibility(true)}
             style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
           <MenuRow 
@@ -530,6 +538,13 @@ else{
           /* onAddItem={onAddItem}
           itemList={items} */
           onCancelSupport={onCancelSupport2} 
+          />
+
+          <AboutModal 
+          visibility={isAboutVisible} 
+          /* onAddItem={onAddItem}
+          itemList={items} */
+          onCancelAbout={onCancelAbout2} 
           />
 
         </View>
