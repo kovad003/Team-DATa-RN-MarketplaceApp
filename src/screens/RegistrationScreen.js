@@ -23,57 +23,112 @@ function RegistrationScreen(props) {
   // For the inputs
 
   // State variable
-  const [item, setItem] = useState({
-    categoryId: 1,
-    customerId: 1, //TODO
-    title: 'some name',
-    price: 0,
-    description: 'some description',
-    image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
-    condition: 'used',
-    location: 'Hämeenlinna',
+  const [customer, setCustomer] = useState({
+    //customerId: 1,
+    firstName: 'default firstName', //TODO
+    lastName: 'default lastName',
+    userName: 'default userName',
+    password: "default password",
+    dateOfBirth: 'default dateOfBirth',
+    email: 'default email',
+    phone: 'default phone',
+    image: 'default image',
 });
 /* const [formChecker, setFormChecker] = useState({
     categoryinput: 'false',
 }) */
-const userNameInputHandler=(enteredText)=>{
-  item.title = enteredText;
-  console.log('entered text/firstname: ' + enteredText);
+
+/* For Controlling modal
+    const addItem=()=>{
+      props.onAddItem(item);
+  }
+*/
+
+// AD new consts
+
+const addCustomer=()=>{
+  props.onAddCustomer(customer);
 }
+
+const cancelCustomer=()=>{
+  props.onCancelCustomer();
+}
+
+
+
+
 const firstNameInputHandler=(enteredText)=>{
-  item.title = enteredText;
-  console.log('entered text/firstname: ' + enteredText);
+  customer.firstName = enteredText;
+  console.log('entered text/firstName: ' + enteredText);
 }
-
 const lastNameInputHandler=(enteredText)=>{
-    item.price = enteredText;
-    console.log('entered text/lastname: ' + enteredText);
+  customer.lastName = enteredText;
+  console.log('entered text/lastName: ' + enteredText);
 }
 
-const emailInputHandler=(enteredText)=>{
-    item.description = enteredText;
-    console.log('entered text/email: ' + enteredText);
+const userNameInputHandler=(enteredText)=>{
+  customer.userName = enteredText;
+  console.log('entered text/userName: ' + enteredText);
 }
 
 const passwordInputHandler=(enteredText)=>{
-    item.image = enteredText;
+  customer.password = enteredText;
     console.log('entered text/password: ' + enteredText);
 }
 
+const dateOfBirthInputHandler=(enteredText)=>{
+  customer.dateOfBirth = enteredText;
+    console.log('entered text/dateOfBirth: ' + enteredText);
+}
+
+const emailInputHandler=(enteredText)=>{
+  customer.email = enteredText;
+  console.log('entered text/email: ' + enteredText);
+}
+
+const phoneInputHandler=(enteredText)=>{
+  customer.phone = enteredText;
+  console.log('entered text/phone: ' + enteredText);
+}
+
+const imageInputHandler=(enteredText)=>{
+  customer.image = enteredText;
+    console.log('entered text/image: ' + enteredText);
+}
+
+
+
+
+
+/*
 const confirmPasswordInputHandler=(enteredText)=>{
     item.condition = enteredText;
     console.log('entered text/confirmPassword: ' + enteredText);
 }
+*/
 
 
-
-  // For Controlling modal
+  /* For Controlling modal
   const addItem2=()=>{
     props.onAddItem2(item);
     }
   const cancelItem2=()=>{
     props.onCancelItem2();
     }
+
+    */
+
+  
+    
+  
+
+
+
+  /*
+  const cancelItem=()=>{
+      props.onCancelItem();
+  }
+  */
 
   return (
     <Modal visible={props.visibility} animationType="slide">
@@ -109,7 +164,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Firstname"
               style={styles.TextInput}
-              onChangeText={lastNameInputHandler}
+              onChangeText={firstNameInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -118,7 +173,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Lastname"
               style={styles.TextInput}
-              onChangeText={emailInputHandler}
+              onChangeText={lastNameInputHandler}
             />
           </View>
           <View style={{marginVertical: 5}}>
@@ -127,7 +182,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your email"
               style={styles.TextInput}
-              onChangeText={passwordInputHandler}
+              onChangeText={emailInputHandler}
             />
             </View>
           <View style={{marginVertical: 5}}>
@@ -137,20 +192,23 @@ const confirmPasswordInputHandler=(enteredText)=>{
               secureTextEntry={true}
               placeholder="Enter your password"
               style={styles.TextInput}
-              onChangeText={confirmPasswordInputHandler}
+              onChangeText={passwordInputHandler}
             />
           </View>
+
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>
-              Confirm Password
+              Phone number
             </Text>
             <TextInput
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
-              placeholder="Enter your confirm Password"
+              placeholder="Enter your phone number"
               style={styles.TextInput}
+              onChangeText={phoneInputHandler} // might not be necessary
             />
           </View>
+
           <View style={styles.eulaRow}>
         <View style={styles.eulaCheckBoxRow}>
           <Checkbox style={styles.eulaCheckBox}></Checkbox>
@@ -170,7 +228,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
                 paddingBottom: 20,
                 borderRadius: 10,
               }}>
-              <Text style={{fontSize: 20, color: '#fff'}}>Register</Text>            
+              <Text onPress={addCustomer} style={{fontSize: 20, color: '#fff'}}>Register</Text>            
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -184,7 +242,7 @@ const confirmPasswordInputHandler=(enteredText)=>{
 
                 marginVertical: 10,
               }}>
-              <Text onPress = {cancelItem2} style={{fontSize: 20, color: '#fff'}}>Cancel</Text>            
+              <Text onPress = {cancelCustomer} style={{fontSize: 20, color: '#fff'}}>Cancel</Text>            
             </TouchableOpacity>
     
           </View>
