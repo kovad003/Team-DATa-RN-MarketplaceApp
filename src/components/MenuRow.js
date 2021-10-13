@@ -10,10 +10,6 @@ import colors from "../constants/colors";
 
 function MenuRow(props) {
 
-
-  
-
-
   return (
     <View style={props.style}>  
       <TouchableOpacity 

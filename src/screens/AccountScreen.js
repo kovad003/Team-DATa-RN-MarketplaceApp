@@ -38,6 +38,14 @@ const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
 
 
+// AD - For the new login modal window
+// AD - for the login page visibility
+const menuRowShowLoginModal = ()=>{
+  //setLoginVisible(false);
+  //()=>setLoginVisible(true)
+  props.setLoginVisible(true)
+}
+
 
 // AD - a dunny Update Info alert
 const menuTestAlert = () =>
@@ -573,24 +581,29 @@ else{
             <LogoSmall></LogoSmall>
           </View>
 
-          <MenuRow style = {styles.row1} rowText = "Register"
+          <MenuRow 
+            onSelect = {()=>setVisibility(true)}
+            style = {styles.row1} rowText = "Register"
             icon1 = "account-plus-outline"/>
-          <MenuRow style = {styles.row1a} rowText = "Login"
+          <MenuRow 
+            onSelect={()=>setLoginVisible(true)}
+            style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
 
-        
+            {/*
             <Text 
             text = 'submit'
             style = {TextStyling.textBlackSmall}
             onPress={()=>setLoginVisible(true)} >
             Login</Text>
+            
 
             <Text 
             text = 'submit'
             style = {TextStyling.textBlackSmall}
-            onPress={()=>setVisibility(true)} >{/* onPress={()=>setRegisterVisible(true) */}
+            onPress={()=>setVisibility(true)} > // onPress={()=>setRegisterVisible(true)
             Registration</Text> 
-          
+          */}
 
           <MenuRow 
             onSelect={menuTestAlert}
