@@ -257,21 +257,10 @@ function CreateItemScreen(props) {
 
           <View style={styles.logoContainer}>
             <LogoSmall></LogoSmall>
-          </View> 
-
-          <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setVisibility(true)} >
-            Press Me</Text>
-
-            <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setflatListVisibility(true)} >
-            Press Me FlatList</Text>            
+          </View>                    
 
           <MenuRow 
+            onSelect={()=>setVisibility(true)}
             style = {styles.row1} 
             bckgcol = {colors.darkBlueCustom} 
             rowText = "Post New Item"
@@ -282,7 +271,9 @@ function CreateItemScreen(props) {
             icon2color = "white"  />
          
 
-          <MenuRow style = {styles.row2} 
+          <MenuRow
+            onSelect={()=>setflatListVisibility(true)} 
+            style = {styles.row2} 
             bckgcol = {colors.darkGreenCustom} 
             rowText = "My Posted Items"
             icon1 = "pin-outline"
