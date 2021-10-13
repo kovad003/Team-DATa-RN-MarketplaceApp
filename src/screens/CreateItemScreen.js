@@ -34,28 +34,30 @@ import colors from "../constants/colors";
 /* AD - The main function of the page */
 function CreateItemScreen(props) {
 
-  /* AD - State variables */
-
-  const [hasMessage, setMessage] = useState(false);
+  /************* AD - State Variables *************/
 
   /* AD - Handles the display of messages */
   const [messageDisplayed, setMessageDisplayed] = useState('');
+  const [hasMessage, setMessage] = useState(false);
 
-  const [items, setItems] = useState([]);
-  
+  /* AD - Handles the item variable (an array) */
+  const [items, setItems] = useState([]);  
 
   /* AD - Handles loading state */
   const [isLoading, setLoading] = useState(true);
 
+  /* AD - Handles the state of whether specific modal windows are visible or not*/
   const [isVisible, setVisibility] = useState(false);
-
   const [isflatListVisible, setflatListVisibility] = useState(false);
 
-  /*
+  /* AD - Redundant, might delete later
     const [itemList, addItemToList] = useState([]);
   */
 
-  // Custom Functions ****************************************************************************************
+  /************* AD - Custom Functions *************/
+
+  /* AD - A custom function to store item data taken from user 
+        input taken from the CreateItemInput modal window */
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
 
@@ -73,6 +75,7 @@ function CreateItemScreen(props) {
     //setLoading(true);
   }
 
+  /* AD - Functions related to the modal visibility */
   const cancelAddItem=()=>{
     setVisibility(false);
     setLoading(false);
@@ -83,12 +86,14 @@ function CreateItemScreen(props) {
     setLoading(false);
   }
 
+  /* AD - A function related to deletion, currently a WIP */
   const onDeleteItem=(idParam)=>{
     console.log('idParam: ' + idParam);
     //setLoading(true);
     deleteData(idParam)
   }
 
+  /* AD - functions related to confirmation and error messages */
   function showError(error){
     setMessage(true);
     setMessageDisplayed("Error: " + error);
@@ -105,22 +110,27 @@ function CreateItemScreen(props) {
     setLoading(true);
   }
 
-  // Service Functions ****************************************************************************************
-  // *** GET ***
+  /************* AD - Service Functions (connects to a Java Backend) *************/
+  
+  /* AD - An async function to GET (fetch) data from the Java backend (which interacts with our MySQL / Google Cloud database) */
   async function fetchData() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
-      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      /* AD - This waits for the fetch to be completed successfully. 
+      It is also a timeout (for server timeouts), which is also a possible response. */
       response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
     }
-    catch(error){
+    /* AD - A try catch to catch errors*/
+    catch(error){      
       showError(error);
     }
     try{
-      //Getting json from the response
+      /* AD - This gets json from the response. 
+      Essentially, the variable responseData is assigned a value, that is the json from the response. */
       let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
+      /* AD - A console log is added, so that the success of the response can be made apparent in the terminal */
+      console.log(responseData); 
       setItems(responseData);
     }
     catch(error){
@@ -128,7 +138,7 @@ function CreateItemScreen(props) {
     }
   }
 
-  // *** POST ***
+  /* AD - An async function to POST data to the Java backend (which interacts with our MySQL / Google Cloud database) */
   async function addData(categoryParam, customerParam, titleParam, priceParam, descrParam, imageParam, conditionParam, locationParam) {
     console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
     let response = null;
@@ -162,8 +172,9 @@ function CreateItemScreen(props) {
     }
   }
 
-  // *** PUT ***
-  // Object props are hardcoded, no input form is available. Works the same way as adding item
+  /* AD - An async function to PUT data to the Java backend (which interacts with our MySQL / Google Cloud database) */
+  
+    // Object props are hardcoded, no input form is available. Works the same way as adding item
   async function updateData(/*idParam, nameParam, priceParam, descrParam, categoryParam*/) {
     console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
     let response = null;
@@ -198,7 +209,7 @@ function CreateItemScreen(props) {
     }
   }
 
-  // *** DELETE ***
+  /* AD - An async function to DELETE data to the Java backend (which interacts with our MySQL / Google Cloud database) */
   // Delivers parameter as JSON data 
   async function deleteData(itemIdParam) {
     console.log('started:  async function deleteData(idParam) {');
