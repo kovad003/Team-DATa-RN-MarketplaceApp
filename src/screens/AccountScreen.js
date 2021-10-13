@@ -35,6 +35,8 @@ import RegistrationScreen from "./RegistrationScreen";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
 import LogoSmall from "../components/LogoSmall";
+import AppSupport from "../components/account/AppSupport";
+import AboutModal from "../components/account/AboutModal";
 
 /* AD - Redundant, might delete later
     import CreateItemInput from "../components/CreateItemInput";
@@ -56,6 +58,8 @@ const [isLoading, setLoading] = useState(false); //was true
 const [isVisible, setVisibility] = useState(false);
 
 const [isflatListVisible, setflatListVisibility] = useState(false);
+const [isSupportVisible, setSupportVisibility] = useState(false);
+const [isAboutVisible, setAboutVisibility] = useState(false);
 
 //const [customers, setCustomer] = useState([]);
 const [customerList, addCustomerToList] = useState([]);
@@ -69,7 +73,7 @@ const [isRegisterVisible, setRegisterVisible] = useState(false);
  /* AD - Handles the item variable (an array) */
 const [items, setItems] = useState([]);
 
-// AD - a dummyy Update Info alert
+// AD - a dummy Update Info alert
 const menuTestAlert = () =>
 Alert.alert(
 "Dummy Update Info",
@@ -84,11 +88,11 @@ Alert.alert(
 ]
 );
 
-// AD - a dunny Update Info alert
-const menuTestAlert2 = () =>
+// AD - a comming soon alert
+const comingSoonAlert = () =>
 Alert.alert(
-"This is the second alert",
-"Your post was successfully updated!",
+"Wow, slow down there, buddy.",
+"This feature is coming soon!",
 [
     {
     text: "Cancel",
@@ -140,6 +144,9 @@ const onAddCustomer = (childdata) => {
     setLoading(false);
   }
 
+
+  
+
 //
 
 //
@@ -188,6 +195,18 @@ const cancelAddItem=()=>{
 const cancelAddItem2=()=>{
   setflatListVisibility(false);
   setLoading(false);
+}
+
+/* For the support modal */
+const onCancelSupport2=()=>{
+  setSupportVisibility(false);
+  //setLoading(false);
+}
+
+/* For the About Modal */
+const onCancelAbout2=()=>{
+  setAboutVisibility(false);
+  //setLoading(false);
 }
 
 const onDeleteItem=(idParam)=>{
@@ -476,21 +495,28 @@ else{
             style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
           <MenuRow 
-            onSelect={menuTestAlert}
+            onSelect = {()=>setAboutVisibility(true)}
             style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
-          <MenuRow style = {styles.row2} rowText = "Settings"
-            onSelect={menuTestAlert2}
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} rowText = "Settings"
             icon1 = "cog-outline" />
-          <MenuRow style = {styles.row2} rowText = "Premium"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} rowText = "Premium"
             icon1 = "crown" />          
-          <MenuRow style = {styles.row2} bckgcol = {colors.danger} rowText = "Delete Account"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} bckgcol = {colors.danger} rowText = "Delete Account"
             icon1 = "delete-forever"
             icon2 = "alert-octagon"
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
             icon2color = "white"  />
-          <MenuRow style = {styles.row3} rowText = "Support"
+          <MenuRow 
+          onSelect = {()=>setSupportVisibility(true)}
+          style = {styles.row3} rowText = "Support"
           icon1 = "face-agent" />
 
           <LoginScreen 
@@ -506,6 +532,20 @@ else{
           customerList={customer} 
           onCancelCustomer={cancelAddCustomer}  // onCancelItem2 = cancelAddItem2
           /> 
+
+          <AppSupport 
+          visibility={isSupportVisible} 
+          /* onAddItem={onAddItem}
+          itemList={items} */
+          onCancelSupport={onCancelSupport2} 
+          />
+
+          <AboutModal 
+          visibility={isAboutVisible} 
+          /* onAddItem={onAddItem}
+          itemList={items} */
+          onCancelAbout={onCancelAbout2} 
+          />
 
         </View>
       </View>         
