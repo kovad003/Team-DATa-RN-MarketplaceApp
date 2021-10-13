@@ -17,7 +17,7 @@
 /* AD - Standard imports from both React and React-Native*/
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
-  ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
+  ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent, Alert } from "react-native";
 
 /* AD - External component imports (such as for modal views and logos etc) */
 import LogoSmall from "../components/LogoSmall";
@@ -109,6 +109,21 @@ function CreateItemScreen(props) {
     setMessage(false);
     setLoading(true);
   }
+
+  // AD - a comming soon alert
+  const comingSoonAlert = () =>
+  Alert.alert(
+  "Wow, slow down there, buddy.",
+  "This feature is coming soon!",
+  [
+      {
+      text: "Cancel",
+      onPress: () => console.log("Cancel Pressed"),
+      style: "cancel"
+      },
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+  ]
+);
 
   /************* AD - Service Functions (connects to a Java Backend) *************/
   
@@ -300,9 +315,13 @@ function CreateItemScreen(props) {
       <View style={styles.container}>  
         <View style={styles.centralContainer}>        
 
-          <MenuRow style = {styles.row1} rowText = "Seller's Guide"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row1} rowText = "Seller's Guide"
             icon1 = "book-open-page-variant"/>
-          <MenuRow style = {styles.row2} rowText = "Notifications"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} rowText = "Notifications"
             icon1 = "bell-ring-outline" />
           
 
@@ -332,12 +351,18 @@ function CreateItemScreen(props) {
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
             icon2color = "white"  />
-          <MenuRow style = {styles.row2} rowText = "My Watchlist"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} rowText = "My Watchlist"
             icon1 = "eye-outline" />
-          <MenuRow style = {styles.row2} rowText = "My Purchases"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} rowText = "My Purchases"
             icon1 = "shopping-outline" />          
-          <MenuRow style = {styles.row3} rowText = "Trending"
-          icon1 = "trending-up" />
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row3} rowText = "Trending"
+            icon1 = "trending-up" />
 
         {/* AD - For the hidden CreateItemInput external component (modal), 
                 which will become visible, when the user clicks the respective touchable opacity button */}

@@ -86,7 +86,7 @@ Alert.alert(
 ]
 );
 
-// AD - a dummy Update Info alert
+// AD - a comming soon alert
 const comingSoonAlert = () =>
 Alert.alert(
 "Wow, slow down there, buddy.",
