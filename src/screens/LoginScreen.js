@@ -1,77 +1,98 @@
-import React, {useState , useEffect} from 'react';
-import {
-  Button,
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Dimensions,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-  Image,
 
-  Modal
-} from 'react-native';
+import React, {useState , useEffect} from 'react';
+import {Button, View, StyleSheet, ScrollView, Text, Dimensions, SafeAreaView, TextInput, TouchableOpacity, Image, Modal,} from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //const LoginScreen = () => {
 function LoginScreen(props) {
-// State variables
+// STATE VARIABLES --------------------------------------------------------------
+// For LOGIN
+const [sessionId, setSessionId] = useState("None");
 
-const [userName , setUserName] = useState('')
-const [password , setPassword] = useState('')
 const [loginDetails, setLoginDetails] = useState([]);
 const [hasMessage, setMessage] = useState(false);
 const [messageDisplayed, setMessageDisplayed] = useState('');
-const [isLoading, setLoading] = useState(false); //was true
+const [isValidating, setIsValidating] = useState(false); //was true
 const [isLogin , setIsLogin] = useState (false);
-const [item, setItem] = useState({
-  customerId: "", //TODO
-  userName: "default userName",
-  password: "default password",
+
+// For service method
+const [loginDataToSend, setloginDataToSend] = useState({
+  userName: "user",
+  password: "password",
 });
+const [loginDataReceived, setloginDataReceived] = useState({
+  customerId: "undefined", //TODO
+  userName: "undefined",
+});
+// END OF STATE VARIABLES --------------------------------------------------------------
 
-
-/* for controlling the modal */
-
-// For Controlling modal
-const addItem=()=>{
-  props.onAddItem(item);
-  }
-const cancelItem=()=>{
-  props.onCancelItem();
-  }
-
-//Input handlers
-/* const [formChecker, setFormChecker] = useState({
-    categoryinput: 'false',
-}) */
-const usernameInputHandler=(enteredText)=>{
-    item.userName = enteredText;
-    //console.log('entered text/username: ' + enteredText);
+// SESSION HANDLERS --------------------------------------------------------------
+const saveSessionId=(newSessionId)=>{
+  AsyncStorage.setItem("StoredSessionId", newSessionId.toString());
+  console.log('SessionId was saved as: ' + newSessionId)
 }
+const getSessionId=()=>{
+  console.log("AsyncStorage.getItem(StoredSessionId): " + JSON.stringify(AsyncStorage.getItem("StoredSessionId")));
+  AsyncStorage.getItem("StoredSessionId").then((value) => console.log("SEssion ID value: " + value));
+  
+ // console.log("sessionID: " + sessionId)
+}
+// END OF SESSION HANDLERS --------------------------------------------------------------
 
+// INPUT HANDLERS --------------------------------------------------------------
+const usernameInputHandler=(enteredText)=>{
+    loginDataToSend.userName = enteredText;
+    console.log('entered text/username: ' + enteredText);
+}
 const passwordInputHandler=(enteredText)=>{
-    item.password = enteredText;
-    //console.log('entered text/password: ' + enteredText);
+    loginDataToSend.password = enteredText;
+    console.log('entered text/password: ' + enteredText);
 }
 const LoginInputHandler = () =>{
   console.log("LoginInputHandler()");
-  setUserName(item.userName);
-  setPassword(item.password);
-  setLoading(true);
-  //console.log ('username:'+userName)
-  //console.log ('Password:'+password)
+  setIsValidating(true);
 }
-  // Service Function
-  async function fetchLoginData() {
+// END OF INPUT HANDLERS --------------------------------------------------------------
+
+// LOGIN HANDLERS --------------------------------------------------------------
+ /*  const handleLogin = () => {
+    if (isNaN(loginDataReceived.customerId)){
+      console.log('you dont have account or username and password are not correct');
+    }
+  } */
+
+  const handleLogin = () => {
+    let token = AsyncStorage.getItem("StoredSessionId").then((value) => console.log("SEssion ID value: " + value));
+    
+  }
+// END OF LOGIN HANDLERS --------------------------------------------------------------
+
+// DATA TRANSFER TO PARENT ------------------------------------------------------------
+const addItem=()=>{
+  props.onAddItem(loginDataToSend);
+}
+const cancelItem=()=>{
+  props.onCancelItem();
+}
+
+// SERVICE METHODS --------------------------------------------------------------
+  async function validateLoginData(loginDataToSend) {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
+    let requestOptions = {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        userName: loginDataToSend.userName.toString(),
+        password: loginDataToSend.password.toString(),
+      })
+    };
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch(`http://10.0.2.2:8080/rest/loginservice/getlogindetails/${userName}`);//This is a template literal (escapes the variable)
-
+      response = await fetch("http://10.0.2.2:8080/rest/loginservice/validatelogindetails", requestOptions);//This is a template literal (escapes the variable)
     }
     catch(error){
       showError(error);
@@ -79,32 +100,23 @@ const LoginInputHandler = () =>{
     try{
       //Getting json from the response
       let responseData = await response.json();
-      console.log(JSON.stringify(userName));//Just for checking.....
-      setLoginDetails(responseData);
+      setloginDataReceived(responseData);
+      // console.log(JSON.stringify("login Data received: " + loginDataReceived));
+      saveSessionId(responseData.customerId.toString()) // Will Store Customer ID as AsnyncStorage
+      handleLogin(); //
     }
     catch(error){
       showError(error);
     }
   }
-  /* 
-  fetchLoginData()
-  setLoading(false);
-  */
+// END OF SERVICE METHODS --------------------------------------------------------------  
 
-  if (loginDetails.password === null || loginDetails.password===password){
-    // if (loginDetails.password === null || loginDetails.password===password){
-    //Define some kind of default value
-    console.log('You are logged in as: ' + JSON.stringify(loginDetails));
-    //setIsLogin(true)
-  }else{
-    console.log('you dont have account or username and password are not correct');
-    //setIsLogin(false)
-  }
 
+// Error Messages --------------------------------------------------------------
   function showError(error){
-  setMessage(true);
-  setMessageDisplayed("Error: " + error);
-  console.log(messageDisplayed);
+    setMessage(true);
+    setMessageDisplayed("Error: " + error);
+    console.log(messageDisplayed);
   }
   function showConfirmation(message){
     setMessageDisplayed("Confirmation: " + message);
@@ -114,26 +126,27 @@ const LoginInputHandler = () =>{
     setMessage(false);
     //setLoading(true);
   }
+// End of Error Messages --------------------------------------------------------
 
-  /*   
-This is called every time the view is rendered
-The new calls of fetchData (and others) must be stopped somehow, because in
-those methods are statevariables set, which cause a new re-render. 
-*/
+// USE EFFECT --------------------------------------------------------  
+/* This is called every time the view is rendered The new calls of fetchData (and others) must be 
+stopped somehow, because in those methods are statevariables set, which cause a new re-render. */
   useEffect(() => {
   console.log('useEffect(() => {'); 
-    if (isLoading==true){
-      //fetchData();
-      fetchLoginData();
-      setLoading(false);
+    if (isValidating==true){
+      validateLoginData(loginDataToSend);
+      setIsValidating(false);
     }
-});
+  });
+// END OF USE EFFECT --------------------------------------------------------
 
 return (
   <Modal visible={props.visibility} animationType="slide">
    <ScrollView style={styles.scrollView}>
 
     <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+      {/* <Button title="setSessionID as 9999" onPress={saveSessionId("9999")}> </Button> */}
+      <Button title="getSessionID" onPress={getSessionId}> </Button>
       <View
         style={{
           paddingHorizontal: 10,
@@ -150,7 +163,7 @@ return (
           <View style={{marginVertical: 10}}>
             <Text style={{fontSize: 16, marginBottom: 5}}>Username</Text>
             <TextInput
-              value = "flarson"
+              /* value = "flarson" */
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your username"
               style={styles.TextInput}
@@ -160,7 +173,7 @@ return (
           <View>
             <Text style={{fontSize: 16, marginBottom: 5}}>Password</Text>
             <TextInput
-              value = "flarson1234"
+              /* value = "flarson1234" */
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
               placeholder="Enter your password"
