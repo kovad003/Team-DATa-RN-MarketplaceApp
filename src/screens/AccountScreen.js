@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
-  ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
+  ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent, Alert } from "react-native";
 
 import MenuRow from "../components/MenuRow";
 import LogoSmall from "../components/LogoSmall";
@@ -36,6 +36,45 @@ const [customer, setCustomer] = useState([]);
 /* AD - for the AccountScreen -> login page modal visibility */
 const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
+
+
+
+// AD - a dunny Update Info alert
+const menuTestAlert = () =>
+Alert.alert(
+"Dummy Update Info",
+"Your post was successfully updated!",
+[
+    {
+    text: "Cancel",
+    onPress: () => console.log("Cancel Pressed"),
+    style: "cancel"
+    },
+    { text: "OK", onPress: () => console.log("OK Pressed") }
+]
+);
+
+// AD - a dunny Update Info alert
+const menuTestAlert2 = () =>
+Alert.alert(
+"This is the second alert",
+"Your post was successfully updated!",
+[
+    {
+    text: "Cancel",
+    onPress: () => console.log("Cancel Pressed"),
+    style: "cancel"
+    },
+    { text: "OK", onPress: () => console.log("OK Pressed") }
+]
+);
+
+
+
+
+
+
+
 
 
  /*
@@ -298,7 +337,7 @@ function closeMessage() {
 
   // *** POST ***
   async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
-    console.log('started: async function addCustomerData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
+    console.log('started: async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
     let response = null;
     let requestOptions = {
       method:'POST',
@@ -553,9 +592,12 @@ else{
             Registration</Text> 
           
 
-          <MenuRow style = {styles.row2} rowText = "About"
+          <MenuRow 
+            onSelect={menuTestAlert}
+            style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
           <MenuRow style = {styles.row2} rowText = "Settings"
+            onSelect={menuTestAlert2}
             icon1 = "cog-outline" />
           <MenuRow style = {styles.row2} rowText = "Premium"
             icon1 = "crown" />          

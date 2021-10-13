@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // AD - constants
@@ -9,9 +9,15 @@ import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
 function MenuRow(props) {
+
+
+  
+
+
   return (
     <View style={props.style}>  
       <TouchableOpacity 
+        onPress = {props.onSelect}
         style={[styles.rowContainer, {backgroundColor: props.bckgcol || "#E6E6E6"}]}>
         <Icon 
           name={props.icon1 || "chevron-left"} 
