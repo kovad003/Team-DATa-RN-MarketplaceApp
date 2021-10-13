@@ -23,8 +23,9 @@ const AppSupport=(props)=>{
 // A dummy contact form alert
     const contactFormAlert = () =>
     Alert.alert(
-    "Dummy Update Info",
-    "Your post was successfully updated!",
+    "Customer Contact Form",
+    "Your form was successfully sent!",
+    "We will be in touch with 24 hours!",
     [
         {
         text: "Cancel",

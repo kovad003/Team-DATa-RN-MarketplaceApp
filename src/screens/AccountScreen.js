@@ -87,10 +87,10 @@ Alert.alert(
 );
 
 // AD - a dummy Update Info alert
-const menuTestAlert2 = () =>
+const comingSoonAlert = () =>
 Alert.alert(
-"This is the second alert",
-"Your post was successfully updated!",
+"Wow, slow down there, buddy.",
+"This feature is coming soon!",
 [
     {
     text: "Cancel",
@@ -487,15 +487,20 @@ else{
             style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
           <MenuRow 
-            onSelect={menuTestAlert}
+            onSelect={comingSoonAlert}
             style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
-          <MenuRow style = {styles.row2} rowText = "Settings"
-            onSelect={menuTestAlert2}
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} rowText = "Settings"
             icon1 = "cog-outline" />
-          <MenuRow style = {styles.row2} rowText = "Premium"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} rowText = "Premium"
             icon1 = "crown" />          
-          <MenuRow style = {styles.row2} bckgcol = {colors.danger} rowText = "Delete Account"
+          <MenuRow 
+            onSelect={comingSoonAlert}
+            style = {styles.row2} bckgcol = {colors.danger} rowText = "Delete Account"
             icon1 = "delete-forever"
             icon2 = "alert-octagon"
             textstyling = {TextStyling.textWhiteMedium}
