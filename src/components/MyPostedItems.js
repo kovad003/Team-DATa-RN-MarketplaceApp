@@ -37,6 +37,7 @@ const MyPostedItems=(props)=>{
   const [hasMessage, setMessage] = useState(false);
   const [messageDisplayed, setMessageDisplayed] = useState('');
   const [items, setItems] = useState([]);
+  const [customerItems, setCustomerItems] = useState([]);
   const [itemList, addItemToList] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [isVisible, setVisibility] = useState(false);
@@ -102,6 +103,30 @@ const MyPostedItems=(props)=>{
       showError(error);
     }
   }
+
+  async function fetchCustomerItems() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getcustomeritems/1000");
+    }
+    catch(error){
+      showError(error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      console.log(responseData);//Just for checking.....
+      setCustomerItems(responseData);
+    }
+    catch(error){
+      showError(error);
+    }
+  }
+
+
+
 
   // *** POST ***
   async function addData(nameParam, priceParam, descrParam, categoryParam) {
@@ -204,6 +229,7 @@ const MyPostedItems=(props)=>{
       if (isLoading==true){
         fetchData();
         setLoading(false);
+        fetchCustomerItems();
     }
   });
 
@@ -230,7 +256,7 @@ const MyPostedItems=(props)=>{
         <View style = {styles.flatListOuterContainer}>
           <FlatList
                   keyExtractor={(item) => item.itemId.toString()} 
-                  data={items}
+                  data={customerItems}
                   renderItem={itemData => 
                       <ListCreatedItem itemId={itemData.item.itemId} 
                       title={itemData.item.title}
