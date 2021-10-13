@@ -25,7 +25,7 @@ function HomeScreen(props) {
     console.log(messageDisplayed);
   }
 
-  // HH - for categories 
+  // HH - for items decending 
   // *** GET ***
   async function fetchCatData() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
@@ -33,7 +33,7 @@ function HomeScreen(props) {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getalldesc");
 
     }
     catch(error){
