@@ -61,7 +61,7 @@ function App(props) {
       // <ListItemsScreen id='c3'/>
       // <MyItemScreen />
       // <AccountScreen /> 
-      <BottomTabsNavigation /> 
+       <BottomTabsNavigation /> 
       // <ItemDetailScreen />
       // <CategoryStackNavigation />
       // <CustomerProfileScreen />
