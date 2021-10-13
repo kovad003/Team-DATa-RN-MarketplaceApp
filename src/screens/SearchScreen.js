@@ -289,6 +289,15 @@ const SearchScreen = (props) => {
               <Button title='Cancel' onPress={onCancel} />
             </Modal>
 {/*                       *******************                      */}
+            <Modal visible={true}>
+              <Text style={styles.modalTitle}>Select a price range:</Text>
+              <PriceSetter
+                /*  onValueChange={} */
+              />
+              <PriceSetter/>
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+{/*                       *******************                      */}
              
 {/* --------------------------------------------------------------------------------------- */}
             <MenuSwipableRow 
@@ -308,7 +317,6 @@ const SearchScreen = (props) => {
               />
             )}
             />
-
             <MenuSwipableRow
               value={regionNameToDisplay}
               iconMain="map"
