@@ -43,69 +43,58 @@ const AboutModal=(props)=>{
                 <View style={{ alignSelf: "center" }}>
                     <Text style={{ fontSize: 20, fontWeight: "bold" }}>About Modal</Text>
                 </View>
+
+
+                
                 <View style={{ marginTop: 10 }}>
+
                     <View style={{ marginVertical: 5 }}>
-                        <Text style={{ fontSize: 16, marginBottom: 5 }}>First Name</Text>
-                        <TextInput
-                            placeholderTextColor="#bdbdbd"
-                            placeholder="your fisrt name"
-                            style={styles.TextInput}
-                        />
-                    </View>
-                    <View style={{ marginVertical: 5 }}>
-                        <Text style={{ fontSize: 16, marginBottom: 3 }}>Last Name</Text>
-                        <TextInput
-                            placeholderTextColor="#bdbdbd"
-                            placeholder="Your last name"
-                            style={styles.TextInput}
-                        />
+                        <Text 
+                        style={{ fontSize: 16, marginBottom: 5, textAlign : "center" }}>
+                        Welcome to Useddo!</Text>
+                        
                     </View>
                     <View style={{ marginVertical: 5 }}>
-                        <Text style={{ fontSize: 16, marginBottom: 3 }}>Email</Text>
-                        <TextInput
-                            placeholderTextColor="#bdbdbd"
-                            placeholder="Your email"
-                            style={styles.TextInput}
-                        />
+                        <Text 
+                        style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
+                        Whether you are looking to buy or sell
+                        Useddo has you covered.</Text>
+                        
                     </View>
-                    <View style={{ marginVertical: 5  }}> 
-                        <Text style={{ fontSize: 16, marginBottom: 3 }}>Your Message</Text>
-                        <TextInput
-                            textAlign="left"
-                            multiline={true}
-                            maxLength={250} //250
-                            textAlignVertical="top"
-                            placeholderTextColor="#bdbdbd"
-                            placeholder="Write your message here"
-                            style={[styles.TextInput, { height: 90, }]}
-                        />
+                    <View style={{ marginVertical: 5 }}>
+                        <Text 
+                        style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
+                        We are an up-and-coming marketplace app with unrivalled
+                        community support.</Text>
+                        
                     </View>
-                     
+                    <View style={{ marginVertical: 5 }}>
+                        <Text 
+                        style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
+                        We really cherish and value are growing and expanding user base.</Text>
+                        
+                    </View>
+                    <View style={{ marginVertical: 5 }}>
+                        <Text 
+                        style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
+                        And we thank you greatly for choosing to use Useddo.</Text>
+                        
+                    </View>
+                    <View style={{ marginVertical: 5 }}>
+                        <Text 
+                        style={{ fontSize: 16, marginBottom: 5, textAlign : "center" }}>
+                        Best regards - the Useddo team.</Text>
+                        
+                    </View>
+
                     <View style={{ alignSelf: 'center', width: '100%', marginTop: 20 }}>
                         
-                        {/*                       
-                        <TouchableOpacity
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                backgroundColor: '#1E90FF',
-                                paddingTop: 20,
-                                paddingBottom: 20,
-                                borderRadius: 10,
-                            }}>
-                            <Text style={{ fontSize: 20, color: '#fff' }}>Submit</Text>
-                        </TouchableOpacity>
-                        */}
-
                         <View style={styles.buttonView}>
                             <View style={styles.button}>
                             <Button color='#c83232' title="OK" onPress={cancelAbout}/>
                             </View>
 
-                            <View 
-                            style={styles.button}>
                             
-                            </View>
                         </View> 
 
                     </View>
