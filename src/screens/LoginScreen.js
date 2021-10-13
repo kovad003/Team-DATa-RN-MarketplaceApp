@@ -1,77 +1,79 @@
 import React, {useState , useEffect} from 'react';
-import {
-  Button,
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Dimensions,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-  Image,
-
-  Modal
-} from 'react-native';
+import {Button, View, StyleSheet, ScrollView, Text, Dimensions, SafeAreaView, TextInput, TouchableOpacity, Image, Modal,} from 'react-native';
 
 //const LoginScreen = () => {
 function LoginScreen(props) {
 // State variables
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const [userName , setUserName] = useState('')
 const [password , setPassword] = useState('')
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const [loginDetails, setLoginDetails] = useState([]);
 const [hasMessage, setMessage] = useState(false);
 const [messageDisplayed, setMessageDisplayed] = useState('');
-const [isLoading, setLoading] = useState(false); //was true
+const [isValidating, setIsValidating] = useState(false); //was true
 const [isLogin , setIsLogin] = useState (false);
-const [item, setItem] = useState({
-  customerId: "", //TODO
-  userName: "default userName",
-  password: "default password",
+
+
+const [loginDataToSend, setloginDataToSend] = useState({
+  userName: "user",
+  password: "password",
 });
-
-
-/* for controlling the modal */
-
-// For Controlling modal
-const addItem=()=>{
-  props.onAddItem(item);
-  }
-const cancelItem=()=>{
-  props.onCancelItem();
-  }
+const [loginDataReceived, setloginDataReceived] = useState({
+  customerId: null, //TODO
+  userName: "user",
+});
 
 //Input handlers
 /* const [formChecker, setFormChecker] = useState({
     categoryinput: 'false',
 }) */
 const usernameInputHandler=(enteredText)=>{
-    item.userName = enteredText;
+    loginDataToSend.userName = enteredText;
     //console.log('entered text/username: ' + enteredText);
 }
-
 const passwordInputHandler=(enteredText)=>{
-    item.password = enteredText;
+    loginDataToSend.password = enteredText;
     //console.log('entered text/password: ' + enteredText);
 }
 const LoginInputHandler = () =>{
   console.log("LoginInputHandler()");
-  setUserName(item.userName);
-  setPassword(item.password);
-  setLoading(true);
+  /* setUserName(loginData.userName);
+  setPassword(loginData.password); */
+  setIsValidating(true);
   //console.log ('username:'+userName)
   //console.log ('Password:'+password)
 }
+
+/* for controlling the modal */
+
+// For Controlling modal
+const addItem=()=>{
+  props.onAddItem(loginDataToSend);
+  }
+const cancelItem=()=>{
+  props.onCancelItem();
+  }
+
+
   // Service Function
-  async function fetchLoginData() {
+  async function validateLoginData(loginDataToSend) {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
+    let requestOptions = {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        userName: loginDataToSend.userName.toString(),
+        password: loginDataToSend.password.toString(),
+      })
+    };
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch(`http://10.0.2.2:8080/rest/loginservice/getlogindetails/${userName}`);//This is a template literal (escapes the variable)
-
+      response = await fetch("http://10.0.2.2:8080/rest/loginservice/validatelogindetails", requestOptions);//This is a template literal (escapes the variable)
     }
     catch(error){
       showError(error);
@@ -79,26 +81,21 @@ const LoginInputHandler = () =>{
     try{
       //Getting json from the response
       let responseData = await response.json();
-      console.log(JSON.stringify(userName));//Just for checking.....
-      setLoginDetails(responseData);
+      setloginDataReceived(responseData);
+      console.log(JSON.stringify("login Data received: " + loginDataReceived));     
     }
     catch(error){
       showError(error);
     }
   }
-  /* 
-  fetchLoginData()
-  setLoading(false);
-  */
+  
 
-  if (loginDetails.password === null || loginDetails.password===password){
+  if (isNaN(loginDataReceived.customerId)){
     // if (loginDetails.password === null || loginDetails.password===password){
     //Define some kind of default value
-    console.log('You are logged in as: ' + JSON.stringify(loginDetails));
-    //setIsLogin(true)
-  }else{
     console.log('you dont have account or username and password are not correct');
-    //setIsLogin(false)
+  }else{
+    console.log('You are logged in as: ' + JSON.stringify(loginDataReceived));
   }
 
   function showError(error){
@@ -115,8 +112,6 @@ const LoginInputHandler = () =>{
     //setLoading(true);
   }
 
-
-
   /*   
 This is called every time the view is rendered
 The new calls of fetchData (and others) must be stopped somehow, because in
@@ -124,10 +119,9 @@ those methods are statevariables set, which cause a new re-render.
 */
   useEffect(() => {
   console.log('useEffect(() => {'); 
-    if (isLoading==true){
-      //fetchData();
-      fetchLoginData();
-      setLoading(false);
+    if (isValidating==true){
+      validateLoginData(loginDataToSend);
+      setIsValidating(false);
     }
 });
 
@@ -152,7 +146,7 @@ return (
           <View style={{marginVertical: 10}}>
             <Text style={{fontSize: 16, marginBottom: 5}}>Username</Text>
             <TextInput
-              value = "flarson"
+              /* value = "flarson" */
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your username"
               style={styles.TextInput}
@@ -162,7 +156,7 @@ return (
           <View>
             <Text style={{fontSize: 16, marginBottom: 5}}>Password</Text>
             <TextInput
-              value = "flarson1234"
+              /* value = "flarson1234" */
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
               placeholder="Enter your password"
