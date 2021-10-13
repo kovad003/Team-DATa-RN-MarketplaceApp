@@ -1,26 +1,55 @@
+/**
+ * Overview: A class that allows users to view their account overview.
+ *           Also, the user can access account-related information and modal screens.
+ * 
+ * Description: This screen is accessible via the Profile button on the bottom navigation bar. 
+ *              The main parts of the screen are as follows: 
+ * 
+ *  - Variables, functions and async functions -> These are behind the scenes and not visible to the user. 
+ *                                                They power the functionality of the page. 
+ *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
+ *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as the 'login' modal).
+ *  - Page stylings -> Much of our apps stylings are included on each respective page.
+ *                     Ocassionally, however, external consts, fonts, and colours have been utilised.
+ * 
+ * @link   ./src/screens/AccountScreen.js
+ * @file   This files defines the AccountScreen.js class.
+ * @author Ashley Davis.
+ * @since  04.10.2021
+ */
+
+/* AD - Standard imports from both React and React-Native*/
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent, Alert } from "react-native";
 
-import MenuRow from "../components/MenuRow";
-import LogoSmall from "../components/LogoSmall";
-
-// AD - constants
+/* AD - Constants (such as for custom colours and margins etc) */
 import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
+
+/* AD - External component imports (such as for modal views and logos etc) */
 import LoginScreen from "./LoginScreen";
 import RegistrationScreen from "./RegistrationScreen";
-import CreateItemInput from "../components/CreateItemInput";
-
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
+import MenuRow from "../components/MenuRow";
+import LogoSmall from "../components/LogoSmall";
 
+/* AD - Redundant, might delete later
+    import CreateItemInput from "../components/CreateItemInput";
+  */
+
+/* AD - The main function of the page */
 function AccountScreen(props) {
 
+/************* AD - State Variables *************/
 
+/* AD - Handles the display of messages */
 const [hasMessage, setMessage] = useState(false);
 const [messageDisplayed, setMessageDisplayed] = useState('');
-const [items, setItems] = useState([]);
+
+
 
 const [itemList, addItemToList] = useState([]);
 const [isLoading, setLoading] = useState(false); //was true
@@ -37,6 +66,8 @@ const [customer, setCustomer] = useState([]);
 const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
 
+ /* AD - Handles the item variable (an array) */
+const [items, setItems] = useState([]);
 
 // AD - a dummyy Update Info alert
 const menuTestAlert = () =>
@@ -475,7 +506,7 @@ else{
           customerList={customer} 
           onCancelCustomer={cancelAddCustomer}  // onCancelItem2 = cancelAddItem2
           /> 
-          
+
         </View>
       </View>         
 
