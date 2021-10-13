@@ -10,7 +10,8 @@ import {
     TextInput,
     TouchableOpacity,
     Image,
-    Modal
+    Modal,
+    Alert
 } from 'react-native';
 import Logo from "../Logo";
 import { Margins } from '../../constants/constvalues';
@@ -19,7 +20,20 @@ import { Margins } from '../../constants/constvalues';
 //const AppSupport = () => {
 const AppSupport=(props)=>{
 
-    
+// A dummy contact form alert
+    const contactFormAlert = () =>
+    Alert.alert(
+    "Dummy Update Info",
+    "Your post was successfully updated!",
+    [
+        {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+    );
     
     const cancelSupport=()=>{
         props.onCancelSupport();
@@ -36,14 +50,15 @@ const AppSupport=(props)=>{
             <View
                 style={{
                     paddingHorizontal: 10,
-                    paddingVertical: 10,
-                    marginVertical: 10,
+                    paddingVertical: 5,
+                    //marginVertical: 10,
+                    marginTop: 5,
                     marginHorizontal: 10,
                     backgroundColor: '#fff',
                     borderRadius: 10,
                 }}>
                 <View style={{ alignSelf: "center" }}>
-                    <Text style={{ fontSize: 16 }}>Contact Us</Text>
+                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>Contact Us</Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <View style={{ marginVertical: 5 }}>
@@ -104,18 +119,12 @@ const AppSupport=(props)=>{
                             <Button color='#c83232' title="Cancel" onPress={cancelSupport}/>
                             </View>
                             <View style={styles.button}>
-                            <Button color='#000080' title="Add" />
+                            <Button color='#000080' title="Add" onPress={contactFormAlert}/>
                             </View>
                         </View> 
 
                     </View>
 
-                        
-                    
-                       
-               
-
-                   
                 </View>
             </View>
         </View>

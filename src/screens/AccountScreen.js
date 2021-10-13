@@ -71,7 +71,7 @@ const [isRegisterVisible, setRegisterVisible] = useState(false);
  /* AD - Handles the item variable (an array) */
 const [items, setItems] = useState([]);
 
-// AD - a dummyy Update Info alert
+// AD - a dummy Update Info alert
 const menuTestAlert = () =>
 Alert.alert(
 "Dummy Update Info",
@@ -86,7 +86,7 @@ Alert.alert(
 ]
 );
 
-// AD - a dunny Update Info alert
+// AD - a dummy Update Info alert
 const menuTestAlert2 = () =>
 Alert.alert(
 "This is the second alert",
