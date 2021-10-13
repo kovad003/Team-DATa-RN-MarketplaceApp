@@ -1,27 +1,59 @@
+/**
+ * Overview: A class that allows users to create new items and access seller-related information and modal screens.
+ *
+ * Description: This screen is accessible via the Create Item button on the bottom navigation bar. The main parts of the screen are as follows: 
+ *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page.
+ *  - Functions and async functions -> These are behind the scenes and not visible. They power the functionality of the page.
+ *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as 'Post New Item' for sale).
+ *  - Page stylings -> Much of our apps stylings are included on each respective page, however, occassionally we have uses external consts, fonts, and colours.
+ * 
+ * @link   ./src/screens/CreateItemScreen.js
+ * @file   This files defines the CreateItemScreen.js class.
+ * @author Ashley Davis.
+ * @since  01.10.2021
+ */
+
+/* AD - Standard imports from both React and React-Native*/
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
-import TextStyling from '../constants/fontstyling'
-import { Margins, Paddings } from "../constants/constvalues";
-import colors from "../constants/colors";
+
+/* AD - External component imports (such as for modal views and logos etc) */
 import LogoSmall from "../components/LogoSmall";
 import CreateItemInput from "../components/CreateItemInput";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
 import MyPostedItems from "../components/MyPostedItems";
 
+/* AD - Constants (such as for custom colours and margins etc) */
+import TextStyling from '../constants/fontstyling'
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
+
+/* AD - The main function of the page */
 function CreateItemScreen(props) {
 
-  // functions related to the input field functionality
+  /* AD - State variables */
 
   const [hasMessage, setMessage] = useState(false);
+
+  /* AD - Handles the display of messages */
   const [messageDisplayed, setMessageDisplayed] = useState('');
+
   const [items, setItems] = useState([]);
-  const [itemList, addItemToList] = useState([]);
+  
+
+  /* AD - Handles loading state */
   const [isLoading, setLoading] = useState(true);
+
   const [isVisible, setVisibility] = useState(false);
 
   const [isflatListVisible, setflatListVisibility] = useState(false);
+
+  /*
+    const [itemList, addItemToList] = useState([]);
+  */
 
   // Custom Functions ****************************************************************************************
   const onAddItem = (childdata) => {
