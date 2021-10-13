@@ -298,7 +298,7 @@ function closeMessage() {
 
   // *** POST ***
   async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
-    console.log('started: async function addCustomerData(customerIdParam, firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
+    console.log('started: async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
     let response = null;
     let requestOptions = {
       method:'POST',
