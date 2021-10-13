@@ -1,30 +1,37 @@
 import React from 'react';
 
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import colors from '../../constants/colors';
 
 const ListItemToSelect=(props)=>{
     return(
         <TouchableOpacity 
-            activeOpacity={0.8} 
+            activeOpacity={1} 
             onLongPress={props.onLongPress}
             onPress={props.onPress}
             onSelect={props.onSelect}>
             <View style={styles.listItemStyle}>
-                <Text>{props.id}&#41; {props.name}</Text>
-                {/* <Text>Price: {props.price}€ </Text>
-                <Text>Description: {props.description}</Text>
-                <Text>Category: {props.category}</Text> */}
+                <Text style={styles.text}>{/* {props.id}&#41; */} {props.name}</Text>
             </View>
         </TouchableOpacity>
     );
 }
 const styles = StyleSheet.create ({
     listItemStyle: {
-      borderWidth: 1, 
-      borderColor: 'blue', 
-      padding: 5,
-      backgroundColor:"#abc",
-      marginVertical:5,
+        width: '90%',
+        alignSelf:'center',
+        borderWidth: 0,
+        borderRadius: 3, 
+        borderColor: colors.light3, 
+        padding: 10,
+        backgroundColor:"#E6E6E6",
+        marginVertical:3,
+        elevation:2,
+    },
+    text:{
+        textAlign: 'center',
+        fontSize: 20,
+        fontWeight: '800',
     },
   });
 
