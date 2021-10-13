@@ -50,9 +50,9 @@ function CreateItemScreen(props) {
   const [isVisible, setVisibility] = useState(false);
   const [isflatListVisible, setflatListVisibility] = useState(false);
 
-  /* AD - Redundant, might delete later
-    const [itemList, addItemToList] = useState([]);
-  */
+
+  const [itemList, addItemToList] = useState([]);
+  
 
   /************* AD - Custom Functions *************/
 
