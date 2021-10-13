@@ -66,7 +66,6 @@ const LoginInputHandler = () =>{
     let token = AsyncStorage.getItem("StoredSessionId").then((value) => console.log("SEssion ID value: " + value));
     
   }
-
 // END OF LOGIN HANDLERS --------------------------------------------------------------
 
 // DATA TRANSFER TO PARENT ------------------------------------------------------------
@@ -129,9 +128,7 @@ const cancelItem=()=>{
   }
 // End of Error Messages --------------------------------------------------------
 
-
-// USE EFFECT --------------------------------------------------------
-   
+// USE EFFECT --------------------------------------------------------  
 /* This is called every time the view is rendered The new calls of fetchData (and others) must be 
 stopped somehow, because in those methods are statevariables set, which cause a new re-render. */
   useEffect(() => {
@@ -140,7 +137,7 @@ stopped somehow, because in those methods are statevariables set, which cause a 
       validateLoginData(loginDataToSend);
       setIsValidating(false);
     }
-});
+  });
 // END OF USE EFFECT --------------------------------------------------------
 
 return (
@@ -289,7 +286,6 @@ TextInput: {
   borderBottomWidth: 2,
   fontSize: 18,
 },
-
 
 /* Extra modifications */
 scrollView: {

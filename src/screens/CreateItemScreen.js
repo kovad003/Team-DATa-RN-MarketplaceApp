@@ -1,29 +1,63 @@
+/**
+ * Overview: A class that allows users to create new items and access seller-related information and modal screens.
+ *
+ * Description: This screen is accessible via the Create Item button on the bottom navigation bar. The main parts of the screen are as follows: 
+ *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page.
+ *  - Functions and async functions -> These are behind the scenes and not visible. They power the functionality of the page.
+ *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as 'Post New Item' for sale).
+ *  - Page stylings -> Much of our apps stylings are included on each respective page, however, occassionally we have uses external consts, fonts, and colours.
+ * 
+ * @link   ./src/screens/CreateItemScreen.js
+ * @file   This files defines the CreateItemScreen.js class.
+ * @author Ashley Davis.
+ * @since  01.10.2021
+ */
+
+/* AD - Standard imports from both React and React-Native*/
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
-import TextStyling from '../constants/fontstyling'
-import { Margins, Paddings } from "../constants/constvalues";
-import colors from "../constants/colors";
+
+/* AD - External component imports (such as for modal views and logos etc) */
 import LogoSmall from "../components/LogoSmall";
 import CreateItemInput from "../components/CreateItemInput";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
 import MyPostedItems from "../components/MyPostedItems";
 
+/* AD - Constants (such as for custom colours and margins etc) */
+import TextStyling from '../constants/fontstyling'
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
+
+/* AD - The main function of the page */
 function CreateItemScreen(props) {
 
-  // functions related to the input field functionality
+  /************* AD - State Variables *************/
 
-  const [hasMessage, setMessage] = useState(false);
+  /* AD - Handles the display of messages */
   const [messageDisplayed, setMessageDisplayed] = useState('');
-  const [items, setItems] = useState([]);
-  const [itemList, addItemToList] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-  const [isVisible, setVisibility] = useState(false);
+  const [hasMessage, setMessage] = useState(false);
 
+  /* AD - Handles the item variable (an array) */
+  const [items, setItems] = useState([]);  
+
+  /* AD - Handles loading state */
+  const [isLoading, setLoading] = useState(true);
+
+  /* AD - Handles the state of whether specific modal windows are visible or not*/
+  const [isVisible, setVisibility] = useState(false);
   const [isflatListVisible, setflatListVisibility] = useState(false);
 
-  // Custom Functions ****************************************************************************************
+  /* AD - Redundant, might delete later
+    const [itemList, addItemToList] = useState([]);
+  */
+
+  /************* AD - Custom Functions *************/
+
+  /* AD - A custom function to store item data taken from user 
+        input taken from the CreateItemInput modal window */
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
 
@@ -41,6 +75,7 @@ function CreateItemScreen(props) {
     //setLoading(true);
   }
 
+  /* AD - Functions related to the modal visibility */
   const cancelAddItem=()=>{
     setVisibility(false);
     setLoading(false);
@@ -51,12 +86,14 @@ function CreateItemScreen(props) {
     setLoading(false);
   }
 
+  /* AD - A function related to deletion, currently a WIP */
   const onDeleteItem=(idParam)=>{
     console.log('idParam: ' + idParam);
     //setLoading(true);
     deleteData(idParam)
   }
 
+  /* AD - functions related to confirmation and error messages */
   function showError(error){
     setMessage(true);
     setMessageDisplayed("Error: " + error);
@@ -73,22 +110,27 @@ function CreateItemScreen(props) {
     setLoading(true);
   }
 
-  // Service Functions ****************************************************************************************
-  // *** GET ***
+  /************* AD - Service Functions (connects to a Java Backend) *************/
+  
+  /* AD - An async function to GET (fetch) data from the Java backend (which interacts with our MySQL / Google Cloud database) */
   async function fetchData() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
-      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      /* AD - This waits for the fetch to be completed successfully. 
+      It is also a timeout (for server timeouts), which is also a possible response. */
       response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
     }
-    catch(error){
+    /* AD - A try catch to catch errors*/
+    catch(error){      
       showError(error);
     }
     try{
-      //Getting json from the response
+      /* AD - This gets json from the response. 
+      Essentially, the variable responseData is assigned a value, that is the json from the response. */
       let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
+      /* AD - A console log is added, so that the success of the response can be made apparent in the terminal */
+      console.log(responseData); 
       setItems(responseData);
     }
     catch(error){
@@ -96,7 +138,7 @@ function CreateItemScreen(props) {
     }
   }
 
-  // *** POST ***
+  /* AD - An async function to POST data to the Java backend (which interacts with our MySQL / Google Cloud database) */
   async function addData(categoryParam, customerParam, titleParam, priceParam, descrParam, imageParam, conditionParam, locationParam) {
     console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
     let response = null;
@@ -130,8 +172,9 @@ function CreateItemScreen(props) {
     }
   }
 
-  // *** PUT ***
-  // Object props are hardcoded, no input form is available. Works the same way as adding item
+  /* AD - An async function to PUT data to the Java backend (which interacts with our MySQL / Google Cloud database) */
+  
+    // Object props are hardcoded, no input form is available. Works the same way as adding item
   async function updateData(/*idParam, nameParam, priceParam, descrParam, categoryParam*/) {
     console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
     let response = null;
@@ -166,7 +209,7 @@ function CreateItemScreen(props) {
     }
   }
 
-  // *** DELETE ***
+  /* AD - An async function to DELETE data to the Java backend (which interacts with our MySQL / Google Cloud database) */
   // Delivers parameter as JSON data 
   async function deleteData(itemIdParam) {
     console.log('started:  async function deleteData(idParam) {');
@@ -194,10 +237,12 @@ function CreateItemScreen(props) {
     }
   }
 
-/*   
-  This is called every time the view is rendered
-  The new calls of fetchData (and others) must be stopped somehow, because in
-  those methods are statevariables set, which cause a new re-render. 
+/*
+  AD - This function is called every time the view is rendered.
+       There are async functions which get called, and so new calls of such functions
+       (such as GET methods for instance) must be stopped,
+       lest new re-renders are executed. Such methods are state variables
+       and endless re-renders could occur, unless stopped by useEffect.  
 */
   useEffect(() => {
     console.log('useEffect(() => {'); 
@@ -207,7 +252,8 @@ function CreateItemScreen(props) {
     }
   });
 
-  // If the 'fetch' is not ready yet, an activityindicator is shown
+  /* AD - An if statement to return an activity indicator if certain async functions,
+          like GET (fetch) are not yet ready */
   if (isLoading==true) {
     console.log('if(isLoading==true) {');
     return (
@@ -216,7 +262,9 @@ function CreateItemScreen(props) {
       </View>
     );
   }
-  // If error or confirm message needs to be displayed
+
+  /* AD - An elseif statement for if a message needs to be displayed
+        (such as an error or confirm message) */
   else if(hasMessage){
     console.log('else if(hasError){');
     return(
@@ -239,10 +287,13 @@ function CreateItemScreen(props) {
       </ScrollView>
     );
   }
-  //Otherwise the list is shown
+  /* AD - an else statement for if everything works correctly. 
+    The CreateItemScree is then displayed to the user. */
   else{
     console.log('else{');
     return (
+
+/************* AD - Data that will be rendered and visible to the user *************/
 
 <ScrollView style={styles.scrollStyle}>
 
@@ -257,21 +308,10 @@ function CreateItemScreen(props) {
 
           <View style={styles.logoContainer}>
             <LogoSmall></LogoSmall>
-          </View> 
-
-          <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setVisibility(true)} >
-            Press Me</Text>
-
-            <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setflatListVisibility(true)} >
-            Press Me FlatList</Text>            
+          </View>                    
 
           <MenuRow 
+            onSelect={()=>setVisibility(true)}
             style = {styles.row1} 
             bckgcol = {colors.darkBlueCustom} 
             rowText = "Post New Item"
@@ -282,7 +322,9 @@ function CreateItemScreen(props) {
             icon2color = "white"  />
          
 
-          <MenuRow style = {styles.row2} 
+          <MenuRow
+            onSelect={()=>setflatListVisibility(true)} 
+            style = {styles.row2} 
             bckgcol = {colors.darkGreenCustom} 
             rowText = "My Posted Items"
             icon1 = "pin-outline"
@@ -297,7 +339,8 @@ function CreateItemScreen(props) {
           <MenuRow style = {styles.row3} rowText = "Trending"
           icon1 = "trending-up" />
 
-        {/* AD - For the hidden modal view */}
+        {/* AD - For the hidden CreateItemInput external component (modal), 
+                which will become visible, when the user clicks the respective touchable opacity button */}
         <CreateItemInput 
           visibility={isVisible} 
           onAddItem={onAddItem}
@@ -305,15 +348,14 @@ function CreateItemScreen(props) {
           onCancelItem={cancelAddItem} 
           /> 
 
-          {/* AD - For the hidden modal view */}
-        
+        {/* AD - For the hidden MyPostedItems external component (modal), 
+                which will become visible, when the user clicks the respective touchable opacity button */}      
         <MyPostedItems 
           visibility={isflatListVisible} 
           onAddItem={onAddItem}
           itemList={items} 
           onCancelItem={cancelAddItem2} 
-          /> 
-          
+          />         
 
         </View>
       </View>
@@ -323,9 +365,10 @@ function CreateItemScreen(props) {
   }
 };
 
+/************* AD - Stylings *************/
 const styles = StyleSheet.create({
   scrollViewCustom: {
-    backgroundColor: colors.light4, // AD - added background
+    backgroundColor: colors.light4,
   },
   logoItemModal: {
     marginTop: Margins.xlarge,
@@ -336,38 +379,30 @@ const styles = StyleSheet.create({
     overflow: "visible",
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
-    backgroundColor: colors.light5, // AD - added color    
+    backgroundColor: colors.light5, 
   },
-
-  /* AD - Originally from the Account Screen */
   scrollStyle: {
     backgroundColor: colors.light4, 
   },
-
   container: {
     flex: 1,
     alignItems: 'center',   
     width:'100%',    
-  },   
-  
+  },     
   logoContainer:{
-    marginTop: 17, //20
+    marginTop: 17,
     alignItems: 'center',   
   },
-
   row1: {
     marginTop: 17,
     marginBottom: Margins.xxnarrow,
   },
-
   row2: {
-    marginVertical: Margins.xxnarrow, // narrow
+    marginVertical: Margins.xxnarrow,
   },
-
   row3: {
-    marginVertical: Margins.midsize, // xlarge
+    marginVertical: Margins.midsize,
   },
-
   centralContainer: {
     flex: 1,   
     justifyContent: 'center',

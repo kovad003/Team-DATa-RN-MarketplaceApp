@@ -1,26 +1,55 @@
+/**
+ * Overview: A class that allows users to view their account overview.
+ *           Also, the user can access account-related information and modal screens.
+ * 
+ * Description: This screen is accessible via the Profile button on the bottom navigation bar. 
+ *              The main parts of the screen are as follows: 
+ * 
+ *  - Variables, functions and async functions -> These are behind the scenes and not visible to the user. 
+ *                                                They power the functionality of the page. 
+ *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
+ *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as the 'login' modal).
+ *  - Page stylings -> Much of our apps stylings are included on each respective page.
+ *                     Ocassionally, however, external consts, fonts, and colours have been utilised.
+ * 
+ * @link   ./src/screens/AccountScreen.js
+ * @file   This files defines the AccountScreen.js class.
+ * @author Ashley Davis.
+ * @since  04.10.2021
+ */
+
+/* AD - Standard imports from both React and React-Native*/
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
-  ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent } from "react-native";
+  ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent, Alert } from "react-native";
 
-import MenuRow from "../components/MenuRow";
-import LogoSmall from "../components/LogoSmall";
-
-// AD - constants
+/* AD - Constants (such as for custom colours and margins etc) */
 import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
+
+/* AD - External component imports (such as for modal views and logos etc) */
 import LoginScreen from "./LoginScreen";
 import RegistrationScreen from "./RegistrationScreen";
-import CreateItemInput from "../components/CreateItemInput";
-
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
+import MenuRow from "../components/MenuRow";
+import LogoSmall from "../components/LogoSmall";
 
+/* AD - Redundant, might delete later
+    import CreateItemInput from "../components/CreateItemInput";
+  */
+
+/* AD - The main function of the page */
 function AccountScreen(props) {
 
+/************* AD - State Variables *************/
 
+/* AD - Handles the display of messages */
 const [hasMessage, setMessage] = useState(false);
 const [messageDisplayed, setMessageDisplayed] = useState('');
-const [items, setItems] = useState([]);
+
+
 
 const [itemList, addItemToList] = useState([]);
 const [isLoading, setLoading] = useState(false); //was true
@@ -37,30 +66,38 @@ const [customer, setCustomer] = useState([]);
 const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
 
+ /* AD - Handles the item variable (an array) */
+const [items, setItems] = useState([]);
 
- /*
+// AD - a dummyy Update Info alert
+const menuTestAlert = () =>
+Alert.alert(
+"Dummy Update Info",
+"Your post was successfully updated!",
+[
+    {
+    text: "Cancel",
+    onPress: () => console.log("Cancel Pressed"),
+    style: "cancel"
+    },
+    { text: "OK", onPress: () => console.log("OK Pressed") }
+]
+);
 
-id: 1,
-    customerId: 1, //TODO
-    password: 'password',
-    */
-
-
-    /*
-      const [customer, setCustomer] = useState({
-    customerId: 1,
-    firstName: "default firstName", //TODO
-    lastName: 'default lastName',
-    userName: 'default userName',
-    password: "default password",
-    dateOfBirth: 'default dateOfBirth',
-    email: 'default email',
-    phone: 'default phone',
-    image: 'default image',
-});
-
-*/
-
+// AD - a dunny Update Info alert
+const menuTestAlert2 = () =>
+Alert.alert(
+"This is the second alert",
+"Your post was successfully updated!",
+[
+    {
+    text: "Cancel",
+    onPress: () => console.log("Cancel Pressed"),
+    style: "cancel"
+    },
+    { text: "OK", onPress: () => console.log("OK Pressed") }
+]
+);
 
 // AD new consts
 
@@ -92,34 +129,9 @@ const onAddCustomer = (childdata) => {
   //setLoading(true);
 }
 
-
-
-/*
-const addCustomer=()=>{
-  props.onAddCustomer(customer);
-}
-*/
-
-
-  
-  //
-
-
   const cancelLoginModal = ()=>{
     setLoginVisible(false);
   }
-
-
-  /* For the registration modal (cancelRegistrationModal)
-
-  const cancelLoginModal = ()=>{
-    setLoginVisible(false);
-  }
-
-  const cancelRegistrationModal = ()=>{
-    setRegisterVisible(false);
-  }
-  */
 
   // AD new consts
 
@@ -127,50 +139,6 @@ const addCustomer=()=>{
     setVisibility(false);
     setLoading(false);
   }
-
-
-
-  // cancelRegistrationModal
-
-
-  //
-  /*
-  const onAddItem=()=>{
-    setLoginVisible(true);
-  }
-
-  const cancelAddItem = ()=>{
-    setLoginVisible(false);
-  }
-
-
-*/ 
-
-/*
-  const onAddItem2=()=>{
-    setRegisterVisible(true);
-  }
-
-  
-
-  const cancelAddItem2 = ()=>{
-    setRegisterVisible(false);
-  }
-*/
- 
-
-  // For Controlling modal
-
-  /*
-const addItem=()=>{
-  props.onAddItem(item);
-}
-
-const cancelItem=()=>{
-  props.onCancelItem();
-}
-
-*/
 
 //
 
@@ -183,10 +151,6 @@ const cancelItem=()=>{
 /* AD - extra editions for the registration page input functionality */
 
 // functions related to the input field functionality
-
-
-
-
 
 // Custom Functions ****************************************************************************************
 const onAddItem = (childdata) => {
@@ -215,21 +179,6 @@ const onAddItem = (childdata) => {
   setVisibility(false);
   //setLoading(true);
 }
-
-/*
-
- customerId: 1,
-    firstName: "default firstName", //TODO
-    lastName: 'default lastName',
-    userName: 'default userName',
-    password: "default password",
-    dateOfBirth: 'default dateOfBirth',
-    email: 'default email',
-    phone: 'default phone',
-    image: 'default image',
-
-
-*/
 
 const cancelAddItem=()=>{
   setVisibility(false);
@@ -263,12 +212,6 @@ function closeMessage() {
   setLoading(true);
 }
 
-
-//
-
-//
-
-//
 
 // AD - customer service additions
 
@@ -514,16 +457,6 @@ else if(hasMessage){
 else{
   console.log('else{');
   
-
-
-//
-
-//
-
-//
-
-//
-
   return (
 
     <ScrollView style={styles.scrollStyle}>
@@ -534,28 +467,20 @@ else{
             <LogoSmall></LogoSmall>
           </View>
 
-          <MenuRow style = {styles.row1} rowText = "Register"
+          <MenuRow 
+            onSelect = {()=>setVisibility(true)}
+            style = {styles.row1} rowText = "Register"
             icon1 = "account-plus-outline"/>
-          <MenuRow style = {styles.row1a} rowText = "Login"
+          <MenuRow 
+            onSelect={()=>setLoginVisible(true)}
+            style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
-
-        
-            <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setLoginVisible(true)} >
-            Login</Text>
-
-            <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setVisibility(true)} >{/* onPress={()=>setRegisterVisible(true) */}
-            Registration</Text> 
-          
-
-          <MenuRow style = {styles.row2} rowText = "About"
+          <MenuRow 
+            onSelect={menuTestAlert}
+            style = {styles.row2} rowText = "About"
             icon1 = "information-outline" />
           <MenuRow style = {styles.row2} rowText = "Settings"
+            onSelect={menuTestAlert2}
             icon1 = "cog-outline" />
           <MenuRow style = {styles.row2} rowText = "Premium"
             icon1 = "crown" />          
@@ -581,6 +506,7 @@ else{
           customerList={customer} 
           onCancelCustomer={cancelAddCustomer}  // onCancelItem2 = cancelAddItem2
           /> 
+
         </View>
       </View>         
 

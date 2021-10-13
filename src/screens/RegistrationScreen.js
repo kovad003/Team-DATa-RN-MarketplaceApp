@@ -25,7 +25,7 @@ function RegistrationScreen(props) {
   // State variable
   const [customer, setCustomer] = useState({
     //customerId: 1,
-    firstName: "default firstName", //TODO
+    firstName: 'default firstName', //TODO
     lastName: 'default lastName',
     userName: 'default userName',
     password: "default password",
