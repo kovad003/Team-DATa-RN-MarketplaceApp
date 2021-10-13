@@ -35,6 +35,7 @@ import RegistrationScreen from "./RegistrationScreen";
 import ItemSuccessfullyAdded from "../components/ItemSuccessfullyAdded";
 import MenuRow from "../components/MenuRow";
 import LogoSmall from "../components/LogoSmall";
+import AppSupport from "../components/account/AppSupport";
 
 /* AD - Redundant, might delete later
     import CreateItemInput from "../components/CreateItemInput";
@@ -56,6 +57,7 @@ const [isLoading, setLoading] = useState(false); //was true
 const [isVisible, setVisibility] = useState(false);
 
 const [isflatListVisible, setflatListVisibility] = useState(false);
+const [isSupportVisible, setSupportVisibility] = useState(false);
 
 //const [customers, setCustomer] = useState([]);
 const [customerList, addCustomerToList] = useState([]);
@@ -140,6 +142,9 @@ const onAddCustomer = (childdata) => {
     setLoading(false);
   }
 
+
+  
+
 //
 
 //
@@ -188,6 +193,12 @@ const cancelAddItem=()=>{
 const cancelAddItem2=()=>{
   setflatListVisibility(false);
   setLoading(false);
+}
+
+/* For the support modal */
+const onCancelSupport2=()=>{
+  setSupportVisibility(false);
+  //setLoading(false);
 }
 
 const onDeleteItem=(idParam)=>{
@@ -490,7 +501,9 @@ else{
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
             icon2color = "white"  />
-          <MenuRow style = {styles.row3} rowText = "Support"
+          <MenuRow 
+          onSelect = {()=>setSupportVisibility(true)}
+          style = {styles.row3} rowText = "Support"
           icon1 = "face-agent" />
 
           <LoginScreen 
@@ -506,6 +519,13 @@ else{
           customerList={customer} 
           onCancelCustomer={cancelAddCustomer}  // onCancelItem2 = cancelAddItem2
           /> 
+
+          <AppSupport 
+          visibility={isSupportVisible} 
+          /* onAddItem={onAddItem}
+          itemList={items} */
+          onCancelSupport={onCancelSupport2} 
+          />
 
         </View>
       </View>         
