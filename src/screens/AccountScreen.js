@@ -475,6 +475,7 @@ else{
           customerList={customer} 
           onCancelCustomer={cancelAddCustomer}  // onCancelItem2 = cancelAddItem2
           /> 
+          
         </View>
       </View>         
 

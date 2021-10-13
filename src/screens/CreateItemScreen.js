@@ -237,10 +237,12 @@ function CreateItemScreen(props) {
     }
   }
 
-/*   
-  This is called every time the view is rendered
-  The new calls of fetchData (and others) must be stopped somehow, because in
-  those methods are statevariables set, which cause a new re-render. 
+/*
+  AD - This function is called every time the view is rendered.
+       There are async functions which get called, and so new calls of such functions
+       (such as GET methods for instance) must be stopped,
+       lest new re-renders are executed. Such methods are state variables
+       and endless re-renders could occur, unless stopped by useEffect.  
 */
   useEffect(() => {
     console.log('useEffect(() => {'); 
@@ -250,7 +252,8 @@ function CreateItemScreen(props) {
     }
   });
 
-  // If the 'fetch' is not ready yet, an activityindicator is shown
+  /* AD - An if statement to return an activity indicator if certain async functions,
+          like GET (fetch) are not yet ready */
   if (isLoading==true) {
     console.log('if(isLoading==true) {');
     return (
@@ -259,7 +262,9 @@ function CreateItemScreen(props) {
       </View>
     );
   }
-  // If error or confirm message needs to be displayed
+
+  /* AD - An elseif statement for if a message needs to be displayed
+        (such as an error or confirm message) */
   else if(hasMessage){
     console.log('else if(hasError){');
     return(
@@ -282,10 +287,13 @@ function CreateItemScreen(props) {
       </ScrollView>
     );
   }
-  //Otherwise the list is shown
+  /* AD - an else statement for if everything works correctly. 
+    The CreateItemScree is then displayed to the user. */
   else{
     console.log('else{');
     return (
+
+/************* AD - Data that will be rendered and visible to the user *************/
 
 <ScrollView style={styles.scrollStyle}>
 
@@ -331,7 +339,8 @@ function CreateItemScreen(props) {
           <MenuRow style = {styles.row3} rowText = "Trending"
           icon1 = "trending-up" />
 
-        {/* AD - For the hidden modal view */}
+        {/* AD - For the hidden CreateItemInput external component (modal), 
+                which will become visible, when the user clicks the respective touchable opacity button */}
         <CreateItemInput 
           visibility={isVisible} 
           onAddItem={onAddItem}
@@ -339,15 +348,14 @@ function CreateItemScreen(props) {
           onCancelItem={cancelAddItem} 
           /> 
 
-          {/* AD - For the hidden modal view */}
-        
+        {/* AD - For the hidden MyPostedItems external component (modal), 
+                which will become visible, when the user clicks the respective touchable opacity button */}      
         <MyPostedItems 
           visibility={isflatListVisible} 
           onAddItem={onAddItem}
           itemList={items} 
           onCancelItem={cancelAddItem2} 
-          /> 
-          
+          />         
 
         </View>
       </View>
@@ -357,9 +365,10 @@ function CreateItemScreen(props) {
   }
 };
 
+/************* AD - Stylings *************/
 const styles = StyleSheet.create({
   scrollViewCustom: {
-    backgroundColor: colors.light4, // AD - added background
+    backgroundColor: colors.light4,
   },
   logoItemModal: {
     marginTop: Margins.xlarge,
@@ -370,38 +379,30 @@ const styles = StyleSheet.create({
     overflow: "visible",
     backgroundColor: "rgba(11,67,130,1)",
     marginTop: 9,
-    backgroundColor: colors.light5, // AD - added color    
+    backgroundColor: colors.light5, 
   },
-
-  /* AD - Originally from the Account Screen */
   scrollStyle: {
     backgroundColor: colors.light4, 
   },
-
   container: {
     flex: 1,
     alignItems: 'center',   
     width:'100%',    
-  },   
-  
+  },     
   logoContainer:{
-    marginTop: 17, //20
+    marginTop: 17,
     alignItems: 'center',   
   },
-
   row1: {
     marginTop: 17,
     marginBottom: Margins.xxnarrow,
   },
-
   row2: {
-    marginVertical: Margins.xxnarrow, // narrow
+    marginVertical: Margins.xxnarrow,
   },
-
   row3: {
-    marginVertical: Margins.midsize, // xlarge
+    marginVertical: Margins.midsize,
   },
-
   centralContainer: {
     flex: 1,   
     justifyContent: 'center',
