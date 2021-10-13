@@ -85,8 +85,8 @@ const ListCreatedItem=(props)=>{
 
                     <View style={styles.innerRowContainer2}>
 
-                        <Text style={TextStyling.textBlackSmall}>Price: </Text>
-                        <Text style={TextStyling.textBlackSmall}>{props.price}€</Text>
+                        <Text style={TextStyling.textBlackSmall}>Price: {props.price}€</Text>
+                       
 
                         <Text style={TextStyling.textBlackSmall}>Condition: {props.condition}</Text>
                         <Text style={TextStyling.textBlackSmall}>Location: {props.location}</Text>
@@ -112,37 +112,12 @@ const ListCreatedItem=(props)=>{
                         </Text>
                         
                     </View>
-
-                    {/* 
-                    <Text 
-
-                        text = 'submit'
-                        style = {TextStyling.textBlackSmall}
-                        onPress={()=>setVisibility(true)} >
-                        Press Me</Text>
-
-                        <Text 
-                            text = 'submit'
-                            style = {TextStyling.textBlackSmall}
-                            onPress={()=>setflatListVisibility(true)} >
-                            Press Me FlatList</Text>  
-
-
-                        <MyPostedItems 
-                            visibility={isflatListVisible} 
-                            onAddItem={onAddItem}
-                            itemList={items} 
-                            onCancelItem={cancelAddItem2} 
-                            />
-
-                    */}
-
-                            <MyPostedItemsDelete 
-                            visibility={isDeleteVisible} 
-                            onAddItem={onAddItem}
-                            itemList={items} 
-                            onCancelItem={cancelAddItem} 
-                            />
+                        <MyPostedItemsDelete 
+                        visibility={isDeleteVisible} 
+                        onAddItem={onAddItem}
+                        itemList={items} 
+                        onCancelItem={cancelAddItem} 
+                        />
 
                 </View>
 
@@ -172,15 +147,12 @@ const styles = StyleSheet.create ({
      LeftInnerContainer: {
         backgroundColor: colors.danger,
         width: '20%',
-
         alignItems: "center",
         paddingHorizontal: 5,
         marginHorizontal: 5,
         marginVertical: 5,
-
         alignItems: "center",
         justifyContent: "center"
-
      },
      rightInnerContainer: {
         backgroundColor: colors.danger,

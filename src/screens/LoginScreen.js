@@ -115,8 +115,6 @@ const LoginInputHandler = () =>{
     //setLoading(true);
   }
 
-
-
   /*   
 This is called every time the view is rendered
 The new calls of fetchData (and others) must be stopped somehow, because in
@@ -275,7 +273,6 @@ TextInput: {
   borderBottomWidth: 2,
   fontSize: 18,
 },
-
 
 /* Extra modifications */
 scrollView: {

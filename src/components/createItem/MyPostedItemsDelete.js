@@ -11,15 +11,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import TextStyling from '../../constants/fontstyling';
 
 const MyPostedItemsDelete=(props)=>{
-       
-    /* For Controlling modal
-    const addItem=()=>{
-        props.onAddItem(item);
-    }
-    const cancelItem=()=>{
-        props.onCancelItem();
-    }
-    */
+           
 
     const cancelDeletion=()=>{
       props.onCancelItem();

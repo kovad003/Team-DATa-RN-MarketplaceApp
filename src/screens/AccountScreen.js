@@ -38,16 +38,7 @@ const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
 
 
-// AD - For the new login modal window
-// AD - for the login page visibility
-const menuRowShowLoginModal = ()=>{
-  //setLoginVisible(false);
-  //()=>setLoginVisible(true)
-  props.setLoginVisible(true)
-}
-
-
-// AD - a dunny Update Info alert
+// AD - a dummyy Update Info alert
 const menuTestAlert = () =>
 Alert.alert(
 "Dummy Update Info",
@@ -76,38 +67,6 @@ Alert.alert(
     { text: "OK", onPress: () => console.log("OK Pressed") }
 ]
 );
-
-
-
-
-
-
-
-
-
- /*
-
-id: 1,
-    customerId: 1, //TODO
-    password: 'password',
-    */
-
-
-    /*
-      const [customer, setCustomer] = useState({
-    customerId: 1,
-    firstName: "default firstName", //TODO
-    lastName: 'default lastName',
-    userName: 'default userName',
-    password: "default password",
-    dateOfBirth: 'default dateOfBirth',
-    email: 'default email',
-    phone: 'default phone',
-    image: 'default image',
-});
-
-*/
-
 
 // AD new consts
 
@@ -139,34 +98,9 @@ const onAddCustomer = (childdata) => {
   //setLoading(true);
 }
 
-
-
-/*
-const addCustomer=()=>{
-  props.onAddCustomer(customer);
-}
-*/
-
-
-  
-  //
-
-
   const cancelLoginModal = ()=>{
     setLoginVisible(false);
   }
-
-
-  /* For the registration modal (cancelRegistrationModal)
-
-  const cancelLoginModal = ()=>{
-    setLoginVisible(false);
-  }
-
-  const cancelRegistrationModal = ()=>{
-    setRegisterVisible(false);
-  }
-  */
 
   // AD new consts
 
@@ -174,50 +108,6 @@ const addCustomer=()=>{
     setVisibility(false);
     setLoading(false);
   }
-
-
-
-  // cancelRegistrationModal
-
-
-  //
-  /*
-  const onAddItem=()=>{
-    setLoginVisible(true);
-  }
-
-  const cancelAddItem = ()=>{
-    setLoginVisible(false);
-  }
-
-
-*/ 
-
-/*
-  const onAddItem2=()=>{
-    setRegisterVisible(true);
-  }
-
-  
-
-  const cancelAddItem2 = ()=>{
-    setRegisterVisible(false);
-  }
-*/
- 
-
-  // For Controlling modal
-
-  /*
-const addItem=()=>{
-  props.onAddItem(item);
-}
-
-const cancelItem=()=>{
-  props.onCancelItem();
-}
-
-*/
 
 //
 
@@ -230,10 +120,6 @@ const cancelItem=()=>{
 /* AD - extra editions for the registration page input functionality */
 
 // functions related to the input field functionality
-
-
-
-
 
 // Custom Functions ****************************************************************************************
 const onAddItem = (childdata) => {
@@ -262,21 +148,6 @@ const onAddItem = (childdata) => {
   setVisibility(false);
   //setLoading(true);
 }
-
-/*
-
- customerId: 1,
-    firstName: "default firstName", //TODO
-    lastName: 'default lastName',
-    userName: 'default userName',
-    password: "default password",
-    dateOfBirth: 'default dateOfBirth',
-    email: 'default email',
-    phone: 'default phone',
-    image: 'default image',
-
-
-*/
 
 const cancelAddItem=()=>{
   setVisibility(false);
@@ -310,12 +181,6 @@ function closeMessage() {
   setLoading(true);
 }
 
-
-//
-
-//
-
-//
 
 // AD - customer service additions
 
@@ -561,16 +426,6 @@ else if(hasMessage){
 else{
   console.log('else{');
   
-
-
-//
-
-//
-
-//
-
-//
-
   return (
 
     <ScrollView style={styles.scrollStyle}>
@@ -589,22 +444,6 @@ else{
             onSelect={()=>setLoginVisible(true)}
             style = {styles.row1a} rowText = "Login"
             icon1 = "login" />
-
-            {/*
-            <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setLoginVisible(true)} >
-            Login</Text>
-            
-
-            <Text 
-            text = 'submit'
-            style = {TextStyling.textBlackSmall}
-            onPress={()=>setVisibility(true)} > // onPress={()=>setRegisterVisible(true)
-            Registration</Text> 
-          */}
-
           <MenuRow 
             onSelect={menuTestAlert}
             style = {styles.row2} rowText = "About"
