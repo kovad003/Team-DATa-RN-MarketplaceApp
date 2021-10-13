@@ -48,20 +48,25 @@ const SearchScreen = (props) => {
   const [isLoadingRegions, setLoadingRegions] = useState(true); // Will trigger Data transfer
   const [isLoadingCities, setLoadingCities] = useState(false); // Will trigger Data transfer
 
+  // Handle Category Data From DB
+  const [categoryList, addCategoryToList] = useState([null]); // Will store available categories from DB (JAVA)
+  const [selectedCategory, setCategory] = useState(); // Will be used to select a category
+  
   // Handle Region Data From DB
   const [regionList, addRegionToList] = useState([null]); // Will store available regions from DB (JAVA)
   const [selectedRegionId, setRegionId] = useState(); // Will be used to fetch available cities in region (JAVA)
 
   // Handle City Data From DB
-  const [cityList, addCityToList] = useState([null]); // For technical reasons city name has to be saved separatly
+  const [cityList, addCityToList] = useState([null]); // Will store available cities per region
   const [selectedCity, setSelectedCity] = useState({}); // JSON taken from DB (JAVA)
-  
 
-  // Handle Swipe Button Display
-  const [regionNameToDisplay, setRegionNameToDisplay] = useState("None"); // For technical reasons region name has to be saved separately
-  const [cityNameDisplay, setCityNameToDisplay] = useState("None"); // For technical reasons city name has to be saved separately
+  // Handle Swipe Button Display => For technical name has to be saved separately
+  const [categoryNameToDisplay, setCategoryNameToDisplay] = useState("None"); 
+  const [regionNameToDisplay, setRegionNameToDisplay] = useState("None");
+  const [cityNameDisplay, setCityNameToDisplay] = useState("None");
 
   // Handle Modals
+  const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false); // Will show/hide category selection modal
   const [isRegionModalVisible, setRegionModalVisibility] = useState(false); // Will show/hide Region selection modal
   const [isCityModalVisible, setCityModalVisibility] = useState(false); // Will show/hide City selection modal
 
@@ -93,6 +98,9 @@ const SearchScreen = (props) => {
   }
   // --------------------------------------------------
   // Swipe Actions ------------------------------------ 
+  const showCategoryModal=()=>{
+    setCategoryModalVisibility(true);
+  }
   const showRegionModal=()=>{
     setRegionModalVisibility(true);
   }
@@ -103,12 +111,21 @@ const SearchScreen = (props) => {
     console.log("clear selection");
   }
   const onCancel=()=>{
+    setCategoryModalVisibility(false);
     setRegionModalVisibility(false);
     setCityModalVisibility(false);
     setLoadingRegions(false);
   }
   // --------------------------------------------------
   // Handle Selections ---------------------------------
+  const handleCategorySelection=(selectedItem)=>{
+    setCategoryModalVisibility(false);
+    setCategory(selectedItem.cityId);
+    setCategoryNameToDisplay(selectedItem.title)
+    // ToConsole
+    console.log("selected item: " +  JSON.stringify(selectedItem));
+    console.log("setRegion to " +selectedItem.regionId);
+  }
   const handleRegionSelection=(selectedItem)=>{
     setRegionModalVisibility(false);
     setRegionId(selectedItem.regionId);
@@ -132,6 +149,30 @@ const SearchScreen = (props) => {
 
 // SERVICE FUNCTIONS ======================================================================================================
   // *** GET ***
+  async function getAllCategory() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
+    }
+    catch(error){
+      console.log(error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      addCategoryToList(responseData);
+      // To console
+      // console.log(responseData);
+      console.log('categoryList: ' + categoryList)
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
+  // *** GET ***
   async function getAllRegion() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
@@ -154,6 +195,7 @@ const SearchScreen = (props) => {
       console.log(error);
     }
   }
+  // *** GET ***
   async function getAllCityInRegion(regionId) {
     console.log('regionId = ' + regionId);
     // Variable res is used later, so it must be introduced before try block and so cannot be const.
@@ -182,6 +224,7 @@ const SearchScreen = (props) => {
   useEffect(() => {
     console.log('useEffect(() => {'); 
       if (isLoadingRegions==true){
+        getAllCategory();
         getAllRegion();   
         setLoadingRegions(false);
       }
@@ -201,6 +244,21 @@ const SearchScreen = (props) => {
       </View>
         <View>
 {/* MODALS -------------------------------------------------------------------------------- */}
+            <Modal visible={isCategoryModalVisible}>
+              <Text style={styles.modalTitle}>Available Categories</Text>
+              <FlatList
+                keyExtractor={(category) => category.id.toString()} 
+                data={categoryList}
+                renderItem={categoryData =>
+                  <ListItemToSelect 
+                    id={categoryData.item.id}
+                    name={categoryData.item.title}
+                    onPress={() => handleCategorySelection(categoryData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+{/*                       *******************                      */}
             <Modal visible={isRegionModalVisible}>
               <Text style={styles.modalTitle}>Available Regions</Text>
               <FlatList
@@ -210,13 +268,12 @@ const SearchScreen = (props) => {
                   <ListItemToSelect 
                     id={regionData.item.regionId}
                     name={regionData.item.regionName}
-                    onSelect={() => handleRegionSelection(regionData.item)}
                     onPress={() => handleRegionSelection(regionData.item)}
                   />}
               />
               <Button title='Cancel' onPress={onCancel} />
             </Modal>
-
+{/*                       *******************                      */}
             <Modal visible={isCityModalVisible}>
               <Text style={styles.modalTitle}>Region: {regionNameToDisplay}</Text>
               <FlatList
@@ -226,16 +283,16 @@ const SearchScreen = (props) => {
                   <ListItemToSelect 
                     id={cityData.item.cityId}
                     name={cityData.item.cityName}
-                    onSelect={() => handleCitySelection(cityData.item)}
                     onPress={() => handleCitySelection(cityData.item)}
                   />}
               />
               <Button title='Cancel' onPress={onCancel} />
             </Modal>
+{/*                       *******************                      */}
              
 {/* --------------------------------------------------------------------------------------- */}
             <MenuSwipableRow 
-              value="N/A"
+              value={categoryNameToDisplay}
               iconMain="tag-multiple"
               iconColor="black"
               label="Category"
@@ -247,7 +304,7 @@ const SearchScreen = (props) => {
             )}
               renderRightActions = {() => (
               <MenuSwipeActionFilter 
-                onPress={() => showRegionModal()} 
+                onPress={() => showCategoryModal()} 
               />
             )}
             />
