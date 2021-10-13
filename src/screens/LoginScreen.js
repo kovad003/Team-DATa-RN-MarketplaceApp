@@ -1,63 +1,83 @@
+
 import React, {useState , useEffect} from 'react';
 import {Button, View, StyleSheet, ScrollView, Text, Dimensions, SafeAreaView, TextInput, TouchableOpacity, Image, Modal,} from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 //const LoginScreen = () => {
 function LoginScreen(props) {
-// State variables
+// STATE VARIABLES --------------------------------------------------------------
+// For LOGIN
+const [sessionId, setSessionId] = useState("None");
 
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-const [userName , setUserName] = useState('')
-const [password , setPassword] = useState('')
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const [loginDetails, setLoginDetails] = useState([]);
 const [hasMessage, setMessage] = useState(false);
 const [messageDisplayed, setMessageDisplayed] = useState('');
 const [isValidating, setIsValidating] = useState(false); //was true
 const [isLogin , setIsLogin] = useState (false);
 
-
+// For service method
 const [loginDataToSend, setloginDataToSend] = useState({
   userName: "user",
   password: "password",
 });
 const [loginDataReceived, setloginDataReceived] = useState({
-  customerId: null, //TODO
-  userName: "user",
+  customerId: "undefined", //TODO
+  userName: "undefined",
 });
+// END OF STATE VARIABLES --------------------------------------------------------------
 
-//Input handlers
-/* const [formChecker, setFormChecker] = useState({
-    categoryinput: 'false',
-}) */
+// SESSION HANDLERS --------------------------------------------------------------
+const saveSessionId=(newSessionId)=>{
+  AsyncStorage.setItem("StoredSessionId", newSessionId.toString());
+  console.log('SessionId was saved as: ' + newSessionId)
+}
+const getSessionId=()=>{
+  console.log("AsyncStorage.getItem(StoredSessionId): " + JSON.stringify(AsyncStorage.getItem("StoredSessionId")));
+  AsyncStorage.getItem("StoredSessionId").then((value) => console.log("SEssion ID value: " + value));
+  
+ // console.log("sessionID: " + sessionId)
+}
+// END OF SESSION HANDLERS --------------------------------------------------------------
+
+// INPUT HANDLERS --------------------------------------------------------------
 const usernameInputHandler=(enteredText)=>{
     loginDataToSend.userName = enteredText;
-    //console.log('entered text/username: ' + enteredText);
+    console.log('entered text/username: ' + enteredText);
 }
 const passwordInputHandler=(enteredText)=>{
     loginDataToSend.password = enteredText;
-    //console.log('entered text/password: ' + enteredText);
+    console.log('entered text/password: ' + enteredText);
 }
 const LoginInputHandler = () =>{
   console.log("LoginInputHandler()");
-  /* setUserName(loginData.userName);
-  setPassword(loginData.password); */
   setIsValidating(true);
-  //console.log ('username:'+userName)
-  //console.log ('Password:'+password)
 }
+// END OF INPUT HANDLERS --------------------------------------------------------------
 
-/* for controlling the modal */
+// LOGIN HANDLERS --------------------------------------------------------------
+ /*  const handleLogin = () => {
+    if (isNaN(loginDataReceived.customerId)){
+      console.log('you dont have account or username and password are not correct');
+    }
+  } */
 
-// For Controlling modal
+  const handleLogin = () => {
+    let token = AsyncStorage.getItem("StoredSessionId").then((value) => console.log("SEssion ID value: " + value));
+    
+  }
+
+// END OF LOGIN HANDLERS --------------------------------------------------------------
+
+// DATA TRANSFER TO PARENT ------------------------------------------------------------
 const addItem=()=>{
   props.onAddItem(loginDataToSend);
-  }
+}
 const cancelItem=()=>{
   props.onCancelItem();
-  }
+}
 
-
-  // Service Function
+// SERVICE METHODS --------------------------------------------------------------
   async function validateLoginData(loginDataToSend) {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
@@ -82,26 +102,22 @@ const cancelItem=()=>{
       //Getting json from the response
       let responseData = await response.json();
       setloginDataReceived(responseData);
-      console.log(JSON.stringify("login Data received: " + loginDataReceived));     
+      // console.log(JSON.stringify("login Data received: " + loginDataReceived));
+      saveSessionId(responseData.customerId.toString()) // Will Store Customer ID as AsnyncStorage
+      handleLogin(); //
     }
     catch(error){
       showError(error);
     }
   }
-  
+// END OF SERVICE METHODS --------------------------------------------------------------  
 
-  if (isNaN(loginDataReceived.customerId)){
-    // if (loginDetails.password === null || loginDetails.password===password){
-    //Define some kind of default value
-    console.log('you dont have account or username and password are not correct');
-  }else{
-    console.log('You are logged in as: ' + JSON.stringify(loginDataReceived));
-  }
 
+// Error Messages --------------------------------------------------------------
   function showError(error){
-  setMessage(true);
-  setMessageDisplayed("Error: " + error);
-  console.log(messageDisplayed);
+    setMessage(true);
+    setMessageDisplayed("Error: " + error);
+    console.log(messageDisplayed);
   }
   function showConfirmation(message){
     setMessageDisplayed("Confirmation: " + message);
@@ -111,12 +127,13 @@ const cancelItem=()=>{
     setMessage(false);
     //setLoading(true);
   }
+// End of Error Messages --------------------------------------------------------
 
-  /*   
-This is called every time the view is rendered
-The new calls of fetchData (and others) must be stopped somehow, because in
-those methods are statevariables set, which cause a new re-render. 
-*/
+
+// USE EFFECT --------------------------------------------------------
+   
+/* This is called every time the view is rendered The new calls of fetchData (and others) must be 
+stopped somehow, because in those methods are statevariables set, which cause a new re-render. */
   useEffect(() => {
   console.log('useEffect(() => {'); 
     if (isValidating==true){
@@ -124,12 +141,15 @@ those methods are statevariables set, which cause a new re-render.
       setIsValidating(false);
     }
 });
+// END OF USE EFFECT --------------------------------------------------------
 
 return (
   <Modal visible={props.visibility} animationType="slide">
    <ScrollView style={styles.scrollView}>
 
     <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+      {/* <Button title="setSessionID as 9999" onPress={saveSessionId("9999")}> </Button> */}
+      <Button title="getSessionID" onPress={getSessionId}> </Button>
       <View
         style={{
           paddingHorizontal: 10,

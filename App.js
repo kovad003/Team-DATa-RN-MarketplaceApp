@@ -24,21 +24,34 @@ import CustomerProfileScreen from './src/screens/CustomerProfileScreen'
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
 
-// Custom Fonts
+// LOGIN Imports
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// GETTING CUSTOM FONTS -----------------------------------------------------------
 const getFonts = (props) => Font.loadAsync({
   'cheveuxdange': require('./src/assets/fonts/cheveuxdange.ttf'),
   'caballar': require('./src/assets/fonts/caballar.ttf'),
   'cake-n-truffles': require('./src/assets/fonts/cake-n-truffles.ttf'),
 });
+// END OF GETTING CUSTOM FONTS ----------------------------------------------------
 
-// Main Function
+// ****************************************************************************************
+// MAIN FUNCTION **************************************************************************
 function App(props) {
+// STATE VARIABLES ------------------------------------------------------------------
   const [fontloaded, setFontsLoaded] = useState(false);
+  const [SESSIONID, setSESSIONID] = useState();
+// END OF STATE VARIABLES -----------------------------------------------------------
 
+// GETTING SESSION ID ---------------------------------------------------------------
+  AsyncStorage.getItem("StoredSessionId").then((value) => setSESSIONID(value));
+  AsyncStorage.getItem("StoredSessionId").then((value) => console.log("App.js -> Session ID value: " + value));
+  console.log('App.js SESSIONID: ' + SESSIONID)
+// END OF GETTING SESSION ID --------------------------------------------------------
+  
+// LOADING CUSTOM FONTS -------------------------------------------------------------
   if(fontloaded){
-    return (
-
-
+    return (      
       // <CategoryScreen />
       // <RegistrationScreen />
       // <LoginScreen />
@@ -48,12 +61,10 @@ function App(props) {
       // <ListItemsScreen id='c3'/>
       // <MyItemScreen />
       // <AccountScreen /> 
-       <BottomTabsNavigation /> 
+      <BottomTabsNavigation /> 
       // <ItemDetailScreen />
       // <CategoryStackNavigation />
       // <CustomerProfileScreen />
-
-
     );
   } else {
     return(
