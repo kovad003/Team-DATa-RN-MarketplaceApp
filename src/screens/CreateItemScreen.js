@@ -36,23 +36,22 @@ function CreateItemScreen(props) {
 
   /************* AD - State Variables *************/
 
-  /* AD - Handles the display of messages */
+  /* AD - Handles the display of messages (useState variable) */
   const [messageDisplayed, setMessageDisplayed] = useState('');
   const [hasMessage, setMessage] = useState(false);
 
-  /* AD - Handles the item variable (an array) */
+  /* AD - Handles the item variable (useState variable / array) */
   const [items, setItems] = useState([]);  
+  const [itemList, addItemToList] = useState([]);
 
-  /* AD - Handles loading state */
+  /* AD - Handles loading state (useState variable) */
   const [isLoading, setLoading] = useState(true);
 
-  /* AD - Handles the state of whether specific modal windows are visible or not*/
+  /* AD - Handles the state of whether specific 
+        modal windows are visible or not (useState variable)*/
   const [isVisible, setVisibility] = useState(false);
   const [isflatListVisible, setflatListVisibility] = useState(false);
 
-
-  const [itemList, addItemToList] = useState([]);
-  
 
   /************* AD - Custom Functions *************/
 
@@ -303,7 +302,7 @@ function CreateItemScreen(props) {
     );
   }
   /* AD - an else statement for if everything works correctly. 
-    The CreateItemScree is then displayed to the user. */
+    The CreateItemScreen is then displayed to the user. */
   else{
     console.log('else{');
     return (

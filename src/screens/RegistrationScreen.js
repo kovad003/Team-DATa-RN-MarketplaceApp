@@ -38,12 +38,6 @@ function RegistrationScreen(props) {
     categoryinput: 'false',
 }) */
 
-/* For Controlling modal
-    const addItem=()=>{
-      props.onAddItem(item);
-  }
-*/
-
 // AD new consts
 
 const addCustomer=()=>{
@@ -56,7 +50,7 @@ const cancelCustomer=()=>{
 
 
 
-
+/* AD - input handlers, to take input from form*/
 const firstNameInputHandler=(enteredText)=>{
   customer.firstName = enteredText;
   console.log('entered text/firstName: ' + enteredText);
