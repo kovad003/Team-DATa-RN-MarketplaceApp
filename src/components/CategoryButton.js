@@ -2,46 +2,46 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, Platform, TouchableNativeFeedback, ImageBackground  } from "react-native";
 
-// Custom Import
+// Custom Import 
 import TextStyling from '../constants/fontstyling'
 
 
 
-
+// HH - This Component is used in Category screen to show each category 
+// this Component has background image which is saved on internet and url is saved to database
 const CategoryButton = props => {
-const imageUrl = props.imageUrl;
-// for test
-//console.log(imageUrl);
-return (
-    <View style={styles.gridItem} >
-    <TouchableOpacity 
-        style={{flex:1,}}
-        onPress={props.onSelect}
-        >
-        <View style={{...styles.mealRow, ...styles.mealHeder}}>
-            <ImageBackground 
-            //source={require("../assets/images/category-Images/main-category-others.jpg")}
-            source={{uri : imageUrl}}
-            resizeMode='cover'
-            style={styles.bgImage}
+    //onst imageUrl = props.imageUrl;
+    // for test
+    //console.log(imageUrl);
+    return (
+        <View style={styles.gridItem} >
+        <TouchableOpacity 
+            style={{flex:1,}}
+            onPress={props.onSelect}
             >
-              <View style={styles.titleContainer}>
-                  <Text  style={styles.title} >{props.title}</Text>
-              </View>
-            </ImageBackground>
+            <View style={{...styles.mealRow, ...styles.mealHeder}}>
+                <ImageBackground 
+                //source={require("../assets/images/category-Images/main-category-others.jpg")}
+                source={{uri : props.imageUrl}}
+                resizeMode='cover'
+                style={styles.bgImage}
+                >
+                <View style={styles.titleContainer}>
+                    <Text  style={styles.title} >{props.title}</Text>
+                </View>
+                </ImageBackground>
+            </View>
+        </TouchableOpacity>
         </View>
-    </TouchableOpacity>
-    </View>
-)
+    )
 };
 
 const styles = StyleSheet.create({
     gridItem:{
         flex:1,
-        marginHorizontal:8,
-        marginVertical:15,
-
-        height:190,
+        marginHorizontal:10,
+        marginVertical:12,
+        height:180,
         borderWidth:0,
         borderRadius:11,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',

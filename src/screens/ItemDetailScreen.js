@@ -112,7 +112,7 @@ function timeConverter(UNIX_timestamp){
   var hour = a.getHours();
   var min = a.getMinutes();
   var sec = a.getSeconds();
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min ;
   return time;
 }
 console.log((0));

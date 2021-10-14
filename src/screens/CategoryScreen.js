@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, ScrollView, Alert, ActivityIndicator, FlatList 
 import 'react-native-gesture-handler';
 
 // HH - neccessary components are imported here
-import HeaderComponent from "../components/HeaderComponent";
 import CategoryButton from "../components/CategoryButton";
 import ListItemsScreen from '../screens/ListItemsScreen'
 
@@ -155,24 +154,7 @@ const styles = StyleSheet.create({
     width:'100%',
 
   },
-  headerContainer:{
-    height: 60,
-    justifyContent:'center',
-    alignItems:'center'
 
-  },
-  header: {
-    height: 60,
-    width: '100%',
-  },
-
-
-
-  categoryButton: {
-
-    marginTop: 18,
-    marginLeft: 11
-  }
 });
 
 export default CategoryScreen;
