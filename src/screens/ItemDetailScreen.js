@@ -10,11 +10,11 @@ import EditableCard from "../components/EditableCard";
 import AccountScreenRow from '../components/AccountScreenRow';
 import ContactInformation from '../components/ContactInformation';
 
-// Styling iports
+// HH - Import the general Styling constants
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-// in this Component we can see all details of the selected Item
+// HH - in this Component we can see all details of the selected Item
 function itemDetailScreen(props) {
 
 
@@ -36,17 +36,22 @@ function itemDetailScreen(props) {
   //   //     cat => cat.categoryId.nidexOf(props.selectedItemId) >= 0);
   //  const selectedItem = ITEM.find(item => item.id === selectedItemId);
   //**************************************************************Ends 
+
+  // HH - read itemId which is sent from the ListItemScreen
   const { itemId } = props.route.params;
   const selectedItemId = itemId;
 
-  
+  //  HH - If you click the Contact information this function is implimented
+  //  and shows the contact information of the seller
   const ContactInfo = ()=>{
     setInfoVisible(true);
   }
+  // HH - close the contact information Modal view
   const CancelContactInfo = ()=>{
     setInfoVisible(false);
   }
   
+
   // HH - for read data for selected item ******************************************** start
   // *** GET ***
   async function fetchCatData() {
@@ -94,7 +99,26 @@ function itemDetailScreen(props) {
     setMessage(false);
     setLoading(true);
   }
-  console.log(selectedItem);
+  // HH - use for test
+  //console.log(selectedItem);
+
+  // HH -This function is Changing the MYSQL database timestamp to real Date and Time
+function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
+}
+console.log((0));
+let postDate = timeConverter(selectedItem.datePosted)
+
+
  // ****************************************************************************** end
 
 
@@ -110,7 +134,7 @@ function itemDetailScreen(props) {
         <View style={styles.mainContainer}>
           <Text style={{fontSize:30, padding:10,}}>{selectedItem.title}</Text>
           <View style={styles.rowContent}>
-            <Text style={styles.rowText}>Posted at {selectedItem.datePosted} in {selectedItem.location}</Text>
+            <Text style={styles.rowText}>Posted at {postDate} in {selectedItem.location}</Text>
           </View>
           <View style={styles.rowContent}>
             <Text style={styles.rowTextBold}>Condition:</Text>
@@ -129,7 +153,7 @@ function itemDetailScreen(props) {
             <Text style={styles.rowText} >{selectedItem.description}</Text>
           </View>
         </View>
-        <AccountScreenRow icon="question" rowText='Guid for shopping Safe' style = {styles.row2} onSelect={()=> props.navigation.navigate('Guid')} />
+        <AccountScreenRow icon="question" rowText='Guide for shopping Safe' style = {styles.row2} onSelect={()=> props.navigation.navigate('Guide')} />
         <AccountScreenRow icon="info" rowText='Report' style = {styles.row2}/>
       </ScrollView>
       <View style={styles.uploadButton}>
@@ -141,6 +165,8 @@ function itemDetailScreen(props) {
         animationType="slide"
         transparent={true}
         >
+          {/* HH - It's a Modal View componets which use current Item's customer id to
+          read customer contact information */}
           <ContactInformation 
           customerId={selectedItem.customerId}
           CancelContactInfo={CancelContactInfo}/>
@@ -150,6 +176,7 @@ function itemDetailScreen(props) {
   );
 }
 
+// HH - Styling
 const styles = StyleSheet.create({
   container: {
     flex: 1,
