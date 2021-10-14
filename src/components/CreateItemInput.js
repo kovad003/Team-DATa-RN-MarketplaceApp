@@ -25,6 +25,8 @@ const CreateItemInput=(props)=>{
     /* const [formChecker, setFormChecker] = useState({
         categoryinput: 'false',
     }) */
+
+    /* AD - input handlers, to take input from the text input fields */
     const categoryInputHandler=(enteredText)=>{
         item.categoryId = enteredText;
         console.log('entered text/categoryId: ' + enteredText);

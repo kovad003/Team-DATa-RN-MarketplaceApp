@@ -50,7 +50,7 @@ const cancelCustomer=()=>{
 
 
 
-/* AD - input handlers, to take input from form*/
+/* AD - input handlers, to take input from the text input fields */
 const firstNameInputHandler=(enteredText)=>{
   customer.firstName = enteredText;
   console.log('entered text/firstName: ' + enteredText);
@@ -89,40 +89,6 @@ const imageInputHandler=(enteredText)=>{
   customer.image = enteredText;
     console.log('entered text/image: ' + enteredText);
 }
-
-
-
-
-
-/*
-const confirmPasswordInputHandler=(enteredText)=>{
-    item.condition = enteredText;
-    console.log('entered text/confirmPassword: ' + enteredText);
-}
-*/
-
-
-  /* For Controlling modal
-  const addItem2=()=>{
-    props.onAddItem2(item);
-    }
-  const cancelItem2=()=>{
-    props.onCancelItem2();
-    }
-
-    */
-
-  
-    
-  
-
-
-
-  /*
-  const cancelItem=()=>{
-      props.onCancelItem();
-  }
-  */
 
   return (
     <Modal visible={props.visibility} animationType="slide">
