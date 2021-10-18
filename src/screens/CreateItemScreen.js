@@ -8,7 +8,7 @@
  *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page.
  *  - Functions and async functions -> These are behind the scenes and not visible. They power the functionality of the page.
  *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as 'Post New Item' for sale).
- *  - Page stylings -> Much of the apps stylings are included on each respective page, however, 
+ *  - Page stylings -> Much of the app's stylings are included on each respective page, however, 
  *                     occasionally we have uses external consts, fonts, and colours.
  * 
  * @link   ./src/screens/CreateItemScreen.js

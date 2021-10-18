@@ -10,7 +10,7 @@
  *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
  *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
  *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as the 'login' modal).
- *  - Page stylings -> Much of our apps stylings are included on each respective page.
+ *  - Page stylings -> Much of the app's stylings are included on each respective page.
  *                     Occasionally, however, external consts, fonts, and colours have been utilised.
  * 
  * @link   ./src/screens/AccountScreen.js
@@ -19,13 +19,13 @@
  * @since  04.10.2021
  */
 
-/* AD - Standard imports from both React and React-Native*/
+/* AD - Standard imports from both React and React-Native */
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent, Alert } from "react-native";
 
 /* AD - Constants (such as for custom colours and margins etc) */
-import TextStyling from '../constants/fontstyling'
+import TextStyling from '../constants/fontstyling';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 

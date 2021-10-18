@@ -1,17 +1,50 @@
+/**
+ * Overview: A class that allows users to post a new item for sale.
+ *           The CreateItemInput screen is activated when users click 'Post New Item' 
+ *           from the Create Item screen.
+ * 
+ * Description: Once the user clicks 'Post New Item' they can then input the new details via this modal screen. 
+ *              The main parts of the screen are as follows: 
+ * 
+ *  - A state variable and text input handlers -> These are behind the scenes and not visible to the user. 
+ *                                                They power the functionality of the page. 
+ *  - Modal Window-> The screen is made visible to the user via the modal container that wraps it.
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
+ *  - Text input fields -> The user can enter the details of the new item into the text input fields.
+ *  - Buttons -> The user can either choose to add the item, or cancel the item via the buttons.
+ *  - Page stylings -> Much of the app's stylings are included on each respective page.
+ *                     Occasionally, however, external consts, fonts, and colours have been utilised.
+ * 
+ * @link   ./src/components/CreateItemInput.js
+ * @file   This files defines the CreateItemInput.js class.
+ * @author Ashley Davis.
+ * @since  02.10.2021
+ */
+
+/* AD - Standard imports from both React and React-Native */
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+/* AD - imports for the logos and items*/
 import CreateItemInputLogo from "./CreateItemInputLogo";
-import colors from "../constants/colors";
 import Icon1 from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/FontAwesome5";
 import Icon3 from "react-native-vector-icons/Entypo";
 import Icon4 from "react-native-vector-icons/MaterialIcons";
-import { Margins, Paddings } from "../constants/constvalues";
-import { ScrollView } from 'react-native-gesture-handler';
-import TextStyling from '../constants/fontstyling'
 
+/* AD - Constants (such as for custom colours and margins etc) */
+import TextStyling from '../constants/fontstyling';
+import { Margins, Paddings } from "../constants/constvalues";
+import colors from "../constants/colors";
+
+
+/* AD - The main function of the component */
 const CreateItemInput=(props)=>{
-    // State variable
+
+  /************* AD - State Variables *************/
+
+    // AD - State variable (defines the item object)
     const [item, setItem] = useState({
         categoryId: 1,
         customerId: 1, //TODO
@@ -25,6 +58,8 @@ const CreateItemInput=(props)=>{
     /* const [formChecker, setFormChecker] = useState({
         categoryinput: 'false',
     }) */
+
+    /************* AD - Custom Functions *************/
 
     /* AD - input handlers, to take input from the text input fields */
     const categoryInputHandler=(enteredText)=>{
@@ -62,8 +97,8 @@ const CreateItemInput=(props)=>{
         console.log('entered text/location: ' + enteredText);
     }
     
-
-    // For Controlling modal
+    /* AD - custom functions to control the modal 
+    (other functions are called via props, and the item object can be added) */
     const addItem=()=>{
         props.onAddItem(item);
     }
@@ -71,7 +106,7 @@ const CreateItemInput=(props)=>{
         props.onCancelItem();
     }
 
-    // Return
+    /************* AD - The data to be rendered and visible to the user *************/
     return (
         <Modal visible={props.visibility} animationType="slide">
           <ScrollView style={styles.scrollView}>
@@ -151,6 +186,8 @@ const CreateItemInput=(props)=>{
     );
 }
 
+/************* AD - Stylings *************/
+
 const styles=StyleSheet.create({
       scrollView: {
         backgroundColor: colors.light4,
@@ -167,9 +204,8 @@ const styles=StyleSheet.create({
         marginTop: Margins.narrow,
       },
       inputStyle: {
-        //borderWidth: 1,
         borderBottomWidth:1,
-        borderColor: colors.darkBlueCustom, //  '#000080' '#5f9ea0'
+        borderColor: colors.darkBlueCustom,
         paddingLeft: Paddings.narrow,
         width:'80%',
         backgroundColor: 'white',
@@ -179,9 +215,8 @@ const styles=StyleSheet.create({
         borderRadius: 5,            
       },
       inputStyle2: {
-        //borderWidth: 1, 
         borderBottomWidth:1,
-        borderColor: colors.darkBlueCustom, //  '#000080' '#5f9ea0'
+        borderColor: colors.darkBlueCustom,
         paddingLeft: Paddings.narrow,
         width:'80%',
         height: 80,
@@ -191,9 +226,8 @@ const styles=StyleSheet.create({
         borderRadius: 5,  
       },
       inputStyle3: {
-        //borderWidth: 1, 
         borderBottomWidth:1, 
-        borderColor: colors.darkBlueCustom, //  '#000080' '#5f9ea0'
+        borderColor: colors.darkBlueCustom,
         paddingLeft: Paddings.narrow,
         width:'80%',
         height: 70,
