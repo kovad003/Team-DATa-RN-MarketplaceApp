@@ -60,13 +60,7 @@ const MyPostedItems=(props)=>{
     
 /************* AD - Custom Functions *************/
 
-    /* AD - Functions related to the modal visibility (and adding data) */
-    const addItem=()=>{
-        props.onAddItem(item);
-    }
-    const cancelItem=()=>{
-        props.onCancelItem();
-    }
+    
 
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
@@ -89,6 +83,14 @@ const MyPostedItems=(props)=>{
     console.log('idParam: ' + idParam);
     //setLoading(true);
     deleteData(idParam)
+  }
+
+  /* AD - Functions related to the modal visibility (and adding data) */
+  const addItem=()=>{
+    props.onAddItem(item);
+  }
+  const cancelItem=()=>{
+      props.onCancelItem();
   }
 
   /* AD - functions related to confirmation and error messages */
