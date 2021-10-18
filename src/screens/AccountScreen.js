@@ -8,7 +8,7 @@
  *  - Variables, functions and async functions -> These are behind the scenes and not visible to the user. 
  *                                                They power the functionality of the page. 
  *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
- *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page.  
  *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as the 'login' modal).
  *  - Page stylings -> Much of the app's stylings are included on each respective page.
  *                     Occasionally, however, external consts, fonts, and colours have been utilised.
@@ -51,13 +51,13 @@ const [messageDisplayed, setMessageDisplayed] = useState('');
 const [isLoading, setLoading] = useState(false); // was true
 
 /* AD - Handles the state of whether specific 
-      modal windows are visible or not (useState variable)*/
+      modal windows are visible or not (useState variable) */
 const [isflatListVisible, setflatListVisibility] = useState(false);
 const [isSupportVisible, setSupportVisibility] = useState(false);
 const [isAboutVisible, setAboutVisibility] = useState(false);
 const [isVisible, setVisibility] = useState(false);
 
-/* AD - Handles the registration of ne customers (useState variable / array) */
+/* AD - Handles the registration of new customers (useState variable / array) */
 const [customerList, addCustomerToList] = useState([]);
 const [customer, setCustomer] = useState([]);
 const [items, setItems] = useState([]);
@@ -132,8 +132,6 @@ const onAddCustomer = (childdata) => {
   const cancelLoginModal = ()=>{
     setLoginVisible(false);
   }
-
-  // AD new consts
 
   const cancelAddCustomer=()=>{
     setVisibility(false);
@@ -547,7 +545,6 @@ else{
 const styles = StyleSheet.create({
   scrollStyle: {
     backgroundColor: colors.light4,
-    //justifyContent: 'center',
   },
 
   container: {
@@ -557,7 +554,7 @@ const styles = StyleSheet.create({
   },   
   
   logoContainer:{
-    marginTop: 17, //20
+    marginTop: 17,
     alignItems: 'center',   
   },
 
@@ -572,11 +569,11 @@ const styles = StyleSheet.create({
   },
 
   row2: {
-    marginVertical: Margins.xxnarrow, // narrow
+    marginVertical: Margins.xxnarrow,
   },
 
   row3: {
-    marginVertical: Margins.midsize, // xlarge
+    marginVertical: Margins.midsize,
   },
 
   centralContainer: {
