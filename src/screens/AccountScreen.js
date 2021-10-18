@@ -16,7 +16,7 @@
  * @link   ./src/screens/AccountScreen.js
  * @file   This files defines the AccountScreen.js class.
  * @author Ashley Davis.
- * @since  04.10.2021
+ * @since  01.10.2021
  */
 
 /* AD - Standard imports from both React and React-Native */
@@ -51,7 +51,7 @@ const [messageDisplayed, setMessageDisplayed] = useState('');
 const [isLoading, setLoading] = useState(false); // was true
 
 /* AD - Handles the state of whether specific 
-      modal windows are visible or not (useState variable) */
+        modal windows are visible or not (useState variable) */
 const [isflatListVisible, setflatListVisibility] = useState(false);
 const [isSupportVisible, setSupportVisibility] = useState(false);
 const [isAboutVisible, setAboutVisibility] = useState(false);
@@ -233,7 +233,7 @@ function closeMessage() {
       It is also a timeout (for server timeouts), which is also a possible response. */
       response = await fetch("http://10.0.2.2:8080/rest/customerservice/getall");
     }
-    /* AD - A try catch to catch errors*/
+    /* AD - A try catch to catch errors */
     catch(error){
       showError(error);
     }
@@ -249,7 +249,6 @@ function closeMessage() {
     }
   }
  
-
   /* AD - An async function to POST data to the Java backend (which interacts with our MySQL / Google Cloud database) */
   async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
     console.log('started: async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
