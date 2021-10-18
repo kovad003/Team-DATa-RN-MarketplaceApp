@@ -11,7 +11,11 @@ function SearchBar(props) {
   return (
     <View style={styles.container}>
       <View style={styles.searchRow}>
-        <TextInput style={styles.inputField} placeholder="Search..." placeholderTextColor='#4f4e4f'></TextInput>
+        <TextInput style={styles.inputField} placeholder="Search..." placeholderTextColor='#4f4e4f'
+          value={props.value}
+          onChangeText={props.onChangeText} 
+        >          
+        </TextInput>
         <IconButton style={styles.iconButton}></IconButton>
       </View>    
     </View>

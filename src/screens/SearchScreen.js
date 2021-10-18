@@ -9,7 +9,7 @@
  *
  * @link   ./src/screens/SearchScreen.js
  * @file   This files defines the SearchScreen.js class.
- * @author Daniel Kovacs.
+ * @author Daniel Kovacs
  * @since  03.10.2021
  */
  
@@ -20,8 +20,6 @@ import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView, Text, FlatList, Modal, Button } from "react-native";
 
 // Component Imports
-import SwitchFilter from "../components/SwitchFilter";
-import ScrollDownList from "../components/ScrollDownList";
 import PriceSetter from "../components/PriceSetter";
 import SearchBar from "../components/SearchBar";
 import MenuSwipableRow from "../components/swipable/MenuSwipableRow";
@@ -44,31 +42,41 @@ const SearchScreen = (props) => {
   // Handle Accessibility
   const [isCitySwipeAccessable, setCitySwipeAccessibility] = useState({isEnabled:false, colorDisplayed:'lightgrey'});
 
-  // Handle Loading
-  const [isLoadingRegions, setLoadingRegions] = useState(true); // Will trigger Data transfer
-  const [isLoadingCities, setLoadingCities] = useState(false); // Will trigger Data transfer
+  // Handle Loading => Will trigger Data transfer
+  const [isLoadingCategories, setLoadingCategories] = useState(true);
+  const [isLoadingRegions, setLoadingRegions] = useState(true);
+  const [isLoadingCities, setLoadingCities] = useState(false);
 
-  // Handle Category Data From DB
+  // Handle Category Data
   const [categoryList, addCategoryToList] = useState([null]); // Will store available categories from DB (JAVA)
   const [selectedCategory, setCategory] = useState(); // Will be used to select a category
   
-  // Handle Region Data From DB
+  // Handle Region Data
   const [regionList, addRegionToList] = useState([null]); // Will store available regions from DB (JAVA)
   const [selectedRegionId, setRegionId] = useState(); // Will be used to fetch available cities in region (JAVA)
 
-  // Handle City Data From DB
+  // Handle City Data
   const [cityList, addCityToList] = useState([null]); // Will store available cities per region
   const [selectedCity, setSelectedCity] = useState({}); // JSON taken from DB (JAVA)
+
+  // Handle Condition Data
+  const [conditionList, addConditionToList] = useState(["very new", "new", "used", "old"]);
+  const [selectedCondition, setSelectedCondition] = useState({});
 
   // Handle Swipe Button Display => For technical name has to be saved separately
   const [categoryNameToDisplay, setCategoryNameToDisplay] = useState("None"); 
   const [regionNameToDisplay, setRegionNameToDisplay] = useState("None");
   const [cityNameDisplay, setCityNameToDisplay] = useState("None");
+  const [minPriceToDisplay, setMinPriceToDisplay] = useState(1); 
+  const [maxPriceToDisplay, setMaxPriceToDisplay] = useState(1);
+  const [conditionNameToDisplay, setConditionNameToDisplay] = useState('None');
 
-  // Handle Modals
-  const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false); // Will show/hide category selection modal
-  const [isRegionModalVisible, setRegionModalVisibility] = useState(false); // Will show/hide Region selection modal
-  const [isCityModalVisible, setCityModalVisibility] = useState(false); // Will show/hide City selection modal
+  // Handle Modals => Will show/hide selection modals
+  const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
+  const [isRegionModalVisible, setRegionModalVisibility] = useState(false);
+  const [isCityModalVisible, setCityModalVisibility] = useState(false);
+  const [isPriceModalVisible, setPriceModalVisibility] = useState(false);
+  const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
 
   // Handle Messages To Display
   const [hasMessage, setMessage] = useState(false);
@@ -78,8 +86,8 @@ const SearchScreen = (props) => {
 // CUSTOM FUNCTIONS =======================================================================================================
   // TRASH >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   function onPressFunction(){
-    console.log('swipable was pressed');
-    console.log("regionList: " + JSON.stringify(regionList));
+    //console.log('swipable was pressed');
+    //console.log("regionList: " + JSON.stringify(regionList));
     //setLoading(true);
   }
   function hello(){
@@ -97,7 +105,7 @@ const SearchScreen = (props) => {
     setCitySwipeAccessibility({isEnabled:true, colorDisplayed:"white"});
   }
   // --------------------------------------------------
-  // Swipe Actions ------------------------------------ 
+  // Swipe & Button Actions ------------------------------------ 
   const showCategoryModal=()=>{
     setCategoryModalVisibility(true);
   }
@@ -107,6 +115,12 @@ const SearchScreen = (props) => {
   const showCityModal=()=>{
     setCityModalVisibility(true);
   }
+  const showPriceModal=()=>{
+    setPriceModalVisibility(true);
+  }
+  const showConditionModal=()=>{
+    setConditionModalVisibility(true);
+  }
   const clearCitySelection=()=>{
     console.log("clear selection");
   }
@@ -114,10 +128,17 @@ const SearchScreen = (props) => {
     setCategoryModalVisibility(false);
     setRegionModalVisibility(false);
     setCityModalVisibility(false);
+    setPriceModalVisibility(false);
+    setConditionModalVisibility(false);
     setLoadingRegions(false);
   }
   // --------------------------------------------------
   // Handle Selections ---------------------------------
+  const handleTextInput=(selectedItem)=>{
+    setSearchTitle(selectedItem);
+    // ToConsole
+    console.log("SearchTitle: " +  selectedItem);
+  }
   const handleCategorySelection=(selectedItem)=>{
     setCategoryModalVisibility(false);
     setCategory(selectedItem.cityId);
@@ -144,6 +165,24 @@ const SearchScreen = (props) => {
     // ToConsole
     console.log("selected item: " +  JSON.stringify(selectedItem));
   }
+  const takeMinPriceInput=(enteredValue)=>{
+    setMinPriceToDisplay(enteredValue.toString());
+    // ToConsole
+    // console.log("min Price: " +  scaledValue);
+  }
+  const takeMaxPriceInput=(enteredValue)=>{
+    setMaxPriceToDisplay(enteredValue.toString());
+    // ToConsole
+    // console.log("max Price: " +  scaledValue);
+  }
+  const handleConditionSelection=(selectedItem)=>{
+    setSelectedCondition(selectedItem);
+    setConditionNameToDisplay(selectedItem);
+    setConditionModalVisibility(false);
+    // ToConsole
+    //console.log("selected item: " +  JSON.stringify(selectedItem));
+  }
+
   // --------------------------------------------------
 // END OF CUSTOM FUNCTIONS ================================================================================================
 
@@ -217,14 +256,49 @@ const SearchScreen = (props) => {
       console.log(error);
     }
   }
+
+  async function searchForItems(title, category, city, priceMin, priceMax, condition) {
+    console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
+    let response = null;
+    let requestOptions = {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        title: title.toString(),
+        category: category.toString(),
+        city: city.toString(),
+        priceMin: priceMin*1, // *1 -> numbers only
+        priceMax: priceMax*1, // *1 -> numbers only
+        condition: condition.toString(),
+      })
+    };
+    try {
+      response = await fetch("http://10.0.2.2:8080/rest/searchservice/searchForItems", requestOptions)
+    } catch (error) {
+      showError(error);
+    }
+    try {
+      let responseData = await response.json();
+      console.log('responseData: ' + responseData);
+      showConfirmation("Item was successfully added!")
+    } catch (error) {
+      showError(error);
+    }
+  }
+
 // END OF SERVICE FUNCTIONS ===============================================================================================
 
 // USE EFFECT FUNCTION ====================================================================================================
   // Will Rerender the screen in case the isLoading boolean is set to true
   useEffect(() => {
-    console.log('useEffect(() => {'); 
+    console.log('useEffect(() => {');
+      if (isLoadingCategories==true){
+        getAllCategory();  
+        setLoadingCategories(false);
+      } 
       if (isLoadingRegions==true){
-        getAllCategory();
         getAllRegion();   
         setLoadingRegions(false);
       }
@@ -240,7 +314,7 @@ const SearchScreen = (props) => {
   return (
     <View style={styles.container}>
       <View >
-        <SearchBar/>
+        <SearchBar onChangeText={handleTextInput}/>
       </View>
         <View>
 {/* MODALS -------------------------------------------------------------------------------- */}
@@ -289,13 +363,31 @@ const SearchScreen = (props) => {
               <Button title='Cancel' onPress={onCancel} />
             </Modal>
 {/*                       *******************                      */}
-            <Modal visible={true}>
+            <Modal visible={isPriceModalVisible}>
               <Text style={styles.modalTitle}>Select a price range:</Text>
-              <PriceSetter
-                /*  onValueChange={} */
+              <PriceSetter title="Min Price:"
+                onValueChange = {takeMinPriceInput}
+                displayValue = {minPriceToDisplay}
               />
-              <PriceSetter/>
-              <Button title='Cancel' onPress={onCancel} />
+              <PriceSetter title="Max Price:"
+                onValueChange={takeMaxPriceInput}
+                displayValue={maxPriceToDisplay}
+              />
+              <Button title='Cancel' onPress={onCancel}/>
+            </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isConditionModalVisible}>
+              <Text style={styles.modalTitle}>Select a condition:</Text>
+              <FlatList
+                keyExtractor={(condition) => condition}
+                data={conditionList}
+                renderItem={conditionData =>
+                  <ListItemToSelect 
+                    name={conditionData.item}
+                    onPress={() => handleConditionSelection(conditionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel}/>
             </Modal>
 {/*                       *******************                      */}
              
@@ -342,6 +434,7 @@ const SearchScreen = (props) => {
                 onPress={() => showCityModal()}/>)}
             />
             <MenuSwipableRow 
+              value={"Min: €" + minPriceToDisplay + " - Max: €" + maxPriceToDisplay}
               iconMain="database"
               iconColor="black"
               label="Price"
@@ -349,9 +442,10 @@ const SearchScreen = (props) => {
               renderLeftActions = {() => (<MenuSwipeActionResetFilter  
                 onPress={() => clearCitySelection()}/>)}
               renderRightActions = {() => (<MenuSwipeActionFilter 
-                onPress={() => showRegionModal()}/>)}
+                onPress={() => showPriceModal()}/>)}
             />
             <MenuSwipableRow 
+              value={conditionNameToDisplay}
               iconMain="eye"
               iconColor="black"
               label="Condition"
@@ -359,7 +453,7 @@ const SearchScreen = (props) => {
               renderLeftActions = {() => (<MenuSwipeActionResetFilter 
                 onPress={() => clearCitySelection()}/>)}
               renderRightActions = {() => (<MenuSwipeActionFilter 
-                onPress={() => showRegionModal()}/>)}
+                onPress={() => showConditionModal()}/>)}
             />    
         </View>  
     </View>
