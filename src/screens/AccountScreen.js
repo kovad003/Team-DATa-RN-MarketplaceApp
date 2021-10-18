@@ -11,7 +11,7 @@
  *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
  *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as the 'login' modal).
  *  - Page stylings -> Much of our apps stylings are included on each respective page.
- *                     Ocassionally, however, external consts, fonts, and colours have been utilised.
+ *                     Occasionally, however, external consts, fonts, and colours have been utilised.
  * 
  * @link   ./src/screens/AccountScreen.js
  * @file   This files defines the AccountScreen.js class.
@@ -458,11 +458,13 @@ else if(hasMessage){
     </ScrollView>
   );
 }
-//Otherwise the list is shown
+// AD - Else the following code is rendered to the screen.
 else{
   console.log('else{');
   
   return (
+
+    /************* AD - The screen that will be rendered and visible to the user *************/
 
     <ScrollView style={styles.scrollStyle}>
       <View style={styles.container}>  
@@ -541,7 +543,7 @@ else{
 }
 };
 
-/* AD - styles */
+/************* AD - Stylings *************/
 const styles = StyleSheet.create({
   scrollStyle: {
     backgroundColor: colors.light4,

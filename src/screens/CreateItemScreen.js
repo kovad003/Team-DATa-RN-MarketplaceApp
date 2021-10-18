@@ -1,12 +1,15 @@
 /**
  * Overview: A class that allows users to create new items and access seller-related information and modal screens.
  *
- * Description: This screen is accessible via the Create Item button on the bottom navigation bar. The main parts of the screen are as follows: 
+ * Description: This screen is accessible via the Create Item button on the bottom navigation bar. 
+ *              The main parts of the screen are as follows: 
+ * 
  *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
  *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page.
  *  - Functions and async functions -> These are behind the scenes and not visible. They power the functionality of the page.
  *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as 'Post New Item' for sale).
- *  - Page stylings -> Much of our apps stylings are included on each respective page, however, occassionally we have uses external consts, fonts, and colours.
+ *  - Page stylings -> Much of the apps stylings are included on each respective page, however, 
+ *                     occasionally we have uses external consts, fonts, and colours.
  * 
  * @link   ./src/screens/CreateItemScreen.js
  * @file   This files defines the CreateItemScreen.js class.
@@ -307,7 +310,7 @@ function CreateItemScreen(props) {
     console.log('else{');
     return (
 
-/************* AD - Data that will be rendered and visible to the user *************/
+/************* AD - The screen that will be rendered and visible to the user *************/
 
 <ScrollView style={styles.scrollStyle}>
 
@@ -321,8 +324,7 @@ function CreateItemScreen(props) {
           <MenuRow 
             onSelect={comingSoonAlert}
             style = {styles.row2} rowText = "Notifications"
-            icon1 = "bell-ring-outline" />
-          
+            icon1 = "bell-ring-outline" />          
 
           <View style={styles.logoContainer}>
             <LogoSmall></LogoSmall>
@@ -337,7 +339,7 @@ function CreateItemScreen(props) {
             //icon2 = "plus"
             textstyling = {TextStyling.textWhiteMedium}
             icon1color = "white"
-            icon2color = "white"  />
+            icon2color = "white" />
          
 
           <MenuRow
