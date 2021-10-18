@@ -16,7 +16,7 @@ function SearchBar(props) {
           onChangeText={props.onChangeText} 
         >          
         </TextInput>
-        <IconButton style={styles.iconButton}></IconButton>
+        <IconButton style={styles.iconButton} onPress={props.onPress}></IconButton>
       </View>    
     </View>
   );

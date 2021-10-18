@@ -46,6 +46,10 @@ const SearchScreen = (props) => {
   const [isLoadingCategories, setLoadingCategories] = useState(true);
   const [isLoadingRegions, setLoadingRegions] = useState(true);
   const [isLoadingCities, setLoadingCities] = useState(false);
+  const [isSearchingItems, setSearchingItems] = useState(false); // Will trigger search
+
+  // Handle Search
+  const [searchTitle, setSearchTitle] = useState();
 
   // Handle Category Data
   const [categoryList, addCategoryToList] = useState([null]); // Will store available categories from DB (JAVA)
@@ -78,9 +82,6 @@ const SearchScreen = (props) => {
   const [isPriceModalVisible, setPriceModalVisibility] = useState(false);
   const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
 
-  // Handle Messages To Display
-  const [hasMessage, setMessage] = useState(false);
-  const [messageDisplayed, setMessageDisplayed] = useState('');
 // END OF STATE VARIABLES =================================================================================================
 
 // CUSTOM FUNCTIONS =======================================================================================================
@@ -133,9 +134,13 @@ const SearchScreen = (props) => {
     setLoadingRegions(false);
   }
   // --------------------------------------------------
-  // Handle Selections ---------------------------------
+  // Handle Search & Selections ---------------------------------
+  const handleSearch=()=>{
+    setSearchingItems(true);
+  }
   const handleTextInput=(selectedItem)=>{
     setSearchTitle(selectedItem);
+
     // ToConsole
     console.log("SearchTitle: " +  selectedItem);
   }
@@ -182,7 +187,6 @@ const SearchScreen = (props) => {
     // ToConsole
     //console.log("selected item: " +  JSON.stringify(selectedItem));
   }
-
   // --------------------------------------------------
 // END OF CUSTOM FUNCTIONS ================================================================================================
 
@@ -196,7 +200,7 @@ const SearchScreen = (props) => {
       response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
     }
     catch(error){
-      console.log(error);
+      alert("Error in Service Method: " + error);
     }
     try{
       //Getting json from the response
@@ -207,7 +211,7 @@ const SearchScreen = (props) => {
       console.log('categoryList: ' + categoryList)
     }
     catch(error){
-      console.log(error);
+      alert("Error in Response Data: " + error);
     }
   }
 
@@ -220,18 +224,17 @@ const SearchScreen = (props) => {
       response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
     }
     catch(error){
-      console.log(error);
+      alert("Error in service method: " + error);
     }
     try{
       //Getting json from the response
       let responseData = await response.json();
       addRegionToList(responseData);
       // Toonsole
-      // console.log(responseData);
       console.log('regionList: ' + regionList)
     }
     catch(error){
-      console.log(error);
+      alert("Error in Response Data: " + error);
     }
   }
   // *** GET ***
@@ -242,23 +245,29 @@ const SearchScreen = (props) => {
     try{
       // This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
+      //console.log("Fetching response... => response: " + JSON.stringify(response, null, 4))
     }
     catch(error){
       console.log(error);
+      alert("Error in service method: " + error);
     }
     try{
       // Getting json from the response
       let responseData = await response.json();
       addCityToList(responseData.regionCities);
-      // console.log("cities in region" + JSON.stringify(responseData.regionCities));
+      // console.log("cities in region" + JSON.stringify(responseData.regionCities, null, 4));
     }
     catch(error){
       console.log(error);
+      alert("Error in Response Data: " + error);
     }
   }
 
+// *** POST ***
   async function searchForItems(title, category, city, priceMin, priceMax, condition) {
-    console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
+    console.log('async function searchForItems(title, category, city, priceMin, priceMax, condition) {');
+    console.log("title: " + title + ", category: " + category + ", city: " + city +  
+    ", priceMin: " + priceMin, ", priceMax:" + priceMax, ", condition: " + condition);
     let response = null;
     let requestOptions = {
       method:'POST',
@@ -266,28 +275,28 @@ const SearchScreen = (props) => {
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
-        title: title.toString(),
-        category: category.toString(),
-        city: city.toString(),
-        priceMin: priceMin*1, // *1 -> numbers only
-        priceMax: priceMax*1, // *1 -> numbers only
+        itemTitle: title.toString(),
+        categoryTitle: category.toString(),
+        location: city.toString(),
+        minPrice: priceMin*1, // *1 -> numbers only
+        maxPrice: priceMax*1, // *1 -> numbers only
         condition: condition.toString(),
       })
     };
+    console.log("body: " + requestOptions.body);
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/searchservice/searchForItems", requestOptions)
+      response = await fetch("http://10.0.2.2:8080/rest/searchservice/searchforitems", requestOptions)
+      // console.log("Fetching response... => response: " + JSON.stringify(response, null, 4));
     } catch (error) {
-      showError(error);
+      alert("Error in service method: " + error);
     }
     try {
       let responseData = await response.json();
-      console.log('responseData: ' + responseData);
-      showConfirmation("Item was successfully added!")
+      console.log('responseData: ' + JSON.stringify(responseData, null, 4));
     } catch (error) {
-      showError(error);
+      alert("Error in Response Data: " + error);
     }
   }
-
 // END OF SERVICE FUNCTIONS ===============================================================================================
 
 // USE EFFECT FUNCTION ====================================================================================================
@@ -295,17 +304,20 @@ const SearchScreen = (props) => {
   useEffect(() => {
     console.log('useEffect(() => {');
       if (isLoadingCategories==true){
-        getAllCategory();  
+        getAllCategory();
         setLoadingCategories(false);
       } 
       if (isLoadingRegions==true){
-        getAllRegion();   
+        getAllRegion();
         setLoadingRegions(false);
       }
       if(isLoadingCities==true){
-          getAllCityInRegion(selectedRegionId);
-          // changeCitySwipeAccessibility();
-          setLoadingCities(false);
+        getAllCityInRegion(selectedRegionId);
+        setLoadingCities(false);
+      }
+      if(isSearchingItems==true){
+        searchForItems(searchTitle, categoryNameToDisplay, cityNameDisplay, minPriceToDisplay, maxPriceToDisplay, conditionNameToDisplay);
+        setSearchingItems(false);
       }
   });
 // ========================================================================================================================
@@ -314,7 +326,7 @@ const SearchScreen = (props) => {
   return (
     <View style={styles.container}>
       <View >
-        <SearchBar onChangeText={handleTextInput}/>
+        <SearchBar onChangeText={handleTextInput} onPress={handleSearch}/>
       </View>
         <View>
 {/* MODALS -------------------------------------------------------------------------------- */}
@@ -373,7 +385,7 @@ const SearchScreen = (props) => {
                 onValueChange={takeMaxPriceInput}
                 displayValue={maxPriceToDisplay}
               />
-              <Button title='Cancel' onPress={onCancel}/>
+              <Button title='Ok' onPress={onCancel}/>
             </Modal>
 {/*                       *******************                      */}
             <Modal visible={isConditionModalVisible}>
