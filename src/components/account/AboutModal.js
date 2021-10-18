@@ -57,7 +57,7 @@ const AboutModal=(props)=>{
                     <View style={{ marginVertical: 5 }}>
                         <Text 
                         style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
-                        Whether you are looking to buy or sell
+                        Whether you are looking to buy or sell,
                         Useddo has you covered.</Text>
                         
                     </View>
@@ -71,13 +71,13 @@ const AboutModal=(props)=>{
                     <View style={{ marginVertical: 5 }}>
                         <Text 
                         style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
-                        We really cherish and value are growing and expanding user base.</Text>
+                        We really cherish and value our enthusiastic and expanding user base.</Text>
                         
                     </View>
                     <View style={{ marginVertical: 5 }}>
                         <Text 
                         style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
-                        And we thank you greatly for choosing to use Useddo.</Text>
+                        Furthermore, we thank you greatly for choosing to use Useddo!</Text>
                         
                     </View>
                     <View style={{ marginVertical: 5 }}>
