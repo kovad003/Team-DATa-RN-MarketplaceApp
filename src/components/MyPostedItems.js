@@ -30,7 +30,6 @@ import TextStyling from '../constants/fontstyling';
 /* AD - External components */
 import CreateItemInputLogo from "./CreateItemInputLogo";
 import ListCreatedItem from "../components/ListCreatedItem";
-import MyPostedItemsDelete from "./createItem/MyPostedItemsDelete";
 
 /* AD - The main function of the page */
 const MyPostedItems=(props)=>{

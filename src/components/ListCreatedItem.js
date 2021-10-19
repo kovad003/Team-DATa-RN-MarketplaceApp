@@ -29,7 +29,6 @@ import colors from "../constants/colors";
 import TextStyling from '../constants/fontstyling';
 
 /* AD - External custom components */
-import MyPostedItemsDelete from './createItem/MyPostedItemsDelete';
 
 /* AD - The main function of the page */
 const ListCreatedItem=(props)=>{
@@ -134,14 +133,13 @@ const ListCreatedItem=(props)=>{
             }
             try {
             let responseData = await response.json();
-            //showConfirmation("Item was successfully removed!")
             console.log('responseData: ' + responseData);
-            if(responseData === true){
-                alert("Item was removed successfully!")
-            }
-            else{
-                alert("Something went wrong! Please try again later.");
-            }
+                if(responseData === true){
+                    alert("Item was removed successfully!")
+                }
+                else{
+                    alert("Something went wrong! Please try again later.");
+                }
             } catch (error) {
             alert("Error in response data:" + error);
             }
@@ -194,18 +192,6 @@ const ListCreatedItem=(props)=>{
                         </Text>
                         
                     </View>
-                    {/* AD - For the hidden MyPostedItemsDelete external component (modal), 
-                    which will become visible, when the user clicks the delete button below
-                    the listed item ('my posted items' rendered via the ListCreatedItem.js) */} 
-                    {/* TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                        <MyPostedItemsDelete 
-                        visibility={isDeleteVisible} 
-                        onAddItem={onAddItem}
-                        itemList={items} 
-                        onCancelItem={cancelAddItem} 
-                        />
-                    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
-
                 </View>
             </View>
         </View>
