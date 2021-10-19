@@ -45,7 +45,7 @@ import Logo from "../components/Logo";
 /* TJ & AD - The main function of the page */
 function RegistrationScreen(props) {
 
-  /************* TJ & AD - State Variables *************/
+  /************* TJ & AD - State Variable *************/
 
   // TJ & AD - State variable (defines the customer object)
   const [customer, setCustomer] = useState({
