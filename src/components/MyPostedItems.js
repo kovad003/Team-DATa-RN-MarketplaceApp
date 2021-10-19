@@ -194,7 +194,7 @@ const MyPostedItems=(props)=>{
                       condition={itemData.item.condition}
                       location={itemData.item.location}
                       datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
-                      onDelete={()=>onDeleteItem(itemData.item.itemId)} 
+                      onDelete={()=>onDeleteItem(itemData.item.itemId)} // TODO: remove -> TODEL
                   />}
                   />
         </View>

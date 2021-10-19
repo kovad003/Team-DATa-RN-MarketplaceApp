@@ -73,7 +73,7 @@ const ListCreatedItem=(props)=>{
       // AD - a dummmy More Info alert
         const moreInfoAlert = () =>
         Alert.alert(
-        "Dummy More Info",
+        "Info Alert",
         "Here is more information about your post!",
         [
             {
@@ -82,13 +82,12 @@ const ListCreatedItem=(props)=>{
             style: "cancel"
             },
             { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-        );
+        ]);
 
         // AD - a dummmy Update Info alert
         const updateAlert = () =>
         Alert.alert(
-        "Dummy Update Info",
+        "Update Alert!",
         "Your post was successfully updated!",
         [
             {
@@ -97,8 +96,57 @@ const ListCreatedItem=(props)=>{
             style: "cancel"
             },
             { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-        );
+        ]);
+
+        // AD - Delete Alert
+        const deleteAlert = () =>
+        Alert.alert(
+        "Delete Alert!",
+        "Are you sure you want to remove this item? This process can not be undone!",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => deleteItem(props.itemId) }
+        ]);
+
+// SERVICE METHODS ----------------------------------------------------------------------------------------------------------------        
+        /* AD - An async function to DELETE data to the Java backend (which interacts with our MySQL / Google Cloud database) */
+        // Delivers parameter as JSON data 
+        async function deleteItem(idParam) {
+            console.log('started:  async function deleteItem(idParam) {');
+            let response = null;
+            let requestOptions = {
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                itemId: idParam*1, // *1 -> numbers only
+            })
+            };
+            try {
+            response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+            } catch (error) {
+            alert("Error in the service method:" + error);
+            }
+            try {
+            let responseData = await response.json();
+            //showConfirmation("Item was successfully removed!")
+            console.log('responseData: ' + responseData);
+            if(responseData === true){
+                alert("Item was removed successfully!")
+            }
+            else{
+                alert("Something went wrong! Please try again later.");
+            }
+            } catch (error) {
+            alert("Error in response data:" + error);
+            }
+        }
+
 
     return(
 
@@ -138,8 +186,9 @@ const ListCreatedItem=(props)=>{
                             UPDATE
                         </Text>
                         <Text
-                            text = 'submit' 
-                            onPress={()=>setDeleteVisibility(true)}
+                            //text = 'submit' 
+                            onPress={deleteAlert}
+                            // onPress={()=>setDeleteVisibility(true)} //TODEL
                             style={[TextStyling.textBlackSmall, styles.deleteButton]}>
                             DELETE
                         </Text>
@@ -148,12 +197,14 @@ const ListCreatedItem=(props)=>{
                     {/* AD - For the hidden MyPostedItemsDelete external component (modal), 
                     which will become visible, when the user clicks the delete button below
                     the listed item ('my posted items' rendered via the ListCreatedItem.js) */} 
+                    {/* TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                         <MyPostedItemsDelete 
                         visibility={isDeleteVisible} 
                         onAddItem={onAddItem}
                         itemList={items} 
                         onCancelItem={cancelAddItem} 
                         />
+                    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
                 </View>
             </View>

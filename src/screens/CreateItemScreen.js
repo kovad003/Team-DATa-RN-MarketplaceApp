@@ -143,7 +143,7 @@ function CreateItemScreen(props) {
     try{
       /* AD - This waits for the fetch to be completed successfully. 
       It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getcustomeritems/1001");
+      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getcustomeritems/1000"); //TODO: apply SESSION ID
     }
     /* AD - A try catch to catch errors*/
     catch(error){      
