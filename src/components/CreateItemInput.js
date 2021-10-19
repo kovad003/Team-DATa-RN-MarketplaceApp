@@ -106,8 +106,11 @@ const CreateItemInput=(props)=>{
         props.onCancelItem();
     }
 
-    /************* AD - The data to be rendered and visible to the user *************/
+    
     return (
+
+  /************* AD - The data to be rendered and visible to the user *************/
+  
         <Modal visible={props.visibility} animationType="slide">
           <ScrollView style={styles.scrollView}>
             <View style={styles.formStyle}>

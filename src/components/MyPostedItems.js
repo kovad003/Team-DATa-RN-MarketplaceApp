@@ -60,8 +60,6 @@ const MyPostedItems=(props)=>{
     
 /************* AD - Custom Functions *************/
 
-    
-
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
     console.log('childdata from child onAddItem App.js: ' + childdata.name);

@@ -1,5 +1,28 @@
-import React, { Component, useState, useEffect } from "react";
+/**
+ * Overview: A class that allows customers to register (create an account) with the app.
+ *           The RegistrationScreen is activated when users click 'Register' 
+ *           from the AccountScreen.
+ * 
+ * Description: Once the user clicks 'Register' this external component is called to display an input form. 
+ *              The main parts of the screen are as follows: 
+ * 
+ *  - A state variable and text input handlers -> These are behind the scenes and not visible to the user. 
+ *                                                They power the functionality of the page. 
+ *  - Modal Window-> The screen is made visible to the user via the modal container that wraps it.
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
+ *  - Text input fields -> The customer can enter their details into the registration text input fields.
+ *  - Buttons -> The customer can either choose to add the information, or cancel the registration via the buttons.
+ *  - Page stylings -> Much of the app's stylings are included on each respective page.
+ *                     Occasionally, however, external consts, fonts, and colours have been utilised.
+ * 
+ * @link   ./src/screens/RegistrationScreen.js
+ * @file   This files defines the RegistrationScreen.js class.
+ * @author Tukhtaboy Jumaniyazov & Ashley Davis.
+ * @since  01.10.2021
+ */
 
+/* TJ & AD - Standard imports from both React and React-Native */
+import React, { Component, useState, useEffect } from "react";
 import {
   Button,
   View,
@@ -13,16 +36,18 @@ import {
   Image,
   Modal
 } from 'react-native';
+
+/* TJ & AD - External component imports */
 import Checkbox from "../components/Checkbox";
 import LinkButton from "../components/LinkButton";
 import Logo from "../components/Logo";
 
-//const Home = () => {
+/* TJ & AD - The main function of the page */
 function RegistrationScreen(props) {
 
-  // For the inputs
+  /************* TJ & AD - State Variables *************/
 
-  // State variable
+  // TJ & AD - State variable (defines the customer object)
   const [customer, setCustomer] = useState({
     //customerId: 1,
     firstName: 'default firstName', //TODO
@@ -34,11 +59,12 @@ function RegistrationScreen(props) {
     phone: 'default phone',
     image: 'default image',
 });
-/* const [formChecker, setFormChecker] = useState({
-    categoryinput: 'false',
-}) */
 
-// AD new consts
+ /************* TJ & AD - Custom Functions *************/
+
+  /* TJ & AD - custom functions to control the modal 
+  (other functions are called via props, 
+    and the customer object can be added) */
 
 const addCustomer=()=>{
   props.onAddCustomer(customer);
@@ -49,8 +75,7 @@ const cancelCustomer=()=>{
 }
 
 
-
-/* AD - input handlers, to take input from the text input fields */
+/* TJ & AD - input handlers, to take input from the text input fields */
 const firstNameInputHandler=(enteredText)=>{
   customer.firstName = enteredText;
   console.log('entered text/firstName: ' + enteredText);
@@ -91,6 +116,9 @@ const imageInputHandler=(enteredText)=>{
 }
 
   return (
+
+  /************* TJ & AD - The data to be rendered and visible to the user *************/
+
     <Modal visible={props.visibility} animationType="slide">
     <ScrollView style={styles.scrollView}>
 
@@ -214,6 +242,8 @@ const imageInputHandler=(enteredText)=>{
     </Modal>
   );
 };
+
+/************* TJ & AD - Stylings *************/
 
 const styles = StyleSheet.create({
   view: {height: 60, width: '100%', backgroundColor: 'red'},
