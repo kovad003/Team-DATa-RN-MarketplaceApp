@@ -154,7 +154,7 @@ function CreateItemScreen(props) {
       Essentially, the variable responseData is assigned a value, that is the json from the response. */
       let responseData = await response.json();
       /* AD - A console log is added, so that the success of the response can be made apparent in the terminal */
-      console.log(JSON.stringify(responseData, null, 4)); 
+      console.log("Response Data as JSON: " + JSON.stringify(responseData, null, 4)); 
       setItems(responseData);
     }
     catch(error){
@@ -393,11 +393,8 @@ function CreateItemScreen(props) {
 
         </View>
       </View>
-    </ScrollView>   
-      
-    );
-  }
-};
+    </ScrollView>         
+    );}};
 
 /************* AD - Stylings *************/
 const styles = StyleSheet.create({

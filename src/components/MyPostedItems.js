@@ -35,59 +35,13 @@ import MyPostedItemsDelete from "./createItem/MyPostedItemsDelete";
 /* AD - The main function of the page */
 const MyPostedItems=(props)=>{
 
-  /************* AD - State Variables *************/
+/************* AD - State Variables *************/
 
    // AD - State variables
-// TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-/*     const data = "This is data from Child Component to the Parent Component."
-    const [name, setName]=useState('');
-    const [price, setPrice]=useState(0); */
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-// TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-/*     const [hasMessage, setMessage] = useState(false);
-    const [messageDisplayed, setMessageDisplayed] = useState(''); */
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
     const [itemToUpdate, setItemToUpdate] = useState([]);
     const [isLoadingItemToUpdate, setLoadingItemToUpdate] = useState(true);
-    // const [customerItems, setCustomerItems] = useState([]); //TODEL
-    // const [itemList, addItemToList] = useState([]);
-
-    // const [isVisible, setVisibility] = useState(false);
-
-    // AD - State variable (defines the item object)
-// TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  
-    /* const [item, setItem] = useState({
-        title: 'some name',
-        price: 0,
-        description: 'some description',
-        category: 'some category',
-    }); */
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    
+   
 /************* AD - Custom Functions *************/
-// TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  /* const onAddItem = (childdata) => {
-    addItemToList(itemList =>[...itemList, childdata]);
-    console.log('childdata from child onAddItem App.js: ' + childdata.name);
-    console.log('childdata from child onAddItem App.js: ' + childdata.price);
-    console.log('childdata from child onAddItem App.js: ' + childdata.description);
-    console.log('childdata from child onAddItem App.js: ' + childdata.category);
-    addData(childdata.name, childdata.price, childdata.description, childdata.category);
-    setVisibility(false);
-    //setLoading(true);
-  } */
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-// TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  /* AD - Functions related to the modal visibility */
-  /* const cancelAddItem=()=>{
-    setVisibility(false);
-    setLoading(false);
-  } */
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
   const onDeleteItem=(idParam)=>{
     console.log('idParam: ' + idParam);
     //setLoading(true);
@@ -101,25 +55,6 @@ const MyPostedItems=(props)=>{
   const cancelItem=()=>{
       props.onCancelItem();
   }
-
-// TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  /* AD - functions related to confirmation and error messages */
-  /* function showError(error){
-    setMessage(true);
-    setMessageDisplayed("Error: " + error);
-    console.log(messageDisplayed);
-  }
- */
-/*   function showConfirmation(message){
-    setMessageDisplayed("Confirmation: " + message);
-    setMessage(true);
-  } */
-
- /*  function closeMessage() {
-    setMessage(false);
-    setLoading(true);
-  } */
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   /************* AD - Service Functions (connects to a Java Backend) *************/
   
@@ -228,9 +163,7 @@ const MyPostedItems=(props)=>{
 
     // Return
     return (
-
     /************* AD - The data that will be rendered and visible to the user *************/
-
     <Modal visible={props.visibility} animationType="slide">
         <View style={styles.formStyle}>
           <View style={styles.logoCustom} >
