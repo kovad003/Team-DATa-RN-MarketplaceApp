@@ -49,19 +49,22 @@ const MyPostedItems=(props)=>{
     const [messageDisplayed, setMessageDisplayed] = useState(''); */
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    const [items, setItems] = useState([]);
-    const [customerItems, setCustomerItems] = useState([]);
+    const [itemToUpdate, setItemToUpdate] = useState([]);
+    const [isLoadingItemToUpdate, setLoadingItemToUpdate] = useState(true);
+    // const [customerItems, setCustomerItems] = useState([]); //TODEL
     // const [itemList, addItemToList] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+
     // const [isVisible, setVisibility] = useState(false);
 
     // AD - State variable (defines the item object)
-    const [item, setItem] = useState({
+// TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  
+    /* const [item, setItem] = useState({
         title: 'some name',
         price: 0,
         description: 'some description',
         category: 'some category',
-    });
+    }); */
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     
 /************* AD - Custom Functions *************/
 // TODEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -122,7 +125,7 @@ const MyPostedItems=(props)=>{
   
   /* AD - An async function to GET (fetch) data from the Java backend 
  (which interacts with our MySQL / Google Cloud database). This one is WIP */
-  async function fetchData() {
+  async function fetchSingleItem() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
@@ -132,75 +135,23 @@ const MyPostedItems=(props)=>{
     }
     /* AD - A try catch to catch errors */
     catch(error){
-      showError(error);
+      alert("Error in the service method:" + error);
     }
     try{
       /* AD - This gets json from the response. 
       Essentially, the variable responseData is assigned a value, that is the json from the response. */
       let responseData = await response.json();
       console.log(responseData);//Just for checking.....
-      setItems(responseData);
+      setItemToUpdate(responseData);
     }
     catch(error){
-      showError(error);
-    }
-  }
-
-  async function fetchCustomerItems() {
-    //Variable res is used later, so it must be introduced before try block and so cannot be const.
-    let response = null;
-    try{
-      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getcustomeritems/1000");
-    }
-    catch(error){
-      showError(error);
-    }
-    try{
-      //Getting json from the response
-      let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
-      setCustomerItems(responseData);
-    }
-    catch(error){
-      showError(error);
-    }
-  }
-
-
- /* AD - An async function to POST data to the Java backend (which interacts with our MySQL / Google Cloud database) */
-  async function addData(nameParam, priceParam, descrParam, categoryParam) {
-    console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
-    let response = null;
-    let requestOptions = {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({
-        name: nameParam.toString(), 
-        price: priceParam*1, // *1 -> numbers only
-        description: descrParam.toString(), 
-        category: categoryParam.toString() 
-      })
-    };
-    try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/addjsonitem", requestOptions)
-    } catch (error) {
-      showError(error);
-    }
-    try {
-      let responseData = await response.json();
-      console.log('responseData: ' + responseData);
-      showConfirmation("Item was successfully added!")
-    } catch (error) {
-      showError(error);
+      alert("Error in response data:" + error);
     }
   }
 
   /* AD - An async function to PUT data to the Java backend (which interacts with our MySQL / Google Cloud database) */  
   // Object props are hardcoded, no input form is available. Works the same way as adding item
-  async function updateData(/*idParam, nameParam, priceParam, descrParam, categoryParam*/) {
+  async function updateSingleItem(/*idParam, nameParam, priceParam, descrParam, categoryParam*/) {
     console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
     let response = null;
     let requestOptions = {
@@ -220,14 +171,14 @@ const MyPostedItems=(props)=>{
     try {
       response = await fetch("http://10.0.2.2:8080/rest/itemservice/updatejsonitem", requestOptions)
     } catch (error) {
-      showError(error);
+      alert("Error in the service method:" + error);
     }
     try {
       let responseData = await response.json();
       console.log('responseData: ' + responseData);
       showConfirmation("Item was successfully added!")
     } catch (error) {
-      showError(error);
+      alert("Error in response data:" + error);
     }
   }
 
@@ -248,14 +199,14 @@ const MyPostedItems=(props)=>{
     try {
       response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
     } catch (error) {
-      showError(error);
+      alert("Error in the service method:" + error);
     }
     try {
       let responseData = await response.json();
       showConfirmation("Item was successfully removed!")
       console.log('responseData: ' + responseData);
     } catch (error) {
-      showError(error);
+      alert("Error in response data:" + error);
     }
   }
 
@@ -268,10 +219,10 @@ const MyPostedItems=(props)=>{
 */
   useEffect(() => {
     console.log('useEffect(() => {'); 
-      if (isLoading==true){
-        fetchData();
+      if (isLoadingItemToUpdate==true){
+/*         fetchData();
         setLoading(false);
-        fetchCustomerItems();
+        fetchCustomerItems(); */
     }
   });
 
@@ -301,7 +252,8 @@ const MyPostedItems=(props)=>{
         <View style = {styles.flatListOuterContainer}>
           <FlatList
                   keyExtractor={(item) => item.itemId.toString()} 
-                  data={customerItems}
+                  // data={customerItems} //TODEL
+                  data={props.itemList}
                   renderItem={itemData => 
                       <ListCreatedItem itemId={itemData.item.itemId} 
                       title={itemData.item.title}
