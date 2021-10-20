@@ -41,11 +41,6 @@ const MyPostedItems=(props)=>{
     const [isLoadingItemToUpdate, setLoadingItemToUpdate] = useState(true);
    
 /************* AD - Custom Functions *************/
-  const onDeleteItem=(idParam)=>{
-    console.log('idParam: ' + idParam);
-    //setLoading(true);
-    deleteData(idParam)
-  }
 
   /* AD - Functions related to the modal visibility (and adding data) */
  /*  const addItem=()=>{
@@ -57,32 +52,6 @@ const MyPostedItems=(props)=>{
 
   /************* AD - Service Functions (connects to a Java Backend) *************/
   
-  /* AD - An async function to GET (fetch) data from the Java backend 
- (which interacts with our MySQL / Google Cloud database). This one is WIP */
-  async function fetchSingleItem() {
-    //Variable res is used later, so it must be introduced before try block and so cannot be const.
-    let response = null;
-    try{
-      /* AD - This waits for the fetch to be completed successfully. 
-      It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-    }
-    /* AD - A try catch to catch errors */
-    catch(error){
-      alert("Error in the service method:" + error);
-    }
-    try{
-      /* AD - This gets json from the response. 
-      Essentially, the variable responseData is assigned a value, that is the json from the response. */
-      let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
-      setItemToUpdate(responseData);
-    }
-    catch(error){
-      alert("Error in response data:" + error);
-    }
-  }
-
   /* AD - An async function to PUT data to the Java backend (which interacts with our MySQL / Google Cloud database) */  
   // Object props are hardcoded, no input form is available. Works the same way as adding item
   async function updateSingleItem(/*idParam, nameParam, priceParam, descrParam, categoryParam*/) {
@@ -111,34 +80,6 @@ const MyPostedItems=(props)=>{
       let responseData = await response.json();
       console.log('responseData: ' + responseData);
       showConfirmation("Item was successfully added!")
-    } catch (error) {
-      alert("Error in response data:" + error);
-    }
-  }
-
-  /* AD - An async function to DELETE data to the Java backend (which interacts with our MySQL / Google Cloud database) */
-  // Delivers parameter as JSON data 
-  async function deleteData(idParam) {
-    console.log('started:  async function deleteData(idParam) {');
-    let response = null;
-    let requestOptions = {
-      method:'DELETE',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({
-        id: idParam*1, // *1 -> numbers only
-      })
-    };
-    try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
-    } catch (error) {
-      alert("Error in the service method:" + error);
-    }
-    try {
-      let responseData = await response.json();
-      showConfirmation("Item was successfully removed!")
-      console.log('responseData: ' + responseData);
     } catch (error) {
       alert("Error in response data:" + error);
     }
@@ -203,7 +144,8 @@ const MyPostedItems=(props)=>{
                       price={itemData.item.price}
                       condition={itemData.item.condition}
                       location={itemData.item.location}
-                      datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
+                      datePosted={Date(itemData.item.datePosted)} //timestamp has to be displayed as date and maybe time
+                      description={itemData.item.description}
                       refreshScreen={refreshScreen}
                   />}
                   />

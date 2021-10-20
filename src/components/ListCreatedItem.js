@@ -52,11 +52,26 @@ const ListCreatedItem=(props)=>{
      * an Alert message will appear.
      * @param {*} responseData 
      */
+
+    function handleDetailsResponse(responseData) {
+        Alert.alert(
+            "Details:",
+            `${props.description}`,
+            [
+                {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+                },
+                { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]);
+    }
+    
     function handleDeleteResponse(responseData){
         if(responseData === true) {
             Alert. alert(
-            "Deleted!", 
-            "Your posted item was removed successfully.", 
+            "Deleted!",
+            "Your posted item was removed successfully.",
             [ 
                 { 
                 text: "OK",
@@ -67,49 +82,66 @@ const ListCreatedItem=(props)=>{
         }           
     }
 
-      // AD - a dummmy More Info alert
-        const moreInfoAlert = () =>
-        Alert.alert(
-        "Info Alert",
-        "Here is more information about your post!",
-        [
-            {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]);
+    // AD - a dummmy Update Info alert
+    const updateAlert = () =>
+    Alert.alert(
+    "Update Alert!",
+    "Your post was successfully updated!",
+    [
+        {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]);
 
-        // AD - a dummmy Update Info alert
-        const updateAlert = () =>
-        Alert.alert(
-        "Update Alert!",
-        "Your post was successfully updated!",
-        [
-            {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]);
+    // AD - Delete Alert
+    const deleteAlert = () =>
+    Alert.alert(
+    "Delete Alert!",
+    "Are you sure you want to remove this item? This process can not be undone!",
+    [
+        {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+        },
+        { text: "OK", onPress: () => deleteItem(props.itemId) }
+    ]);
 
-        // AD - Delete Alert
-        const deleteAlert = () =>
-        Alert.alert(
-        "Delete Alert!",
-        "Are you sure you want to remove this item? This process can not be undone!",
-        [
-            {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-            },
-            { text: "OK", onPress: () => deleteItem(props.itemId) }
-        ]);
+// SERVICE METHODS ----------------------------------------------------------------------------------------------------------------
+        /* AD - An async function to GET (fetch) data from the Java backend 
+        (which interacts with our MySQL / Google Cloud database). This one is WIP */
+        async function fetchItemtoUpdate(itemId) {
+            console.log("itemId: " + itemId);
+            //Variable res is used later, so it must be introduced before try block and so cannot be const.
+            let response = null;
+            try{
+            /* AD - This waits for the fetch to be completed successfully. 
+            It is also a timeout (for server timeouts), which is also a possible response. */
+                response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getjsonitemtoupdate/${itemId}`);
+            }
+            /* AD - A try catch to catch errors */
+            catch(error){
+                alert("Error in the service method:" + error);
+            }
+            try{
+            /* AD - This gets json from the response. 
+            Essentially, the variable responseData is assigned a value, that is the json from the response. */
+                let responseData = await response.json();
+                console.log(JSON.stringify(responseData, null, 4));
+                if(responseData != null){
+                    handleDetailsResponse(responseData);
+                } else {
+                    console.log("responseData is null: ");
+                }
+            }
+            catch(error){
+                alert("Error in response data:" + error);
+            }
+        }
 
-// SERVICE METHODS ----------------------------------------------------------------------------------------------------------------        
         /* AD - An async function to DELETE data to the Java backend (which interacts with our MySQL / Google Cloud database) */
         // Delivers parameter as JSON data 
         async function deleteItem(idParam) {
@@ -154,7 +186,7 @@ const ListCreatedItem=(props)=>{
 
                 <View style={styles.rightInnerContainer}>
                     <View style={styles.innerRowContainer1}>
-                        <Text style={[TextStyling.textBlackSmall, styles.titleName]}>{props.itemId}&#41; {props.title}</Text>
+                        <Text style={[TextStyling.textBlackSmall, styles.titleName]}>{/* {props.itemId}&#41; */}{props.title}</Text>
                     </View>
 
                     <View style={styles.innerRowContainer2}>
@@ -167,9 +199,10 @@ const ListCreatedItem=(props)=>{
 
                     <View style={styles.innerRowContainer3}>
                         <Text
-                            onPress={moreInfoAlert} 
+                            //onPress={() => {fetchSingleItem(props.itemId)}}
+                            onPress={handleDetailsResponse}
                             style={[TextStyling.textBlackSmall, styles.moreButton]}>
-                            MORE INFO
+                            DETAILS
                         </Text>
                         <Text 
                             onPress={updateAlert}
