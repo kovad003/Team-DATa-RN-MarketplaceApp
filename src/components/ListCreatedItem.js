@@ -33,10 +33,10 @@ import TextStyling from '../constants/fontstyling';
 /* AD - The main function of the page */
 const ListCreatedItem=(props)=>{
 
-    // ================ AD - State Variables ================
+// ================ AD - State Variables ================
         // Currently empty
 
-    // ================ AD - Custom Functions ===================
+// ================ AD - Custom Functions ===================
     /**
      * Function will enable data transfer from child to parent through props 
      * so customer data can be re-fetched from DB in the parent class using an apropiate service method.
@@ -46,14 +46,13 @@ const ListCreatedItem=(props)=>{
         console.log("const triggerScreenRefresh=()=>{");
         props.refreshScreen("trigger from ListCreatedItem.js");
     }
-    /**
-     * Function will process responseData received from the apropiate service method.
-     * Based on the nature of the response data (True -> removal was successful; or False -> removal was not successful)
-     * an Alert message will appear.
-     * @param {*} responseData 
-     */
 
-    function handleDetailsResponse(responseData) {
+
+// HANDLER Functions --------------------------------
+    /**
+     * This function will print the item details to the screen in form of an ALERT message.
+     */
+    function handleDetailsResponse() {
         Alert.alert(
             "Details:",
             `${props.description}`,
@@ -66,7 +65,13 @@ const ListCreatedItem=(props)=>{
                 { text: "OK", onPress: () => console.log("OK Pressed") }
             ]);
     }
-    
+
+    /**
+     * Function will process responseData received from the apropiate service method.
+     * Based on the nature of the response data (True -> removal was successful; or False -> removal was not successful)
+     * an Alert message will appear.
+     * @param {*} responseData 
+     */
     function handleDeleteResponse(responseData){
         if(responseData === true) {
             Alert. alert(
@@ -81,34 +86,37 @@ const ListCreatedItem=(props)=>{
             alert("Something went wrong! Please try again later.");
         }           
     }
+// End of HANDLER Functions --------------------------
 
-    // AD - a dummmy Update Info alert
+// ALERT Functions -----------------------------------
+    // AD - a dummmy Update Info alert //TODO: make an update feature!!!
     const updateAlert = () =>
-    Alert.alert(
-    "Update Alert!",
-    "Your post was successfully updated!",
-    [
-        {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-    ]);
+        Alert.alert(
+        "Update Alert!",
+        "Your post was successfully updated!",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]);
 
     // AD - Delete Alert
     const deleteAlert = () =>
-    Alert.alert(
-    "Delete Alert!",
-    "Are you sure you want to remove this item? This process can not be undone!",
-    [
-        {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-        },
-        { text: "OK", onPress: () => deleteItem(props.itemId) }
-    ]);
+        Alert.alert(
+        "Delete Alert!",
+        "Are you sure you want to remove this item? This process can not be undone!",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => deleteItem(props.itemId) }
+        ]);
+// End of ALERT Functions ---------------------------
 
 // SERVICE METHODS ----------------------------------------------------------------------------------------------------------------
         /* AD - An async function to GET (fetch) data from the Java backend 
@@ -169,7 +177,7 @@ const ListCreatedItem=(props)=>{
                 alert("Error in response data:" + error);
             }
         }
-
+// End of SERVICE Methods ---------------------------------------------------------------------------------------------
 
     return(
 
