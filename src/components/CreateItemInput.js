@@ -22,8 +22,8 @@
  */
 
 /* AD - Standard imports from both React and React-Native */
-import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, Alert} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 /* AD - imports for the logos and items*/
@@ -37,14 +37,26 @@ import Icon4 from "react-native-vector-icons/MaterialIcons";
 import TextStyling from '../constants/fontstyling';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
+import { isEmpty } from 'lodash';
 
 
 /* AD - The main function of the component */
 const CreateItemInput=(props)=>{
-
   /************* AD - State Variables *************/
 
     // AD - State variable (defines the item object)
+    // const [isLoading, setLoading] = useState(false);
+    const [colorValidator, setColorValidator] = useState(true);
+    const [inputValidator, setInputValidator] = useState({
+      title: false,
+      price: false,
+      description: false,
+      // image: false,
+      category: false,
+      condition: false,
+      location: false,
+    });
+
     const [item, setItem] = useState({
         categoryId: 1,
         customerId: 1, //TODO
@@ -60,56 +72,158 @@ const CreateItemInput=(props)=>{
     }) */
 
     /************* AD - Custom Functions *************/
+    //ALERT messages:
+    function handleWrongPriceFormat(){
+      Alert.alert(
+        "Wrong Format!",
+        "You must enter a number: '99.99' or '99'",
+        [ 
+            { 
+            text: "OK",
+            onPress: () => console.log("OK Pressed"), 
+            }, ], { cancelable: false } );        
+    }
+
+    function checkAllFields() {
+      for (const item of Object.entries(inputValidator)) {
+        console.log(item[0] + " -> " + item[1])
+      }
+    }
 
     /* AD - input handlers, to take input from the text input fields */
-    const categoryInputHandler=(enteredText)=>{
-        item.categoryId = enteredText;
-        console.log('entered text/categoryId: ' + enteredText);
-    }
-
+    /**
+     * 
+     * @param {*} enteredText 
+     */
     const titleInputHandler=(enteredText)=>{
-        item.title = enteredText;
-        console.log('entered text/title: ' + enteredText);
-    }
-
-    const priceInputHandler=(enteredText)=>{
-        item.price = enteredText;
-        console.log('entered text/price: ' + enteredText);
-    }
-
-    const descriptionInputHandler=(enteredText)=>{
-        item.description = enteredText;
+      item.title = enteredText; 
+      console.log('entered text/title: ' + enteredText);
+      if(isEmpty(enteredText)){
+        inputValidator.title = false;
+        console.log("No text was entered!");
+      }
+      else{        
+        inputValidator.title = true;
         console.log('entered text/description: ' + enteredText);
+      }
+      checkAllFields(); 
     }
 
+    /**
+     * 
+     * @param {*} enteredText 
+     */
+    const priceInputHandler=(enteredText)=>{
+      console.log('entered text/price: ' + enteredText);
+      if(isNaN(enteredText)){
+        setColorValidator(false);
+        inputValidator.price = false;
+        handleWrongPriceFormat();
+        // ToConsol:
+        console.log('Not a number');
+        console.log("colorValidator is: " + colorValidator);
+      }
+      else{
+        setColorValidator(true);
+        inputValidator.price = true;
+        item.price = enteredText;
+        // ToConsol:
+        console.log('This is a number');
+      }
+      if(isEmpty(enteredText)) {
+        inputValidator.price = false;
+        // ToConsol:
+        console.log("No text was entered!");
+      } 
+      checkAllFields();  
+    }
+
+    /**
+     * 
+     * @param {*} enteredText 
+     */
+    const descriptionInputHandler=(enteredText)=>{
+      item.description = enteredText;
+      if(isEmpty(enteredText)){
+        inputValidator.description = false;
+        // ToConsol:
+        console.log("No text was entered!");
+      }
+      else{        
+        inputValidator.description = true;
+        // ToConsol:
+        console.log('entered text/description: ' + enteredText);
+      }
+      checkAllFields(); 
+    }
+
+    /**
+     * 
+     * @param {*} enteredText 
+     */
     const imageInputHandler=(enteredText)=>{
         //item.image = enteredText;
         item.image = "https://thumbs.dreamstime.com/z/sale-real-estate-sign-17187578.jpg"; //TODO: image upload
+        // ToConsol:
         console.log('entered text/image: ' + enteredText);
     }
 
+    /**
+     * 
+     * @param {*} enteredText 
+     */
+    const categoryInputHandler=(enteredText)=>{
+      item.categoryId = enteredText;
+      // ToConsol:
+      console.log('entered text/categoryId: ' + enteredText);
+    }
+    
+    /**
+     * 
+     * @param {*} enteredText 
+     */
     const conditionInputHandler=(enteredText)=>{
         item.condition = enteredText;
+        // ToConsol:
         console.log('entered text/condition: ' + enteredText);
     }
 
+    /**
+     * 
+     * @param {*} enteredText 
+     */
     const locationInputHandler=(enteredText)=>{
         item.location = enteredText;
+        // ToConsol:
         console.log('entered text/location: ' + enteredText);
     }
     
     /* AD - custom functions to control the modal 
     (other functions are called via props, and the item object can be added) */
+    /**
+     * 
+     */
     const addItem=()=>{
         props.onAddItem(item);
     }
+    /**
+     * 
+     */
     const cancelItem=()=>{
         props.onCancelItem();
     }
 
-    
-    return (
+    /**
+     * 
+     */
+    /* useEffect(() => {
+      console.log('useEffect(() => {'); 
+      if (isLoading==true){
+        //setLoadingCustomerData(false);
+    }
+  }); */
 
+  return (
   /************* AD - The data to be rendered and visible to the user *************/
   
         <Modal visible={props.visibility} animationType="slide">
@@ -123,7 +237,8 @@ const CreateItemInput=(props)=>{
               <View style={styles.itemNameRow}>
               <Icon1 name="tag" style={styles.iconStyling}></Icon1>
               <TextInput placeholder="Item's name" 
-                  style={styles.inputStyle} 
+                  style={styles.inputStyle}
+                  maxLength={5} 
                   onChangeText={titleInputHandler}/>
               </View>
 
@@ -132,7 +247,8 @@ const CreateItemInput=(props)=>{
               <Icon2 name="euro-sign" style={styles.iconStyling2}></Icon2>  
               
               <TextInput placeholder="Item's price" 
-                  style={styles.inputStyle} 
+                  style={[styles.inputStyle, {borderColor: colorValidator ? colors.darkBlueCustom : "red"}]} //backgroundColor: darkMode ? '#282f3b' : '#f5f5f5',
+                  maxLength={10} 
                   onChangeText={priceInputHandler}/>                
               </View>
 
@@ -140,7 +256,10 @@ const CreateItemInput=(props)=>{
               <View style={styles.itemNameRow}>               
               <Icon3 name="edit" style={styles.iconStyling3}></Icon3>    
               <TextInput placeholder="Item's description"                
-                  style={styles.inputStyle2} 
+                  style={styles.inputStyle2}
+                  maxLength={255}
+                  multiline={true}
+                  numberOfLines={8}  
                   onChangeText={descriptionInputHandler}/>               
               </View>
                 
