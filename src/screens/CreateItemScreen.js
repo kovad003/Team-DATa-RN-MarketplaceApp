@@ -261,6 +261,11 @@ function CreateItemScreen(props) {
     }
   }
 
+  /**
+   * This Function triggers a customer data re-fetch. The request for that is originating from the child (or component) class
+   * where the appropiate service method is used to remove a certain item from the DB, specified by its ID number.
+   * @param {*} childdata 
+   */
   const reFetchCustomerData = (childdata) => {
     console.log("reFetchCustomerData: " + childdata);
     setLoadingCustomerData(true);

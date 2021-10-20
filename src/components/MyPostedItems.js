@@ -152,14 +152,16 @@ const MyPostedItems=(props)=>{
        and endless re-renders could occur, unless stopped by useEffect.  
 */
 
+  /**
+   * This Function is a intermediary (mediator) between the Screen class (CreateItemScreen.js) and the component class (ListCreatedItem).
+   * It will connect the two classes so whenever an item removal is executed through the appropiate service method located in the component
+   * this function will invoke another method in the parent (Screen) class, which will trigger a customer data re-fetch.
+   * @param {*} childdata 
+   */
   const refreshScreen = (childdata) => {
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     console.log("reloadSwitch is: " + childdata);
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     props.reFetchCustomerData("trigger from MyPostedItems.js");
   }
-
-  //refreshScreen();
 
   useEffect(() => {
     console.log('useEffect(() => {'); 
@@ -194,7 +196,6 @@ const MyPostedItems=(props)=>{
         <View style = {styles.flatListOuterContainer}>
           <FlatList
                   keyExtractor={(item) => item.itemId.toString()} 
-                  // data={customerItems} //TODEL
                   data={props.itemList}
                   renderItem={itemData => 
                       <ListCreatedItem itemId={itemData.item.itemId} 
@@ -203,8 +204,6 @@ const MyPostedItems=(props)=>{
                       condition={itemData.item.condition}
                       location={itemData.item.location}
                       datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
-                      onDelete={()=>onDeleteItem(itemData.item.itemId)
-                      } // TODO: remove -> TODEL
                       refreshScreen={refreshScreen}
                   />}
                   />

@@ -33,50 +33,39 @@ import TextStyling from '../constants/fontstyling';
 /* AD - The main function of the page */
 const ListCreatedItem=(props)=>{
 
-    /************* AD - State Variables *************/
+    // ================ AD - State Variables ================
+        // Currently empty
 
-    /* AD - Handles the items (useState variable / array) */
-    const [items, setItems] = useState([]);
-    const [itemList, addItemToList] = useState([]);
-
-    const [reloadSwitch, setReloadSwitch] = useState(false);
-    const data = "This is data from Child Component to the Parent Component. :)" //TODEL
-
-    /* AD - Handles the delete item modal window visibility (useState variable) */
-    const [isDeleteVisible, setDeleteVisibility] = useState(false);
-
-    /************* AD - Custom Functions *************/
-
+    // ================ AD - Custom Functions ===================
+    /**
+     * Function will enable data transfer from child to parent through props 
+     * so customer data can be re-fetched from DB in the parent class using an apropiate service method.
+     * In case we have multiple child nested inside of each other this step has to repeated in the intermediary (mediator) class. 
+     */
      const triggerScreenRefresh=()=>{
-        //props.refreshScreen(reloadSwitch);
         console.log("const triggerScreenRefresh=()=>{");
         props.refreshScreen("trigger from ListCreatedItem.js");
     }
-
-     /* AD - A custom function to store new item data taken from user 
-        input taken from the CreateItemInput modal window */
-    const onAddItem = (childdata) => {
-        addItemToList(itemList =>[...itemList, childdata]);
-    
-        console.log('childdata.categoryId: ' + childdata.categoryId);
-        console.log('childdata.customerId: ' + childdata.customerId);
-        console.log('childdata.title: ' + childdata.title);
-        console.log('childdata.price: ' + childdata.price);
-        console.log('childdata.description: ' + childdata.description);
-        console.log('childdata.description: ' + childdata.image);
-        console.log('childdata.condition: ' + childdata.condition);
-        console.log('childdata.location: ' + childdata.location);
-    
-        addData(childdata.categoryId, childdata.customerId, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
-        setDeleteVisibility(false);
-        //setLoading(true);
-      }
-
-      /* AD - A function related to modal visibility */
-      const cancelAddItem=()=>{
-        setDeleteVisibility(false);
-        //setLoading(false);
-      }
+    /**
+     * Function will process responseData received from the apropiate service method.
+     * Based on the nature of the response data (True -> removal was successful; or False -> removal was not successful)
+     * an Alert message will appear.
+     * @param {*} responseData 
+     */
+    function handleDeleteResponse(responseData){
+        if(responseData === true) {
+            Alert. alert(
+            "Deleted!", 
+            "Your posted item was removed successfully.", 
+            [ 
+                { 
+                text: "OK",
+                onPress: () => triggerScreenRefresh(), 
+                }, ], { cancelable: false } ); 
+        } else {
+            alert("Something went wrong! Please try again later.");
+        }           
+    }
 
       // AD - a dummmy More Info alert
         const moreInfoAlert = () =>
@@ -136,31 +125,16 @@ const ListCreatedItem=(props)=>{
             })
             };
             try {
-            response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+                response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
             } catch (error) {
-            alert("Error in the service method:" + error);
+                alert("Error in the service method:" + error);
             }
             try {
-            let responseData = await response.json();
-            console.log('responseData: ' + responseData);
-                if(responseData === true){
-                    //alert("Item was removed successfully!")
-                    Alert. alert(
-                    "Deleted!", 
-                    "Your posted item was removed successfully.", 
-                    [ 
-                        { 
-                        text: "OK",
-                        onPress: () => triggerScreenRefresh(), 
-                        }, ], { cancelable: false } ); 
-                        /* onPress: () => { setReloadSwitch(true); }, 
-                        }, ], { cancelable: false } ); */
-                }
-                else{
-                    alert("Something went wrong! Please try again later.");
-                }              
+                let responseData = await response.json();
+                console.log('responseData: ' + responseData);
+                handleDeleteResponse(responseData); // Java service method will return TRUE or FALSE as a response.   
             } catch (error) {
-            alert("Error in response data:" + error);
+                alert("Error in response data:" + error);
             }
         }
 
@@ -205,7 +179,6 @@ const ListCreatedItem=(props)=>{
                         <Text
                             //text = 'submit' 
                             onPress={deleteAlert}
-                            // onPress={()=>setDeleteVisibility(true)} //TODEL
                             style={[TextStyling.textBlackSmall, styles.deleteButton]}>
                             DELETE
                         </Text>
