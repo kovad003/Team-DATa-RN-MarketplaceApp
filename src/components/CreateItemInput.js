@@ -83,7 +83,8 @@ const CreateItemInput=(props)=>{
     }
 
     const imageInputHandler=(enteredText)=>{
-        item.image = enteredText;
+        //item.image = enteredText;
+        item.image = "https://thumbs.dreamstime.com/z/sale-real-estate-sign-17187578.jpg"; //TODO: image upload
         console.log('entered text/image: ' + enteredText);
     }
 
@@ -146,8 +147,9 @@ const CreateItemInput=(props)=>{
               <Text style={TextStyling.textBlackSmall}>Image</Text>
               <View style={styles.itemNameRow}>               
               <Icon3 name="image" style={styles.iconStyling3a}></Icon3>    
-              <TextInput placeholder="Item's image"                
-                  style={styles.inputStyle3} 
+              <TextInput placeholder="Default image will be used" //placeholder="Item's image"                
+                  style={[styles.inputStyle3, {backgroundColor: "grey"}]}
+                  editable={false} 
                   onChangeText={imageInputHandler}/>               
               </View>
 
