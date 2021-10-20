@@ -261,6 +261,12 @@ function CreateItemScreen(props) {
     }
   }
 
+  const reFetchCustomerData = (childdata) => {
+    console.log("reFetchCustomerData: " + childdata);
+    setLoadingCustomerData(true);
+  }
+
+
 /*
   AD - This function is called every time the view is rendered.
        There are async functions which get called, and so new calls of such functions
@@ -388,7 +394,8 @@ function CreateItemScreen(props) {
           visibility={isflatListVisible} 
           onAddItem={onAddItem}
           itemList={items} 
-          onCancelItem={cancelAddItem2} 
+          onCancelItem={cancelAddItem2}
+          reFetchCustomerData={reFetchCustomerData} 
           />         
 
         </View>

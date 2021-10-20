@@ -151,6 +151,16 @@ const MyPostedItems=(props)=>{
        lest new re-renders are executed. Such methods are state variables
        and endless re-renders could occur, unless stopped by useEffect.  
 */
+
+  const refreshScreen = (childdata) => {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    console.log("reloadSwitch is: " + childdata);
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    props.reFetchCustomerData("trigger from MyPostedItems.js");
+  }
+
+  //refreshScreen();
+
   useEffect(() => {
     console.log('useEffect(() => {'); 
       if (isLoadingItemToUpdate==true){
@@ -193,7 +203,9 @@ const MyPostedItems=(props)=>{
                       condition={itemData.item.condition}
                       location={itemData.item.location}
                       datePosted={itemData.item.datePosted} //timestamp has to be displayed as date and maybe time
-                      onDelete={()=>onDeleteItem(itemData.item.itemId)} // TODO: remove -> TODEL
+                      onDelete={()=>onDeleteItem(itemData.item.itemId)
+                      } // TODO: remove -> TODEL
+                      refreshScreen={refreshScreen}
                   />}
                   />
         </View>

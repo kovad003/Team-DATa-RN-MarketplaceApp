@@ -39,10 +39,19 @@ const ListCreatedItem=(props)=>{
     const [items, setItems] = useState([]);
     const [itemList, addItemToList] = useState([]);
 
+    const [reloadSwitch, setReloadSwitch] = useState(false);
+    const data = "This is data from Child Component to the Parent Component. :)" //TODEL
+
     /* AD - Handles the delete item modal window visibility (useState variable) */
     const [isDeleteVisible, setDeleteVisibility] = useState(false);
 
     /************* AD - Custom Functions *************/
+
+     const triggerScreenRefresh=()=>{
+        //props.refreshScreen(reloadSwitch);
+        console.log("const triggerScreenRefresh=()=>{");
+        props.refreshScreen("trigger from ListCreatedItem.js");
+    }
 
      /* AD - A custom function to store new item data taken from user 
         input taken from the CreateItemInput modal window */
@@ -135,11 +144,21 @@ const ListCreatedItem=(props)=>{
             let responseData = await response.json();
             console.log('responseData: ' + responseData);
                 if(responseData === true){
-                    alert("Item was removed successfully!")
+                    //alert("Item was removed successfully!")
+                    Alert. alert(
+                    "Deleted!", 
+                    "Your posted item was removed successfully.", 
+                    [ 
+                        { 
+                        text: "OK",
+                        onPress: () => triggerScreenRefresh(), 
+                        }, ], { cancelable: false } ); 
+                        /* onPress: () => { setReloadSwitch(true); }, 
+                        }, ], { cancelable: false } ); */
                 }
                 else{
                     alert("Something went wrong! Please try again later.");
-                }
+                }              
             } catch (error) {
             alert("Error in response data:" + error);
             }
