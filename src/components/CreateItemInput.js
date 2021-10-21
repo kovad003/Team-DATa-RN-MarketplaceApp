@@ -384,7 +384,7 @@ const CreateItemInput=(props)=>{
               <Icon1 name="tag" style={styles.iconStyling}></Icon1>
               <TextInput placeholder="Item's name" 
                   style={styles.inputStyle}
-                  maxLength={5} 
+                  maxLength={15} 
                   onChangeText={titleInputHandler}/>
               </View>
 
