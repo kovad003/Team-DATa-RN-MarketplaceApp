@@ -40,6 +40,7 @@ import colors from "../constants/colors";
 import { isEmpty } from 'lodash';
 import ScrollDownList from './ScrollDownList';
 import ListItemToSelect from './list/ListItemToSelect';
+import App from '../../App';
 
 
 /* AD - The main function of the component */
@@ -133,6 +134,7 @@ const CreateItemInput=(props)=>{
     const handleCategorySelection=(selectedItem)=>{
       setCategoryModalVisibility(false);
       setCategory(selectedItem);
+      item.categoryId=selectedItem.categoryId;
       inputValidator.category=true;
       // ToConsole
       console.log("selected item: " +  JSON.stringify(selectedItem));
@@ -164,10 +166,21 @@ const CreateItemInput=(props)=>{
     }
 
     //ALERT messages:
+    function validationFailedAlert(){
+      Alert.alert(
+        "Warning!",
+        "Please complete the form!",
+        [ 
+            { 
+            text: "OK",
+            onPress: () => console.log("OK Pressed"), 
+            }, ], { cancelable: false } );        
+    }
+
     function handleWrongPriceFormat(){
       Alert.alert(
         "Wrong Format!",
-        "You must enter a number: '99.99' or '99'",
+        "Price must be a number.",
         [ 
             { 
             text: "OK",
@@ -178,6 +191,12 @@ const CreateItemInput=(props)=>{
     function checkAllFields() {
       for (const item of Object.entries(inputValidator)) {
         console.log(item[0] + " -> " + item[1])
+        if(item[1] == false){
+          //ALERT MESSAGE
+        }
+        else{
+
+        }
       }
     }
 
@@ -295,8 +314,27 @@ const CreateItemInput=(props)=>{
      * 
      */
     const addItem=()=>{
+      var counter = 0;
+      for (const validationItem of Object.entries(inputValidator)) {
+        //console.log(item[0] + " -> " + item[1])
+        if(validationItem[1] == false){
+          counter++;
+        }
+        else{
+          console.log("Validation is OK!")
+        }
+        console.log(validationItem[0] + " -> " + validationItem[1]);
+        console.log("Mistakes counted so far: " + counter);
+      }
+      if (counter == 0) {
+        console.log('Inserting data to DB...');
         props.onAddItem(item);
+      } else {
+        validationFailedAlert();
+      } 
     }
+    
+    
     /**
      * 
      */
