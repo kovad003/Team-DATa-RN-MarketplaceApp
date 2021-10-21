@@ -34,11 +34,14 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// LOGIN Imports
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 /* AD - The main function of the page */
 function CreateItemScreen(props) {
 
   /************* AD - State Variables *************/
-
+// STATE VARIABLES ------------------------------------------------------------------
   /* AD - Handles the display of messages (useState variable) */
   const [messageDisplayed, setMessageDisplayed] = useState('');
   const [hasMessage, setMessage] = useState(false);
@@ -55,6 +58,15 @@ function CreateItemScreen(props) {
   const [isVisible, setVisibility] = useState(false);
   const [isflatListVisible, setflatListVisibility] = useState(false);
 
+  // CustomerId is available after login -> service methods
+  const [SESSIONID, setSESSIONID] = useState();
+// END OF STATE VARIABLES -----------------------------------------------------------
+
+// GETTING SESSION ID ---------------------------------------------------------------
+  AsyncStorage.getItem("StoredSessionId").then((value) => setSESSIONID(value));
+  AsyncStorage.getItem("StoredSessionId").then((value) => console.log("App.js -> Session ID value: " + value));
+  console.log('App.js SESSIONID: ' + SESSIONID)
+// END OF GETTING SESSION ID --------------------------------------------------------
 
   /************* AD - Custom Functions *************/
 
@@ -72,7 +84,7 @@ function CreateItemScreen(props) {
     console.log('childdata.condition: ' + childdata.condition);
     console.log('childdata.location: ' + childdata.location);
 
-    addData(childdata.categoryId, 1000, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
+    addData(childdata.categoryId, SESSIONID, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
     setVisibility(false);
     //setLoading(true);
   }
@@ -143,7 +155,7 @@ function CreateItemScreen(props) {
     try{
       /* AD - This waits for the fetch to be completed successfully. 
       It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getcustomeritems/1000"); //TODO: apply SESSION ID
+      response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getcustomeritems/${SESSIONID}`); //TODO: apply SESSION ID
     }
     /* AD - A try catch to catch errors*/
     catch(error){      
