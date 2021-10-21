@@ -59,13 +59,13 @@ function CreateItemScreen(props) {
   const [isflatListVisible, setflatListVisibility] = useState(false);
 
   // CustomerId is available after login -> service methods
-  const [SESSIONID, setSESSIONID] = useState();
+  const [SESSIONID, setSESSIONID] = useState(1000);
 // END OF STATE VARIABLES -----------------------------------------------------------
 
 // GETTING SESSION ID ---------------------------------------------------------------
-  AsyncStorage.getItem("StoredSessionId").then((value) => setSESSIONID(value));
+ /*  AsyncStorage.getItem("StoredSessionId").then((value) => setSESSIONID(value));
   AsyncStorage.getItem("StoredSessionId").then((value) => console.log("App.js -> Session ID value: " + value));
-  console.log('App.js SESSIONID: ' + SESSIONID)
+  console.log('App.js SESSIONID: ' + SESSIONID) */
 // END OF GETTING SESSION ID --------------------------------------------------------
 
   /************* AD - Custom Functions *************/
