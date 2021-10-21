@@ -29,66 +29,70 @@ import colors from "../constants/colors";
 import TextStyling from '../constants/fontstyling';
 
 /* AD - External custom components */
-import MyPostedItemsDelete from './createItem/MyPostedItemsDelete';
 
 /* AD - The main function of the page */
 const ListCreatedItem=(props)=>{
 
-    /************* AD - State Variables *************/
+// ================ AD - State Variables ================
+        // Currently empty
 
-    /* AD - Handles the items (useState variable / array) */
-    const [items, setItems] = useState([]);
-    const [itemList, addItemToList] = useState([]);
+// ================ AD - Custom Functions ===================
+    /**
+     * Function will enable data transfer from child to parent through props 
+     * so customer data can be re-fetched from DB in the parent class using an apropiate service method.
+     * In case we have multiple child nested inside of each other this step has to repeated in the intermediary (mediator) class. 
+     */
+     const triggerScreenRefresh=()=>{
+        console.log("const triggerScreenRefresh=()=>{");
+        props.refreshScreen("trigger from ListCreatedItem.js");
+    }
 
-    /* AD - Handles the delete item modal window visibility (useState variable) */
-    const [isDeleteVisible, setDeleteVisibility] = useState(false);
 
-    /************* AD - Custom Functions *************/
-
-     /* AD - A custom function to store new item data taken from user 
-        input taken from the CreateItemInput modal window */
-    const onAddItem = (childdata) => {
-        addItemToList(itemList =>[...itemList, childdata]);
-    
-        console.log('childdata.categoryId: ' + childdata.categoryId);
-        console.log('childdata.customerId: ' + childdata.customerId);
-        console.log('childdata.title: ' + childdata.title);
-        console.log('childdata.price: ' + childdata.price);
-        console.log('childdata.description: ' + childdata.description);
-        console.log('childdata.description: ' + childdata.image);
-        console.log('childdata.condition: ' + childdata.condition);
-        console.log('childdata.location: ' + childdata.location);
-    
-        addData(childdata.categoryId, childdata.customerId, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
-        setDeleteVisibility(false);
-        //setLoading(true);
-      }
-
-      /* AD - A function related to modal visibility */
-      const cancelAddItem=()=>{
-        setDeleteVisibility(false);
-        //setLoading(false);
-      }
-
-      // AD - a dummmy More Info alert
-        const moreInfoAlert = () =>
+// HANDLER Functions --------------------------------
+    /**
+     * This function will print the item details to the screen in form of an ALERT message.
+     */
+    function handleDetailsResponse() {
         Alert.alert(
-        "Dummy More Info",
-        "Here is more information about your post!",
-        [
-            {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-        );
+            "Details:",
+            `${props.description}`,
+            [
+                {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+                },
+                { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]);
+    }
 
-        // AD - a dummmy Update Info alert
-        const updateAlert = () =>
+    /**
+     * Function will process responseData received from the apropiate service method.
+     * Based on the nature of the response data (True -> removal was successful; or False -> removal was not successful)
+     * an Alert message will appear.
+     * @param {*} responseData 
+     */
+    function handleDeleteResponse(responseData){
+        if(responseData === true) {
+            Alert. alert(
+            "Deleted!",
+            "Your posted item was removed successfully.",
+            [ 
+                { 
+                text: "OK",
+                onPress: () => triggerScreenRefresh(), 
+                }, ], { cancelable: false } ); 
+        } else {
+            alert("Something went wrong! Please try again later.");
+        }           
+    }
+// End of HANDLER Functions --------------------------
+
+// ALERT Functions -----------------------------------
+    // AD - a dummmy Update Info alert //TODO: make an update feature!!!
+    const updateAlert = () =>
         Alert.alert(
-        "Dummy Update Info",
+        "Update Alert!",
         "Your post was successfully updated!",
         [
             {
@@ -97,8 +101,83 @@ const ListCreatedItem=(props)=>{
             style: "cancel"
             },
             { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-        );
+        ]);
+
+    // AD - Delete Alert
+    const deleteAlert = () =>
+        Alert.alert(
+        "Delete Alert!",
+        "Are you sure you want to remove this item? This process can not be undone!",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => deleteItem(props.itemId) }
+        ]);
+// End of ALERT Functions ---------------------------
+
+// SERVICE METHODS ----------------------------------------------------------------------------------------------------------------
+        /* AD - An async function to GET (fetch) data from the Java backend 
+        (which interacts with our MySQL / Google Cloud database). This one is WIP */
+        async function fetchItemtoUpdate(itemId) {
+            console.log("itemId: " + itemId);
+            //Variable res is used later, so it must be introduced before try block and so cannot be const.
+            let response = null;
+            try{
+            /* AD - This waits for the fetch to be completed successfully. 
+            It is also a timeout (for server timeouts), which is also a possible response. */
+                response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getjsonitemtoupdate/${itemId}`);
+            }
+            /* AD - A try catch to catch errors */
+            catch(error){
+                alert("Error in the service method:" + error);
+            }
+            try{
+            /* AD - This gets json from the response. 
+            Essentially, the variable responseData is assigned a value, that is the json from the response. */
+                let responseData = await response.json();
+                console.log(JSON.stringify(responseData, null, 4));
+                if(responseData != null){
+                    handleDetailsResponse(responseData);
+                } else {
+                    console.log("responseData is null: ");
+                }
+            }
+            catch(error){
+                alert("Error in response data:" + error);
+            }
+        }
+
+        /* AD - An async function to DELETE data to the Java backend (which interacts with our MySQL / Google Cloud database) */
+        // Delivers parameter as JSON data 
+        async function deleteItem(idParam) {
+            console.log('started:  async function deleteItem(idParam) {');
+            let response = null;
+            let requestOptions = {
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                itemId: idParam*1, // *1 -> numbers only
+            })
+            };
+            try {
+                response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+            } catch (error) {
+                alert("Error in the service method:" + error);
+            }
+            try {
+                let responseData = await response.json();
+                console.log('responseData: ' + responseData);
+                handleDeleteResponse(responseData); // Java service method will return TRUE or FALSE as a response.   
+            } catch (error) {
+                alert("Error in response data:" + error);
+            }
+        }
+// End of SERVICE Methods ---------------------------------------------------------------------------------------------
 
     return(
 
@@ -115,7 +194,7 @@ const ListCreatedItem=(props)=>{
 
                 <View style={styles.rightInnerContainer}>
                     <View style={styles.innerRowContainer1}>
-                        <Text style={[TextStyling.textBlackSmall, styles.titleName]}>{props.itemId}&#41; {props.title}</Text>
+                        <Text style={[TextStyling.textBlackSmall, styles.titleName]}>{/* {props.itemId}&#41; */}{props.title}</Text>
                     </View>
 
                     <View style={styles.innerRowContainer2}>
@@ -128,9 +207,10 @@ const ListCreatedItem=(props)=>{
 
                     <View style={styles.innerRowContainer3}>
                         <Text
-                            onPress={moreInfoAlert} 
+                            //onPress={() => {fetchSingleItem(props.itemId)}}
+                            onPress={handleDetailsResponse}
                             style={[TextStyling.textBlackSmall, styles.moreButton]}>
-                            MORE INFO
+                            DETAILS
                         </Text>
                         <Text 
                             onPress={updateAlert}
@@ -138,23 +218,13 @@ const ListCreatedItem=(props)=>{
                             UPDATE
                         </Text>
                         <Text
-                            text = 'submit' 
-                            onPress={()=>setDeleteVisibility(true)}
+                            //text = 'submit' 
+                            onPress={deleteAlert}
                             style={[TextStyling.textBlackSmall, styles.deleteButton]}>
                             DELETE
                         </Text>
                         
                     </View>
-                    {/* AD - For the hidden MyPostedItemsDelete external component (modal), 
-                    which will become visible, when the user clicks the delete button below
-                    the listed item ('my posted items' rendered via the ListCreatedItem.js) */} 
-                        <MyPostedItemsDelete 
-                        visibility={isDeleteVisible} 
-                        onAddItem={onAddItem}
-                        itemList={items} 
-                        onCancelItem={cancelAddItem} 
-                        />
-
                 </View>
             </View>
         </View>

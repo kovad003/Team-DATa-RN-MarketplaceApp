@@ -34,11 +34,14 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// LOGIN Imports
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 /* AD - The main function of the page */
 function CreateItemScreen(props) {
 
   /************* AD - State Variables *************/
-
+// STATE VARIABLES ------------------------------------------------------------------
   /* AD - Handles the display of messages (useState variable) */
   const [messageDisplayed, setMessageDisplayed] = useState('');
   const [hasMessage, setMessage] = useState(false);
@@ -48,13 +51,22 @@ function CreateItemScreen(props) {
   const [itemList, addItemToList] = useState([]);
 
   /* AD - Handles loading state (useState variable) */
-  const [isLoading, setLoading] = useState(true);
+  const [isLoadingCustomerData, setLoadingCustomerData] = useState(true);
 
   /* AD - Handles the state of whether specific 
         modal windows are visible or not (useState variable)*/
   const [isVisible, setVisibility] = useState(false);
   const [isflatListVisible, setflatListVisibility] = useState(false);
 
+  // CustomerId is available after login -> service methods
+  const [SESSIONID, setSESSIONID] = useState(1000);
+// END OF STATE VARIABLES -----------------------------------------------------------
+
+// GETTING SESSION ID ---------------------------------------------------------------
+ /*  AsyncStorage.getItem("StoredSessionId").then((value) => setSESSIONID(value));
+  AsyncStorage.getItem("StoredSessionId").then((value) => console.log("App.js -> Session ID value: " + value));
+  console.log('App.js SESSIONID: ' + SESSIONID) */
+// END OF GETTING SESSION ID --------------------------------------------------------
 
   /************* AD - Custom Functions *************/
 
@@ -72,7 +84,7 @@ function CreateItemScreen(props) {
     console.log('childdata.condition: ' + childdata.condition);
     console.log('childdata.location: ' + childdata.location);
 
-    addData(childdata.categoryId, childdata.customerId, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
+    addData(childdata.categoryId, SESSIONID, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
     setVisibility(false);
     //setLoading(true);
   }
@@ -80,12 +92,12 @@ function CreateItemScreen(props) {
   /* AD - Functions related to the modal visibility */
   const cancelAddItem=()=>{
     setVisibility(false);
-    setLoading(false);
+    setLoadingCustomerData(false);
   }
 
   const cancelAddItem2=()=>{
     setflatListVisibility(false);
-    setLoading(false);
+    setLoadingCustomerData(false);
   }
 
   /* AD - A function related to deletion, currently a WIP */
@@ -109,7 +121,7 @@ function CreateItemScreen(props) {
 
   function closeMessage() {
     setMessage(false);
-    setLoading(true);
+    setLoadingCustomerData(true);
   }
 
   // AD - a comming soon alert
@@ -127,16 +139,23 @@ function CreateItemScreen(props) {
   ]
 );
 
+// Handler Functions ---------------------------------------------------
+  const handleMyPostedItemModal=()=>{
+    setLoadingCustomerData(true);
+    setflatListVisibility(true);
+  }
+
   /************* AD - Service Functions (connects to a Java Backend) *************/
   
   /* AD - An async function to GET (fetch) data from the Java backend (which interacts with our MySQL / Google Cloud database) */
-  async function fetchData() {
+  async function fetchCustomerData() {
+    console.log("CreateItemScreen.js -> async function fetchCustomerData() {");
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
       /* AD - This waits for the fetch to be completed successfully. 
       It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+      response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getcustomeritems/${SESSIONID}`); //TODO: apply SESSION ID
     }
     /* AD - A try catch to catch errors*/
     catch(error){      
@@ -147,7 +166,7 @@ function CreateItemScreen(props) {
       Essentially, the variable responseData is assigned a value, that is the json from the response. */
       let responseData = await response.json();
       /* AD - A console log is added, so that the success of the response can be made apparent in the terminal */
-      console.log(responseData); 
+      console.log("Response Data as JSON: " + JSON.stringify(responseData, null, 4)); 
       setItems(responseData);
     }
     catch(error){
@@ -254,6 +273,17 @@ function CreateItemScreen(props) {
     }
   }
 
+  /**
+   * This Function triggers a customer data re-fetch. The request for that is originating from the child (or component) class
+   * where the appropiate service method is used to remove a certain item from the DB, specified by its ID number.
+   * @param {*} childdata 
+   */
+  const reFetchCustomerData = (childdata) => {
+    console.log("reFetchCustomerData: " + childdata);
+    setLoadingCustomerData(true);
+  }
+
+
 /*
   AD - This function is called every time the view is rendered.
        There are async functions which get called, and so new calls of such functions
@@ -263,15 +293,15 @@ function CreateItemScreen(props) {
 */
   useEffect(() => {
     console.log('useEffect(() => {'); 
-      if (isLoading==true){
-        fetchData();
-        setLoading(false);
+      if (isLoadingCustomerData==true){
+        fetchCustomerData();
+        setLoadingCustomerData(false);
     }
   });
 
   /* AD - An if statement to return an activity indicator if certain async functions,
           like GET (fetch) are not yet ready */
-  if (isLoading==true) {
+  if (isLoadingCustomerData==true) {
     console.log('if(isLoading==true) {');
     return (
       <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
@@ -343,7 +373,8 @@ function CreateItemScreen(props) {
          
 
           <MenuRow
-            onSelect={()=>setflatListVisibility(true)} 
+            // onSelect={()=>setflatListVisibility(true)}
+            onSelect={()=>handleMyPostedItemModal()} 
             style = {styles.row2} 
             bckgcol = {colors.darkGreenCustom} 
             rowText = "My Posted Items"
@@ -380,16 +411,14 @@ function CreateItemScreen(props) {
           visibility={isflatListVisible} 
           onAddItem={onAddItem}
           itemList={items} 
-          onCancelItem={cancelAddItem2} 
+          onCancelItem={cancelAddItem2}
+          reFetchCustomerData={reFetchCustomerData} 
           />         
 
         </View>
       </View>
-    </ScrollView>   
-      
-    );
-  }
-};
+    </ScrollView>         
+    );}};
 
 /************* AD - Stylings *************/
 const styles = StyleSheet.create({

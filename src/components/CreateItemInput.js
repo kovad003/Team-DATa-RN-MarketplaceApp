@@ -22,8 +22,8 @@
  */
 
 /* AD - Standard imports from both React and React-Native */
-import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, Alert, FlatList} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 /* AD - imports for the logos and items*/
@@ -37,80 +37,341 @@ import Icon4 from "react-native-vector-icons/MaterialIcons";
 import TextStyling from '../constants/fontstyling';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
+import { isEmpty } from 'lodash';
+import ScrollDownList from './ScrollDownList';
+import ListItemToSelect from './list/ListItemToSelect';
 
 
 /* AD - The main function of the component */
 const CreateItemInput=(props)=>{
-
   /************* AD - State Variables *************/
+  // STATE VARIABLES ======================================================================================================  
+  /*AD - State variable (defines the item object)*/
+    const [colorValidator, setColorValidator] = useState(true);
+    const [inputValidator, setInputValidator] = useState({
+      title: false,
+      price: false,
+      description: false,
+      // image: false,
+      category: false,
+      condition: false,
+      location: false,
+    });
 
-    // AD - State variable (defines the item object)
+    // Item to be added to the DB
     const [item, setItem] = useState({
-        categoryId: 1,
-        customerId: 1, //TODO
-        title: 'some name',
+        categoryId: 0,
+        categoryTitle: "some category",
+        customerId: 0, // Will be set at the Screen class (SESSIONID)
+        title: 'some title',
         price: 0,
         description: 'some description',
-        image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
-        condition: 'used',
-        location: 'Hämeenlinna',
+        //image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
+        image: "https://thumbs.dreamstime.com/z/sale-real-estate-sign-17187578.jpg",
+        condition: 'some condition',
+        location: 'some location',
     });
-    /* const [formChecker, setFormChecker] = useState({
-        categoryinput: 'false',
-    }) */
+
+    // Handle Condition Data
+    const [conditionList, addConditionToList] = useState(["very new", "new", "used", "old"]);
+    const [selectedCondition, setSelectedCondition] = useState("Please select...");
+
+    // Handle Category Data
+    const [categoryList, addCategoryToList] = useState([null]); // Will store available categories from DB (JAVA)
+    const [selectedCategory, setCategory] = useState({
+      title: "Please select..." // category title
+    }); // Will be used to select a category
+
+    // Handle Region Data
+    const [regionList, addRegionToList] = useState([null]); // Will store available regions from DB (JAVA)
+    const [selectedRegionId, setRegionId] = useState(); // Will be used to fetch available cities in region (JAVA)
+
+    // Handle City Data
+    const [cityList, addCityToList] = useState([]); // Will store available cities per region
+    const [selectedCity, setSelectedCity] = useState({
+      cityId: null,
+      cityName: "Please select..."
+    }); // JSON taken from DB (JAVA)  
+
+    // Handle Modals => Will show/hide selection modals
+    const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
+    const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
+    const [isRegionModalVisible, setRegionModalVisibility] = useState(false);
+    const [isCityModalVisible, setCityModalVisibility] = useState(false);
+
+    // Handle Loading => Will trigger Data transfer
+    const [isLoadingCategories, setLoadingCategories] = useState(true);
+    const [isLoadingRegions, setLoadingRegions] = useState(true);
+    const [isLoadingCities, setLoadingCities] = useState(false);
+    const [isCityListReady, setCityListReadiness] = useState(false);
 
     /************* AD - Custom Functions *************/
+    // SHOW/HIDE Modals ======================================================================================================
+    const openCategoryModal = () => {
+      setCategoryModalVisibility(true);
+    }
+    const openConditionModal = () => {
+      setConditionModalVisibility(true);
+    }
+    const openRegionModal = () => {
+      setLoadingRegions(true);
+      setRegionModalVisibility(true);
+    }
+    const onCancel=()=>{
+      setCategoryModalVisibility(false);
+      setConditionModalVisibility(false);
+    }  
 
-    /* AD - input handlers, to take input from the text input fields */
-    const categoryInputHandler=(enteredText)=>{
-        item.categoryId = enteredText;
-        console.log('entered text/categoryId: ' + enteredText);
+    // SELECTION HANDLER Functions ===================================================================================================
+    const handleCategorySelection=(selectedItem)=>{
+      setCategoryModalVisibility(false);
+      setCategory(selectedItem);
+      item.categoryId=selectedItem.id;
+      inputValidator.category=true;
+      // ToConsole
+      console.log("selected item: " +  JSON.stringify(selectedItem));
+    }
+    const handleConditionSelection=(selectedItem)=>{
+    setSelectedCondition(selectedItem);
+    setConditionModalVisibility(false);
+    item.condition=selectedItem.toString();
+    inputValidator.condition=true;
+    // ToConsole
+    //console.log("selected item: " +  JSON.stringify(selectedItem));
+    }
+    const handleRegionSelection=(selectedItem)=>{
+      setRegionModalVisibility(false);
+      setRegionId(selectedItem.regionId);
+      //changeCitySwipeAccessibility();
+      setLoadingCities(true);
+      //setCityModalVisibility(true);
+      // ToConsole
+      console.log("selected item: " +  JSON.stringify(selectedItem));
+      console.log("setRegion to " +selectedItem.regionId);
+    }
+    const handleCitySelection=(selectedItem)=>{
+    setSelectedCity(selectedItem);
+    setRegionModalVisibility(false);
+    setCityModalVisibility(false);
+    item.location=selectedItem.cityName;
+    inputValidator.location=true;
+    // ToConsole
+    console.log("selected item: " +  JSON.stringify(selectedItem));
     }
 
+    // ALERT messages ======================================================================================================
+    function validationFailedAlert(){
+      Alert.alert(
+        "Warning!",
+        "Please complete the form!",
+        [ 
+            { 
+            text: "OK",
+            onPress: () => console.log("OK Pressed"), 
+            }, ], { cancelable: false } );        
+    }
+
+    function handleWrongPriceFormat(){
+      Alert.alert(
+        "Wrong Format!",
+        "Price must be a number.",
+        [ 
+            { 
+            text: "OK",
+            onPress: () => console.log("OK Pressed"), 
+            }, ], { cancelable: false } );        
+    }
+
+    // INPUT HANDLERS ======================================================================================================
     const titleInputHandler=(enteredText)=>{
-        item.title = enteredText;
-        console.log('entered text/title: ' + enteredText);
+      item.title = enteredText; 
+      console.log('entered text/title: ' + enteredText);
+      if(isEmpty(enteredText)){
+        inputValidator.title = false;
+        console.log("No text was entered!");
+      }
+      else{        
+        inputValidator.title = true;
+        console.log('entered text/description: ' + enteredText);
+      }
     }
 
     const priceInputHandler=(enteredText)=>{
+      console.log('entered text/price: ' + enteredText);
+      if(isNaN(enteredText)){
+        setColorValidator(false);
+        inputValidator.price = false;
+        handleWrongPriceFormat();
+        // ToConsol:
+        console.log('Not a number');
+        console.log("colorValidator is: " + colorValidator);
+      }
+      else{
+        setColorValidator(true);
+        inputValidator.price = true;
         item.price = enteredText;
-        console.log('entered text/price: ' + enteredText);
+        // ToConsol:
+        console.log('This is a number');
+      }
+      if(isEmpty(enteredText)) {
+        inputValidator.price = false;
+        // ToConsol:
+        console.log("No text was entered!");
+      } 
     }
 
     const descriptionInputHandler=(enteredText)=>{
-        item.description = enteredText;
+      item.description = enteredText;
+      if(isEmpty(enteredText)){
+        inputValidator.description = false;
+        // ToConsol:
+        console.log("No text was entered!");
+      }
+      else{        
+        inputValidator.description = true;
+        // ToConsol:
         console.log('entered text/description: ' + enteredText);
+      }
     }
 
     const imageInputHandler=(enteredText)=>{
-        item.image = enteredText;
+        //item.image = enteredText;
+        item.image = "https://thumbs.dreamstime.com/z/sale-real-estate-sign-17187578.jpg"; //TODO: image upload
+        // ToConsol:
         console.log('entered text/image: ' + enteredText);
     }
-
-    const conditionInputHandler=(enteredText)=>{
-        item.condition = enteredText;
-        console.log('entered text/condition: ' + enteredText);
-    }
-
-    const locationInputHandler=(enteredText)=>{
-        item.location = enteredText;
-        console.log('entered text/location: ' + enteredText);
-    }
     
-    /* AD - custom functions to control the modal 
-    (other functions are called via props, and the item object can be added) */
+    // ADD ITEM / CANCEL ACTION ========================================================================================
+    /* (other functions are called via props, and the item object can be added) */
     const addItem=()=>{
+      var counter = 0;
+      for (const validationItem of Object.entries(inputValidator)) {
+        //console.log(item[0] + " -> " + item[1])
+        if(validationItem[1] == false){
+          counter++;
+        }
+        else{
+          console.log("Validation is OK!")
+        }
+        console.log(validationItem[0] + " -> " + validationItem[1]);
+        console.log("Mistakes counted so far: " + counter);
+      }
+      if (counter == 0) {
+        console.log('Inserting data to DB...');
         props.onAddItem(item);
+      } else {
+        validationFailedAlert();
+      } 
     }
+     
     const cancelItem=()=>{
         props.onCancelItem();
     }
 
-    
-    return (
+  // SERVICE FUNCTIONS ======================================================================================================
+  // *** GET ***
+  async function getAllCategory() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
+    }
+    catch(error){
+      alert("Error in Service Method: " + error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      addCategoryToList(responseData);
+      // To console
+      // console.log(responseData);
+      console.log('categoryList: ' + categoryList)
+    }
+    catch(error){
+      alert("Error in Response Data: " + error);
+    }
+  }
 
+  // *** GET ***
+  async function getAllRegion() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
+    }
+    catch(error){
+      alert("Error in service method: " + error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      addRegionToList(responseData);
+      // Toonsole
+      console.log('regionList: ' + regionList)
+    }
+    catch(error){
+      alert("Error in Response Data: " + error);
+    }
+  }
+
+  // *** GET ***
+  async function getAllCityInRegion(regionId) {
+    console.log("async function getAllCityInRegion(regionId) {");
+    console.log('regionId = ' + regionId);
+    // Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      // This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
+      //console.log("Fetching response... => response: " + JSON.stringify(response, null, 4))
+    }
+    catch(error){
+      console.log(error);
+      alert("Error in service method: " + error);
+    }
+    try{
+      // Getting json from the response
+      let responseData = await response.json();
+      addCityToList(responseData.regionCities);
+      console.log("cities in region" + JSON.stringify(responseData.regionCities, null, 4));
+    }
+    catch(error){
+      console.log(error);
+      alert("Error in Response Data: " + error);
+    }
+  }
+
+
+// USE EFFECT FUNCTION ====================================================================================================
+  useEffect(() => {
+    console.log('useEffect(() => {');
+      if (isLoadingCategories==true){
+        getAllCategory();
+        setLoadingCategories(false);
+      } 
+      if (isLoadingRegions==true){
+        getAllRegion();
+        setLoadingRegions(false);
+      }
+      if(isLoadingCities==true){
+        getAllCityInRegion(selectedRegionId);
+        setLoadingCities(false);
+        setCityListReadiness(true);
+      }
+      if(isCityListReady==true){
+        console.log("if(isCityListReady==true){");
+        //console.log("cityList: " + JSON.stringify(cityList));
+        setCityModalVisibility(true);
+        setCityListReadiness(false);
+      }
+  });
+// ========================================================================================================================
+
+  return (
   /************* AD - The data to be rendered and visible to the user *************/
-  
+      <View>
         <Modal visible={props.visibility} animationType="slide">
           <ScrollView style={styles.scrollView}>
             <View style={styles.formStyle}>
@@ -122,7 +383,8 @@ const CreateItemInput=(props)=>{
               <View style={styles.itemNameRow}>
               <Icon1 name="tag" style={styles.iconStyling}></Icon1>
               <TextInput placeholder="Item's name" 
-                  style={styles.inputStyle} 
+                  style={styles.inputStyle}
+                  maxLength={15} 
                   onChangeText={titleInputHandler}/>
               </View>
 
@@ -131,7 +393,8 @@ const CreateItemInput=(props)=>{
               <Icon2 name="euro-sign" style={styles.iconStyling2}></Icon2>  
               
               <TextInput placeholder="Item's price" 
-                  style={styles.inputStyle} 
+                  style={[styles.inputStyle, {borderColor: colorValidator ? colors.darkBlueCustom : "red"}]} //backgroundColor: darkMode ? '#282f3b' : '#f5f5f5',
+                  maxLength={10} 
                   onChangeText={priceInputHandler}/>                
               </View>
 
@@ -139,53 +402,137 @@ const CreateItemInput=(props)=>{
               <View style={styles.itemNameRow}>               
               <Icon3 name="edit" style={styles.iconStyling3}></Icon3>    
               <TextInput placeholder="Item's description"                
-                  style={styles.inputStyle2} 
+                  style={styles.inputStyle2}
+                  maxLength={255}
+                  multiline={true}
+                  numberOfLines={8}  
                   onChangeText={descriptionInputHandler}/>               
               </View>
                 
               <Text style={TextStyling.textBlackSmall}>Image</Text>
               <View style={styles.itemNameRow}>               
               <Icon3 name="image" style={styles.iconStyling3a}></Icon3>    
-              <TextInput placeholder="Item's image"                
-                  style={styles.inputStyle3} 
+              <TextInput placeholder="Default image will be used" //placeholder="Item's image"                
+                  style={[styles.inputStyle3, {backgroundColor: "grey"}]}
+                  editable={false} 
                   onChangeText={imageInputHandler}/>               
               </View>
 
               <Text style={TextStyling.textBlackSmall}>Category</Text>
-              <View style={styles.itemNameRow}>
+              <View style={styles.itemNameRow}>                
               <Icon4 name="category" style={styles.iconStyling5}></Icon4> 
-              <TextInput placeholder="Item's category" 
-                  style={styles.inputStyle} 
-                  onChangeText={categoryInputHandler}/>
-              </View>
+              <TextInput //placeholder="Item's category" 
+                style={styles.inputStyle}
+                editable={false}
+                value={selectedCategory.title || "select one"}
+                //onChangeText={categoryInputHandler}
+              />                           
+              </View> 
+              {/* AD please style it! */}
+              <ScrollDownList
+                onPress={openCategoryModal}
+              />
 
               <Text style={TextStyling.textBlackSmall}>Condition</Text>
               <View style={styles.itemNameRow}>
               <Icon4 name="build-circle" style={styles.iconStyling5}></Icon4> 
-              <TextInput placeholder="Item's condition" 
-                  style={styles.inputStyle} 
-                  onChangeText={conditionInputHandler}/>
+              <TextInput //placeholder="Item's condition" 
+                style={styles.inputStyle} 
+                editable={false}
+                value={selectedCondition || "select one"}
+                //onChangeText={conditionInputHandler}
+              />
               </View>
+              <ScrollDownList
+                onPress={openConditionModal}
+              />
 
               <Text style={TextStyling.textBlackSmall}>Location</Text>
               <View style={styles.itemNameRow}>
               <Icon4 name="my-location" style={styles.iconStyling5}></Icon4> 
-              <TextInput placeholder="Item's location"
-                  style={styles.inputStyle}
-                  onChangeText={locationInputHandler}/>
+              <TextInput //placeholder="Item's location"
+                style={styles.inputStyle}
+                editable={false}
+                value={selectedCity.cityName || "select one"}
+                //onChangeText={locationInputHandler}
+              />
               </View>
+              <ScrollDownList
+                onPress={openRegionModal}
+              />
 
               <View style={styles.buttonView}>
-                  <View style={styles.button}>
-                  <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
-                  </View>
-                  <View style={styles.button}>
-                  <Button color='#000080' title="Add" onPress={addItem}/>
-                  </View>
+                <View style={styles.button}>
+                <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
+                </View>
+                <View style={styles.button}>
+                <Button color='#000080' title="Add" onPress={addItem}/>
+                </View>
               </View>          
             </View>
           </ScrollView>
         </Modal>
+              
+{/* MODALS -------------------------------------------------------------------------------- */}
+            <Modal visible={isCategoryModalVisible}>
+              <Text style={styles.modalTitle}>Available Categories</Text>
+              <FlatList
+                keyExtractor={(category) => category.id.toString()} 
+                data={categoryList}
+                renderItem={categoryData =>
+                  <ListItemToSelect 
+                    id={categoryData.item.id}
+                    name={categoryData.item.title}
+                    onPress={() => handleCategorySelection(categoryData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isConditionModalVisible}>
+              <Text style={styles.modalTitle}>Select a condition:</Text>
+              <FlatList
+                keyExtractor={(condition) => condition}
+                data={conditionList}
+                renderItem={conditionData =>
+                  <ListItemToSelect 
+                    name={conditionData.item}
+                    onPress={() => handleConditionSelection(conditionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel}/>
+            </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isRegionModalVisible}>
+              <Text style={styles.modalTitle}>Available Regions</Text>
+              <FlatList
+                keyExtractor={(region) => region.regionId.toString()} 
+                data={regionList}
+                renderItem={regionData =>
+                  <ListItemToSelect 
+                    id={regionData.item.regionId}
+                    name={regionData.item.regionName}
+                    onPress={() => handleRegionSelection(regionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isCityModalVisible}>
+              <Text style={styles.modalTitle}>Cities in Region</Text>
+              <FlatList
+                keyExtractor={(city) => city.cityId.toString()}
+                data={cityList}
+                renderItem={cityData =>
+                  <ListItemToSelect 
+                    id={cityData.item.cityId}
+                    name={cityData.item.cityName}
+                    onPress={() => handleCitySelection(cityData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>       
+      </View> 
     );
 }
 
@@ -301,6 +648,15 @@ const styles=StyleSheet.create({
         paddingRight: Paddings.narrow,
         paddingTop: 6,
       },
+      modalTitle:{
+      textAlign:'center',
+      marginBottom: 15,
+      padding: 5,
+      fontSize: 20,
+      fontWeight: "bold",
+      color: '#2d3553',
+      backgroundColor: colors.light1,
+    },
 });
 
 export default CreateItemInput;
