@@ -9,7 +9,9 @@ import fontstyling from "../constants/fontstyling";
 function ScrollDownList(props) {
   return (
     <View style={[styles.container]}>
-      <TouchableOpacity style={styles.row}>
+      <TouchableOpacity style={styles.row}
+        onPress={props.onPress}
+      >
         <Text style={styles.label}>{props.label || 'Select...'}</Text>
       </TouchableOpacity>
     </View>

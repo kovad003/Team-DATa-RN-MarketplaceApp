@@ -23,7 +23,7 @@
 
 /* AD - Standard imports from both React and React-Native */
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, Alert} from 'react-native';
+import {StyleSheet, View, TextInput, Button, Modal, findNodeHandle, Text, Alert, FlatList} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 /* AD - imports for the logos and items*/
@@ -38,6 +38,8 @@ import TextStyling from '../constants/fontstyling';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 import { isEmpty } from 'lodash';
+import ScrollDownList from './ScrollDownList';
+import ListItemToSelect from './list/ListItemToSelect';
 
 
 /* AD - The main function of the component */
@@ -67,11 +69,59 @@ const CreateItemInput=(props)=>{
         condition: 'used',
         location: 'Hämeenlinna',
     });
+
+    // Handle Condition Data
+    const [conditionList, addConditionToList] = useState(["very new", "new", "used", "old"]);
+    const [selectedCondition, setSelectedCondition] = useState("Please select...");
+
+    // Handle Category Data
+    const [categoryList, addCategoryToList] = useState([null]); // Will store available categories from DB (JAVA)
+    const [selectedCategory, setCategory] = useState({
+      title: "Please select..." // category title
+    }); // Will be used to select a category
+
+    // Handle Modals => Will show/hide selection modals
+    const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
+    const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
+
+    // Handle Loading => Will trigger Data transfer
+    const [isLoadingCategories, setLoadingCategories] = useState(true);
+    const [isLoadingRegions, setLoadingRegions] = useState(true);
+    const [isLoadingCities, setLoadingCities] = useState(false);
+
     /* const [formChecker, setFormChecker] = useState({
         categoryinput: 'false',
     }) */
 
     /************* AD - Custom Functions *************/
+    //PROMPT messages:
+    const openCategoryModal = () => {
+      setCategoryModalVisibility(true);
+    }
+    const openConditionModal = () => {
+      setConditionModalVisibility(true);
+    }
+    const onCancel=()=>{
+      setCategoryModalVisibility(false);
+      setConditionModalVisibility(false);
+    }
+
+    //HANDLER Functions:
+    const handleCategorySelection=(selectedItem)=>{
+      setCategoryModalVisibility(false);
+      setCategory(selectedItem);
+      inputValidator.category=true;
+      // ToConsole
+      console.log("selected item: " +  JSON.stringify(selectedItem));
+    }
+    const handleConditionSelection=(selectedItem)=>{
+    setSelectedCondition(selectedItem);
+    setConditionModalVisibility(false);
+    inputValidator.condition=true;
+    // ToConsole
+    //console.log("selected item: " +  JSON.stringify(selectedItem));
+  }
+
     //ALERT messages:
     function handleWrongPriceFormat(){
       Alert.alert(
@@ -213,19 +263,53 @@ const CreateItemInput=(props)=>{
         props.onCancelItem();
     }
 
-    /**
-     * 
-     */
-    /* useEffect(() => {
-      console.log('useEffect(() => {'); 
-      if (isLoading==true){
-        //setLoadingCustomerData(false);
+  // SERVICE FUNCTIONS ======================================================================================================
+  // *** GET ***
+  async function getAllCategory() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
     }
-  }); */
+    catch(error){
+      alert("Error in Service Method: " + error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      addCategoryToList(responseData);
+      // To console
+      // console.log(responseData);
+      console.log('categoryList: ' + categoryList)
+    }
+    catch(error){
+      alert("Error in Response Data: " + error);
+    }
+  }
+
+  
+// USE EFFECT FUNCTION ====================================================================================================
+  useEffect(() => {
+    console.log('useEffect(() => {');
+      if (isLoadingCategories==true){
+        getAllCategory();
+        setLoadingCategories(false);
+      } 
+      /* if (isLoadingRegions==true){
+        getAllRegion();
+        setLoadingRegions(false);
+      }
+      if(isLoadingCities==true){
+        getAllCityInRegion(selectedRegionId);
+        setLoadingCities(false);
+      } */
+  });
+// ========================================================================================================================
 
   return (
   /************* AD - The data to be rendered and visible to the user *************/
-  
+      <View>
         <Modal visible={props.visibility} animationType="slide">
           <ScrollView style={styles.scrollView}>
             <View style={styles.formStyle}>
@@ -273,40 +357,86 @@ const CreateItemInput=(props)=>{
               </View>
 
               <Text style={TextStyling.textBlackSmall}>Category</Text>
-              <View style={styles.itemNameRow}>
+              <View style={styles.itemNameRow}>                
               <Icon4 name="category" style={styles.iconStyling5}></Icon4> 
-              <TextInput placeholder="Item's category" 
-                  style={styles.inputStyle} 
-                  onChangeText={categoryInputHandler}/>
-              </View>
+              <TextInput //placeholder="Item's category" 
+                style={styles.inputStyle}
+                editable={false}
+                value={selectedCategory.title || "select one"}
+                //onChangeText={categoryInputHandler}
+              />                           
+              </View> 
+              {/* AD please style it! */}
+              <ScrollDownList
+                onPress={openCategoryModal}
+              />
 
               <Text style={TextStyling.textBlackSmall}>Condition</Text>
               <View style={styles.itemNameRow}>
               <Icon4 name="build-circle" style={styles.iconStyling5}></Icon4> 
-              <TextInput placeholder="Item's condition" 
-                  style={styles.inputStyle} 
-                  onChangeText={conditionInputHandler}/>
+              <TextInput //placeholder="Item's condition" 
+                style={styles.inputStyle} 
+                editable={false}
+                value={selectedCondition || "select one"}
+                //onChangeText={conditionInputHandler}
+              />
               </View>
+              <ScrollDownList
+                onPress={openConditionModal}
+              />
 
               <Text style={TextStyling.textBlackSmall}>Location</Text>
               <View style={styles.itemNameRow}>
               <Icon4 name="my-location" style={styles.iconStyling5}></Icon4> 
               <TextInput placeholder="Item's location"
-                  style={styles.inputStyle}
-                  onChangeText={locationInputHandler}/>
+                style={styles.inputStyle}
+                onChangeText={locationInputHandler}/>
               </View>
 
               <View style={styles.buttonView}>
-                  <View style={styles.button}>
-                  <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
-                  </View>
-                  <View style={styles.button}>
-                  <Button color='#000080' title="Add" onPress={addItem}/>
-                  </View>
+                <View style={styles.button}>
+                <Button color='#c83232' title="Cancel" onPress={cancelItem}/>
+                </View>
+                <View style={styles.button}>
+                <Button color='#000080' title="Add" onPress={addItem}/>
+                </View>
               </View>          
             </View>
           </ScrollView>
         </Modal>
+              
+        {/* MODALS -------------------------------------------------------------------------------- */}
+            <Modal visible={isCategoryModalVisible}>
+              <Text style={styles.modalTitle}>Available Categories</Text>
+              <FlatList
+                keyExtractor={(category) => category.id.toString()} 
+                data={categoryList}
+                renderItem={categoryData =>
+                  <ListItemToSelect 
+                    id={categoryData.item.id}
+                    name={categoryData.item.title}
+                    onPress={() => handleCategorySelection(categoryData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isConditionModalVisible}>
+              <Text style={styles.modalTitle}>Select a condition:</Text>
+              <FlatList
+                keyExtractor={(condition) => condition}
+                data={conditionList}
+                renderItem={conditionData =>
+                  <ListItemToSelect 
+                    name={conditionData.item}
+                    onPress={() => handleConditionSelection(conditionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel}/>
+            </Modal>
+{/*                       *******************                      */}
+      </View> 
+
     );
 }
 
@@ -422,6 +552,15 @@ const styles=StyleSheet.create({
         paddingRight: Paddings.narrow,
         paddingTop: 6,
       },
+      modalTitle:{
+      textAlign:'center',
+      marginBottom: 15,
+      padding: 5,
+      fontSize: 20,
+      fontWeight: "bold",
+      color: '#2d3553',
+      backgroundColor: colors.light1,
+    },
 });
 
 export default CreateItemInput;
