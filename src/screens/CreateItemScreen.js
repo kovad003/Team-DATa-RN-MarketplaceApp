@@ -72,7 +72,7 @@ function CreateItemScreen(props) {
     console.log('childdata.condition: ' + childdata.condition);
     console.log('childdata.location: ' + childdata.location);
 
-    addData(childdata.categoryId, childdata.customerId, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
+    addData(childdata.categoryId, 1000, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
     setVisibility(false);
     //setLoading(true);
   }

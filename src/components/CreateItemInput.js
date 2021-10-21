@@ -40,15 +40,13 @@ import colors from "../constants/colors";
 import { isEmpty } from 'lodash';
 import ScrollDownList from './ScrollDownList';
 import ListItemToSelect from './list/ListItemToSelect';
-import App from '../../App';
 
 
 /* AD - The main function of the component */
 const CreateItemInput=(props)=>{
   /************* AD - State Variables *************/
-
-    // AD - State variable (defines the item object)
-    // const [isLoading, setLoading] = useState(false);
+  // STATE VARIABLES ======================================================================================================  
+  /*AD - State variable (defines the item object)*/
     const [colorValidator, setColorValidator] = useState(true);
     const [inputValidator, setInputValidator] = useState({
       title: false,
@@ -60,15 +58,18 @@ const CreateItemInput=(props)=>{
       location: false,
     });
 
+    // Item to be added to the DB
     const [item, setItem] = useState({
-        categoryId: 1,
-        customerId: 1, //TODO
-        title: 'some name',
+        categoryId: 0,
+        categoryTitle: "some category",
+        customerId: 0, // Will be set at the Screen class (SESSIONID)
+        title: 'some title',
         price: 0,
         description: 'some description',
-        image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
-        condition: 'used',
-        location: 'Hämeenlinna',
+        //image: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg',
+        image: "https://thumbs.dreamstime.com/z/sale-real-estate-sign-17187578.jpg",
+        condition: 'some condition',
+        location: 'some location',
     });
 
     // Handle Condition Data
@@ -90,8 +91,7 @@ const CreateItemInput=(props)=>{
     const [selectedCity, setSelectedCity] = useState({
       cityId: null,
       cityName: "Please select..."
-    }); // JSON taken from DB (JAVA)
-    const [isCityListReady, setCityListReadiness] = useState(false);
+    }); // JSON taken from DB (JAVA)  
 
     // Handle Modals => Will show/hide selection modals
     const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
@@ -103,13 +103,10 @@ const CreateItemInput=(props)=>{
     const [isLoadingCategories, setLoadingCategories] = useState(true);
     const [isLoadingRegions, setLoadingRegions] = useState(true);
     const [isLoadingCities, setLoadingCities] = useState(false);
-
-    /* const [formChecker, setFormChecker] = useState({
-        categoryinput: 'false',
-    }) */
+    const [isCityListReady, setCityListReadiness] = useState(false);
 
     /************* AD - Custom Functions *************/
-    //PROMPT messages:
+    // SHOW/HIDE Modals ======================================================================================================
     const openCategoryModal = () => {
       setCategoryModalVisibility(true);
     }
@@ -120,21 +117,16 @@ const CreateItemInput=(props)=>{
       setLoadingRegions(true);
       setRegionModalVisibility(true);
     }
-    const openCityModal=()=>{
-    setCityModalVisibility(true);
-    }
-    
     const onCancel=()=>{
       setCategoryModalVisibility(false);
       setConditionModalVisibility(false);
-    }
-    
+    }  
 
-    //HANDLER Functions:
+    // SELECTION HANDLER Functions ===================================================================================================
     const handleCategorySelection=(selectedItem)=>{
       setCategoryModalVisibility(false);
       setCategory(selectedItem);
-      item.categoryId=selectedItem.categoryId;
+      item.categoryId=selectedItem.id;
       inputValidator.category=true;
       // ToConsole
       console.log("selected item: " +  JSON.stringify(selectedItem));
@@ -142,6 +134,7 @@ const CreateItemInput=(props)=>{
     const handleConditionSelection=(selectedItem)=>{
     setSelectedCondition(selectedItem);
     setConditionModalVisibility(false);
+    item.condition=selectedItem.toString();
     inputValidator.condition=true;
     // ToConsole
     //console.log("selected item: " +  JSON.stringify(selectedItem));
@@ -160,12 +153,13 @@ const CreateItemInput=(props)=>{
     setSelectedCity(selectedItem);
     setRegionModalVisibility(false);
     setCityModalVisibility(false);
+    item.location=selectedItem.cityName;
     inputValidator.location=true;
     // ToConsole
     console.log("selected item: " +  JSON.stringify(selectedItem));
     }
 
-    //ALERT messages:
+    // ALERT messages ======================================================================================================
     function validationFailedAlert(){
       Alert.alert(
         "Warning!",
@@ -188,23 +182,7 @@ const CreateItemInput=(props)=>{
             }, ], { cancelable: false } );        
     }
 
-    function checkAllFields() {
-      for (const item of Object.entries(inputValidator)) {
-        console.log(item[0] + " -> " + item[1])
-        if(item[1] == false){
-          //ALERT MESSAGE
-        }
-        else{
-
-        }
-      }
-    }
-
-    /* AD - input handlers, to take input from the text input fields */
-    /**
-     * 
-     * @param {*} enteredText 
-     */
+    // INPUT HANDLERS ======================================================================================================
     const titleInputHandler=(enteredText)=>{
       item.title = enteredText; 
       console.log('entered text/title: ' + enteredText);
@@ -216,13 +194,8 @@ const CreateItemInput=(props)=>{
         inputValidator.title = true;
         console.log('entered text/description: ' + enteredText);
       }
-      checkAllFields(); 
     }
 
-    /**
-     * 
-     * @param {*} enteredText 
-     */
     const priceInputHandler=(enteredText)=>{
       console.log('entered text/price: ' + enteredText);
       if(isNaN(enteredText)){
@@ -245,13 +218,8 @@ const CreateItemInput=(props)=>{
         // ToConsol:
         console.log("No text was entered!");
       } 
-      checkAllFields();  
     }
 
-    /**
-     * 
-     * @param {*} enteredText 
-     */
     const descriptionInputHandler=(enteredText)=>{
       item.description = enteredText;
       if(isEmpty(enteredText)){
@@ -264,55 +232,17 @@ const CreateItemInput=(props)=>{
         // ToConsol:
         console.log('entered text/description: ' + enteredText);
       }
-      checkAllFields(); 
     }
 
-    /**
-     * 
-     * @param {*} enteredText 
-     */
     const imageInputHandler=(enteredText)=>{
         //item.image = enteredText;
         item.image = "https://thumbs.dreamstime.com/z/sale-real-estate-sign-17187578.jpg"; //TODO: image upload
         // ToConsol:
         console.log('entered text/image: ' + enteredText);
     }
-
-    /**
-     * 
-     * @param {*} enteredText 
-     */
-    const categoryInputHandler=(enteredText)=>{
-      item.categoryId = enteredText;
-      // ToConsol:
-      console.log('entered text/categoryId: ' + enteredText);
-    }
     
-    /**
-     * 
-     * @param {*} enteredText 
-     */
-    const conditionInputHandler=(enteredText)=>{
-        item.condition = enteredText;
-        // ToConsol:
-        console.log('entered text/condition: ' + enteredText);
-    }
-
-    /**
-     * 
-     * @param {*} enteredText 
-     */
-    const locationInputHandler=(enteredText)=>{
-        item.location = enteredText;
-        // ToConsol:
-        console.log('entered text/location: ' + enteredText);
-    }
-    
-    /* AD - custom functions to control the modal 
-    (other functions are called via props, and the item object can be added) */
-    /**
-     * 
-     */
+    // ADD ITEM / CANCEL ACTION ========================================================================================
+    /* (other functions are called via props, and the item object can be added) */
     const addItem=()=>{
       var counter = 0;
       for (const validationItem of Object.entries(inputValidator)) {
@@ -333,11 +263,7 @@ const CreateItemInput=(props)=>{
         validationFailedAlert();
       } 
     }
-    
-    
-    /**
-     * 
-     */
+     
     const cancelItem=()=>{
         props.onCancelItem();
     }
