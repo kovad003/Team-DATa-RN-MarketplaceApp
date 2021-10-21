@@ -80,9 +80,23 @@ const CreateItemInput=(props)=>{
       title: "Please select..." // category title
     }); // Will be used to select a category
 
+    // Handle Region Data
+    const [regionList, addRegionToList] = useState([null]); // Will store available regions from DB (JAVA)
+    const [selectedRegionId, setRegionId] = useState(); // Will be used to fetch available cities in region (JAVA)
+
+    // Handle City Data
+    const [cityList, addCityToList] = useState([]); // Will store available cities per region
+    const [selectedCity, setSelectedCity] = useState({
+      cityId: null,
+      cityName: "Please select..."
+    }); // JSON taken from DB (JAVA)
+    const [isCityListReady, setCityListReadiness] = useState(false);
+
     // Handle Modals => Will show/hide selection modals
     const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
     const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
+    const [isRegionModalVisible, setRegionModalVisibility] = useState(false);
+    const [isCityModalVisible, setCityModalVisibility] = useState(false);
 
     // Handle Loading => Will trigger Data transfer
     const [isLoadingCategories, setLoadingCategories] = useState(true);
@@ -101,10 +115,19 @@ const CreateItemInput=(props)=>{
     const openConditionModal = () => {
       setConditionModalVisibility(true);
     }
+    const openRegionModal = () => {
+      setLoadingRegions(true);
+      setRegionModalVisibility(true);
+    }
+    const openCityModal=()=>{
+    setCityModalVisibility(true);
+    }
+    
     const onCancel=()=>{
       setCategoryModalVisibility(false);
       setConditionModalVisibility(false);
     }
+    
 
     //HANDLER Functions:
     const handleCategorySelection=(selectedItem)=>{
@@ -120,7 +143,25 @@ const CreateItemInput=(props)=>{
     inputValidator.condition=true;
     // ToConsole
     //console.log("selected item: " +  JSON.stringify(selectedItem));
-  }
+    }
+    const handleRegionSelection=(selectedItem)=>{
+      setRegionModalVisibility(false);
+      setRegionId(selectedItem.regionId);
+      //changeCitySwipeAccessibility();
+      setLoadingCities(true);
+      //setCityModalVisibility(true);
+      // ToConsole
+      console.log("selected item: " +  JSON.stringify(selectedItem));
+      console.log("setRegion to " +selectedItem.regionId);
+    }
+    const handleCitySelection=(selectedItem)=>{
+    setSelectedCity(selectedItem);
+    setRegionModalVisibility(false);
+    setCityModalVisibility(false);
+    inputValidator.location=true;
+    // ToConsole
+    console.log("selected item: " +  JSON.stringify(selectedItem));
+    }
 
     //ALERT messages:
     function handleWrongPriceFormat(){
@@ -288,7 +329,57 @@ const CreateItemInput=(props)=>{
     }
   }
 
-  
+  // *** GET ***
+  async function getAllRegion() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
+    }
+    catch(error){
+      alert("Error in service method: " + error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      addRegionToList(responseData);
+      // Toonsole
+      console.log('regionList: ' + regionList)
+    }
+    catch(error){
+      alert("Error in Response Data: " + error);
+    }
+  }
+
+  // *** GET ***
+  async function getAllCityInRegion(regionId) {
+    console.log("async function getAllCityInRegion(regionId) {");
+    console.log('regionId = ' + regionId);
+    // Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      // This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
+      //console.log("Fetching response... => response: " + JSON.stringify(response, null, 4))
+    }
+    catch(error){
+      console.log(error);
+      alert("Error in service method: " + error);
+    }
+    try{
+      // Getting json from the response
+      let responseData = await response.json();
+      addCityToList(responseData.regionCities);
+      console.log("cities in region" + JSON.stringify(responseData.regionCities, null, 4));
+    }
+    catch(error){
+      console.log(error);
+      alert("Error in Response Data: " + error);
+    }
+  }
+
+
 // USE EFFECT FUNCTION ====================================================================================================
   useEffect(() => {
     console.log('useEffect(() => {');
@@ -296,14 +387,21 @@ const CreateItemInput=(props)=>{
         getAllCategory();
         setLoadingCategories(false);
       } 
-      /* if (isLoadingRegions==true){
+      if (isLoadingRegions==true){
         getAllRegion();
         setLoadingRegions(false);
       }
       if(isLoadingCities==true){
         getAllCityInRegion(selectedRegionId);
         setLoadingCities(false);
-      } */
+        setCityListReadiness(true);
+      }
+      if(isCityListReady==true){
+        console.log("if(isCityListReady==true){");
+        //console.log("cityList: " + JSON.stringify(cityList));
+        setCityModalVisibility(true);
+        setCityListReadiness(false);
+      }
   });
 // ========================================================================================================================
 
@@ -388,10 +486,16 @@ const CreateItemInput=(props)=>{
               <Text style={TextStyling.textBlackSmall}>Location</Text>
               <View style={styles.itemNameRow}>
               <Icon4 name="my-location" style={styles.iconStyling5}></Icon4> 
-              <TextInput placeholder="Item's location"
+              <TextInput //placeholder="Item's location"
                 style={styles.inputStyle}
-                onChangeText={locationInputHandler}/>
+                editable={false}
+                value={selectedCity.cityName || "select one"}
+                //onChangeText={locationInputHandler}
+              />
               </View>
+              <ScrollDownList
+                onPress={openRegionModal}
+              />
 
               <View style={styles.buttonView}>
                 <View style={styles.button}>
@@ -405,7 +509,7 @@ const CreateItemInput=(props)=>{
           </ScrollView>
         </Modal>
               
-        {/* MODALS -------------------------------------------------------------------------------- */}
+{/* MODALS -------------------------------------------------------------------------------- */}
             <Modal visible={isCategoryModalVisible}>
               <Text style={styles.modalTitle}>Available Categories</Text>
               <FlatList
@@ -435,8 +539,36 @@ const CreateItemInput=(props)=>{
               <Button title='Cancel' onPress={onCancel}/>
             </Modal>
 {/*                       *******************                      */}
+            <Modal visible={isRegionModalVisible}>
+              <Text style={styles.modalTitle}>Available Regions</Text>
+              <FlatList
+                keyExtractor={(region) => region.regionId.toString()} 
+                data={regionList}
+                renderItem={regionData =>
+                  <ListItemToSelect 
+                    id={regionData.item.regionId}
+                    name={regionData.item.regionName}
+                    onPress={() => handleRegionSelection(regionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isCityModalVisible}>
+              <Text style={styles.modalTitle}>Cities in Region</Text>
+              <FlatList
+                keyExtractor={(city) => city.cityId.toString()}
+                data={cityList}
+                renderItem={cityData =>
+                  <ListItemToSelect 
+                    id={cityData.item.cityId}
+                    name={cityData.item.cityName}
+                    onPress={() => handleCitySelection(cityData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>       
       </View> 
-
     );
 }
 
