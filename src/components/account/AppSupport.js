@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import Logo from "../Logo";
 import { Margins } from '../../constants/constvalues';
+import colors from '../../constants/colors';
 //import LogoSmall from "../src/components/LogoSmall";
 
 //const AppSupport = () => {
@@ -47,7 +48,7 @@ const AppSupport=(props)=>{
         <Modal visible={props.visibility} animationType="slide">
         <ScrollView style={styles.scrollView}>     
 
-        <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+        <View style={{ flex: 1, backgroundColor: colors.light4/* '#ffffff' */ }}>
             <Logo style={styles.logo}/>
             <View
                 style={{
@@ -67,7 +68,7 @@ const AppSupport=(props)=>{
                         <Text style={{ fontSize: 16, marginBottom: 5 }}>First Name</Text>
                         <TextInput
                             placeholderTextColor="#bdbdbd"
-                            placeholder="your fisrt name"
+                            placeholder="your first name"
                             style={styles.TextInput}
                         />
                     </View>
@@ -152,6 +153,7 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         //backgroundColor: colors.light4,
+        backgroundColor: colors.light4,
       },
     /* extra stylings for the modal control buttons */
     buttonView:{
