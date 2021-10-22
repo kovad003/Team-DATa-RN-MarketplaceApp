@@ -419,47 +419,49 @@ const CreateItemInput=(props)=>{
               </View>
 
               <Text style={TextStyling.textBlackSmall}>Category</Text>
-              <View style={styles.itemNameRow}>                
+              <View style={styles.splitRow}>                
               <Icon4 name="category" style={styles.iconStyling5}></Icon4> 
               <TextInput //placeholder="Item's category" 
-                style={styles.inputStyle}
+                style={styles.splitRowInner}
                 editable={false}
                 value={selectedCategory.title || "select one"}
                 //onChangeText={categoryInputHandler}
               />                           
-              </View> 
+              
               {/* AD please style it! */}
               <ScrollDownList
                 onPress={openCategoryModal}
               />
+              </View> 
 
               <Text style={TextStyling.textBlackSmall}>Condition</Text>
-              <View style={styles.itemNameRow}>
+              <View style={styles.splitRow}>
               <Icon4 name="build-circle" style={styles.iconStyling5}></Icon4> 
               <TextInput //placeholder="Item's condition" 
-                style={styles.inputStyle} 
+                style={styles.splitRowInner} 
                 editable={false}
                 value={selectedCondition || "select one"}
                 //onChangeText={conditionInputHandler}
               />
-              </View>
+              
               <ScrollDownList
                 onPress={openConditionModal}
               />
+              </View>
 
               <Text style={TextStyling.textBlackSmall}>Location</Text>
-              <View style={styles.itemNameRow}>
+              <View style={styles.splitRow}>
               <Icon4 name="my-location" style={styles.iconStyling5}></Icon4> 
               <TextInput //placeholder="Item's location"
-                style={styles.inputStyle}
+                style={styles.splitRowInner}
                 editable={false}
                 value={selectedCity.cityName || "select one"}
                 //onChangeText={locationInputHandler}
-              />
-              </View>
+              />             
               <ScrollDownList
                 onPress={openRegionModal}
               />
+               </View>
 
               <View style={styles.buttonView}>
                 <View style={styles.button}>
@@ -589,6 +591,22 @@ const styles=StyleSheet.create({
       itemNameRow: {
         flexDirection: 'row',
         justifyContent: 'center',
+      },
+      splitRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginRight: Margins.midsize,
+      },
+      splitRowInner: {
+        borderBottomWidth:1,
+        borderColor: colors.darkBlueCustom,
+        paddingLeft: Paddings.narrow,
+        width:'40%',
+        backgroundColor: 'white',
+        color: '#000080',
+        marginRight: Margins.midsize, //midsize
+        height: 40,  
+        borderRadius: 5,            
       },
       buttonView:{
         width:'60%',
