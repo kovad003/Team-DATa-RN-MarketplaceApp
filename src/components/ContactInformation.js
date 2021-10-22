@@ -82,6 +82,10 @@ return(
     <View style={styles.contactModal}>
         <View style={styles.contactModal2}>
             <View style={styles.content} >
+                <Image
+                source={{ uri: customer.image }}
+                style={{ width: 100, height: 100 , marginBottom:10 }}
+                />
                 <Text style={styles.contactInfoText}>{customer.firstName} - {customer.lastName}</Text>
                 <Text style={styles.contactInfoText}>Customer ID : {customer.customerId}</Text>
                 <Text style={styles.contactInfoText}>Phone number : {customer.phone}</Text>
@@ -120,6 +124,7 @@ const styles = StyleSheet.create({
   },
   content:{
     width:'95%',
+    alignItems:'center',
     borderBottomColor: 'grey',
     borderBottomWidth: 1,
     borderTopWidth: 1,

@@ -1,12 +1,13 @@
 import React, { Component , useState , useEffect } from "react";
 import { StyleSheet, View, Text, Alert, ActivityIndicator, FlatList, Button } from "react-native";
 
-//import { ITEM } from "../data/dummy-data";
+// HH - neccessary components are imported here
 import MyItemCard from "../components/MyItemCard";
 import MyItemCardSmall from "../components/MyItemCardSmall";
-
 import EditableCard from "../components/EditableCard";
 import Logo from "../components/Logo";
+
+// HH - Import the general Styling constants
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
@@ -25,7 +26,7 @@ function HomeScreen(props) {
     console.log(messageDisplayed);
   }
 
-  // HH - for items decending 
+  // HH - reading Items with decending order 
   // *** GET ***
   async function fetchCatData() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
