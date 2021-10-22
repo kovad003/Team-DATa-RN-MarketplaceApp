@@ -13,6 +13,9 @@ import 'react-native-gesture-handler';
 
 import GuidForShoppingScreen from '../screens/GuidForShoppingScreen'
 
+/* HH - Here we create stack navigation for 4 pages 
+These three pages are (categoryScreen, listitemsScreen, ItemdetailScreen and Guide page)
+*/
 
 const Stack = createStackNavigator();
 function CategoryStackNavigation () {
@@ -20,14 +23,16 @@ function CategoryStackNavigation () {
     return (
         <Stack.Navigator >
           <Stack.Screen 
-          name="Categories" 
+          name="CategoriesScreen" 
           component={CategoryScreen} 
+          options={{
+            headerTitle: 'Categories'} }
           />
           <Stack.Screen 
           name="CategoryList" 
           component={ListItemsScreen}   
           options={{
-            headerTitle: 'Category List'} }
+            headerTitle: 'Category Items'} }
           />
           <Stack.Screen 
           name="ItemDetail"  
@@ -36,10 +41,10 @@ function CategoryStackNavigation () {
             headerTitle: 'Item Details'} }
           />
           <Stack.Screen 
-          name="Guid"  
+          name="Guide"  
           component={GuidForShoppingScreen}           
           options={{
-            headerTitle: 'Guid'} }
+            headerTitle: 'Guide'} }
           />
         </Stack.Navigator>
     );

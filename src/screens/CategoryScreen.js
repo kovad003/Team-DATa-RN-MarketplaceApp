@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView, Alert, ActivityIndicator, FlatList } from "react-native";
 import 'react-native-gesture-handler';
 
-
-
-
-import HeaderComponent from "../components/HeaderComponent";
+// HH - neccessary components are imported here
 import CategoryButton from "../components/CategoryButton";
-//import { CATEGORIES } from "../data/dummy-data"; // dummy-data
 import ListItemsScreen from '../screens/ListItemsScreen'
+
+// HH - Import the general Styling constants
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
@@ -27,14 +25,13 @@ function CategoryScreen(props) {
     console.log(messageDisplayed);
   }
 
-  // HH - for categories 
+  // HH - read all categories from database 
   // *** GET ***
   async function fetchCatData() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
       response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
 
     }
@@ -81,14 +78,6 @@ function CategoryScreen(props) {
   const renderCategoryItem = itemData => {
     return( 
 
-      // // for dummy data*******************Start
-      // <CategoryButton 
-      // title={itemData.item.title}
-      // onSelect={()=> props.navigation.navigate('CategoryList',{ catId:itemData.item.id })}
-      // color= {itemData.item.color}
-      // image={itemData.item.url}
-      // />
-      // // ********************************End
       <CategoryButton 
       id={itemData.item.id}
       title={itemData.item.title}
@@ -101,7 +90,7 @@ function CategoryScreen(props) {
   };
 
 
-
+  // HH - it shows the active indicator (loading)
   if (isLoading==true) {
     console.log('if(isLoading==true) {');
     return (
@@ -110,7 +99,7 @@ function CategoryScreen(props) {
       </View>
     );
   }
-  // If error or confirm message needs to be displayed
+  // HH - If error or confirm message needs to be displayed (can't fetch data from database)
   else if(hasMessage){
     console.log('else if(hasError){');
     return(
@@ -130,8 +119,6 @@ function CategoryScreen(props) {
           <View style={styles.categoryItems}>
             <FlatList 
             keyExtractor={(cat, index) => cat.id}
-            //HH - for dummy-data
-            // data={CATEGORIES} 
             data={categories}
             renderItem={renderCategoryItem} 
             numColumns={2}
@@ -167,24 +154,7 @@ const styles = StyleSheet.create({
     width:'100%',
 
   },
-  headerContainer:{
-    height: 60,
-    justifyContent:'center',
-    alignItems:'center'
 
-  },
-  header: {
-    height: 60,
-    width: '100%',
-  },
-
-
-
-  categoryButton: {
-
-    marginTop: 18,
-    marginLeft: 11
-  }
 });
 
 export default CategoryScreen;

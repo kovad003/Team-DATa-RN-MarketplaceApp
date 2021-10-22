@@ -26,6 +26,7 @@ import AppLoading from "expo-app-loading";
 
 // LOGIN Imports
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { sortedLastIndex } from "lodash";
 
 // GETTING CUSTOM FONTS -----------------------------------------------------------
 const getFonts = (props) => Font.loadAsync({
@@ -43,11 +44,21 @@ function App(props) {
   const [SESSIONID, setSESSIONID] = useState();
 // END OF STATE VARIABLES -----------------------------------------------------------
 
-// GETTING SESSION ID ---------------------------------------------------------------
-  AsyncStorage.getItem("StoredSessionId").then((value) => setSESSIONID(value));
-  AsyncStorage.getItem("StoredSessionId").then((value) => console.log("App.js -> Session ID value: " + value));
-  console.log('App.js SESSIONID: ' + SESSIONID)
-// END OF GETTING SESSION ID --------------------------------------------------------
+// SETTING SESSION ID ---------------------------------------------------------------
+  //AsyncStorage.setItem("StoredSessionId", "0");
+// END OF SETTING SESSION ID --------------------------------------------------------
+
+// CHECKING SESSION ID ---------------------------------------------------------------
+  AsyncStorage.getItem("StoredSessionId").then((value) => {
+    console.log("***Checking AsyncStorage at App.js***");
+    if (value == undefined) {
+      AsyncStorage.setItem("StoredSessionId", "0");
+      console.log("StoredSessionId is undefined: " + "value: " + value);
+    } else {
+      console.log("StoredSessionId is defined: " + "value: " + value);
+    }
+  });
+// END OF CHECKING SESSION ID --------------------------------------------------------
   
 // LOADING CUSTOM FONTS -------------------------------------------------------------
   if(fontloaded){
@@ -61,7 +72,7 @@ function App(props) {
       // <ListItemsScreen id='c3'/>
       // <MyItemScreen />
       // <AccountScreen /> 
-      <BottomTabsNavigation /> 
+       <BottomTabsNavigation /> 
       // <ItemDetailScreen />
       // <CategoryStackNavigation />
       // <CustomerProfileScreen />

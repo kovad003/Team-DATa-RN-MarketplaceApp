@@ -5,12 +5,15 @@ import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 //Custom Import
 import colors from "../constants/colors";
 import fontstyling from "../constants/fontstyling";
+import TextStyling from '../constants/fontstyling';
 
 function ScrollDownList(props) {
   return (
     <View style={[styles.container]}>
-      <TouchableOpacity style={styles.row}>
-        <Text style={styles.label}>{props.label || 'Select...'}</Text>
+      <TouchableOpacity style={styles.row}
+        onPress={props.onPress}
+      >
+        <Text style={[styles.label, TextStyling.textBlackSmall]}>{props.label || 'Select...'}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -19,11 +22,11 @@ function ScrollDownList(props) {
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: colors.light2,
-    backgroundColor: 'white',
+    backgroundColor: colors.light2, // 'white'
     borderRadius: 0,
     marginVertical: 1,
     marginHorizontal: 0,
-    height: 50,
+    height: 40, // 50
     justifyContent: 'center',
     // ------------------------------
     //android shadows
@@ -36,6 +39,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 0.5,
+
+    borderBottomWidth:1,
+    borderColor: colors.darkBlueCustom,
     // ------------------------------
   },
   row: {

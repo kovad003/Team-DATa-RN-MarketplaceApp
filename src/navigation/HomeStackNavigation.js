@@ -5,23 +5,25 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
-
+// HH - here needed pages and components are imported
 import CategoryScreen from '../screens/CategoryScreen'
 import ListItemsScreen from '../screens/ListItemsScreen'
 import ItemDetailScreen from '../screens/ItemDetailScreen'
 import HomeScreen from '../screens/HomeScreen'
 import GuidForShoppingScreen from '../screens/GuidForShoppingScreen'
 
-//import Colors from '../constants/Colors';
-
+/* HH - Here we create stack navigation for 3 pages 
+These three pages are (Home page , Item details and Guide page)
+*/
 const Stack = createStackNavigator();
 function HomeStackNavigation () {
 
     return (
         <Stack.Navigator >
           <Stack.Screen 
-          name="Home" 
+          name="HomeScreen" 
           component={HomeScreen}
+          // HH - Here we are removing this screen's header - (becuse we have it in BottomTabsNavigation)
           options={{headerShown: false}} 
           />
           <Stack.Screen 
@@ -31,10 +33,10 @@ function HomeStackNavigation () {
             headerTitle: 'Item Details'} }
           />
           <Stack.Screen 
-          name="Guid"  
+          name="Guide"  
           component={GuidForShoppingScreen}           
           options={{
-            headerTitle: 'Guid'} }
+            headerTitle: 'Guide'} }
           />
         </Stack.Navigator>
     );

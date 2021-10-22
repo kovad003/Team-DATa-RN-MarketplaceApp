@@ -9,7 +9,7 @@
  *
  * @link   ./src/screens/SearchScreen.js
  * @file   This files defines the SearchScreen.js class.
- * @author Daniel Kovacs.
+ * @author Daniel Kovacs
  * @since  03.10.2021
  */
  
@@ -20,8 +20,6 @@ import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView, Text, FlatList, Modal, Button } from "react-native";
 
 // Component Imports
-import SwitchFilter from "../components/SwitchFilter";
-import ScrollDownList from "../components/ScrollDownList";
 import PriceSetter from "../components/PriceSetter";
 import SearchBar from "../components/SearchBar";
 import MenuSwipableRow from "../components/swipable/MenuSwipableRow";
@@ -44,37 +42,53 @@ const SearchScreen = (props) => {
   // Handle Accessibility
   const [isCitySwipeAccessable, setCitySwipeAccessibility] = useState({isEnabled:false, colorDisplayed:'lightgrey'});
 
-  // Handle Loading
-  const [isLoadingRegions, setLoadingRegions] = useState(true); // Will trigger Data transfer
-  const [isLoadingCities, setLoadingCities] = useState(false); // Will trigger Data transfer
+  // Handle Loading => Will trigger Data transfer
+  const [isLoadingCategories, setLoadingCategories] = useState(true);
+  const [isLoadingRegions, setLoadingRegions] = useState(true);
+  const [isLoadingCities, setLoadingCities] = useState(false);
+  const [isSearchingItems, setSearchingItems] = useState(false); // Will trigger search
 
-  // Handle Region Data From DB
+  // Handle Search
+  const [searchTitle, setSearchTitle] = useState();
+
+  // Handle Category Data
+  const [categoryList, addCategoryToList] = useState([null]); // Will store available categories from DB (JAVA)
+  const [selectedCategory, setCategory] = useState(); // Will be used to select a category
+  
+  // Handle Region Data
   const [regionList, addRegionToList] = useState([null]); // Will store available regions from DB (JAVA)
   const [selectedRegionId, setRegionId] = useState(); // Will be used to fetch available cities in region (JAVA)
 
-  // Handle City Data From DB
-  const [cityList, addCityToList] = useState([null]); // For technical reasons city name has to be saved separatly
+  // Handle City Data
+  const [cityList, addCityToList] = useState([null]); // Will store available cities per region
   const [selectedCity, setSelectedCity] = useState({}); // JSON taken from DB (JAVA)
-  
 
-  // Handle Swipe Button Display
-  const [regionNameToDisplay, setRegionNameToDisplay] = useState("None"); // For technical reasons region name has to be saved separately
-  const [cityNameDisplay, setCityNameToDisplay] = useState("None"); // For technical reasons city name has to be saved separately
+  // Handle Condition Data
+  const [conditionList, addConditionToList] = useState(["very new", "new", "used", "old"]);
+  const [selectedCondition, setSelectedCondition] = useState({});
 
-  // Handle Modals
-  const [isRegionModalVisible, setRegionModalVisibility] = useState(false); // Will show/hide Region selection modal
-  const [isCityModalVisible, setCityModalVisibility] = useState(false); // Will show/hide City selection modal
+  // Handle Swipe Button Display => For technical name has to be saved separately
+  const [categoryNameToDisplay, setCategoryNameToDisplay] = useState("None"); 
+  const [regionNameToDisplay, setRegionNameToDisplay] = useState("None");
+  const [cityNameDisplay, setCityNameToDisplay] = useState("None");
+  const [minPriceToDisplay, setMinPriceToDisplay] = useState(1); 
+  const [maxPriceToDisplay, setMaxPriceToDisplay] = useState(1);
+  const [conditionNameToDisplay, setConditionNameToDisplay] = useState('None');
 
-  // Handle Messages To Display
-  const [hasMessage, setMessage] = useState(false);
-  const [messageDisplayed, setMessageDisplayed] = useState('');
+  // Handle Modals => Will show/hide selection modals
+  const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
+  const [isRegionModalVisible, setRegionModalVisibility] = useState(false);
+  const [isCityModalVisible, setCityModalVisibility] = useState(false);
+  const [isPriceModalVisible, setPriceModalVisibility] = useState(false);
+  const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
+
 // END OF STATE VARIABLES =================================================================================================
 
 // CUSTOM FUNCTIONS =======================================================================================================
   // TRASH >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   function onPressFunction(){
-    console.log('swipable was pressed');
-    console.log("regionList: " + JSON.stringify(regionList));
+    //console.log('swipable was pressed');
+    //console.log("regionList: " + JSON.stringify(regionList));
     //setLoading(true);
   }
   function hello(){
@@ -92,23 +106,52 @@ const SearchScreen = (props) => {
     setCitySwipeAccessibility({isEnabled:true, colorDisplayed:"white"});
   }
   // --------------------------------------------------
-  // Swipe Actions ------------------------------------ 
+  // Swipe & Button Actions ------------------------------------ 
+  const showCategoryModal=()=>{
+    setCategoryModalVisibility(true);
+  }
   const showRegionModal=()=>{
     setRegionModalVisibility(true);
   }
   const showCityModal=()=>{
     setCityModalVisibility(true);
   }
+  const showPriceModal=()=>{
+    setPriceModalVisibility(true);
+  }
+  const showConditionModal=()=>{
+    setConditionModalVisibility(true);
+  }
   const clearCitySelection=()=>{
     console.log("clear selection");
   }
   const onCancel=()=>{
+    setCategoryModalVisibility(false);
     setRegionModalVisibility(false);
     setCityModalVisibility(false);
+    setPriceModalVisibility(false);
+    setConditionModalVisibility(false);
     setLoadingRegions(false);
   }
   // --------------------------------------------------
-  // Handle Selections ---------------------------------
+  // Handle Search & Selections ---------------------------------
+  const handleSearch=()=>{
+    setSearchingItems(true);
+  }
+  const handleTextInput=(selectedItem)=>{
+    setSearchTitle(selectedItem);
+
+    // ToConsole
+    console.log("SearchTitle: " +  selectedItem);
+  }
+  const handleCategorySelection=(selectedItem)=>{
+    setCategoryModalVisibility(false);
+    setCategory(selectedItem.cityId);
+    setCategoryNameToDisplay(selectedItem.title)
+    // ToConsole
+    console.log("selected item: " +  JSON.stringify(selectedItem));
+    console.log("setRegion to " +selectedItem.regionId);
+  }
   const handleRegionSelection=(selectedItem)=>{
     setRegionModalVisibility(false);
     setRegionId(selectedItem.regionId);
@@ -127,10 +170,51 @@ const SearchScreen = (props) => {
     // ToConsole
     console.log("selected item: " +  JSON.stringify(selectedItem));
   }
+  const takeMinPriceInput=(enteredValue)=>{
+    setMinPriceToDisplay(enteredValue.toString());
+    // ToConsole
+    // console.log("min Price: " +  scaledValue);
+  }
+  const takeMaxPriceInput=(enteredValue)=>{
+    setMaxPriceToDisplay(enteredValue.toString());
+    // ToConsole
+    // console.log("max Price: " +  scaledValue);
+  }
+  const handleConditionSelection=(selectedItem)=>{
+    setSelectedCondition(selectedItem);
+    setConditionNameToDisplay(selectedItem);
+    setConditionModalVisibility(false);
+    // ToConsole
+    //console.log("selected item: " +  JSON.stringify(selectedItem));
+  }
   // --------------------------------------------------
 // END OF CUSTOM FUNCTIONS ================================================================================================
 
 // SERVICE FUNCTIONS ======================================================================================================
+  // *** GET ***
+  async function getAllCategory() {
+    //Variable res is used later, so it must be introduced before try block and so cannot be const.
+    let response = null;
+    try{
+      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
+    }
+    catch(error){
+      alert("Error in Service Method: " + error);
+    }
+    try{
+      //Getting json from the response
+      let responseData = await response.json();
+      addCategoryToList(responseData);
+      // To console
+      // console.log(responseData);
+      console.log('categoryList: ' + categoryList)
+    }
+    catch(error){
+      alert("Error in Response Data: " + error);
+    }
+  }
+
   // *** GET ***
   async function getAllRegion() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
@@ -140,20 +224,20 @@ const SearchScreen = (props) => {
       response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
     }
     catch(error){
-      console.log(error);
+      alert("Error in service method: " + error);
     }
     try{
       //Getting json from the response
       let responseData = await response.json();
       addRegionToList(responseData);
       // Toonsole
-      // console.log(responseData);
       console.log('regionList: ' + regionList)
     }
     catch(error){
-      console.log(error);
+      alert("Error in Response Data: " + error);
     }
   }
+  // *** GET ***
   async function getAllCityInRegion(regionId) {
     console.log('regionId = ' + regionId);
     // Variable res is used later, so it must be introduced before try block and so cannot be const.
@@ -161,18 +245,56 @@ const SearchScreen = (props) => {
     try{
       // This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
+      //console.log("Fetching response... => response: " + JSON.stringify(response, null, 4))
     }
     catch(error){
       console.log(error);
+      alert("Error in service method: " + error);
     }
     try{
       // Getting json from the response
       let responseData = await response.json();
       addCityToList(responseData.regionCities);
-      // console.log("cities in region" + JSON.stringify(responseData.regionCities));
+      // console.log("cities in region" + JSON.stringify(responseData.regionCities, null, 4));
     }
     catch(error){
       console.log(error);
+      alert("Error in Response Data: " + error);
+    }
+  }
+
+// *** POST ***
+  async function searchForItems(title, category, city, priceMin, priceMax, condition) {
+    console.log('async function searchForItems(title, category, city, priceMin, priceMax, condition) {');
+    console.log("title: " + title + ", category: " + category + ", city: " + city +  
+    ", priceMin: " + priceMin, ", priceMax:" + priceMax, ", condition: " + condition);
+    let response = null;
+    let requestOptions = {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        itemTitle: title.toString(),
+        categoryTitle: category.toString(),
+        location: city.toString(),
+        minPrice: priceMin*1, // *1 -> numbers only
+        maxPrice: priceMax*1, // *1 -> numbers only
+        condition: condition.toString(),
+      })
+    };
+    console.log("body: " + requestOptions.body);
+    try {
+      response = await fetch("http://10.0.2.2:8080/rest/searchservice/searchforitems", requestOptions)
+      // console.log("Fetching response... => response: " + JSON.stringify(response, null, 4));
+    } catch (error) {
+      alert("Error in service method: " + error);
+    }
+    try {
+      let responseData = await response.json();
+      console.log('responseData: ' + JSON.stringify(responseData, null, 4));
+    } catch (error) {
+      alert("Error in Response Data: " + error);
     }
   }
 // END OF SERVICE FUNCTIONS ===============================================================================================
@@ -180,15 +302,22 @@ const SearchScreen = (props) => {
 // USE EFFECT FUNCTION ====================================================================================================
   // Will Rerender the screen in case the isLoading boolean is set to true
   useEffect(() => {
-    console.log('useEffect(() => {'); 
+    console.log('useEffect(() => {');
+      if (isLoadingCategories==true){
+        getAllCategory();
+        setLoadingCategories(false);
+      } 
       if (isLoadingRegions==true){
-        getAllRegion();   
+        getAllRegion();
         setLoadingRegions(false);
       }
       if(isLoadingCities==true){
-          getAllCityInRegion(selectedRegionId);
-          // changeCitySwipeAccessibility();
-          setLoadingCities(false);
+        getAllCityInRegion(selectedRegionId);
+        setLoadingCities(false);
+      }
+      if(isSearchingItems==true){
+        searchForItems(searchTitle, categoryNameToDisplay, cityNameDisplay, minPriceToDisplay, maxPriceToDisplay, conditionNameToDisplay);
+        setSearchingItems(false);
       }
   });
 // ========================================================================================================================
@@ -197,10 +326,25 @@ const SearchScreen = (props) => {
   return (
     <View style={styles.container}>
       <View >
-        <SearchBar/>
+        <SearchBar onChangeText={handleTextInput} onPress={handleSearch}/>
       </View>
         <View>
 {/* MODALS -------------------------------------------------------------------------------- */}
+            <Modal visible={isCategoryModalVisible}>
+              <Text style={styles.modalTitle}>Available Categories</Text>
+              <FlatList
+                keyExtractor={(category) => category.id.toString()} 
+                data={categoryList}
+                renderItem={categoryData =>
+                  <ListItemToSelect 
+                    id={categoryData.item.id}
+                    name={categoryData.item.title}
+                    onPress={() => handleCategorySelection(categoryData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel} />
+            </Modal>
+{/*                       *******************                      */}
             <Modal visible={isRegionModalVisible}>
               <Text style={styles.modalTitle}>Available Regions</Text>
               <FlatList
@@ -210,13 +354,12 @@ const SearchScreen = (props) => {
                   <ListItemToSelect 
                     id={regionData.item.regionId}
                     name={regionData.item.regionName}
-                    onSelect={() => handleRegionSelection(regionData.item)}
                     onPress={() => handleRegionSelection(regionData.item)}
                   />}
               />
               <Button title='Cancel' onPress={onCancel} />
             </Modal>
-
+{/*                       *******************                      */}
             <Modal visible={isCityModalVisible}>
               <Text style={styles.modalTitle}>Region: {regionNameToDisplay}</Text>
               <FlatList
@@ -226,16 +369,43 @@ const SearchScreen = (props) => {
                   <ListItemToSelect 
                     id={cityData.item.cityId}
                     name={cityData.item.cityName}
-                    onSelect={() => handleCitySelection(cityData.item)}
                     onPress={() => handleCitySelection(cityData.item)}
                   />}
               />
               <Button title='Cancel' onPress={onCancel} />
             </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isPriceModalVisible}>
+              <Text style={styles.modalTitle}>Select a price range:</Text>
+              <PriceSetter title="Min Price:"
+                onValueChange = {takeMinPriceInput}
+                displayValue = {minPriceToDisplay}
+              />
+              <PriceSetter title="Max Price:"
+                onValueChange={takeMaxPriceInput}
+                displayValue={maxPriceToDisplay}
+              />
+              <Button title='Ok' onPress={onCancel}/>
+            </Modal>
+{/*                       *******************                      */}
+            <Modal visible={isConditionModalVisible}>
+              <Text style={styles.modalTitle}>Select a condition:</Text>
+              <FlatList
+                keyExtractor={(condition) => condition}
+                data={conditionList}
+                renderItem={conditionData =>
+                  <ListItemToSelect 
+                    name={conditionData.item}
+                    onPress={() => handleConditionSelection(conditionData.item)}
+                  />}
+              />
+              <Button title='Cancel' onPress={onCancel}/>
+            </Modal>
+{/*                       *******************                      */}
              
 {/* --------------------------------------------------------------------------------------- */}
             <MenuSwipableRow 
-              value="N/A"
+              value={categoryNameToDisplay}
               iconMain="tag-multiple"
               iconColor="black"
               label="Category"
@@ -247,11 +417,10 @@ const SearchScreen = (props) => {
             )}
               renderRightActions = {() => (
               <MenuSwipeActionFilter 
-                onPress={() => showRegionModal()} 
+                onPress={() => showCategoryModal()} 
               />
             )}
             />
-
             <MenuSwipableRow
               value={regionNameToDisplay}
               iconMain="map"
@@ -277,6 +446,7 @@ const SearchScreen = (props) => {
                 onPress={() => showCityModal()}/>)}
             />
             <MenuSwipableRow 
+              value={"Min: €" + minPriceToDisplay + " - Max: €" + maxPriceToDisplay}
               iconMain="database"
               iconColor="black"
               label="Price"
@@ -284,9 +454,10 @@ const SearchScreen = (props) => {
               renderLeftActions = {() => (<MenuSwipeActionResetFilter  
                 onPress={() => clearCitySelection()}/>)}
               renderRightActions = {() => (<MenuSwipeActionFilter 
-                onPress={() => showRegionModal()}/>)}
+                onPress={() => showPriceModal()}/>)}
             />
             <MenuSwipableRow 
+              value={conditionNameToDisplay}
               iconMain="eye"
               iconColor="black"
               label="Condition"
@@ -294,7 +465,7 @@ const SearchScreen = (props) => {
               renderLeftActions = {() => (<MenuSwipeActionResetFilter 
                 onPress={() => clearCitySelection()}/>)}
               renderRightActions = {() => (<MenuSwipeActionFilter 
-                onPress={() => showRegionModal()}/>)}
+                onPress={() => showConditionModal()}/>)}
             />    
         </View>  
     </View>

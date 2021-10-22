@@ -46,7 +46,7 @@ return (
 
 const styles = StyleSheet.create({
     postedItem:{
-        height:350,
+        height:380,
         width:'100%',
         borderWidth:0,
         borderRadius:5,

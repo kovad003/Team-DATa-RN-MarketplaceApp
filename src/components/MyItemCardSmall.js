@@ -4,7 +4,8 @@ import IconButton from "./IconButton";
 
 
 
-
+// HH - this component is used for showing the summery of Items ,
+// only title and price are showing and OnPress goes to more details
 const MyItemCardSmall = props => {
 
 return (
@@ -30,15 +31,15 @@ return (
 
 const styles = StyleSheet.create({
     postedItem:{
-        height:150,
+        height:165,
         width:'100%',
         borderWidth:0,
         borderRadius:10,
         overflow: 'hidden',
-        marginVertical:10,
+        marginVertical:8,
     },
     titleContainer:{
-        backgroundColor:'rgba(0,0,0,0.4)',
+        backgroundColor:'rgba(0,0,0,0.6)',
         paddingVertical:5,
         paddingHorizontal:20,
     },
@@ -49,8 +50,6 @@ const styles = StyleSheet.create({
         textAlign:'center',
 
     },
-    postedRow:{
-    },
     postedHeader:{
         height:'100%',
     },
@@ -60,16 +59,6 @@ const styles = StyleSheet.create({
         justifyContent:'flex-end'
 
     },
-    iconsContainer:{
-        flexDirection:'row',
-        justifyContent:'flex-end',
-    },
-    iconButton1:{
-        margin:10,  
-    },
-    iconButton:{
-        margin:10,
-    }
 });
 
 
