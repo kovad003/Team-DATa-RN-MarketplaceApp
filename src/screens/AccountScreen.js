@@ -8,24 +8,24 @@
  *  - Variables, functions and async functions -> These are behind the scenes and not visible to the user. 
  *                                                They power the functionality of the page. 
  *  - Header-> This feature is part of the stack navigator navigation (configured by Hossein).
- *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page. *  
+ *  - ScrollView-> On this page, the scrollView acts as the main scrollable container for the page.  
  *  - Modal screens -> The app user can access variable modal screens for various functionalities (such as the 'login' modal).
- *  - Page stylings -> Much of our apps stylings are included on each respective page.
- *                     Ocassionally, however, external consts, fonts, and colours have been utilised.
+ *  - Page stylings -> Much of the app's stylings are included on each respective page.
+ *                     Occasionally, however, external consts, fonts, and colours have been utilised.
  * 
  * @link   ./src/screens/AccountScreen.js
  * @file   This files defines the AccountScreen.js class.
  * @author Ashley Davis.
- * @since  04.10.2021
+ * @since  01.10.2021
  */
 
-/* AD - Standard imports from both React and React-Native*/
+/* AD - Standard imports from both React and React-Native */
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, Text, FlatList, 
   ScrollView, ActivityIndicator, Button, ProgressViewIOSComponent, Alert } from "react-native";
 
 /* AD - Constants (such as for custom colours and margins etc) */
-import TextStyling from '../constants/fontstyling'
+import TextStyling from '../constants/fontstyling';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
@@ -38,10 +38,6 @@ import LogoSmall from "../components/LogoSmall";
 import AppSupport from "../components/account/AppSupport";
 import AboutModal from "../components/account/AboutModal";
 
-/* AD - Redundant, might delete later
-    import CreateItemInput from "../components/CreateItemInput";
-  */
-
 /* AD - The main function of the page */
 function AccountScreen(props) {
 
@@ -51,27 +47,25 @@ function AccountScreen(props) {
 const [hasMessage, setMessage] = useState(false);
 const [messageDisplayed, setMessageDisplayed] = useState('');
 
+ /* AD - Handles loading state (useState variable) */
+const [isLoading, setLoading] = useState(false); // was true
 
-
-const [itemList, addItemToList] = useState([]);
-const [isLoading, setLoading] = useState(false); //was true
-const [isVisible, setVisibility] = useState(false);
-
+/* AD - Handles the state of whether specific 
+        modal windows are visible or not (useState variable) */
 const [isflatListVisible, setflatListVisibility] = useState(false);
 const [isSupportVisible, setSupportVisibility] = useState(false);
 const [isAboutVisible, setAboutVisibility] = useState(false);
+const [isVisible, setVisibility] = useState(false);
 
-//const [customers, setCustomer] = useState([]);
+/* AD - Handles the registration of new customers (useState variable / array) */
 const [customerList, addCustomerToList] = useState([]);
-
 const [customer, setCustomer] = useState([]);
+const [items, setItems] = useState([]);
+const [itemList, addItemToList] = useState([]);
 
-/* AD - for the AccountScreen -> login page modal visibility */
+/* AD - for the AccountScreen -> registration page modal visibility */
 const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
-
- /* AD - Handles the item variable (an array) */
-const [items, setItems] = useState([]);
 
 // AD - a dummy Update Info alert
 const menuTestAlert = () =>
@@ -103,9 +97,10 @@ Alert.alert(
 ]
 );
 
-// AD new consts
+/************* AD - Custom Functions *************/
 
-// Custom Functions ****************************************************************************************
+ /* AD - A custom function to store new customer data taken from user 
+        input taken from the Registration modal window */
 const onAddCustomer = (childdata) => {
   addCustomerToList(customerList =>[...customerList, childdata]);
 
@@ -133,11 +128,10 @@ const onAddCustomer = (childdata) => {
   //setLoading(true);
 }
 
+/* AD - Functions related to the modal visibility */
   const cancelLoginModal = ()=>{
     setLoginVisible(false);
   }
-
-  // AD new consts
 
   const cancelAddCustomer=()=>{
     setVisibility(false);
@@ -145,19 +139,9 @@ const onAddCustomer = (childdata) => {
   }
 
 
-  
-
-//
-
-//
-
-//
-
-//
-
 /* AD - extra editions for the registration page input functionality */
 
-// functions related to the input field functionality
+ /* AD - This one was originally related to the item screen, but it is a WIP */
 
 // Custom Functions ****************************************************************************************
 const onAddItem = (childdata) => {
@@ -187,6 +171,7 @@ const onAddItem = (childdata) => {
   //setLoading(true);
 }
 
+/* AD - for more modal functionality (these onese are WIP)*/
 const cancelAddItem=()=>{
   setVisibility(false);
   setLoading(false);
@@ -209,12 +194,14 @@ const onCancelAbout2=()=>{
   //setLoading(false);
 }
 
+/* AD - a wip function */
 const onDeleteItem=(idParam)=>{
   console.log('idParam: ' + idParam);
   //setLoading(true);
   deleteData(idParam)
 }
 
+/* AD - functions related to confirmation and error messages */
 function showError(error){
   setMessage(true);
   setMessageDisplayed("Error: " + error);
@@ -234,20 +221,25 @@ function closeMessage() {
 
 // AD - customer service additions
 
-// Service Functions ****************************************************************************************
-  // *** GET ***
+ /************* AD - Service Functions (connects to a Java Backend) *************/
+
+ /* AD - An async function to GET (fetch) data from the Java backend 
+ (which interacts with our MySQL / Google Cloud database). This one is WIP */
   async function fetchCustomerData() {
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
-      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
+      /* AD - This waits for the fetch to be completed successfully. 
+      It is also a timeout (for server timeouts), which is also a possible response. */
       response = await fetch("http://10.0.2.2:8080/rest/customerservice/getall");
     }
+    /* AD - A try catch to catch errors */
     catch(error){
       showError(error);
     }
     try{
-      //Getting json from the response
+      /* AD - This gets json from the response. 
+      Essentially, the variable responseData is assigned a value, that is the json from the response. */
       let responseData = await response.json();
       console.log(responseData);//Just for checking.....
       setItems(responseData);
@@ -257,8 +249,7 @@ function closeMessage() {
     }
   }
  
-
-  // *** POST ***
+  /* AD - An async function to POST data to the Java backend (which interacts with our MySQL / Google Cloud database) */
   async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
     console.log('started: async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
     let response = null;
@@ -293,21 +284,8 @@ function closeMessage() {
     }
   }
 
-  
-
-//
-
-//
-
-//
-
-//
-
-
-
-
-// Service Functions ****************************************************************************************
-// *** GET ***
+/* AD - An async function to GET (fetch) data from the Java backend 
+ (which interacts with our MySQL / Google Cloud database). */
 async function fetchData() {
   //Variable res is used later, so it must be introduced before try block and so cannot be const.
   let response = null;
@@ -329,7 +307,7 @@ async function fetchData() {
   }
 }
 
-// *** POST ***
+/* AD - An async function to POST data to the Java backend (which interacts with our MySQL / Google Cloud database) */
 async function addData(categoryParam, customerParam, titleParam, priceParam, descrParam, imageParam, conditionParam, locationParam) {
   console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
   let response = null;
@@ -363,7 +341,7 @@ async function addData(categoryParam, customerParam, titleParam, priceParam, des
   }
 }
 
-// *** PUT ***
+/* AD - An async function to PUT data to the Java backend (which interacts with our MySQL / Google Cloud database) */  
 // Object props are hardcoded, no input form is available. Works the same way as adding item
 async function updateData(/*idParam, nameParam, priceParam, descrParam, categoryParam*/) {
   console.log('started: async function addData(nameParam, priceParam, descrParam, categoryParam) {');
@@ -399,8 +377,8 @@ async function updateData(/*idParam, nameParam, priceParam, descrParam, category
   }
 }
 
-// *** DELETE ***
-// Delivers parameter as JSON data 
+/* AD - An async function to DELETE data to the Java backend (which interacts with our MySQL / Google Cloud database) */
+  // Delivers parameter as JSON data 
 async function deleteData(itemIdParam) {
   console.log('started:  async function deleteData(idParam) {');
   let response = null;
@@ -427,10 +405,12 @@ async function deleteData(itemIdParam) {
   }
 }
 
-/*   
-This is called every time the view is rendered
-The new calls of fetchData (and others) must be stopped somehow, because in
-those methods are statevariables set, which cause a new re-render. 
+/*
+  AD - This function is called every time the view is rendered.
+       There are async functions which get called, and so new calls of such functions
+       (such as GET methods for instance) must be stopped,
+       lest new re-renders are executed. Such methods are state variables
+       and endless re-renders could occur, unless stopped by useEffect.  
 */
 useEffect(() => {
   console.log('useEffect(() => {'); 
@@ -440,7 +420,8 @@ useEffect(() => {
   }
 });
 
-// If the 'fetch' is not ready yet, an activityindicator is shown
+/* AD - An if statement to return an activity indicator if certain async functions,
+          like GET (fetch) are not yet ready */
 if (isLoading==true) {
   console.log('if(isLoading==true) {');
   return (
@@ -449,7 +430,9 @@ if (isLoading==true) {
     </View>
   );
 }
-// If error or confirm message needs to be displayed
+
+ /* AD - An elseif statement for if a message needs to be displayed
+        (such as an error or confirm message) */
 else if(hasMessage){
   console.log('else if(hasError){');
   return(
@@ -472,11 +455,13 @@ else if(hasMessage){
     </ScrollView>
   );
 }
-//Otherwise the list is shown
+// AD - Else the following code is rendered to the screen.
 else{
   console.log('else{');
   
   return (
+
+    /************* AD - The screen that will be rendered and visible to the user *************/
 
     <ScrollView style={styles.scrollStyle}>
       <View style={styles.container}>  
@@ -555,10 +540,10 @@ else{
 }
 };
 
+/************* AD - Stylings *************/
 const styles = StyleSheet.create({
   scrollStyle: {
     backgroundColor: colors.light4,
-    //justifyContent: 'center',
   },
 
   container: {
@@ -568,7 +553,7 @@ const styles = StyleSheet.create({
   },   
   
   logoContainer:{
-    marginTop: 17, //20
+    marginTop: 17,
     alignItems: 'center',   
   },
 
@@ -583,11 +568,11 @@ const styles = StyleSheet.create({
   },
 
   row2: {
-    marginVertical: Margins.xxnarrow, // narrow
+    marginVertical: Margins.xxnarrow,
   },
 
   row3: {
-    marginVertical: Margins.midsize, // xlarge
+    marginVertical: Margins.midsize,
   },
 
   centralContainer: {

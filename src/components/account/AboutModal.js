@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Logo from "../Logo";
 import { Margins } from '../../constants/constvalues';
+import colors from '../../constants/colors';
 //import LogoSmall from "../src/components/LogoSmall";
 
 //const AppSupport = () => {
@@ -28,7 +29,7 @@ const AboutModal=(props)=>{
         <Modal visible={props.visibility} animationType="slide">
         <ScrollView style={styles.scrollView}>     
 
-        <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+        <View style={{ flex: 1, backgroundColor: colors.light4/* '#ffffff' */ }}>
             <Logo style={styles.logo}/>
             <View
                 style={{
@@ -57,7 +58,7 @@ const AboutModal=(props)=>{
                     <View style={{ marginVertical: 5 }}>
                         <Text 
                         style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
-                        Whether you are looking to buy or sell
+                        Whether you are looking to buy or sell,
                         Useddo has you covered.</Text>
                         
                     </View>
@@ -71,13 +72,13 @@ const AboutModal=(props)=>{
                     <View style={{ marginVertical: 5 }}>
                         <Text 
                         style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
-                        We really cherish and value are growing and expanding user base.</Text>
+                        We really cherish and value our enthusiastic and expanding user base.</Text>
                         
                     </View>
                     <View style={{ marginVertical: 5 }}>
                         <Text 
                         style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
-                        And we thank you greatly for choosing to use Useddo.</Text>
+                        Furthermore, we thank you greatly for choosing to use Useddo!</Text>
                         
                     </View>
                     <View style={{ marginVertical: 5 }}>
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     scrollView: {
-        //backgroundColor: colors.light4,
+        backgroundColor: colors.light4,
       },
     /* extra stylings for the modal control buttons */
     buttonView:{
