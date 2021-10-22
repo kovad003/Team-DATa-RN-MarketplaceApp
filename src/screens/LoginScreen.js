@@ -3,6 +3,7 @@ import React, {useState , useEffect} from 'react';
 import {Button, View, StyleSheet, ScrollView, Text, Dimensions, SafeAreaView, TextInput, TouchableOpacity, Image, Modal,} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import colors from '../constants/colors';
 
 //const LoginScreen = () => {
 function LoginScreen(props) {
@@ -144,7 +145,7 @@ return (
   <Modal visible={props.visibility} animationType="slide">
    <ScrollView style={styles.scrollView}>
 
-    <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+    <View style={{flex: 1, backgroundColor: colors.light4 /* '#ffffff' */}}>
       {/* <Button title="setSessionID as 9999" onPress={saveSessionId("9999")}> </Button> */}
       <Button title="getSessionID" onPress={getSessionId}> </Button>
       <View
@@ -153,7 +154,7 @@ return (
           paddingVertical: 10,
           marginVertical: 10,
           marginHorizontal: 10,
-          backgroundColor: '#fff',
+          backgroundColor: '#fff', // colors.light4
           borderRadius: 10,
         }}>
         <View style={{alignSelf: 'center', marginTop: 5, marginBottom: 10}}>
@@ -187,12 +188,12 @@ return (
                 style={{
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: '#FF4500',
+                  backgroundColor: colors.danger, // '#FF4500'
                   paddingTop: 20,
                   paddingBottom: 20,
                   borderRadius: 10,
                 }}>
-                <Text style={{fontSize: 20, color: '#fff'}}>Login</Text>
+                <Text style={{fontSize: 20, color: '#fff' }}>Login</Text>
               </TouchableOpacity>
           </View>
         </View>
@@ -292,6 +293,7 @@ scrollView: {
 //flex:1,
 paddingVertical:10,
 paddingHorizontal:15,
+backgroundColor: colors.light4,
 },
 });
 

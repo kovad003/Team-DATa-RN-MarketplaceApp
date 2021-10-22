@@ -246,7 +246,7 @@ const imageInputHandler=(enteredText)=>{
     <Modal visible={props.visibility} animationType="slide">
     <ScrollView style={styles.scrollView}>
 
-    <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+    <View style={{flex: 1, backgroundColor: colors.light4,/* '#ffffff' */}}>
       <Logo style={styles.logo}></Logo>
       <View
         style={{
@@ -310,7 +310,7 @@ const imageInputHandler=(enteredText)=>{
 
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>
-              Phone number
+              Phone number (+): *numbers only
             </Text>
             <TextInput
             // style={[styles.inputStyle, {borderColor: colorValidator ? colors.darkBlueCustom : "red"}]} //backgroundColor: darkMode ? '#282f3b' : '#f5f5f5',
@@ -375,9 +375,12 @@ const styles = StyleSheet.create({
   view: {height: 60, width: '100%', backgroundColor: 'red'},
   TextInput: {
     height: 43,
-    borderBottomColor: '#bdbdbd',
+    borderBottomColor: colors.darkBlueCustom, // #bdbdbd
     borderBottomWidth: 2,
     fontSize: 18,
+  },
+  customBackground: {
+    backgroundColor: colors.light4,
   },
   logo: {
     width: 172,
