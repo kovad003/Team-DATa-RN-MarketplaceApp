@@ -413,7 +413,7 @@ const CreateItemInput=(props)=>{
               <View style={styles.itemNameRow}>               
               <Icon3 name="image" style={styles.iconStyling3a}></Icon3>    
               <TextInput placeholder="Default image will be used" //placeholder="Item's image"                
-                  style={[styles.inputStyle3, {backgroundColor: "grey"}]}
+                  style={[styles.inputStyle3, {backgroundColor: "gainsboro"}]}
                   editable={false} 
                   onChangeText={imageInputHandler}/>               
               </View>
