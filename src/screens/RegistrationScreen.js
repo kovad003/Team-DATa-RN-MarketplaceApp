@@ -283,8 +283,9 @@ const imageInputHandler=(enteredText)=>{
       <View
         style={{
           paddingHorizontal: 10,
-          paddingVertical: 10,
-          marginVertical: 10,
+          //paddingVertical: 10,
+          //marginVertical: 10,
+          marginBottom: 50,
           marginHorizontal: 10,
           backgroundColor: '#fff',
           borderRadius: 10,
@@ -324,7 +325,7 @@ const imageInputHandler=(enteredText)=>{
             />
           </View>
           <View style={{marginVertical: 5}}>
-            <Text style={{fontSize: 16, marginBottom: 3}}>Email</Text>
+            <Text style={{fontSize: 16, marginBottom: 3}}>Email (valid emails only)</Text>
             <TextInput
               maxLength={20} 
               placeholderTextColor="#bdbdbd"
@@ -387,7 +388,7 @@ const imageInputHandler=(enteredText)=>{
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: '#c83232',
+                backgroundColor: colors.danger, // '#c83232'
                 paddingTop: 20,
                 paddingBottom: 20,
                 borderRadius: 10,
