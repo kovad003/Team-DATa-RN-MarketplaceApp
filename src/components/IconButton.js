@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/Entypo";
 function IconButton(props) {
   return (
     <View style={[styles.container, props.style]}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={props.onPress}>
         <Icon
           name={props.icon || "magnifying-glass"}
           style={styles.icon}

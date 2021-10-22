@@ -14,13 +14,17 @@ import SliderComponent from "./SliderComponent";
 function PriceSetter(props) {
   return (
     <View style={styles.container}>
+      <Text style={styles.title}> {props.title} </Text>
       <View style={styles.row}>
-        <View style={styles.row}>
-          <Text style={styles.displayValue}>€</Text>
-          <TextInput value={ props.displayValue || "0"} style={styles.displayValue}></TextInput>
+        <View style={styles.display}>
+         {/*  <Text style={styles.displayValue}>€</Text> */}
+          <TextInput value={"€" + props.displayValue || "0"} style={styles.displayValue}></TextInput>
         </View>
         <Slider onValueChange={props.onValueChange}
-          value={props.mathValue}
+          value={props.scrollValue}
+          step={1}
+          minimumValue={1}
+          maximumValue={1000}
           thumbTintColor='#2d3553'
           minimumTrackTintColor='#8b91ad'
           maximumTrackTintColor='#cdad9c'
@@ -58,15 +62,25 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
 
   },
+  display: {
+    flex:0.3
+  },
   displayValue:{
-    fontFamily: 'caballar',
-    fontSize: 22,
+    // fontFamily: 'caballar',
+    fontSize: 18,
     color: 'black',
+    margin: 0,
+    opacity: 0.8
   },
   slider: {
     flexDirection: 'row',
     flex:1,
-  }
+  },
+  title: {
+    fontSize: 18,
+    textAlign:'center'
+  },
+
 });
 
 export default PriceSetter;
