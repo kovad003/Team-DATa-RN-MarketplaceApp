@@ -310,7 +310,7 @@ const imageInputHandler=(enteredText)=>{
 
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>
-              Phone number (+): *numbers only
+              Phone number (numbers only) (+):
             </Text>
             <TextInput
             // style={[styles.inputStyle, {borderColor: colorValidator ? colors.darkBlueCustom : "red"}]} //backgroundColor: darkMode ? '#282f3b' : '#f5f5f5',
