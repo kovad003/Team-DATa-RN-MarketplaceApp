@@ -89,7 +89,7 @@ const ListCreatedItem=(props)=>{
 // End of HANDLER Functions --------------------------
 
 // ALERT Functions -----------------------------------
-    // AD - a dummmy Update Info alert //TODO: make an update feature!!!
+    /* AD - a dummmy Update Info alert //TODO: make an update feature!!!
     const updateAlert = () =>
         Alert.alert(
         "Update Alert!",
@@ -102,6 +102,7 @@ const ListCreatedItem=(props)=>{
             },
             { text: "OK", onPress: () => console.log("OK Pressed") }
         ]);
+        */
 
     // AD - Delete Alert
     const deleteAlert = () =>

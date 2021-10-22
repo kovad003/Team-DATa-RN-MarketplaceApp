@@ -38,26 +38,24 @@ const AboutModal=(props)=>{
                     //marginVertical: 10,
                     marginTop: 5,
                     marginHorizontal: 10,
-                    backgroundColor: '#fff',
+                    backgroundColor: colors.light2, // '#fff'
                     borderRadius: 10,
                 }}>
-                <View style={{ alignSelf: "center" }}>
-                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>About Modal</Text>
+                <View style={{ alignSelf: "center", paddingTop: 10 }}>
+                    <Text style={{ fontSize: 20, fontWeight: "bold", borderBottomColor: colors.darkBlueCustom, borderBottomWidth: 1 }}>About Modal</Text>
                 </View>
 
-
-                
-                <View style={{ marginTop: 10 }}>
+                <View style={{ marginTop: 10, }}>
 
                     <View style={{ marginVertical: 5 }}>
                         <Text 
-                        style={{ fontSize: 16, marginBottom: 5, textAlign : "center" }}>
+                        style={{ fontSize: 18, fontStyle: 'italic', marginBottom: 5, textAlign : "center" }}>
                         Welcome to Useddo!</Text>
                         
                     </View>
                     <View style={{ marginVertical: 5 }}>
                         <Text 
-                        style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingLeft: 15 }}>
+                        style={{ fontSize: 16, marginBottom: 5, textAlign : "left", paddingHorizontal: 15 }}>
                         Whether you are looking to buy or sell,
                         Useddo has you covered.</Text>
                         
@@ -83,12 +81,12 @@ const AboutModal=(props)=>{
                     </View>
                     <View style={{ marginVertical: 5 }}>
                         <Text 
-                        style={{ fontSize: 16, marginBottom: 5, textAlign : "center" }}>
+                        style={{ fontSize: 18, fontStyle: 'italic', marginBottom: 5, textAlign : "center" }}>
                         Best regards - the Useddo team.</Text>
                         
                     </View>
 
-                    <View style={{ alignSelf: 'center', width: '100%', marginTop: 20 }}>
+                    <View style={{ alignSelf: 'center', width: '100%', marginTop: 10 }}>
                         
                         <View style={styles.buttonView}>
                             <View style={styles.button}>
@@ -116,6 +114,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#bdbdbd',
         borderBottomWidth: 4,
         fontSize: 18,
+        //paddingHorizontal: 10,
     },
     logo: {
         width: 172,
@@ -125,13 +124,14 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         backgroundColor: colors.light4,
+        paddingHorizontal: 15,
       },
     /* extra stylings for the modal control buttons */
     buttonView:{
         width:'100%',
         flexDirection: 'row',
         justifyContent:"space-around",
-        paddingLeft: 20,
+        paddingLeft: 10,
         marginVertical: Margins.narrow,
         alignContent: "center"
       },
