@@ -165,6 +165,7 @@ return (
             <Text style={{fontSize: 16, marginBottom: 5}}>Username</Text>
             <TextInput
               /* value = "flarson" */
+              maxLength={15} 
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your username"
               style={styles.TextInput}
@@ -175,6 +176,7 @@ return (
             <Text style={{fontSize: 16, marginBottom: 5}}>Password</Text>
             <TextInput
               /* value = "flarson1234" */
+              maxLength={15} 
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
               placeholder="Enter your password"

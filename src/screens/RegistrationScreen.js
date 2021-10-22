@@ -56,7 +56,9 @@ function RegistrationScreen(props) {
             Form submission is not possible until all of the fields
             have been appropriately filled in.  
   */
+  
   const [colorValidator, setColorValidator] = useState(true);
+  const [emailColorValidator, setEmailColorValidator] = useState(true);
   const [inputValidator, setInputValidator] = useState({
     userName: false,
     firstName: false,
@@ -107,6 +109,23 @@ function handleWrongPhoneFormat(){
         onPress: () => console.log("OK Pressed"), 
         }, ], { cancelable: false } );        
 }
+
+function handleWrongEmailFormat(){
+  Alert.alert(
+    "Wrong Format!",
+    "Email must be in email format!",
+    [ 
+        { 
+        text: "OK",
+        onPress: () => console.log("OK Pressed"), 
+        }, ], { cancelable: false } );        
+}
+
+/* AD & DK - function for validating email */
+function isEmail(enteredText) {
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(enteredText);
+  };
+
 
   /* TJ & AD - custom functions to control the modal 
   (other functions are called via props, 
@@ -196,17 +215,30 @@ const dateOfBirthInputHandler=(enteredText)=>{
     console.log('entered text/dateOfBirth: ' + enteredText);
 }
 
+/* AD & DK - email validation added */
 const emailInputHandler=(enteredText)=>{
-  customer.email = enteredText;
+  //customer.email = enteredText;
   console.log('entered text/email: ' + enteredText);
-  if(isEmpty(enteredText)){
+  if(isEmail(enteredText)){
+    setEmailColorValidator(false);
     inputValidator.email = false;
-    console.log("No text was entered!");
+    handleWrongEmailFormat();
+    //ToConsole:
+    console.log('Not an email');
+    console.log("emailColorValidator is: " + emailColorValidator);
   }
-  else{        
+  else{
+    setEmailColorValidator(true);
     inputValidator.email = true;
-    console.log('entered text/description: ' + enteredText);
+    customer.email = enteredText;
+    // ToConsole:
+    console.log('This is an email');
   }
+  if(isEmpty(enteredText)) {
+    inputValidator.email = false;
+    // ToConsole:
+    console.log("No text was entered!");
+  } 
 }
 
 const phoneInputHandler=(enteredText)=>{
@@ -264,6 +296,7 @@ const imageInputHandler=(enteredText)=>{
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 5}}>Username</Text>
             <TextInput
+              maxLength={15} 
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your username"
               style={styles.TextInput}
@@ -273,6 +306,7 @@ const imageInputHandler=(enteredText)=>{
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>Firstname</Text>
             <TextInput
+              maxLength={15} 
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Firstname"
               style={styles.TextInput}
@@ -282,6 +316,7 @@ const imageInputHandler=(enteredText)=>{
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>Lastname</Text>
             <TextInput
+              maxLength={15} 
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your Lastname"
               style={styles.TextInput}
@@ -291,15 +326,18 @@ const imageInputHandler=(enteredText)=>{
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>Email</Text>
             <TextInput
+              maxLength={20} 
               placeholderTextColor="#bdbdbd"
               placeholder="Enter your email"
-              style={styles.TextInput}
+              //style={styles.TextInput}
+              style={[styles.TextInput, {borderBottomColor: emailColorValidator ? colors.darkBlueCustom : "red"}]}
               onChangeText={emailInputHandler}
             />
             </View>
           <View style={{marginVertical: 5}}>
             <Text style={{fontSize: 16, marginBottom: 3}}>Password</Text>
             <TextInput
+              maxLength={15} 
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
               placeholder="Enter your password"
@@ -313,13 +351,13 @@ const imageInputHandler=(enteredText)=>{
               Phone number (numbers only) (+):
             </Text>
             <TextInput
-            // style={[styles.inputStyle, {borderColor: colorValidator ? colors.darkBlueCustom : "red"}]} //backgroundColor: darkMode ? '#282f3b' : '#f5f5f5',
+              maxLength={20} 
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
               placeholder="Enter your phone number"
               //style={styles.TextInput}
               style={[styles.TextInput, {borderBottomColor: colorValidator ? colors.darkBlueCustom : "red"}]}
-              onChangeText={phoneInputHandler} // might not be necessary
+              onChangeText={phoneInputHandler}
             />
           </View>
 
