@@ -42,7 +42,7 @@ const AboutModal=(props)=>{
                     borderRadius: 10,
                 }}>
                 <View style={{ alignSelf: "center", paddingTop: 10 }}>
-                    <Text style={{ fontSize: 20, fontWeight: "bold", borderBottomColor: colors.darkBlueCustom, borderBottomWidth: 1 }}>About Modal</Text>
+                    <Text style={{ fontSize: 22, fontWeight: "bold", borderBottomColor: colors.darkBlueCustom, borderBottomWidth: 1 }}>About</Text>
                 </View>
 
                 <View style={{ marginTop: 10, }}>
