@@ -212,11 +212,13 @@ const ListCreatedItem=(props)=>{
                             style={[TextStyling.textBlackSmall, styles.moreButton]}>
                             DETAILS
                         </Text>
+                        {/* 
                         <Text 
                             onPress={updateAlert}
                             style={[TextStyling.textBlackSmall, styles.updateButton]}>
                             UPDATE
                         </Text>
+                        */}
                         <Text
                             //text = 'submit' 
                             onPress={deleteAlert}
@@ -276,10 +278,10 @@ const styles = StyleSheet.create ({
         padding: Paddings.xnarrow,    
     },
     innerRowContainer3: {
-        backgroundColor: colors.light4,
+        backgroundColor: colors.light2,
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingHorizontal: Paddings.large,
+        paddingHorizontal: Paddings.xxlarge, //large
         paddingVertical: Paddings.xnarrow,       
     },
     titleName: {
@@ -292,6 +294,9 @@ const styles = StyleSheet.create ({
     moreButton: {
         color: "green",
         fontWeight: "bold",
+        backgroundColor: colors.light4,
+        paddingHorizontal: Paddings.xnarrow,
+        borderRadius: 3,
     },
     updateButton: {
         color: "blue",
@@ -300,6 +305,9 @@ const styles = StyleSheet.create ({
     deleteButton: {
         color: "red",
         fontWeight: "bold",
+        backgroundColor: colors.light4,
+        paddingHorizontal: Paddings.xnarrow,
+        borderRadius: 3,
     },
     fontCustomBold: {
         fontWeight: "bold",
