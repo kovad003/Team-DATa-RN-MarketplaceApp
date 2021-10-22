@@ -43,13 +43,19 @@ import {
 import Checkbox from "../components/Checkbox";
 import LinkButton from "../components/LinkButton";
 import Logo from "../components/Logo";
+import colors from "../constants/colors";
 
 /* TJ & AD - The main function of the page */
 function RegistrationScreen(props) {
 
   /************* TJ & AD - State Variable *************/
 
-  // > AD - color validator
+  /* 
+  AD & DK - input validation (and some 'colour validation') 
+            added to the customer registration form.
+            Form submission is not possible until all of the fields
+            have been appropriately filled in.  
+  */
   const [colorValidator, setColorValidator] = useState(true);
   const [inputValidator, setInputValidator] = useState({
     userName: false,
@@ -91,10 +97,10 @@ function RegistrationScreen(props) {
         }, ], { cancelable: false } );        
 }
 
-function handleWrongPriceFormat(){
+function handleWrongPhoneFormat(){
   Alert.alert(
     "Wrong Format!",
-    "Price must be a number.",
+    "Phone number must be a number!",
     [ 
         { 
         text: "OK",
@@ -204,16 +210,28 @@ const emailInputHandler=(enteredText)=>{
 }
 
 const phoneInputHandler=(enteredText)=>{
-  customer.phone = enteredText;
+  //customer.phone = enteredText;
   console.log('entered text/phone: ' + enteredText);
-  if(isEmpty(enteredText)){
+  if(isNaN(enteredText)){
+    setColorValidator(false);
     inputValidator.phone = false;
-    console.log("No text was entered!");
+    handleWrongPhoneFormat();
+    // ToConsole:
+    console.log('Not a number');
+    console.log("colorValidator is: " + colorValidator);
   }
-  else{        
+  else{
+    setColorValidator(true);
     inputValidator.phone = true;
-    console.log('entered text/description: ' + enteredText);
+    customer.phone = enteredText;
+    // ToConsole:
+    console.log('This is a number');
   }
+  if(isEmpty(enteredText)) {
+    inputValidator.phone = false;
+    // ToConsole:
+    console.log("No text was entered!");
+  } 
 }
 
 const imageInputHandler=(enteredText)=>{
@@ -295,10 +313,12 @@ const imageInputHandler=(enteredText)=>{
               Phone number
             </Text>
             <TextInput
+            // style={[styles.inputStyle, {borderColor: colorValidator ? colors.darkBlueCustom : "red"}]} //backgroundColor: darkMode ? '#282f3b' : '#f5f5f5',
               placeholderTextColor="#bdbdbd"
               secureTextEntry={true}
               placeholder="Enter your phone number"
-              style={styles.TextInput}
+              //style={styles.TextInput}
+              style={[styles.TextInput, {borderBottomColor: colorValidator ? colors.darkBlueCustom : "red"}]}
               onChangeText={phoneInputHandler} // might not be necessary
             />
           </View>
