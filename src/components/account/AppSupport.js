@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     scrollView: {
-        //backgroundColor: colors.light4,
         backgroundColor: colors.light4,
       },
     /* extra stylings for the modal control buttons */

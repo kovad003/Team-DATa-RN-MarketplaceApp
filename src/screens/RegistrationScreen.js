@@ -420,6 +420,9 @@ const styles = StyleSheet.create({
   customBackground: {
     backgroundColor: colors.light4,
   },
+  scrollView: {
+    backgroundColor: colors.light4,
+  },
   logo: {
     width: 172,
     height: 110,
