@@ -12,6 +12,8 @@ import CreateItemScreen from '../screens/CreateItemScreen'
 import CategoryScreen from '../screens/CategoryScreen'
 import HomeScreen from '../screens/HomeScreen'
 
+
+import SearchStackNavigation from '../navigation/SearchStackNavigation'
 import CategoryStackNavigation from '../navigation/CategoryStackNavigation'
 import HomeStackNavigation from '../navigation/HomeStackNavigation'
 
@@ -39,7 +41,7 @@ function BottomTabsNavigation () {
             iconName = focused ? 'plus-circle' : 'plus-circle';
         } else if (route.name === 'Categories') {
             iconName = focused ? 'shape' : 'shape';
-        }else if (route.name === 'Search') {
+        }else if (route.name === 'SearchStack') {
             iconName = focused ? 'magnify' : 'magnify';
         }else if (route.name === 'Profile') {
             iconName = focused ? 'account' : 'account';
@@ -66,8 +68,10 @@ function BottomTabsNavigation () {
             />
        
             <Tab.Screen 
-            name="Search" 
-            component={SearchScreen}
+            name="SearchStack" 
+            component={SearchStackNavigation}
+            options={{headerShown: false}}  
+
             />        
             <Tab.Screen 
             name="My Items" 

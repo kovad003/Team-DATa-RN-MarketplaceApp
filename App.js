@@ -19,6 +19,7 @@ import AccountScreen from "./src/screens/AccountScreen";
 import BottomTabsNavigation from './src/navigation/BottomTabsNavigation'
 import CategoryStackNavigation from './src/navigation/CategoryStackNavigation'
 import CustomerProfileScreen from './src/screens/CustomerProfileScreen'
+import SearchStackNavigation from './src/navigation/SearchStackNavigation'
 
 // Font Imports
 import * as Font from 'expo-font';
