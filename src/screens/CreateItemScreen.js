@@ -393,13 +393,13 @@ function CreateItemScreen(props) {
         <View style={styles.centralContainer}>        
 
           <MenuRow 
-            //onSelect={comingSoonAlert}
-            onSelect={getSessionData}
+            onSelect={comingSoonAlert}
+            //onSelect={getSessionData}
             style = {styles.row1} rowText = "Seller's Guide"
             icon1 = "book-open-page-variant"/>
           <MenuRow 
-            //onSelect={comingSoonAlert}
-            onSelect = {setSessionData}
+            onSelect={comingSoonAlert}
+            //onSelect = {setSessionData}
             style = {styles.row2} rowText = "Notifications"
             icon1 = "bell-ring-outline" />          
 

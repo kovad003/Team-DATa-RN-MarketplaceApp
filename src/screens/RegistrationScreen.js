@@ -45,6 +45,10 @@ import LinkButton from "../components/LinkButton";
 import Logo from "../components/Logo";
 import colors from "../constants/colors";
 
+/* TJ & AD - custom icon */
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Margins, Paddings } from "../constants/constvalues";
+
 /* TJ & AD - The main function of the page */
 function RegistrationScreen(props) {
 
@@ -123,7 +127,10 @@ function handleWrongEmailFormat(){
 
 /* AD & DK - function for validating email */
 function isEmail(enteredText) {
-  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(enteredText);
+  console.log("function isEmail(enteredText) {")
+  var isOk = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(enteredText);
+  console.log("isOk => " + isOk);
+  return isOk
   };
 
 
@@ -162,7 +169,6 @@ const firstNameInputHandler=(enteredText)=>{
   customer.firstName = enteredText;
   console.log('entered text/firstName: ' + enteredText);
   if(isEmpty(enteredText)){
-    
     inputValidator.firstName = false;
     console.log("No text was entered!");
   }
@@ -219,10 +225,10 @@ const dateOfBirthInputHandler=(enteredText)=>{
 const emailInputHandler=(enteredText)=>{
   //customer.email = enteredText;
   console.log('entered text/email: ' + enteredText);
-  if(isEmail(enteredText)){
+  if(!isEmail(enteredText)){
     setEmailColorValidator(false);
     inputValidator.email = false;
-    handleWrongEmailFormat();
+    //handleWrongEmailFormat();
     //ToConsole:
     console.log('Not an email');
     console.log("emailColorValidator is: " + emailColorValidator);
@@ -363,13 +369,23 @@ const imageInputHandler=(enteredText)=>{
           </View>
 
           <View style={styles.eulaRow}>
-        <View style={styles.eulaCheckBoxRow}>
-          <Checkbox style={styles.eulaCheckBox}></Checkbox>
-          <LinkButton
-            label="I have read and accept EULA terms"
-            style={styles.eulaLinkButton}
-          ></LinkButton>
-        </View>
+
+             {/* 
+            <View style={styles.eulaCheckBoxRow}>
+             */}
+              {/* 
+              <Checkbox style={styles.eulaCheckBox}></Checkbox>
+              */}
+          
+              <Icon name="checkbox-marked" style={styles.iconStyling}></Icon>          
+              <LinkButton
+                label="I have read and accept EULA terms"
+                style={styles.eulaLinkButton}
+              ></LinkButton>
+              
+              {/*
+            </View>
+            */}
         </View>
           <View style={{alignSelf: 'center', width: '100%', marginTop: 50}}>
             <TouchableOpacity
@@ -431,25 +447,41 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   eulaRow: {
-    width: 360,
+    width: 360, //360
     height: 38,
     flexDirection: "row",
-    marginTop: 30
+    //marginTop: 30,
+    marginTop: 15,
+    marginHorizontal: Margins.xxxlarge, //large
+    alignContent: "center",
   },
   eulaCheckBox: {
     height: 40,
-    width: 40
+    width: 40,
   },
   eulaLinkButton: {
     height: 39,
-    width: 320,
+    width: 320, //320
     marginTop: 1
   },
+  /*
   eulaCheckBoxRow: {
     height: 40,
     flexDirection: "row",
     flex: 1,
-    marginTop: 10
+    marginTop: 10,
+    alignContent: "center",
+    marginHorizontal: Margins.midsize
+  },
+  */
+  iconStyling: {
+    color: '#000080',
+    fontSize: 30,
+    justifyContent:'center',
+    alignItems:'center',      
+    //paddingRight: Paddings.narrow,
+    //paddingTop: 6,
+    paddingTop: Paddings.narrow,
   }
 });
 

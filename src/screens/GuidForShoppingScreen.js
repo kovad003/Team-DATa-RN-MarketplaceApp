@@ -16,7 +16,7 @@ function GuidForShoppingScreen(props) {
       <ScrollView>
           <View >
             <View style={styles.headerContainer}>
-              <Text style={styles.textHeader}>Guid for Shopping Safe</Text>
+              <Text style={styles.textHeader}>Guide for Shopping Safe</Text>
             </View>
             <Text style={styles.textContent}>Look for specific things: most of the times when I see an item I want to buy, I search on all those online platforms for exactly that. An item of clothing in a specific colour or size, or even material; the exact model of the chair, aside from just mentioning the type of item or brand. You’d be surprised how much this helps your search results.</Text>
             <Text style={styles.textContent}>Search your radius: sometimes I forgot to set my search radius accordingly and was then disappointed when my glorious find ended up being in Oulu or something. Be realistic with where you search, depending on your options you might be able to pick your things up with public transport, or you might have have to get a car.</Text>
