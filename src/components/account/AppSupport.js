@@ -48,20 +48,23 @@ const AppSupport=(props)=>{
         <Modal visible={props.visibility} animationType="slide">
         <ScrollView style={styles.scrollView}>     
 
-        <View style={{ flex: 1, backgroundColor: colors.light4/* '#ffffff' */ }}>
+        <View style={{ flex: 1, backgroundColor: colors.light4 /* '#ffffff' */ }}>
             <Logo style={styles.logo}/>
             <View
                 style={{
-                    paddingHorizontal: 10,
+                    paddingHorizontal: 10, //10
                     paddingVertical: 5,
                     //marginVertical: 10,
                     marginTop: 5,
-                    marginHorizontal: 10,
+                    marginHorizontal: 15, //10
                     backgroundColor: '#fff',
+                    //backgroundColor: colors.light4,
                     borderRadius: 10,
+                    borderColor: colors.light2,
+                    borderWidth: 1,
                 }}>
                 <View style={{ alignSelf: "center" }}>
-                    <Text style={{ fontSize: 20, fontWeight: "bold" }}>Contact Us</Text>
+                    <Text style={{ fontSize: 20, fontWeight: "bold", borderBottomColor: colors.darkBlueCustom, borderBottomWidth: 1  }}>Contact Us</Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <View style={{ marginVertical: 5 }}>
@@ -81,7 +84,7 @@ const AppSupport=(props)=>{
                         />
                     </View>
                     <View style={{ marginVertical: 5 }}>
-                        <Text style={{ fontSize: 16, marginBottom: 3 }}>Email</Text>
+                        <Text style={{ fontSize: 16, marginBottom: 3 }}>Email (valid emails only)</Text>
                         <TextInput
                             placeholderTextColor="#bdbdbd"
                             placeholder="Your email"
@@ -141,7 +144,7 @@ const styles = StyleSheet.create({
     view: { height: 60, width: '100%', },
     TextInput: {
         height: 43,
-        borderBottomColor: '#bdbdbd',
+        borderBottomColor: '#bdbdbd', 
         borderBottomWidth: 4,
         fontSize: 18,
     },
