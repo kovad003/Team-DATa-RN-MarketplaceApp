@@ -444,11 +444,17 @@ if (isLoadingSearchResults==true) {
                 <Text style={styles.modalTitle}>Select a price range:</Text>
                 <PriceSetter title="Min Price:"
                   onValueChange = {takeMinPriceInput}
-                  displayValue = {minPriceToDisplay}
+                  displayValue = {minPriceToDisplay*1}
+                  scrollValue = {minPriceToDisplay*1}
+                  minimumValue = {1}
+                  maximumValue = {maxPriceToDisplay*1}
                 />
                 <PriceSetter title="Max Price:"
                   onValueChange={takeMaxPriceInput}
-                  displayValue={maxPriceToDisplay}
+                  displayValue={maxPriceToDisplay*1}
+                  scrollValue = {maxPriceToDisplay*1}
+                  minimumValue = {minPriceToDisplay*1}
+                  maximumValue = {1000}
                 />
                 <Button title='Ok' onPress={onCancel}/>
               </Modal>
