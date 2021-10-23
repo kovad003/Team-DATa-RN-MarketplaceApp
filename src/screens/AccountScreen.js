@@ -38,6 +38,9 @@ import LogoSmall from "../components/LogoSmall";
 import AppSupport from "../components/account/AppSupport";
 import AboutModal from "../components/account/AboutModal";
 
+// LOGIN
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 /* AD - The main function of the page */
 function AccountScreen(props) {
 
@@ -49,6 +52,7 @@ const [messageDisplayed, setMessageDisplayed] = useState('');
 
  /* AD - Handles loading state (useState variable) */
 const [isLoading, setLoading] = useState(false); // was true
+const [isLoadingSession, setLoadingSession] = useState(false); // was true
 
 /* AD - Handles the state of whether specific 
         modal windows are visible or not (useState variable) */
@@ -66,6 +70,9 @@ const [itemList, addItemToList] = useState([]);
 /* AD - for the AccountScreen -> registration page modal visibility */
 const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
+
+//Login out button
+const [logBtnText, setLogBtnText] = useState("Login")
 
 // AD - a dummy Update Info alert
 const menuTestAlert = () =>
@@ -127,6 +134,45 @@ const onAddCustomer = (childdata) => {
   setVisibility(false);
   //setLoading(true);
 }
+
+const handleButtonText=(boolean)=>{  
+      if(boolean== true){ 
+        setLogBtnText("Logout");
+        setLoadingSession(true);
+      } else{
+        setLogBtnText("Login");
+        setLoadingSession(true);
+      }
+  }
+
+const handleUserSession=()=>{
+    console.log("const handleUserSession=()=>{");
+    AsyncStorage.getItem("StoredSessionId").then((SESSION_ID) => {
+      console.log("SESSION_ID: "+ SESSION_ID);
+      if(SESSION_ID == 0 || SESSION_ID == undefined){ 
+        setLoginVisible(true);
+        setLoadingSession(true);
+      } else{
+        alert("You have been logged out!");
+        AsyncStorage.setItem("StoredSessionId", "0");
+        setLogBtnText("Login");
+        setLoadingSession(true);
+      }
+    }); 
+  }
+
+const handleLogInOutButtonText=()=>{
+    console.log("const handleLogInOutButtonText=()=>{");
+    AsyncStorage.getItem("StoredSessionId").then((SESSION_ID) => {
+      console.log("SESSION_ID: "+ SESSION_ID);
+      if(SESSION_ID == 0 || SESSION_ID == undefined){
+        return "Login"
+      } else{
+        return "Logout"
+      }
+    });
+    return "puppy" 
+  }
 
 /* AD - Functions related to the modal visibility */
   const cancelLoginModal = ()=>{
@@ -414,15 +460,18 @@ async function deleteData(itemIdParam) {
 */
 useEffect(() => {
   console.log('useEffect(() => {'); 
-    if (isLoading==true){
-      fetchData();
-      setLoading(false);
+  if (isLoading==true){
+    fetchData();
+    setLoading(false);
+  }
+  if (isLoadingSession== true){
+    setLoadingSession(false);
   }
 });
 
 /* AD - An if statement to return an activity indicator if certain async functions,
           like GET (fetch) are not yet ready */
-if (isLoading==true) {
+if (isLoading==true || isLoadingSession==true) {
   console.log('if(isLoading==true) {');
   return (
     <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
@@ -476,8 +525,12 @@ else{
             style = {styles.row1} rowText = "Register"
             icon1 = "account-plus-outline"/>
           <MenuRow 
-            onSelect={()=>setLoginVisible(true)}
-            style = {styles.row1a} rowText = "Login"
+            onSelect={()=>handleUserSession()}
+            style = {styles.row1a} 
+            rowText = {logBtnText}
+            //rowText = {()=>handleLogInOutButtonText()}
+            
+            //rowText = "Login"
             icon1 = "login" />
           <MenuRow 
             onSelect = {()=>setAboutVisibility(true)}
@@ -505,7 +558,8 @@ else{
           icon1 = "face-agent" />
 
           <LoginScreen 
-          visibility={isLoginVisible} 
+          visibility={isLoginVisible}
+          handleButtonText={handleButtonText} 
           /*onAddItem={onAddItem}*/
           /* itemList={items} */
           onCancelItem={cancelLoginModal}   // onCancelItem = cancelAddItem      

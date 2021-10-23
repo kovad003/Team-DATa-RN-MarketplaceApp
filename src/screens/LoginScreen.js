@@ -32,6 +32,7 @@ const [loginDataReceived, setloginDataReceived] = useState({
 const saveSessionId=(newSessionId)=>{
   AsyncStorage.setItem("StoredSessionId", newSessionId.toString());
   console.log('SessionId was saved as: ' + newSessionId)
+  props.handleButtonText(true);
 }
 const getSessionId=()=>{
   console.log("AsyncStorage.getItem(StoredSessionId): " + JSON.stringify(AsyncStorage.getItem("StoredSessionId")));
@@ -105,6 +106,7 @@ const cancelItem=()=>{
         cancelItem();
       }else{
         alert("Wrong username or password!");
+        props.changeButtonText(false)
       }
       
     }
