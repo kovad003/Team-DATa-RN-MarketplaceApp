@@ -25,7 +25,7 @@ function HomeScreen(props) {
     setMessageDisplayed("Error: " + error);
     console.log(messageDisplayed);
   }
-
+  let x = 'http://10.0.2.2:8080'
   // HH - reading Items with decending order 
   // *** GET ***
   async function fetchCatData() {
@@ -34,7 +34,7 @@ function HomeScreen(props) {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getalldesc");
+      response = await fetch(`${x}/rest/itemservice/getalldesc`);
 
     }
     catch(error){
