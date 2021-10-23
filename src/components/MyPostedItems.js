@@ -139,7 +139,8 @@ const MyPostedItems=(props)=>{
                   keyExtractor={(item) => item.itemId.toString()} 
                   data={props.itemList}
                   renderItem={itemData => 
-                      <ListCreatedItem itemId={itemData.item.itemId} 
+                      <ListCreatedItem itemId={itemData.item.itemId}
+                      source={{uri: itemData.item.image}}
                       title={itemData.item.title}
                       price={itemData.item.price}
                       condition={itemData.item.condition}
