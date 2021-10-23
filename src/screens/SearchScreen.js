@@ -83,6 +83,17 @@ const SearchScreen = (props) => {
   const [isPriceModalVisible, setPriceModalVisibility] = useState(false);
   const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
 
+  // Validation 
+  const [inputValidator, setInputValidator] = useState({
+    title: false,
+    category: false,
+    region: false,
+    city: false,
+    minPrice: true, // it is a value by default
+    maxPrice: true, // it is a value by defult
+    condition: false,
+  });
+
 // END OF STATE VARIABLES =================================================================================================
 
 // CUSTOM FUNCTIONS =======================================================================================================
@@ -135,20 +146,52 @@ const SearchScreen = (props) => {
     setLoadingRegions(false);
   }
   // --------------------------------------------------
+  // Validation ---------------------------------
+  const validation=()=>{
+    var isOk = false;
+    var counter = 0;
+    for (const validationTool of Object.entries(inputValidator)) {
+      //console.log(item[0] + " -> " + item[1])
+      if(validationTool[1] == false){
+        counter++;
+      }
+      else{
+        console.log("Input field is incomplete!")
+      }
+      console.log(validationTool[0] + " -> " + validationTool[1]);
+      console.log("Mistakes counted so far: " + counter);
+    }
+    if (counter == 0) {
+      isOk = true;
+      console.log('Validation Ok...');
+    }
+    return isOk
+  }
+  // --------------------------------------------------
   // Handle Search & Selections ---------------------------------
   const handleSearch=()=>{
-    setSearchingItems(true);
+    if(validation() == true){
+      setSearchingItems(true);
+    } else{
+      alert("All fields must be completed!");
+    }  
   }
-  const handleTextInput=(selectedItem)=>{
-    setSearchTitle(selectedItem);
+  const handleTextInput=(enteredText)=>{
+    setSearchTitle(enteredText);
+    if(enteredText == "" || enteredText == null || enteredText == undefined){
+      inputValidator.title = false;
+    } else{
+      inputValidator.title = true;
+    }
 
     // ToConsole
-    console.log("SearchTitle: " +  selectedItem);
+    console.log("SearchTitle: " +  enteredText);
   }
   const handleCategorySelection=(selectedItem)=>{
     setCategoryModalVisibility(false);
     setCategory(selectedItem.cityId);
     setCategoryNameToDisplay(selectedItem.title)
+    inputValidator.category = true;
     // ToConsole
     console.log("selected item: " +  JSON.stringify(selectedItem));
     console.log("setRegion to " +selectedItem.regionId);
@@ -159,6 +202,7 @@ const SearchScreen = (props) => {
     setRegionNameToDisplay(selectedItem.regionName)
     changeCitySwipeAccessibility();
     setLoadingCities(true);
+    inputValidator.region = true;
     // ToConsole
     console.log("selected item: " +  JSON.stringify(selectedItem));
     console.log("setRegion to " +selectedItem.regionId);
@@ -168,6 +212,7 @@ const SearchScreen = (props) => {
     setCityNameToDisplay(selectedItem.cityName);
     setRegionModalVisibility(false);
     setCityModalVisibility(false);
+    inputValidator.city = true;
     // ToConsole
     console.log("selected item: " +  JSON.stringify(selectedItem));
   }
@@ -185,6 +230,7 @@ const SearchScreen = (props) => {
     setSelectedCondition(selectedItem);
     setConditionNameToDisplay(selectedItem);
     setConditionModalVisibility(false);
+    inputValidator.condition = true;
     // ToConsole
     //console.log("selected item: " +  JSON.stringify(selectedItem));
   }
