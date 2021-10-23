@@ -38,17 +38,20 @@ import LogoSmall from "../components/LogoSmall";
 import AppSupport from "../components/account/AppSupport";
 import AboutModal from "../components/account/AboutModal";
 
+// LOGIN
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 /* AD - The main function of the page */
 function AccountScreen(props) {
 
-/************* AD - State Variables *************/
-
+// STATE VARIABLES ------------------------------------------------------------------------------
 /* AD - Handles the display of messages */
 const [hasMessage, setMessage] = useState(false);
 const [messageDisplayed, setMessageDisplayed] = useState('');
 
  /* AD - Handles loading state (useState variable) */
 const [isLoading, setLoading] = useState(false); // was true
+const [isLoadingSession, setLoadingSession] = useState(false); // was true
 
 /* AD - Handles the state of whether specific 
         modal windows are visible or not (useState variable) */
@@ -67,21 +70,11 @@ const [itemList, addItemToList] = useState([]);
 const [isLoginVisible, setLoginVisible] = useState(false);
 const [isRegisterVisible, setRegisterVisible] = useState(false);
 
-// AD - a dummy Update Info alert
-const menuTestAlert = () =>
-Alert.alert(
-"Dummy Update Info",
-"Your post was successfully updated!",
-[
-    {
-    text: "Cancel",
-    onPress: () => console.log("Cancel Pressed"),
-    style: "cancel"
-    },
-    { text: "OK", onPress: () => console.log("OK Pressed") }
-]
-);
+//Login out button
+const [logBtnText, setLogBtnText] = useState("Login")
+// ----------------------------------------------------------------------------------------
 
+// ALERTS --------------------------------------------------------------------------------
 // AD - a comming soon alert
 const comingSoonAlert = () =>
 Alert.alert(
@@ -96,6 +89,7 @@ Alert.alert(
     { text: "OK", onPress: () => console.log("OK Pressed") }
 ]
 );
+// ----------------------------------------------------------------------------------------
 
 /************* AD - Custom Functions *************/
 
@@ -128,6 +122,45 @@ const onAddCustomer = (childdata) => {
   //setLoading(true);
 }
 
+const handleButtonText=(boolean)=>{  
+      if(boolean== true){ 
+        setLogBtnText("Logout");
+        setLoadingSession(true);
+      } else{
+        setLogBtnText("Login");
+        setLoadingSession(true);
+      }
+  }
+
+const handleUserSession=()=>{
+    console.log("const handleUserSession=()=>{");
+    AsyncStorage.getItem("StoredSessionId").then((SESSION_ID) => {
+      console.log("SESSION_ID: "+ SESSION_ID);
+      if(SESSION_ID == 0 || SESSION_ID == undefined){ 
+        setLoginVisible(true);
+        setLoadingSession(true);
+      } else{
+        alert("You have been logged out!");
+        AsyncStorage.setItem("StoredSessionId", "0");
+        setLogBtnText("Login");
+        setLoadingSession(true);
+      }
+    }); 
+  }
+
+const handleLogInOutButtonText=()=>{
+    console.log("const handleLogInOutButtonText=()=>{");
+    AsyncStorage.getItem("StoredSessionId").then((SESSION_ID) => {
+      console.log("SESSION_ID: "+ SESSION_ID);
+      if(SESSION_ID == 0 || SESSION_ID == undefined){
+        return "Login"
+      } else{
+        return "Logout"
+      }
+    });
+    return "puppy" 
+  }
+
 /* AD - Functions related to the modal visibility */
   const cancelLoginModal = ()=>{
     setLoginVisible(false);
@@ -143,45 +176,7 @@ const onAddCustomer = (childdata) => {
 
  /* AD - This one was originally related to the item screen, but it is a WIP */
 
-// Custom Functions ****************************************************************************************
-const onAddItem = (childdata) => {
-  addItemToList(itemList =>[...itemList, childdata]);
-
-  console.log('childdata.customerId: ' + childdata.customerId);
-  console.log('childdata.firstName: ' + childdata.firstName);
-  console.log('childdata.lastName: ' + childdata.lastName);
-  console.log('childdata.userName: ' + childdata.userName);
-  console.log('childdata.password: ' + childdata.password);
-  console.log('childdata.dateOfBirth: ' + childdata.dateOfBirth);
-  console.log('childdata.email: ' + childdata.email);
-  console.log('childdata.phone: ' + childdata.phone);
-  console.log('childdata.image: ' + childdata.image);
-
-  addData(
-    childdata.customerId, 
-    childdata.firstName, 
-    childdata.lastName, 
-    childdata.userName, 
-    childdata.password, 
-    childdata.dateOfBirth, 
-    childdata.email, 
-    childdata.phone, 
-    childdata.image);
-  setVisibility(false);
-  //setLoading(true);
-}
-
-/* AD - for more modal functionality (these onese are WIP)*/
-const cancelAddItem=()=>{
-  setVisibility(false);
-  setLoading(false);
-}
-
-const cancelAddItem2=()=>{
-  setflatListVisibility(false);
-  setLoading(false);
-}
-
+// Custom Functions ***************************************************************************************
 /* For the support modal */
 const onCancelSupport2=()=>{
   setSupportVisibility(false);
@@ -192,13 +187,6 @@ const onCancelSupport2=()=>{
 const onCancelAbout2=()=>{
   setAboutVisibility(false);
   //setLoading(false);
-}
-
-/* AD - a wip function */
-const onDeleteItem=(idParam)=>{
-  console.log('idParam: ' + idParam);
-  //setLoading(true);
-  deleteData(idParam)
 }
 
 /* AD - functions related to confirmation and error messages */
@@ -218,37 +206,7 @@ function closeMessage() {
   setLoading(true);
 }
 
-
-// AD - customer service additions
-
- /************* AD - Service Functions (connects to a Java Backend) *************/
-
- /* AD - An async function to GET (fetch) data from the Java backend 
- (which interacts with our MySQL / Google Cloud database). This one is WIP */
-  async function fetchCustomerData() {
-    //Variable res is used later, so it must be introduced before try block and so cannot be const.
-    let response = null;
-    try{
-      /* AD - This waits for the fetch to be completed successfully. 
-      It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch("http://10.0.2.2:8080/rest/customerservice/getall");
-    }
-    /* AD - A try catch to catch errors */
-    catch(error){
-      showError(error);
-    }
-    try{
-      /* AD - This gets json from the response. 
-      Essentially, the variable responseData is assigned a value, that is the json from the response. */
-      let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
-      setItems(responseData);
-    }
-    catch(error){
-      showError(error);
-    }
-  }
- 
+// SERVICE METHODS ------------------------------------------------------------------------
   /* AD - An async function to POST data to the Java backend (which interacts with our MySQL / Google Cloud database) */
   async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {
     console.log('started: async function addCustomerData(firstNameParam, lastNameParam, userNameParam, passwordParam, dateOfBirthParam, emailParam, phoneParam, imageParam) {');
@@ -404,7 +362,9 @@ async function deleteData(itemIdParam) {
     showError(error);
   }
 }
+// ----------------------------------------------------------------------------------------
 
+// USEFFECT --------------------------------------------------------------------------------
 /*
   AD - This function is called every time the view is rendered.
        There are async functions which get called, and so new calls of such functions
@@ -414,15 +374,20 @@ async function deleteData(itemIdParam) {
 */
 useEffect(() => {
   console.log('useEffect(() => {'); 
-    if (isLoading==true){
-      fetchData();
-      setLoading(false);
+  if (isLoading==true){
+    fetchData();
+    setLoading(false);
+  }
+  if (isLoadingSession== true){
+    setLoadingSession(false);
   }
 });
+// ----------------------------------------------------------------------------------------
 
+// RETURN ---------------------------------------------------------------------------------
 /* AD - An if statement to return an activity indicator if certain async functions,
           like GET (fetch) are not yet ready */
-if (isLoading==true) {
+if (isLoading==true || isLoadingSession==true) {
   console.log('if(isLoading==true) {');
   return (
     <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
@@ -476,8 +441,12 @@ else{
             style = {styles.row1} rowText = "Register"
             icon1 = "account-plus-outline"/>
           <MenuRow 
-            onSelect={()=>setLoginVisible(true)}
-            style = {styles.row1a} rowText = "Login"
+            onSelect={()=>handleUserSession()}
+            style = {styles.row1a} 
+            rowText = {logBtnText}
+            //rowText = {()=>handleLogInOutButtonText()}
+            
+            //rowText = "Login"
             icon1 = "login" />
           <MenuRow 
             onSelect = {()=>setAboutVisibility(true)}
@@ -505,30 +474,25 @@ else{
           icon1 = "face-agent" />
 
           <LoginScreen 
-          visibility={isLoginVisible} 
-          /*onAddItem={onAddItem}*/
-          /* itemList={items} */
-          onCancelItem={cancelLoginModal}   // onCancelItem = cancelAddItem      
+          visibility={isLoginVisible}
+          handleButtonText={handleButtonText} 
+          onCancelItem={cancelLoginModal}  
           /> 
 
           <RegistrationScreen 
           visibility={isVisible} 
           onAddCustomer={onAddCustomer}
           customerList={customer} 
-          onCancelCustomer={cancelAddCustomer}  // onCancelItem2 = cancelAddItem2
+          onCancelCustomer={cancelAddCustomer}
           /> 
 
           <AppSupport 
           visibility={isSupportVisible} 
-          /* onAddItem={onAddItem}
-          itemList={items} */
           onCancelSupport={onCancelSupport2} 
           />
 
           <AboutModal 
           visibility={isAboutVisible} 
-          /* onAddItem={onAddItem}
-          itemList={items} */
           onCancelAbout={onCancelAbout2} 
           />
 

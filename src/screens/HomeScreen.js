@@ -43,7 +43,7 @@ function HomeScreen(props) {
     try{
       //Getting json from the response
       let responseData = await response.json();
-      console.log(responseData);//Just for checking.....
+      //console.log(responseData);//Just for checking.....
       setAllItems(responseData);
     }
     catch(error){
