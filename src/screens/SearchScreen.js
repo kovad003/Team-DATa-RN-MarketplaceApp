@@ -50,6 +50,8 @@ const SearchScreen = (props) => {
 
   // Handle Search
   const [searchTitle, setSearchTitle] = useState();
+  const [searchResult,setSearchResult] = useState()  // HH - create an array of result objects to send 
+
 
   // Handle Category Data
   const [categoryList, addCategoryToList] = useState([null]); // Will store available categories from DB (JAVA)
@@ -68,12 +70,12 @@ const SearchScreen = (props) => {
   const [selectedCondition, setSelectedCondition] = useState({});
 
   // Handle Swipe Button Display => For technical name has to be saved separately
-  const [categoryNameToDisplay, setCategoryNameToDisplay] = useState("None"); 
-  const [regionNameToDisplay, setRegionNameToDisplay] = useState("None");
-  const [cityNameDisplay, setCityNameToDisplay] = useState("None");
+  const [categoryNameToDisplay, setCategoryNameToDisplay] = useState('Not Selected'); 
+  const [regionNameToDisplay, setRegionNameToDisplay] = useState('Not Selected');
+  const [cityNameDisplay, setCityNameToDisplay] = useState('Not Selected');
   const [minPriceToDisplay, setMinPriceToDisplay] = useState(1); 
   const [maxPriceToDisplay, setMaxPriceToDisplay] = useState(1);
-  const [conditionNameToDisplay, setConditionNameToDisplay] = useState('None');
+  const [conditionNameToDisplay, setConditionNameToDisplay] = useState('Not Selected');
 
   // Handle Modals => Will show/hide selection modals
   const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
@@ -292,7 +294,12 @@ const SearchScreen = (props) => {
     }
     try {
       let responseData = await response.json();
-      console.log('responseData: ' + JSON.stringify(responseData, null, 4));
+      //console.log('responseData: ' + JSON.stringify(responseData, null, 4));
+
+      //HH - keep data in an array****
+      setSearchResult(responseData)
+      // HH****************************
+
     } catch (error) {
       alert("Error in Response Data: " + error);
     }
@@ -317,7 +324,12 @@ const SearchScreen = (props) => {
       }
       if(isSearchingItems==true){
         searchForItems(searchTitle, categoryNameToDisplay, cityNameDisplay, minPriceToDisplay, maxPriceToDisplay, conditionNameToDisplay);
+        //HH - check the array of search result to send
+        console.log('searchResult array: ' + JSON.stringify(searchResult, null, 4));      
         setSearchingItems(false);
+        //HH - navigate to SearchResult page 
+        props.navigation.navigate('SearchResult', {result: searchResult});
+
       }
   });
 // ========================================================================================================================
