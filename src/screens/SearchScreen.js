@@ -70,12 +70,12 @@ const SearchScreen = (props) => {
   const [selectedCondition, setSelectedCondition] = useState({});
 
   // Handle Swipe Button Display => For technical name has to be saved separately
-  const [categoryNameToDisplay, setCategoryNameToDisplay] = useState("Furnitures"); 
-  const [regionNameToDisplay, setRegionNameToDisplay] = useState("Uusimaa");
-  const [cityNameDisplay, setCityNameToDisplay] = useState("Helsinki");
+  const [categoryNameToDisplay, setCategoryNameToDisplay] = useState('Not Selected'); 
+  const [regionNameToDisplay, setRegionNameToDisplay] = useState('Not Selected');
+  const [cityNameDisplay, setCityNameToDisplay] = useState('Not Selected');
   const [minPriceToDisplay, setMinPriceToDisplay] = useState(1); 
-  const [maxPriceToDisplay, setMaxPriceToDisplay] = useState(1000);
-  const [conditionNameToDisplay, setConditionNameToDisplay] = useState('new');
+  const [maxPriceToDisplay, setMaxPriceToDisplay] = useState(1);
+  const [conditionNameToDisplay, setConditionNameToDisplay] = useState('Not Selected');
 
   // Handle Modals => Will show/hide selection modals
   const [isCategoryModalVisible, setCategoryModalVisibility] = useState(false);
