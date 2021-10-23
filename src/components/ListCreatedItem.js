@@ -190,7 +190,9 @@ const ListCreatedItem=(props)=>{
 
                 <View style={styles.LeftInnerContainer}>
                     <Image 
-                    source={{uri: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg'}} style={styles.image}/>
+                    //source={{uri: 'https://www.giantbomb.com/a/uploads/scale_small/46/462814/3221502-8667199912-d2d02.jpg'}}
+                    source={props.source}
+                    style={styles.image}/>
                 </View> 
 
                 <View style={styles.rightInnerContainer}>
@@ -248,7 +250,7 @@ const styles = StyleSheet.create ({
      image: {
         width: 70,
         height: 70,
-        borderRadius: 35,
+        borderRadius: 25,
      },
      ListOuterContainer: {
          marginHorizontal: Margins.narrow,         

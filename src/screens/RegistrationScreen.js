@@ -123,7 +123,10 @@ function handleWrongEmailFormat(){
 
 /* AD & DK - function for validating email */
 function isEmail(enteredText) {
-  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(enteredText);
+  console.log("function isEmail(enteredText) {")
+  var isOk = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(enteredText);
+  console.log("isOk => " + isOk);
+  return isOk
   };
 
 
@@ -162,7 +165,6 @@ const firstNameInputHandler=(enteredText)=>{
   customer.firstName = enteredText;
   console.log('entered text/firstName: ' + enteredText);
   if(isEmpty(enteredText)){
-    
     inputValidator.firstName = false;
     console.log("No text was entered!");
   }
@@ -219,10 +221,10 @@ const dateOfBirthInputHandler=(enteredText)=>{
 const emailInputHandler=(enteredText)=>{
   //customer.email = enteredText;
   console.log('entered text/email: ' + enteredText);
-  if(isEmail(enteredText)){
+  if(!isEmail(enteredText)){
     setEmailColorValidator(false);
     inputValidator.email = false;
-    handleWrongEmailFormat();
+    //handleWrongEmailFormat();
     //ToConsole:
     console.log('Not an email');
     console.log("emailColorValidator is: " + emailColorValidator);
