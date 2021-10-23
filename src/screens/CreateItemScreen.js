@@ -75,18 +75,46 @@ function CreateItemScreen(props) {
   const onAddItem = (childdata) => {
     addItemToList(itemList =>[...itemList, childdata]);
 
-    console.log('childdata.categoryId: ' + childdata.categoryId);
-    console.log('childdata.customerId: ' + childdata.customerId);
-    console.log('childdata.title: ' + childdata.title);
-    console.log('childdata.price: ' + childdata.price);
-    console.log('childdata.description: ' + childdata.description);
-    console.log('childdata.description: ' + childdata.image);
-    console.log('childdata.condition: ' + childdata.condition);
-    console.log('childdata.location: ' + childdata.location);
+    console.log('childdata stringified: ' + JSON.stringify(childdata, null, 4));
 
-    addData(childdata.categoryId, SESSIONID, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
+    //addData(childdata.categoryId, SESSIONID, childdata.title, childdata.price, childdata.description, childdata.image, childdata.condition, childdata.location);
+    handleDataInsertion(childdata);
     setVisibility(false);
     //setLoading(true);
+  }
+
+  const handleCustomerDataFetch=()=>{
+    console.log("const handleCustomerDataFetch=()=>{");
+    AsyncStorage.getItem("StoredSessionId").then((SESSION_ID) => {
+      console.log("SESSION_ID: "+ SESSION_ID);
+      if(SESSION_ID == 0 || SESSION_ID == undefined){
+        alert("Please Log in!");
+      } else{
+        fetchCustomerData(SESSION_ID);
+      }
+    }); 
+  }
+
+  const handleDataInsertion=(object)=>{
+    console.log("const handleCustomerDataFetch=()=>{");
+    AsyncStorage.getItem("StoredSessionId").then((SESSION_ID) => {
+      console.log("SESSION_ID: "+ SESSION_ID);
+      if(SESSION_ID == 0 || SESSION_ID == undefined){
+        alert("Please Log in!");
+      } else{
+        addData(object.categoryId, SESSION_ID, object.title, object.price, object.description, object.image, object.condition, object.location);
+      }
+    }); 
+  }
+
+  const setSessionData = () =>{
+    AsyncStorage.setItem("StoredSessionId", "0");
+  }
+  const getSessionData = () =>{
+    AsyncStorage.getItem("StoredSessionId").then((SESSION_ID) => {
+      console.log("sesionid is: "+ SESSION_ID)
+      //fetchCustomerData();
+    });
   }
 
   /* AD - Functions related to the modal visibility */
@@ -140,22 +168,38 @@ function CreateItemScreen(props) {
 );
 
 // Handler Functions ---------------------------------------------------
+  const handlePostNewItemModal=()=>{
+    AsyncStorage.getItem("StoredSessionId").then((value) => {
+      if(value == 0 || value == undefined){
+        alert("Please Log in!");
+      } else{
+        setVisibility(true)
+      }
+    }); 
+  }
+
   const handleMyPostedItemModal=()=>{
-    setLoadingCustomerData(true);
-    setflatListVisibility(true);
+    AsyncStorage.getItem("StoredSessionId").then((value) => {
+      if(value == 0 || value == undefined){
+        alert("Please Log in!");
+      } else{
+        setLoadingCustomerData(true);
+        setflatListVisibility(true);
+      }
+    }); 
   }
 
   /************* AD - Service Functions (connects to a Java Backend) *************/
   
   /* AD - An async function to GET (fetch) data from the Java backend (which interacts with our MySQL / Google Cloud database) */
-  async function fetchCustomerData() {
+  async function fetchCustomerData(idParam) {
     console.log("CreateItemScreen.js -> async function fetchCustomerData() {");
     //Variable res is used later, so it must be introduced before try block and so cannot be const.
     let response = null;
     try{
       /* AD - This waits for the fetch to be completed successfully. 
       It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getcustomeritems/${SESSIONID}`); //TODO: apply SESSION ID
+      response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getcustomeritems/${idParam}`); //TODO: apply SESSION ID
     }
     /* AD - A try catch to catch errors*/
     catch(error){      
@@ -293,9 +337,10 @@ function CreateItemScreen(props) {
 */
   useEffect(() => {
     console.log('useEffect(() => {'); 
-      if (isLoadingCustomerData==true){
-        fetchCustomerData();
-        setLoadingCustomerData(false);
+    if (isLoadingCustomerData==true){
+      handleCustomerDataFetch();
+      //fetchCustomerData();
+      setLoadingCustomerData(false);
     }
   });
 
@@ -348,11 +393,13 @@ function CreateItemScreen(props) {
         <View style={styles.centralContainer}>        
 
           <MenuRow 
-            onSelect={comingSoonAlert}
+            //onSelect={comingSoonAlert}
+            onSelect={getSessionData}
             style = {styles.row1} rowText = "Seller's Guide"
             icon1 = "book-open-page-variant"/>
           <MenuRow 
-            onSelect={comingSoonAlert}
+            //onSelect={comingSoonAlert}
+            onSelect = {setSessionData}
             style = {styles.row2} rowText = "Notifications"
             icon1 = "bell-ring-outline" />          
 
@@ -361,7 +408,7 @@ function CreateItemScreen(props) {
           </View>                    
 
           <MenuRow 
-            onSelect={()=>setVisibility(true)}
+            onSelect={()=>handlePostNewItemModal()}
             style = {styles.row1} 
             bckgcol = {colors.darkBlueCustom} 
             rowText = "Post New Item"

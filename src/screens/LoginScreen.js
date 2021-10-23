@@ -19,8 +19,8 @@ const [isLogin , setIsLogin] = useState (false);
 
 // For service method
 const [loginDataToSend, setloginDataToSend] = useState({
-  userName: "user",
-  password: "password",
+  userName: undefined,
+  password: undefined,
 });
 const [loginDataReceived, setloginDataReceived] = useState({
   customerId: "undefined", //TODO
@@ -52,22 +52,15 @@ const passwordInputHandler=(enteredText)=>{
 }
 const LoginInputHandler = () =>{
   console.log("LoginInputHandler()");
-  setIsValidating(true);
+  if(loginDataToSend.userName == undefined || loginDataToSend.userName == "" || 
+    loginDataToSend.password == undefined || loginDataToSend.password == "" ){
+    alert("All fields are required!");
+  }
+  else{
+    setIsValidating(true);
+  }
 }
 // END OF INPUT HANDLERS --------------------------------------------------------------
-
-// LOGIN HANDLERS --------------------------------------------------------------
- /*  const handleLogin = () => {
-    if (isNaN(loginDataReceived.customerId)){
-      console.log('you dont have account or username and password are not correct');
-    }
-  } */
-
-  const handleLogin = () => {
-    let token = AsyncStorage.getItem("StoredSessionId").then((value) => console.log("SEssion ID value: " + value));
-    
-  }
-// END OF LOGIN HANDLERS --------------------------------------------------------------
 
 // DATA TRANSFER TO PARENT ------------------------------------------------------------
 const addItem=()=>{
@@ -103,15 +96,23 @@ const cancelItem=()=>{
       let responseData = await response.json();
       setloginDataReceived(responseData);
       // console.log(JSON.stringify("login Data received: " + loginDataReceived));
-      saveSessionId(responseData.customerId.toString()) // Will Store Customer ID as AsnyncStorage
-      handleLogin(); //
+      //console.log(responseData.customerId);
+      var customerId = responseData.customerId.toString();
+      console.log(customerId);
+      if(customerId != "0"){
+        saveSessionId(customerId) // Will Store Customer ID as AsnyncStorage
+        alert(`You are logged in (${customerId})`);
+        cancelItem();
+      }else{
+        alert("Wrong username or password!");
+      }
+      
     }
     catch(error){
       showError(error);
     }
   }
 // END OF SERVICE METHODS --------------------------------------------------------------  
-
 
 // Error Messages --------------------------------------------------------------
   function showError(error){
