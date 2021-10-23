@@ -17,7 +17,7 @@
 // IMPORTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Standard Imports
 import React, { Component, useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, Text, FlatList, Modal, Button } from "react-native";
+import { StyleSheet, View, ScrollView, Text, FlatList, Modal, Button, ActivityIndicator } from "react-native";
 
 // Component Imports
 import PriceSetter from "../components/PriceSetter";
@@ -72,8 +72,8 @@ const SearchScreen = (props) => {
   const [categoryNameToDisplay, setCategoryNameToDisplay] = useState('Not Selected'); 
   const [regionNameToDisplay, setRegionNameToDisplay] = useState('Not Selected');
   const [cityNameDisplay, setCityNameToDisplay] = useState('Not Selected');
-  const [minPriceToDisplay, setMinPriceToDisplay] = useState(1); 
-  const [maxPriceToDisplay, setMaxPriceToDisplay] = useState(1);
+  const [minPriceToDisplay, setMinPriceToDisplay] = useState(0); 
+  const [maxPriceToDisplay, setMaxPriceToDisplay] = useState(100);
   const [conditionNameToDisplay, setConditionNameToDisplay] = useState('Not Selected');
 
   // Handle Modals => Will show/hide selection modals
@@ -217,12 +217,22 @@ const SearchScreen = (props) => {
     console.log("selected item: " +  JSON.stringify(selectedItem));
   }
   const takeMinPriceInput=(enteredValue)=>{
-    setMinPriceToDisplay(enteredValue.toString());
+    if(maxPriceToDisplay <= enteredValue){
+      alert("Min price cannot exceed max price");
+      /* setLoadingSearchResults(true); */
+    } else {
+      setMinPriceToDisplay(enteredValue.toString());
+    } 
     // ToConsole
     // console.log("min Price: " +  scaledValue);
   }
   const takeMaxPriceInput=(enteredValue)=>{
-    setMaxPriceToDisplay(enteredValue.toString());
+    if(minPriceToDisplay >= enteredValue){
+      alert("Min price cannot exceed max price");
+      /* setLoadingSearchResults(true); */
+    } else {
+      setMaxPriceToDisplay(enteredValue.toString());
+    }
     // ToConsole
     // console.log("max Price: " +  scaledValue);
   }
@@ -376,6 +386,9 @@ const SearchScreen = (props) => {
         searchForItems(searchTitle, categoryNameToDisplay, cityNameDisplay, minPriceToDisplay, maxPriceToDisplay, conditionNameToDisplay);
         setSearchingItems(false);
       }
+/*       if(isLoadingSearchResults == true){
+        setLoadingSearchResults(false);
+      } */
   });
 // ========================================================================================================================
 
@@ -384,7 +397,7 @@ if (isLoadingSearchResults==true) {
   console.log('if(isLoading==true) {');
   return (
     <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
-      <ActivityIndicator size="large" color="#00ff00" />
+      {<ActivityIndicator size="large" color="#00ff00" />}
     </View>
   );
 } else {
@@ -442,18 +455,22 @@ if (isLoadingSearchResults==true) {
   {/*                       *******************                      */}
               <Modal visible={isPriceModalVisible}>
                 <Text style={styles.modalTitle}>Select a price range:</Text>
+                <PriceSetter title="Max Price:"
+                  disabled = {false}
+                  onTouchEnd = {() => console.log("slider released")}
+                  onValueChange = {takeMaxPriceInput}
+                  displayValue={maxPriceToDisplay*1}
+                  scrollValue = {maxPriceToDisplay*1}
+                  minimumValue = {0}
+                  maximumValue = {1000}
+                />
                 <PriceSetter title="Min Price:"
+                  disabled = {false}
+                  onTouchEnd = {() => console.log("slider released")}
                   onValueChange = {takeMinPriceInput}
                   displayValue = {minPriceToDisplay*1}
                   scrollValue = {minPriceToDisplay*1}
-                  minimumValue = {1}
-                  maximumValue = {maxPriceToDisplay*1}
-                />
-                <PriceSetter title="Max Price:"
-                  onValueChange={takeMaxPriceInput}
-                  displayValue={maxPriceToDisplay*1}
-                  scrollValue = {maxPriceToDisplay*1}
-                  minimumValue = {minPriceToDisplay*1}
+                  minimumValue = {0}
                   maximumValue = {1000}
                 />
                 <Button title='Ok' onPress={onCancel}/>

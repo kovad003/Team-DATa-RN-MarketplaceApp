@@ -20,9 +20,11 @@ function PriceSetter(props) {
          {/*  <Text style={styles.displayValue}>€</Text> */}
           <TextInput value={"€" + props.displayValue || "0"} style={styles.displayValue}></TextInput>
         </View>
-        <Slider onValueChange={props.onValueChange}
+        <Slider disabled={props.disabled}
+        onTouchEnd = {props.onTouchEnd}
+          onValueChange={props.onValueChange}
           value= {props.scrollValue}
-          step={1}
+          step={100}
           minimumValue={props.minimumValue}
           maximumValue={props.maximumValue}
           thumbTintColor='#2d3553'
