@@ -1,3 +1,13 @@
+/**
+ * Overview: A class that handles login validation
+ * 
+ * Description: User input is collected and sent to the DB for validation. Upon successful validation the customerId will be saved in AsyncStorage and will be userd as a SESSION_ID to customise user experince, filter screen and feautre access.
+ * 
+ * @link   ./src/screens/LoginScreen.js
+ * @file   This files defines the AccountScreen.js class.
+ * @author Daniel Kovacs, Ashley Davis.
+ * @since  01.10.2021
+ */
 
 import React, {useState , useEffect} from 'react';
 import {Button, View, StyleSheet, ScrollView, Text, Dimensions, SafeAreaView, TextInput, TouchableOpacity, Image, Modal,} from 'react-native';
@@ -106,7 +116,6 @@ const cancelItem=()=>{
         cancelItem();
       }else{
         alert("Wrong username or password!");
-        props.changeButtonText(false)
       }
       
     }
