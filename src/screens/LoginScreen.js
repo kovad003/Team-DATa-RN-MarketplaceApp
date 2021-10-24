@@ -165,7 +165,7 @@ return (
 
     <View style={{flex: 1, backgroundColor: colors.light4 /* '#ffffff' */}}>
       {/* <Button title="setSessionID as 9999" onPress={saveSessionId("9999")}> </Button> */}
-      <Button title="getSessionID" onPress={getSessionId}> </Button>
+      {/* <Button title="getSessionID" onPress={getSessionId}> </Button> */}
       <View
         style={{
           paddingHorizontal: 10,
