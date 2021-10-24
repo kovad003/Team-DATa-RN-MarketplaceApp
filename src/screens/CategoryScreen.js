@@ -28,6 +28,9 @@ function CategoryScreen(props) {
     console.log(messageDisplayed);
   }
 
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
+
   // HH - read all categories from database 
   // *** GET ***
   async function fetchCatData() {
@@ -35,7 +38,7 @@ function CategoryScreen(props) {
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
+      response = await fetch(`${backendAddress}/rest/categoryservice/getall`);
 
     }
     catch(error){

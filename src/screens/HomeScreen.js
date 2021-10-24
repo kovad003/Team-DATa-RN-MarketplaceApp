@@ -29,7 +29,9 @@ function HomeScreen(props) {
     console.log(messageDisplayed);
   }
 
-  let backendAddress = backendUrl.googleCloudUrl;
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
+
   // HH - reading Items with decending order 
   // *** GET ***
   async function fetchCatData() {

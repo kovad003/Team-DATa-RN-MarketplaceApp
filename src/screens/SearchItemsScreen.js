@@ -11,9 +11,6 @@ import Logo from "../components/Logo";
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
-// HH - import the Java backend address ( URL)
-import backendUrl from "../constants/backendUrl";
-
 
 function SearchItemsScreen(props) {
 

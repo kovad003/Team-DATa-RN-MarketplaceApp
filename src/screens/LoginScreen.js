@@ -100,7 +100,7 @@ const cancelItem=()=>{
     };
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/loginservice/validatelogindetails", requestOptions);//This is a template literal (escapes the variable)
+      response = await fetch(`${backendAddress}/rest/loginservice/validatelogindetails`, requestOptions);//This is a template literal (escapes the variable)
     }
     catch(error){
       showError(error);

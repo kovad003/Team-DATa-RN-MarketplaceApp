@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import ItemCard from "../components/ItemCard";
 
-// HH - import the Java backend address ( URL)
-import backendUrl from "../constants/backendUrl";
-
 function SearchResultScreen(props) {
   return (
     <View style={styles.container}>

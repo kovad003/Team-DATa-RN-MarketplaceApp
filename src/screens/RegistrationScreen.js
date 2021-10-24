@@ -64,6 +64,7 @@ function RegistrationScreen(props) {
             have been appropriately filled in.  
   */
   
+
   const [colorValidator, setColorValidator] = useState(true);
   const [emailColorValidator, setEmailColorValidator] = useState(true);
   const [inputValidator, setInputValidator] = useState({

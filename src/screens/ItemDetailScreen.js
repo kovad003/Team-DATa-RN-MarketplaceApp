@@ -27,7 +27,8 @@ function itemDetailScreen(props) {
     const [isLoading, setLoading] = useState(true);
     const [hasMessage, setMessage] = useState(false);
 
-
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
 
 
   // HH - read itemId which is sent from the ListItemScreen
@@ -53,7 +54,7 @@ function itemDetailScreen(props) {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getjsonitemtoupdate/"+selectedItemId);
+      response = await fetch(`${backendAddress}/rest/itemservice/getjsonitemtoupdate/${selectedItemId}`);
 
     }
     catch(error){
