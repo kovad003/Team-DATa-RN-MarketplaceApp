@@ -124,7 +124,7 @@ const SearchScreen = (props) => {
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
             },
-            { text: "OK", onPress: () => setSliderAccess(false) }
+            { text: "OK", onPress: () => setPriceModalVisibility(true) }
         ]);
 
 
@@ -239,10 +239,12 @@ const SearchScreen = (props) => {
   }
   const takeMinPriceInput=(enteredValue)=>{
     if(maxPriceToDisplay <= enteredValue){
-      priceAlert();
-     // alert("Error: " + enteredValue + "Min price cannot exceed max price!");
-      //setSliderAccess(false);
       setPriceModalVisibility(false);
+      priceAlert();
+      
+      //setPriceModalReload(true)
+      //alert("Error: " + enteredValue + "Min price cannot exceed max price!");
+      //setSliderAccess(false);
       //setPriceModalReload(true);
       //setPriceModalVisibility(false);
       /* setLoadingSearchResults(true); */
@@ -254,10 +256,13 @@ const SearchScreen = (props) => {
   }
   const takeMaxPriceInput=(enteredValue)=>{
     if(minPriceToDisplay >= enteredValue){
+      setPriceModalVisibility(false);
       priceAlert();
+      
+      //setPriceModalReload(true)
       //alert("Error: " + enteredValue + "Min price cannot exceed max price!");
       //setSliderAccess(false);
-      setPriceModalVisibility(false);
+      //setPriceModalVisibility(false);
       //setPriceModalReload(true);
       //setPriceModalVisibility(false);
       /* setLoadingSearchResults(true); */
