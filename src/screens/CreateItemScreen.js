@@ -34,6 +34,9 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 // LOGIN Imports
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -60,6 +63,9 @@ function CreateItemScreen(props) {
 
   // CustomerId is available after login -> service methods
   const [SESSIONID, setSESSIONID] = useState(1000);
+
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
 // END OF STATE VARIABLES -----------------------------------------------------------
 
 // GETTING SESSION ID ---------------------------------------------------------------
@@ -199,7 +205,7 @@ function CreateItemScreen(props) {
     try{
       /* AD - This waits for the fetch to be completed successfully. 
       It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getcustomeritems/${idParam}`); //TODO: apply SESSION ID
+      response = await fetch(`${backendAddress}/rest/itemservice/getcustomeritems/${idParam}`); //TODO: apply SESSION ID
     }
     /* AD - A try catch to catch errors*/
     catch(error){      
@@ -239,7 +245,7 @@ function CreateItemScreen(props) {
       })
     };
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/addjsonitem", requestOptions)
+      response = await fetch(`${backendAddress}/rest/itemservice/addjsonitem`, requestOptions)
     } catch (error) {
       showError(error);
     }
@@ -276,7 +282,7 @@ function CreateItemScreen(props) {
     };
 
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/updatejsonitem", requestOptions)
+      response = await fetch(`${backendAddress}/rest/itemservice/updatejsonitem`, requestOptions)
     } catch (error) {
       showError(error);
     }
@@ -304,7 +310,7 @@ function CreateItemScreen(props) {
       })
     };
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+      response = await fetch(`${backendAddress}/rest/itemservice/deletejsonitem`, requestOptions)
     } catch (error) {
       showError(error);
     }
