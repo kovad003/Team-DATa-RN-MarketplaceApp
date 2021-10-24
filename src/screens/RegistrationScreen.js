@@ -363,7 +363,7 @@ const imageInputHandler=(enteredText)=>{
             <TextInput
               maxLength={20} 
               placeholderTextColor="#bdbdbd"
-              secureTextEntry={true}
+              secureTextEntry={false}
               placeholder="Enter your phone number"
               //style={styles.TextInput}
               style={[styles.TextInput, {borderBottomColor: colorValidator ? colors.darkBlueCustom : "red"}]}
