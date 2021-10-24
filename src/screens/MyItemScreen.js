@@ -6,6 +6,9 @@ import MyItemCard from "../components/MyItemCard";
 import EditableCard from "../components/EditableCard";
 import HeaderComponent from "../components/HeaderComponent";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 
 function MyItemScreen(props) {
 

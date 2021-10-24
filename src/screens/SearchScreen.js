@@ -30,6 +30,10 @@ import ListItemToSelect from "../components/swipable/ListItemToSelect";
 // Constants
 import TextStyling from '../constants/fontstyling'
 import colors from "../constants/colors";
+
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 // END OF IMPORTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /**

@@ -11,6 +11,9 @@ import Logo from "../components/Logo";
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 function HomeScreen(props) {
   
   // HH - add for reding data from MYSQL database**********start
@@ -25,7 +28,8 @@ function HomeScreen(props) {
     setMessageDisplayed("Error: " + error);
     console.log(messageDisplayed);
   }
-  let x = 'http://10.0.2.2:8080'
+
+  let backendAddress = backendUrl.googleCloudUrl;
   // HH - reading Items with decending order 
   // *** GET ***
   async function fetchCatData() {
@@ -34,7 +38,7 @@ function HomeScreen(props) {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch(`${x}/rest/itemservice/getalldesc`);
+      response = await fetch(`${backendAddress}/rest/itemservice/getalldesc`);
 
     }
     catch(error){

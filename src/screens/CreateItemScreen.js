@@ -34,6 +34,9 @@ import TextStyling from '../constants/fontstyling'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 // LOGIN Imports
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

@@ -15,6 +15,9 @@ import {Button, View, StyleSheet, ScrollView, Text, Dimensions, SafeAreaView, Te
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import colors from '../constants/colors';
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 //const LoginScreen = () => {
 function LoginScreen(props) {
 // STATE VARIABLES --------------------------------------------------------------

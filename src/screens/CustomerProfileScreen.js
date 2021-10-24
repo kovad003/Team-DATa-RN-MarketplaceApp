@@ -13,6 +13,9 @@ import AccountScreenRow from '../components/AccountScreenRow';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 // in this Component we can see all details of the selected Item
 function CustomerProfileScreen(props) {
 

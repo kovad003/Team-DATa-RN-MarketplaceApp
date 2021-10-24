@@ -29,6 +29,9 @@ import TextStyling from '../constants/fontstyling';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 /* AD - External component imports (such as for modal views and logos etc) */
 import LoginScreen from "./LoginScreen";
 import RegistrationScreen from "./RegistrationScreen";
