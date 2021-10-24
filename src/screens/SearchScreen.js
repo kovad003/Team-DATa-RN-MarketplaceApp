@@ -17,7 +17,7 @@
 // IMPORTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Standard Imports
 import React, { Component, useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, Text, FlatList, Modal, Button, ActivityIndicator } from "react-native";
+import { StyleSheet, View, ScrollView, Text, FlatList, Modal, Button, ActivityIndicator, Alert } from "react-native";
 
 // Component Imports
 import PriceSetter from "../components/PriceSetter";
@@ -48,6 +48,8 @@ const SearchScreen = (props) => {
   const [isLoadingCities, setLoadingCities] = useState(false);
   const [isSearchingItems, setSearchingItems] = useState(false); // Will trigger search
   const [isLoadingSearchResults, setLoadingSearchResults] = useState(false);
+  const [isReloadingPriceModal, setPriceModalReload] = useState(false);
+  
 
   // Handle Search
   const [searchTitle, setSearchTitle] = useState();
@@ -83,6 +85,9 @@ const SearchScreen = (props) => {
   const [isPriceModalVisible, setPriceModalVisibility] = useState(false);
   const [isConditionModalVisible, setConditionModalVisibility] = useState(false);
 
+  // Disable/Enable Price Setter
+  const [isSliderEnabled, setSliderAccess] = useState(true);
+
   // Validation 
   const [inputValidator, setInputValidator] = useState({
     title: false,
@@ -107,6 +112,22 @@ const SearchScreen = (props) => {
     console.log('hello');
   }
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  //Alert
+
+  const priceAlert = () =>
+        Alert.alert(
+        "Wrong value!",
+        "Max and min prices cannot exceed each other!",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => setSliderAccess(false) }
+        ]);
+
+
   // Swipe Controller ---------------------------------
   /**
    * [someFunction description]
@@ -218,7 +239,12 @@ const SearchScreen = (props) => {
   }
   const takeMinPriceInput=(enteredValue)=>{
     if(maxPriceToDisplay <= enteredValue){
-      alert("Min price cannot exceed max price");
+      priceAlert();
+     // alert("Error: " + enteredValue + "Min price cannot exceed max price!");
+      //setSliderAccess(false);
+      setPriceModalVisibility(false);
+      //setPriceModalReload(true);
+      //setPriceModalVisibility(false);
       /* setLoadingSearchResults(true); */
     } else {
       setMinPriceToDisplay(enteredValue.toString());
@@ -228,7 +254,12 @@ const SearchScreen = (props) => {
   }
   const takeMaxPriceInput=(enteredValue)=>{
     if(minPriceToDisplay >= enteredValue){
-      alert("Min price cannot exceed max price");
+      priceAlert();
+      //alert("Error: " + enteredValue + "Min price cannot exceed max price!");
+      //setSliderAccess(false);
+      setPriceModalVisibility(false);
+      //setPriceModalReload(true);
+      //setPriceModalVisibility(false);
       /* setLoadingSearchResults(true); */
     } else {
       setMaxPriceToDisplay(enteredValue.toString());
@@ -386,6 +417,13 @@ const SearchScreen = (props) => {
         searchForItems(searchTitle, categoryNameToDisplay, cityNameDisplay, minPriceToDisplay, maxPriceToDisplay, conditionNameToDisplay);
         setSearchingItems(false);
       }
+      if(isReloadingPriceModal == true){
+        setPriceModalVisibility(true);
+      }
+      if(isSliderEnabled == false){
+        setSliderAccess(true);
+        setPriceModalVisibility(true);
+      }
 /*       if(isLoadingSearchResults == true){
         setLoadingSearchResults(false);
       } */
@@ -456,7 +494,7 @@ if (isLoadingSearchResults==true) {
               <Modal visible={isPriceModalVisible}>
                 <Text style={styles.modalTitle}>Select a price range:</Text>
                 <PriceSetter title="Max Price:"
-                  disabled = {false}
+                  disabled = {!isSliderEnabled}
                   onTouchEnd = {() => console.log("slider released")}
                   onValueChange = {takeMaxPriceInput}
                   displayValue={maxPriceToDisplay*1}
@@ -465,7 +503,7 @@ if (isLoadingSearchResults==true) {
                   maximumValue = {1000}
                 />
                 <PriceSetter title="Min Price:"
-                  disabled = {false}
+                  disabled = {!isSliderEnabled}
                   onTouchEnd = {() => console.log("slider released")}
                   onValueChange = {takeMinPriceInput}
                   displayValue = {minPriceToDisplay*1}
