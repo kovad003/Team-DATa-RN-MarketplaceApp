@@ -13,8 +13,14 @@ import AccountScreenRow from '../components/AccountScreenRow';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
+
 // in this Component we can see all details of the selected Item
 const ContactInformation = props => {
+    // HH - define variable and read data from constant backendUrl file
+    let backendAddress = backendUrl.backendAddress;
 
     const [customer, setCustomer] = useState([]);
     const [messageDisplayed, setMessageDisplayed] = useState('');
@@ -32,7 +38,7 @@ const ContactInformation = props => {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/customerservice/getcustomer/"+props.customerId);
+      response = await fetch(`${backendAddress}/rest/customerservice/getcustomer/${props.customerId}`);
 
     }
     catch(error){
@@ -107,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.light3,
-    marginTop: '100%',
+    marginTop: '50%',
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     borderTopLeftRadius:20,

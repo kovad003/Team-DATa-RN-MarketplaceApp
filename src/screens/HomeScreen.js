@@ -11,7 +11,12 @@ import Logo from "../components/Logo";
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 function HomeScreen(props) {
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
   
   // HH - add for reding data from MYSQL database**********start
   const [hasMessage, setMessage] = useState(false);
@@ -34,8 +39,7 @@ function HomeScreen(props) {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getalldesc");
-
+      response = await fetch(`${backendAddress}/rest/itemservice/getalldesc`);
     }
     catch(error){
       showError(error);

@@ -38,11 +38,16 @@ import LogoSmall from "../components/LogoSmall";
 import AppSupport from "../components/account/AppSupport";
 import AboutModal from "../components/account/AboutModal";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 // LOGIN
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* AD - The main function of the page */
 function AccountScreen(props) {
+// HH - define variable and read data from constant backendUrl file
+let backendAddress = backendUrl.backendAddress;
 
 // STATE VARIABLES ------------------------------------------------------------------------------
 /* AD - Handles the display of messages */
@@ -229,7 +234,7 @@ function closeMessage() {
       })
     };
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/customerservice/addjsoncustomer", requestOptions)
+      response = await fetch(`${backendAddress}/rest/customerservice/addjsoncustomer`, requestOptions)
     } catch (error) {
       showError(error);
     }
@@ -249,7 +254,7 @@ async function fetchData() {
   let response = null;
   try{
     //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+    response = await fetch(`${backendAddress}/rest/itemservice/getall`);
   }
   catch(error){
     showError(error);
@@ -286,7 +291,7 @@ async function addData(categoryParam, customerParam, titleParam, priceParam, des
     })
   };
   try {
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/addjsonitem", requestOptions)
+    response = await fetch(`${backendAddress}/rest/itemservice/addjsonitem`, requestOptions)
   } catch (error) {
     showError(error);
   }
@@ -322,7 +327,7 @@ async function updateData(/*idParam, nameParam, priceParam, descrParam, category
   };
 
   try {
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/updatejsonitem", requestOptions)
+    response = await fetch(`${backendAddress}/rest/itemservice/updatejsonitem`, requestOptions)
   } catch (error) {
     showError(error);
   }
@@ -350,7 +355,7 @@ async function deleteData(itemIdParam) {
     })
   };
   try {
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+    response = await fetch(`${backendAddress}/rest/itemservice/deletejsonitem`, requestOptions)
   } catch (error) {
     showError(error);
   }

@@ -28,10 +28,16 @@ import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 import TextStyling from '../constants/fontstyling';
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 /* AD - External custom components */
 
 /* AD - The main function of the page */
 const ListCreatedItem=(props)=>{
+    // HH - define variable and read data from constant backendUrl file
+    let backendAddress = backendUrl.backendAddress;
+
 
 // ================ AD - State Variables ================
         // Currently empty
@@ -129,8 +135,7 @@ const ListCreatedItem=(props)=>{
             try{
             /* AD - This waits for the fetch to be completed successfully. 
             It is also a timeout (for server timeouts), which is also a possible response. */
-                response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getjsonitemtoupdate/${itemId}`);
-            }
+            response = await fetch(`${backendAddress}/rest/itemservice/getjsonitemtoupdate/${itemId}`);            }
             /* AD - A try catch to catch errors */
             catch(error){
                 alert("Error in the service method:" + error);
@@ -166,7 +171,7 @@ const ListCreatedItem=(props)=>{
             })
             };
             try {
-                response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+                response = await fetch(`${backendAddress}/rest/itemservice/deletejsonitem`, requestOptions)
             } catch (error) {
                 alert("Error in the service method:" + error);
             }

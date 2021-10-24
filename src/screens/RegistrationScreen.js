@@ -49,6 +49,9 @@ import colors from "../constants/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Margins, Paddings } from "../constants/constvalues";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 /* TJ & AD - The main function of the page */
 function RegistrationScreen(props) {
 

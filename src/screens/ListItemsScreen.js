@@ -12,15 +12,19 @@ import Logo from "../components/Logo";
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 
 function ListItemsScreen(props) {
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
 
-    const [itemsInCat, setItemsInCat] = useState([]);
-    // const [allItems, setAllItems] = useState([]);
-    const [messageDisplayed, setMessageDisplayed] = useState('');
-    const [isLoading, setLoading] = useState(true);
-    const [hasMessage, setMessage] = useState(false);
-
+  const [itemsInCat, setItemsInCat] = useState([]);
+  // const [allItems, setAllItems] = useState([]);
+  const [messageDisplayed, setMessageDisplayed] = useState('');
+  const [isLoading, setLoading] = useState(true);
+  const [hasMessage, setMessage] = useState(false);
 
 
   // HH - created to read data from dummy-data to find the items with our selected Category
@@ -42,8 +46,7 @@ function ListItemsScreen(props) {
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
       //response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/getItemsincategory/"+selectedCategoryId);
-
+      response = await fetch(`${backendAddress}/rest/itemservice/getItemsincategory/${selectedCategoryId}`);
     }
     catch(error){
       showError(error);

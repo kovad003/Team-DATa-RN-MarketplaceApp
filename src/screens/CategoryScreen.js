@@ -10,7 +10,12 @@ import ListItemsScreen from '../screens/ListItemsScreen'
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 function CategoryScreen(props) {
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
 
   // HH - add for reding data from MYSQL database**********start
   const [hasMessage, setMessage] = useState(false);
@@ -32,8 +37,7 @@ function CategoryScreen(props) {
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
-
+      response = await fetch(`${backendAddress}/rest/categoryservice/getall`);
     }
     catch(error){
       showError(error);

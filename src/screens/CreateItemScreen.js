@@ -37,8 +37,13 @@ import colors from "../constants/colors";
 // LOGIN Imports
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 /* AD - The main function of the page */
 function CreateItemScreen(props) {
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
 
   /************* AD - State Variables *************/
 // STATE VARIABLES ------------------------------------------------------------------
@@ -199,7 +204,8 @@ function CreateItemScreen(props) {
     try{
       /* AD - This waits for the fetch to be completed successfully. 
       It is also a timeout (for server timeouts), which is also a possible response. */
-      response = await fetch(`http://10.0.2.2:8080/rest/itemservice/getcustomeritems/${idParam}`); //TODO: apply SESSION ID
+      response = await fetch(`${backendAddress}/rest/itemservice/getcustomeritems/${idParam}`); //TODO: apply SESSION ID
+
     }
     /* AD - A try catch to catch errors*/
     catch(error){      
@@ -239,7 +245,7 @@ function CreateItemScreen(props) {
       })
     };
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/addjsonitem", requestOptions)
+      response = await fetch(`${backendAddress}/rest/itemservice/addjsonitem`, requestOptions)
     } catch (error) {
       showError(error);
     }
@@ -276,7 +282,7 @@ function CreateItemScreen(props) {
     };
 
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/updatejsonitem", requestOptions)
+      response = await fetch(`${backendAddress}/rest/itemservice/updatejsonitem`, requestOptions)
     } catch (error) {
       showError(error);
     }
@@ -304,7 +310,7 @@ function CreateItemScreen(props) {
       })
     };
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+       response = await fetch(`${backendAddress}/rest/itemservice/deletejsonitem`, requestOptions)
     } catch (error) {
       showError(error);
     }

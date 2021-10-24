@@ -41,9 +41,13 @@ import { isEmpty } from 'lodash';
 import ScrollDownList from './ScrollDownList';
 import ListItemToSelect from './list/ListItemToSelect';
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
 
 /* AD - The main function of the component */
 const CreateItemInput=(props)=>{
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
   /************* AD - State Variables *************/
   // STATE VARIABLES ======================================================================================================  
   /*AD - State variable (defines the item object)*/
@@ -275,7 +279,7 @@ const CreateItemInput=(props)=>{
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
+      response = await fetch(`${backendAddress}/rest/categoryservice/getall`);
     }
     catch(error){
       alert("Error in Service Method: " + error);
@@ -299,7 +303,7 @@ const CreateItemInput=(props)=>{
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
+      response = await fetch(`${backendAddress}/rest/regionservice/getallregion`);
     }
     catch(error){
       alert("Error in service method: " + error);
@@ -324,7 +328,7 @@ const CreateItemInput=(props)=>{
     let response = null;
     try{
       // This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
+      response = await fetch(`${backendAddress}/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
       //console.log("Fetching response... => response: " + JSON.stringify(response, null, 4))
     }
     catch(error){

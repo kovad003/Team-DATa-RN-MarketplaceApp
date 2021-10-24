@@ -30,6 +30,10 @@ import ListItemToSelect from "../components/swipable/ListItemToSelect";
 // Constants
 import TextStyling from '../constants/fontstyling'
 import colors from "../constants/colors";
+
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 // END OF IMPORTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 /**
@@ -38,6 +42,9 @@ import colors from "../constants/colors";
  * @return {[type]}      [Screen will be returned for display]
  */
 const SearchScreen = (props) => {
+// HH - define variable and read data from constant backendUrl file
+let backendAddress = backendUrl.backendAddress;
+
 // STATE VARIABLES ========================================================================================================
   // Handle Accessibility
   const [isCitySwipeAccessable, setCitySwipeAccessibility] = useState({isEnabled:false, colorDisplayed:'lightgrey'});
@@ -285,7 +292,7 @@ const SearchScreen = (props) => {
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/categoryservice/getall");
+      response = await fetch(`${backendAddress}/rest/categoryservice/getall`);
     }
     catch(error){
       alert("Error in Service Method: " + error);
@@ -309,7 +316,7 @@ const SearchScreen = (props) => {
     let response = null;
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/regionservice/getallregion");
+      response = await fetch(`${backendAddress}/rest/regionservice/getallregion`);
     }
     catch(error){
       alert("Error in service method: " + error);
@@ -332,8 +339,7 @@ const SearchScreen = (props) => {
     let response = null;
     try{
       // This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch(`http://10.0.2.2:8080/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
-      //console.log("Fetching response... => response: " + JSON.stringify(response, null, 4))
+      response = await fetch(`${backendAddress}/rest/regionservice/getallcityfromregion/${regionId}`); //Template literal `${}`
     }
     catch(error){
       console.log(error);
@@ -373,7 +379,7 @@ const SearchScreen = (props) => {
     };
     console.log("body: " + requestOptions.body);
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/searchservice/searchforitems", requestOptions)
+      response = await fetch(`${backendAddress}/rest/searchservice/searchforitems`, requestOptions)
       // console.log("Fetching response... => response: " + JSON.stringify(response, null, 4));
     } catch (error) {
       alert("Error in service method: " + error);
