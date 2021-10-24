@@ -31,6 +31,10 @@ import TextStyling from '../constants/fontstyling';
 import CreateItemInputLogo from "./CreateItemInputLogo";
 import ListCreatedItem from "../components/ListCreatedItem";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
+
 /* AD - The main function of the page */
 const MyPostedItems=(props)=>{
 
@@ -52,6 +56,9 @@ const MyPostedItems=(props)=>{
 
   /************* AD - Service Functions (connects to a Java Backend) *************/
   
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
+
   /* AD - An async function to PUT data to the Java backend (which interacts with our MySQL / Google Cloud database) */  
   // Object props are hardcoded, no input form is available. Works the same way as adding item
   async function updateSingleItem(/*idParam, nameParam, priceParam, descrParam, categoryParam*/) {
@@ -72,7 +79,7 @@ const MyPostedItems=(props)=>{
     };
 
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/itemservice/updatejsonitem", requestOptions)
+      response = await fetch(`${backendAddress}/rest/itemservice/updatejsonitem`, requestOptions)
     } catch (error) {
       alert("Error in the service method:" + error);
     }

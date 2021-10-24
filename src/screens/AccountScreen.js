@@ -29,6 +29,9 @@ import TextStyling from '../constants/fontstyling';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 /* AD - External component imports (such as for modal views and logos etc) */
 import LoginScreen from "./LoginScreen";
 import RegistrationScreen from "./RegistrationScreen";
@@ -72,6 +75,9 @@ const [isRegisterVisible, setRegisterVisible] = useState(false);
 
 //Login out button
 const [logBtnText, setLogBtnText] = useState("Login")
+
+// HH - define variable and read data from constant backendUrl file
+let backendAddress = backendUrl.backendAddress;
 // ----------------------------------------------------------------------------------------
 
 // ALERTS --------------------------------------------------------------------------------
@@ -229,7 +235,7 @@ function closeMessage() {
       })
     };
     try {
-      response = await fetch("http://10.0.2.2:8080/rest/customerservice/addjsoncustomer", requestOptions)
+      response = await fetch(`${backendAddress}/rest/customerservice/addjsoncustomer`, requestOptions)
     } catch (error) {
       showError(error);
     }
@@ -249,7 +255,7 @@ async function fetchData() {
   let response = null;
   try{
     //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/getall");
+    response = await fetch(`${backendAddress}/rest/itemservice/getall`);
   }
   catch(error){
     showError(error);
@@ -286,7 +292,7 @@ async function addData(categoryParam, customerParam, titleParam, priceParam, des
     })
   };
   try {
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/addjsonitem", requestOptions)
+    response = await fetch(`${backendAddress}/rest/itemservice/addjsonitem`, requestOptions)
   } catch (error) {
     showError(error);
   }
@@ -322,7 +328,7 @@ async function updateData(/*idParam, nameParam, priceParam, descrParam, category
   };
 
   try {
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/updatejsonitem", requestOptions)
+    response = await fetch(`${backendAddress}/rest/itemservice/updatejsonitem`, requestOptions)
   } catch (error) {
     showError(error);
   }
@@ -350,7 +356,7 @@ async function deleteData(itemIdParam) {
     })
   };
   try {
-    response = await fetch("http://10.0.2.2:8080/rest/itemservice/deletejsonitem", requestOptions)
+    response = await fetch(`${backendAddress}/rest/itemservice/deletejsonitem`, requestOptions)
   } catch (error) {
     showError(error);
   }

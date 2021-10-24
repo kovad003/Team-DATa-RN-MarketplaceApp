@@ -15,6 +15,9 @@ import {Button, View, StyleSheet, ScrollView, Text, Dimensions, SafeAreaView, Te
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import colors from '../constants/colors';
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 //const LoginScreen = () => {
 function LoginScreen(props) {
 // STATE VARIABLES --------------------------------------------------------------
@@ -97,7 +100,7 @@ const cancelItem=()=>{
     };
     try{
       //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      response = await fetch("http://10.0.2.2:8080/rest/loginservice/validatelogindetails", requestOptions);//This is a template literal (escapes the variable)
+      response = await fetch(`${backendAddress}/rest/loginservice/validatelogindetails`, requestOptions);//This is a template literal (escapes the variable)
     }
     catch(error){
       showError(error);
