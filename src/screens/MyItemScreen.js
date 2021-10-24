@@ -6,10 +6,15 @@ import MyItemCard from "../components/MyItemCard";
 import EditableCard from "../components/EditableCard";
 import HeaderComponent from "../components/HeaderComponent";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 
 function MyItemScreen(props) {
 
-  
+    // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
+
   // created By Hossein to read data from dummy-data
   // const myItemsList = POSTEDITEMS.find(posted => posted.customerId === 'p004');
   // HH - following line is read data from Dummy-data

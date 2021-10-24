@@ -13,8 +13,14 @@ import AccountScreenRow from '../components/AccountScreenRow';
 import { Margins, Paddings } from "../constants/constvalues";
 import colors from "../constants/colors";
 
+// HH - import the Java backend address ( URL)
+import backendUrl from "../constants/backendUrl";
+
 // in this Component we can see all details of the selected Item
 function CustomerProfileScreen(props) {
+
+  // HH - define variable and read data from constant backendUrl file
+  let backendAddress = backendUrl.backendAddress;
 
   // HH - created to read data from dummy-data
     console.log(props.route.params);
